@@ -589,6 +589,9 @@ button:disabled {
 
 }
 
+.hidden-field {
+    display: none !important;
+}
 </style>
 
 </head>
@@ -1067,6 +1070,35 @@ button:disabled {
         </select>
 
 
+        <!-- DECLARATION OPTION
+             Only shown when Field = Declaration and
+             Mapping Type = Checkbox. Each of the 6
+             declaration statements has its own tick
+             location on the PDF, so this records which
+             statement this particular box belongs to. -->
+
+        <label
+            id="declarationValueLabel"
+            class="hidden-field"
+        >
+            Declaration Statement
+        </label>
+
+        <select
+            id="declarationValueSelect"
+            class="hidden-field"
+        >
+
+            <option value="1">1. No family (has family)</option>
+            <option value="2">2. No family declared</option>
+            <option value="3a">3(a). Father/mother not dependent</option>
+            <option value="3b">3(b). Husband's parents not dependent</option>
+            <option value="4">4. Excluded husband from family</option>
+            <option value="5">5. Nomination invalidates previous</option>
+
+        </select>
+
+
         <!-- START -->
 
         <button
@@ -1402,6 +1434,56 @@ const mappingType =
     document.getElementById(
         "mappingType"
     );
+
+const declarationValueLabel =
+    document.getElementById(
+        "declarationValueLabel"
+    );
+
+const declarationValueSelect =
+    document.getElementById(
+        "declarationValueSelect"
+    );
+
+
+/* =====================================================
+   TOGGLE DECLARATION STATEMENT PICKER
+
+   The "declaration" field has 6 separate tick locations
+   on page 8 (one per numbered statement), unlike the
+   other checkbox fields which only have one. Show the
+   statement picker only when it's relevant.
+===================================================== */
+
+function updateDeclarationValueVisibility() {
+
+    const isDeclarationCheckbox =
+        fieldSelect.value === "declaration" &&
+        mappingType.value === "checkbox";
+
+    declarationValueLabel.classList.toggle(
+        "hidden-field",
+        !isDeclarationCheckbox
+    );
+
+    declarationValueSelect.classList.toggle(
+        "hidden-field",
+        !isDeclarationCheckbox
+    );
+
+}
+
+fieldSelect.addEventListener(
+    "change",
+    updateDeclarationValueVisibility
+);
+
+mappingType.addEventListener(
+    "change",
+    updateDeclarationValueVisibility
+);
+
+updateDeclarationValueVisibility();
 
 const startButton =
     document.getElementById(
@@ -2184,7 +2266,17 @@ function setupMouseMapping() {
                 canvasHeight:
                     Number(
                         pdfCanvas.height
-                    )
+                    ),
+
+                // Only set for the "declaration" field's
+                // checkbox mappings, to say which of the 6
+                // numbered statements this box belongs to.
+                ...(
+                    fieldSelect.value === "declaration" &&
+                    mappingType.value === "checkbox"
+                        ? { value: declarationValueSelect.value }
+                        : {}
+                )
 
             };
 
@@ -2765,6 +2857,12 @@ function updateMappingList() {
                     map.type
                 ) +
 
+                (
+                    map.field === "declaration" && map.value
+                        ? " • Statement " + escapeHTML(map.value)
+                        : ""
+                ) +
+
                 "<br>" +
 
                 "X: " +
@@ -2935,7 +3033,9 @@ function displayMappings() {
 
 
             label.textContent =
-                map.label;
+                map.field === "declaration" && map.value
+                    ? map.label + " (" + map.value + ")"
+                    : map.label;
 
 
             box.appendChild(
