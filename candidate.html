@@ -2587,34 +2587,143 @@ function showStatus(
 ===================================================== */
 
 const PDF_MAPPING = {
-
-    /*
-       Example structure only:
-
-       1: [
-           {
-               field: "name",
-               x: 100,
-               y: 700,
-               size: 10
-           }
-       ]
-
-       Page numbers are 1 through 9.
-
-       These coordinates are intentionally not
-       fabricated here.
-    */
-
-    1: [],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: [],
-    7: [],
-    8: [],
-    9: []
+    1: [
+        { field: "name", type: "text", x: 180.2890625, y: 659.0494689941406, width: 246, height: 30, canvasWidth: 734, canvasHeight: 950 },
+        { field: "declarationDate", type: "text", x: 198.2890625, y: 758.0494689941406, width: 227, height: 24, canvasWidth: 734, canvasHeight: 950 },
+        { field: "place", type: "text", x: 197.2890625, y: 787.0494689941406, width: 232, height: 25, canvasWidth: 734, canvasHeight: 950 },
+    ],
+    2: [
+        { field: "name", type: "text", x: 388.71875, y: 155.71615600585938, width: 303, height: 37, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "fatherName", type: "text", x: 387.71875, y: 196.71615600585938, width: 304, height: 29, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "spouseName", type: "text", x: 388.71875, y: 231.71615600585938, width: 302, height: 27, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "dob", type: "text", x: 389.71875, y: 266.7161560058594, width: 299, height: 21, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "gender", type: "text", x: 394.71875, y: 294.71614837646484, width: 211, height: 19, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "maritalStatus", type: "text", x: 391.71875, y: 318.71614837646484, width: 225, height: 24, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "email", type: "text", x: 389.71875, y: 348.71614837646484, width: 244, height: 19, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "mobile", type: "text", x: 389.71875, y: 367.71614837646484, width: 244, height: 20, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "doj", type: "text", x: 395.71875, y: 392.71614837646484, width: 256, height: 25, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "name", type: "text", x: 585.5208435058594, y: 657.7161254882812, width: 404, height: 23, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "bankAccount", type: "text", x: 585.5208435058594, y: 683.7161254882812, width: 407, height: 22, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "ifsc", type: "text", x: 586.5208435058594, y: 707.7161254882812, width: 406, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "name", type: "text", x: 585.5208435058594, y: 749.7161254882812, width: 420, height: 25, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "aadhaar", type: "text", x: 585.5208435058594, y: 776.7161254882812, width: 424, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "name", type: "text", x: 586.5208435058594, y: 814.7161254882812, width: 429, height: 26, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "pan", type: "text", x: 591.5208435058594, y: 843.7161254882812, width: 408, height: 34, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "epfMember", type: "checkbox", x: 593.5208435058594, y: 893.7161254882812, width: 46, height: 29, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "epsMember", type: "checkbox", x: 592.5208435058594, y: 933.7161254882812, width: 54, height: 32, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "previousDOJ", type: "text", x: 615.5208435058594, y: 1058.7161254882812, width: 107, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "previousCompany", type: "text", x: 97.52084350585938, y: 1061.7161254882812, width: 159, height: 95, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "uan", type: "text", x: 269.5208435058594, y: 1067.7161254882812, width: 147, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "previousDOE", type: "text", x: 733.5208435058594, y: 1071.7161254882812, width: 101, height: 26, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "internationalWorker", type: "checkbox", x: 586.5208435058594, y: 1369.0494384765625, width: 47, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
+    ],
+    3: [
+        { field: "withdrawEPF", type: "checkbox", x: 590.5208435058594, y: 64.71615600585938, width: 68, height: 36, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "withdrawEPS", type: "checkbox", x: 593.5208435058594, y: 117.71615600585938, width: 72, height: 39, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "declarationDate", type: "text", x: 142.52084350585938, y: 417.7161445617676, width: 245, height: 33, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "place", type: "text", x: 143.52084350585938, y: 463.7161445617676, width: 247, height: 30, canvasWidth: 1072, canvasHeight: 1515 },
+    ],
+    4: [
+        { field: "name", type: "text", x: 349.8828125, y: 266.7161560058594, width: 565, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "bankAccount", type: "text", x: 499.8828125, y: 323.7161560058594, width: 213, height: 22, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "dob", type: "text", x: 263.8828125, y: 324.7161560058594, width: 134, height: 19, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "gender", type: "text", x: 314.8828125, y: 351.7161560058594, width: 155, height: 25, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "maritalStatus", type: "text", x: 575.8828125, y: 356.7161560058594, width: 286, height: 19, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "permanentAddress", type: "text", x: 368.8828125, y: 385.71614837646484, width: 637, height: 49, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_relation", type: "text", x: 387.8828125, y: 654.7161407470703, width: 113, height: 28, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_name", type: "text", x: 144.8828125, y: 656.7161254882812, width: 135, height: 29, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_percentage", type: "text", x: 595.8828125, y: 656.7161445617676, width: 151, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_dob", type: "text", x: 504.8828125, y: 657.7161254882812, width: 80, height: 22, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_address", type: "text", x: 279.8828125, y: 657.7161407470703, width: 101, height: 74, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_relation", type: "text", x: 387.8828125, y: 724.7161254882812, width: 112, height: 28, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_dob", type: "text", x: 507.8828125, y: 728.0494689941406, width: 77, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_name", type: "text", x: 146.8828125, y: 728.7161254882812, width: 128, height: 24, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_percentage", type: "text", x: 594.8828125, y: 728.7161254882812, width: 147, height: 24, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_address", type: "text", x: 283.8828125, y: 735.7161407470703, width: 97, height: 93, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee3_relation", type: "text", x: 386.8828125, y: 753.0494689941406, width: 115, height: 27, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee3_name", type: "text", x: 149.8828125, y: 756.7161254882812, width: 125, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee3_dob", type: "text", x: 508.8828125, y: 756.7161407470703, width: 82, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee3_percentage", type: "text", x: 594.8828125, y: 757.7161254882812, width: 150, height: 21, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee4_name", type: "text", x: 145.8828125, y: 798.7161254882812, width: 129, height: 32, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee4_percentage", type: "text", x: 594.8828125, y: 798.7161254882812, width: 152, height: 33, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee4_dob", type: "text", x: 504.8828125, y: 801.7161254882812, width: 81, height: 28, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee4_relation", type: "text", x: 390.8828125, y: 802.7161254882812, width: 113, height: 27, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_name", type: "text", x: 213.8828125, y: 1184.7161254882812, width: 305, height: 24, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_age", type: "text", x: 522.8828125, y: 1185.0494384765625, width: 87, height: 23, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_relation", type: "text", x: 624.8828125, y: 1185.7161254882812, width: 292, height: 23, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_relation", type: "text", x: 625.8828125, y: 1208.0494384765625, width: 290, height: 21, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee3_relation", type: "text", x: 627.8828125, y: 1229.0494384765625, width: 289, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee4_relation", type: "text", x: 626.8828125, y: 1258.0494384765625, width: 291, height: 25, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_name", type: "text", x: 237.08074951171875, y: 1342.7161254882812, width: 338, height: 29, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee2_age", type: "text", x: 580.0807495117188, y: 1344.3828125, width: 96, height: 24, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee3_age", type: "text", x: 583.0807495117188, y: 1369.3828125, width: 97, height: 22, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee3_name", type: "text", x: 237.08074951171875, y: 1372.3828125, width: 334, height: 22, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee4_age", type: "text", x: 582.0807495117188, y: 1394.3828125, width: 98, height: 28, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee4_name", type: "text", x: 236.08074951171875, y: 1396.3828125, width: 338, height: 26, canvasWidth: 1223, canvasHeight: 1583 },
+    ],
+    5: [
+        { field: "nominee1_name", type: "text", x: 152.8828125, y: 321.7161445617676, width: 337, height: 33, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_dob", type: "text", x: 500.8828125, y: 323.7161445617676, width: 161, height: 34, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_relation", type: "text", x: 667.8828125, y: 323.7161445617676, width: 249, height: 34, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_name", type: "text", x: 171.08074951171875, y: 422.7161445617676, width: 371, height: 35, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee2_dob", type: "text", x: 556.0807495117188, y: 424.7161445617676, width: 176, height: 39, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee2_relation", type: "text", x: 744.0807495117188, y: 426.7161445617676, width: 277, height: 36, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee3_name", type: "text", x: 169.08074951171875, y: 488.7161445617676, width: 371, height: 34, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee3_dob", type: "text", x: 556.0807495117188, y: 492.7161445617676, width: 180, height: 31, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee3_relation", type: "text", x: 749.0807495117188, y: 493.7161445617676, width: 270, height: 34, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee4_name", type: "text", x: 170.08074951171875, y: 557.7161445617676, width: 376, height: 30, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee4_relation", type: "text", x: 749.0807495117188, y: 559.7161445617676, width: 277, height: 34, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee4_dob", type: "text", x: 556.0807495117188, y: 560.7161445617676, width: 179, height: 32, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "declarationDate", type: "text", x: 205.08074951171875, y: 728.7161254882812, width: 210, height: 30, canvasWidth: 1223, canvasHeight: 1583 },
+    ],
+    6: [
+        { field: "name", type: "text", x: 631.3385620117188, y: 307.71614837646484, width: 282, height: 34, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "fatherName", type: "text", x: 632.3385620117188, y: 350.71614837646484, width: 286, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "dob", type: "text", x: 630.3385620117188, y: 387.71614837646484, width: 193, height: 31, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "uan", type: "text", x: 631.3385620117188, y: 429.71614837646484, width: 194, height: 33, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "gender", type: "text", x: 629.3385620117188, y: 467.7161445617676, width: 196, height: 34, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "religion", type: "text", x: 627.3385620117188, y: 507.7161445617676, width: 195, height: 33, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "maritalStatus", type: "text", x: 628.3385620117188, y: 549.7161445617676, width: 197, height: 28, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "doj", type: "text", x: 626.3385620117188, y: 666.7161407470703, width: 198, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "permanentAddress", type: "text", x: 627.3385620117188, y: 755.7161254882812, width: 196, height: 133, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "district", type: "text", x: 625.3385620117188, y: 892.7161254882812, width: 201, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "state", type: "text", x: 626.3385620117188, y: 921.7161254882812, width: 202, height: 21, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "pincode", type: "text", x: 625.3385620117188, y: 946.7161254882812, width: 205, height: 21, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "email", type: "text", x: 628.3385620117188, y: 972.7161254882812, width: 200, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "mobile", type: "text", x: 626.3385620117188, y: 996.7161254882812, width: 204, height: 26, canvasWidth: 952, canvasHeight: 1347 },
+    ],
+    7: [
+        { field: "name", type: "text", x: 279.33856201171875, y: 217.71615600585938, width: 295, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "doj", type: "text", x: 734.3385620117188, y: 272.7161560058594, width: 86, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+    ],
+    8: [
+        { field: "nominee1_name", type: "text", x: 116.33856201171875, y: 247.71615600585938, width: 198, height: 24, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee1_relation", type: "text", x: 320.33856201171875, y: 247.71615600585938, width: 133, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee1_age", type: "text", x: 456.33856201171875, y: 247.71615600585938, width: 97, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee1_aadhaar", type: "text", x: 556.3385620117188, y: 247.71615600585938, width: 139, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee1_percentage", type: "text", x: 716.3385620117188, y: 249.71615600585938, width: 174, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee2_name", type: "text", x: 115.33856201171875, y: 271.7161560058594, width: 199, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee2_aadhaar", type: "text", x: 556.3385620117188, y: 271.7161560058594, width: 141, height: 21, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee2_relation", type: "text", x: 320.33856201171875, y: 272.7161560058594, width: 135, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee2_age", type: "text", x: 455.33856201171875, y: 272.7161560058594, width: 98, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee2_percentage", type: "text", x: 715.3385620117188, y: 272.7161560058594, width: 178, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee3_aadhaar", type: "text", x: 559.3385620117188, y: 294.7161560058594, width: 141, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee3_name", type: "text", x: 112.33856201171875, y: 295.7161560058594, width: 203, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee3_relation", type: "text", x: 317.33856201171875, y: 295.7161560058594, width: 138, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee3_percentage", type: "text", x: 716.3385620117188, y: 296.7161560058594, width: 180, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee3_age", type: "text", x: 456.33856201171875, y: 297.7161560058594, width: 98, height: 21, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee4_aadhaar", type: "text", x: 560.3385620117188, y: 315.7161560058594, width: 144, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee4_percentage", type: "text", x: 716.3385620117188, y: 316.7161560058594, width: 184, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee4_age", type: "text", x: 458.33856201171875, y: 317.7161560058594, width: 99, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee4_name", type: "text", x: 111.33856201171875, y: 318.7161560058594, width: 205, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee4_relation", type: "text", x: 319.33856201171875, y: 319.7161560058594, width: 138, height: 24, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "declaration", type: "checkbox", x: 31.33856201171875, y: 404.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "place", type: "text", x: 104.33856201171875, y: 884.7161254882812, width: 166, height: 31, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "declarationDate", type: "text", x: 105.33856201171875, y: 919.7161254882812, width: 165, height: 28, canvasWidth: 952, canvasHeight: 1347 },
+    ],
+    9: [
+        { field: "declarationDate", type: "text", x: 143.33856201171875, y: 289.7161560058594, width: 206, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+    ],
 };
 
 
@@ -2696,6 +2805,8 @@ function resolvePDFValue(field, data) {
 
         place: data.place,
 
+        declaration: data.declaration,
+
         declarationDate:
             formatDateForPDF(data.declarationDate)
     };
@@ -2739,7 +2850,86 @@ function resolvePDFValue(field, data) {
 }
 
 /* =====================================================
+   CHECKBOX HELPERS
+
+   "checkbox" mappings in the JSON are actually a mix of
+   Yes/No <select> fields (internationalWorker, epfMember,
+   epsMember, withdrawEPF, withdrawEPS) and the single
+   "declaration" radio group. Both resolve to a mark drawn
+   at the mapped box when the field is "checked".
+===================================================== */
+
+function isCheckboxChecked(field, rawValue) {
+
+    if (field === "declaration") {
+        // Any of the 6 declaration options counts as checked.
+        return Boolean(rawValue);
+    }
+
+    return String(rawValue).trim().toLowerCase() === "yes";
+}
+
+
+/* =====================================================
+   TEXT WRAPPING HELPER
+
+   Splits a value into lines that fit inside a mapped
+   box's width, so longer values (addresses, etc.) don't
+   run off the edge of the field or overlap neighbouring
+   text.
+===================================================== */
+
+function wrapTextToWidth(text, font, fontSize, maxWidth) {
+
+    const words =
+        String(text)
+            .split(/\s+/)
+            .filter(Boolean);
+
+    const lines = [];
+    let current = "";
+
+    for (const word of words) {
+
+        const candidate =
+            current ? current + " " + word : word;
+
+        const candidateWidth =
+            font.widthOfTextAtSize(
+                candidate,
+                fontSize
+            );
+
+        if (candidateWidth <= maxWidth || !current) {
+            current = candidate;
+        }
+        else {
+            lines.push(current);
+            current = word;
+        }
+    }
+
+    if (current) {
+        lines.push(current);
+    }
+
+    return lines.length ? lines : [""];
+}
+
+
+/* =====================================================
    APPLY PDF MAPPING
+
+   Every mapping carries its own canvasWidth/canvasHeight,
+   because different mappings were captured against
+   different render sizes of the same PDF page. So each
+   mapping is scaled individually against the actual PDF
+   page dimensions rather than assuming one fixed canvas
+   size for the whole document.
+
+   Canvas/browser coordinates start top-left; PDF
+   coordinates start bottom-left, so the Y axis is flipped
+   during conversion.
 ===================================================== */
 
 async function applyPDFMapping(
@@ -2747,13 +2937,10 @@ async function applyPDFMapping(
     data
 ) {
 
-    /*
-       This function is intentionally prepared
-       for the manual 9-page mapping.
-
-       It will write values once the actual
-       PDF coordinates are supplied.
-    */
+    const font =
+        await pdfDoc.embedFont(
+            PDFLib.StandardFonts.Helvetica
+        );
 
     const pages =
         pdfDoc.getPages();
@@ -2774,31 +2961,114 @@ async function applyPDFMapping(
         const page =
             pages[pageNumber - 1];
 
+        const pageWidth =
+            page.getWidth();
+
+        const pageHeight =
+            page.getHeight();
+
         for (
             const mapping of mappings
         ) {
 
-            const value =
+            const scaleX =
+                pageWidth / mapping.canvasWidth;
+
+            const scaleY =
+                pageHeight / mapping.canvasHeight;
+
+            const boxX =
+                mapping.x * scaleX;
+
+            const boxWidth =
+                mapping.width * scaleX;
+
+            const boxHeight =
+                mapping.height * scaleY;
+
+            // Top and bottom of the box, converted to
+            // PDF's bottom-left-origin coordinate space.
+            const boxTopY =
+                pageHeight - (mapping.y * scaleY);
+
+            const boxBottomY =
+                pageHeight -
+                ((mapping.y + mapping.height) * scaleY);
+
+            const rawValue =
                 resolvePDFValue(
                     mapping.field,
                     data
                 );
 
-            if (!value) continue;
+            if (mapping.type === "checkbox") {
 
-            page.drawText(
-                String(value),
-                {
-                    x: mapping.x,
-                    y: mapping.y,
-                    size: mapping.size || 10,
-                    color: PDFLib.rgb(
-                        0,
-                        0,
-                        0
-                    )
+                if (!isCheckboxChecked(mapping.field, rawValue)) {
+                    continue;
                 }
-            );
+
+                const markSize =
+                    Math.max(
+                        8,
+                        Math.min(boxWidth, boxHeight) * 0.85
+                    );
+
+                page.drawText(
+                    "X",
+                    {
+                        x: boxX + (boxWidth - markSize * 0.6) / 2,
+                        y: boxBottomY + (boxHeight - markSize) / 2,
+                        size: markSize,
+                        font: font,
+                        color: PDFLib.rgb(0, 0, 0)
+                    }
+                );
+
+                continue;
+            }
+
+            // Text mapping.
+            if (!rawValue) continue;
+
+            const fontSize =
+                (mapping.size || 10) *
+                ((scaleX + scaleY) / 2);
+
+            const lineHeight =
+                fontSize * 1.15;
+
+            const lines =
+                wrapTextToWidth(
+                    String(rawValue),
+                    font,
+                    fontSize,
+                    boxWidth
+                );
+
+            let cursorY =
+                boxTopY - fontSize;
+
+            for (const line of lines) {
+
+                // Stop rather than drawing well below the
+                // mapped box if the text is too long to fit.
+                if (cursorY < boxBottomY - lineHeight) {
+                    break;
+                }
+
+                page.drawText(
+                    line,
+                    {
+                        x: boxX,
+                        y: cursorY,
+                        size: fontSize,
+                        font: font,
+                        color: PDFLib.rgb(0, 0, 0)
+                    }
+                );
+
+                cursorY -= lineHeight;
+            }
         }
     }
 }
