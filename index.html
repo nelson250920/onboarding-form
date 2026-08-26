@@ -23,10 +23,14 @@ body {
     color: #222;
 }
 
+/* =====================================================
+   HEADER
+===================================================== */
+
 .header {
     background: #1f4e78;
     color: white;
-    padding: 24px 20px;
+    padding: 22px 20px;
     text-align: center;
 }
 
@@ -40,8 +44,12 @@ body {
     font-size: 14px;
 }
 
+/* =====================================================
+   MAIN
+===================================================== */
+
 .container {
-    max-width: 650px;
+    max-width: 700px;
     margin: 35px auto;
     padding: 0 15px;
 }
@@ -67,19 +75,12 @@ body {
     line-height: 1.5;
 }
 
-.info {
-    background: #eaf3fa;
-    border: 1px solid #cbddea;
-    color: #1f4e78;
-    padding: 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    line-height: 1.5;
-    margin-bottom: 25px;
-}
+/* =====================================================
+   FORM
+===================================================== */
 
 .field {
-    margin-bottom: 19px;
+    margin-bottom: 18px;
 }
 
 .field label {
@@ -102,7 +103,7 @@ body {
 .field input {
     width: 100%;
     padding: 12px;
-    border: 1px solid #bcbcbc;
+    border: 1px solid #bbb;
     border-radius: 6px;
     font-size: 15px;
     background: white;
@@ -114,14 +115,11 @@ body {
     box-shadow: 0 0 0 2px rgba(31,78,120,0.12);
 }
 
-.buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 28px;
-}
+/* =====================================================
+   BUTTONS
+===================================================== */
 
 button {
-    flex: 1;
     border: none;
     border-radius: 6px;
     padding: 13px 15px;
@@ -130,45 +128,31 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    opacity: 0.9;
+}
+
+.employee-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
 .save {
+    flex: 1;
     background: #6c757d;
     color: white;
 }
 
-.save:hover {
-    background: #545b62;
-}
-
 .generate {
+    flex: 1;
     background: #198754;
     color: white;
 }
 
-.generate:hover {
-    background: #146c43;
-}
-
-.load {
-    background: #1f4e78;
-    color: white;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.load:hover {
-    background: #163a5c;
-}
-
-.clear {
-    background: #dc3545;
-    color: white;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.clear:hover {
-    background: #bb2d3b;
-}
+/* =====================================================
+   STATUS
+===================================================== */
 
 .status {
     display: none;
@@ -197,6 +181,10 @@ button {
     color: #055160;
 }
 
+/* =====================================================
+   DRAFT AREA
+===================================================== */
+
 .return-box {
     margin-top: 30px;
     padding-top: 20px;
@@ -214,6 +202,285 @@ button {
     color: #666;
 }
 
+.load {
+    width: 100%;
+    margin-top: 8px;
+    background: #1f4e78;
+    color: white;
+}
+
+.clear {
+    width: 100%;
+    margin-top: 8px;
+    background: #dc3545;
+    color: white;
+}
+
+/* =====================================================
+   ADMIN BUTTON
+===================================================== */
+
+.admin-button {
+    display: block;
+    margin: 20px auto;
+    background: #343a40;
+    color: white;
+    padding: 10px 18px;
+}
+
+/* =====================================================
+   ADMIN PANEL
+===================================================== */
+
+#adminPanel {
+    display: none;
+}
+
+.admin-wrapper {
+    max-width: 1500px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.admin-top {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+}
+
+.admin-top h2 {
+    margin: 0 0 8px;
+    color: #1f4e78;
+}
+
+.admin-top p {
+    margin: 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.admin-controls {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+}
+
+.admin-controls label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.admin-controls select {
+    padding: 9px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+}
+
+.admin-controls button {
+    background: #1f4e78;
+    color: white;
+}
+
+.admin-controls .green {
+    background: #198754;
+}
+
+.admin-controls .red {
+    background: #dc3545;
+}
+
+.admin-controls .gray {
+    background: #6c757d;
+}
+
+/* =====================================================
+   ADMIN WORKSPACE
+===================================================== */
+
+.admin-workspace {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.admin-side {
+    width: 330px;
+    flex-shrink: 0;
+    background: white;
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.admin-side h3 {
+    margin-top: 0;
+    color: #1f4e78;
+}
+
+.admin-side select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+}
+
+.admin-side button {
+    width: 100%;
+    margin-top: 7px;
+    background: #1f4e78;
+    color: white;
+}
+
+.admin-side .green {
+    background: #198754;
+}
+
+.admin-side .red {
+    background: #dc3545;
+}
+
+.admin-side .gray {
+    background: #6c757d;
+}
+
+.coordinates {
+    margin-top: 15px;
+    background: #f5f7f9;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.coordinates strong {
+    color: #1f4e78;
+}
+
+.mapping-list {
+    margin-top: 15px;
+    border-top: 1px solid #ddd;
+    padding-top: 12px;
+}
+
+.mapping-item {
+    background: #f5f7f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 9px;
+    margin-bottom: 7px;
+    font-size: 12px;
+}
+
+.mapping-item strong {
+    color: #1f4e78;
+}
+
+.instructions {
+    margin-top: 15px;
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* =====================================================
+   PDF AREA
+===================================================== */
+
+.pdf-area {
+    flex: 1;
+    background: #777;
+    padding: 25px;
+    min-height: 750px;
+    overflow: auto;
+    border-radius: 8px;
+}
+
+.pdf-page-wrapper {
+    position: relative;
+    background: white;
+    margin: 0 auto 25px auto;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.35);
+}
+
+.pdf-canvas {
+    display: block;
+}
+
+.mapping-layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.mapping-box {
+    position: absolute;
+    border: 2px solid #e63946;
+    background: rgba(230,57,70,0.15);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.mapping-box span {
+    position: absolute;
+    top: -23px;
+    left: -2px;
+    background: #e63946;
+    color: white;
+    padding: 3px 7px;
+    font-size: 11px;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+
+.mapping-box.temp {
+    border-color: #198754;
+    background: rgba(25,135,84,0.20);
+}
+
+.mapping-box.temp span {
+    background: #198754;
+}
+
+.close-admin {
+    background: #dc3545 !important;
+}
+
+/* =====================================================
+   MAPPING CODE
+===================================================== */
+
+#mappingCodeBox {
+    display: none;
+    margin-top: 15px;
+}
+
+#mappingCode {
+    width: 100%;
+    min-height: 250px;
+    font-family: monospace;
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
 .footer {
     text-align: center;
     color: #777;
@@ -221,13 +488,21 @@ button {
     margin: 25px 0;
 }
 
-@media(max-width:600px) {
+/* =====================================================
+   MOBILE
+===================================================== */
 
-    .card {
-        padding: 22px;
+@media(max-width:800px) {
+
+    .admin-workspace {
+        flex-direction: column;
     }
 
-    .buttons {
+    .admin-side {
+        width: 100%;
+    }
+
+    .employee-buttons {
         flex-direction: column;
     }
 
@@ -240,6 +515,10 @@ button {
 
 <body>
 
+
+<!-- =====================================================
+     EMPLOYEE HEADER
+===================================================== -->
 
 <div class="header">
 
@@ -254,203 +533,521 @@ button {
 </div>
 
 
-<div class="container">
-
-<div class="card">
-
-
-<div class="title">
-    Personal Details
-</div>
-
-
-<div class="subtitle">
-
-    Please enter your information exactly
-    as it should appear in your onboarding
-    documents.
-
-</div>
-
-
-<div class="info">
-
-    <strong>Email OR Mobile Number</strong>
-    is required. You can provide either one
-    or both.
-
-</div>
-
-
-<!-- NAME -->
-
-<div class="field">
-
-<label>
-
-    Full Name
-    <span class="required">*</span>
-
-</label>
-
-<input
-    type="text"
-    id="name"
-    placeholder="Enter your full name"
->
-
-</div>
-
-
-<!-- EMAIL -->
-
-<div class="field">
-
-<label>
-
-    Email Address
-    <span class="optional">
-        (Optional if mobile is provided)
-    </span>
-
-</label>
-
-<input
-    type="email"
-    id="email"
-    placeholder="Enter your email address"
->
-
-</div>
-
-
-<!-- PHONE -->
-
-<div class="field">
-
-<label>
-
-    Mobile Number
-    <span class="optional">
-        (Optional if email is provided)
-    </span>
-
-</label>
-
-<input
-    type="tel"
-    id="phone"
-    placeholder="Enter your mobile number"
->
-
-</div>
-
-
-<!-- PLACE -->
-
-<div class="field">
-
-<label>
-
-    Place
-    <span class="required">*</span>
-
-</label>
-
-<input
-    type="text"
-    id="place"
-    placeholder="Enter place"
->
-
-</div>
-
-
-<!-- DATE -->
-
-<div class="field">
-
-<label>
-
-    Date / DOJ
-    <span class="required">*</span>
-
-</label>
-
-<input
-    type="date"
-    id="date"
->
-
-</div>
-
-
-<!-- BUTTONS -->
-
-<div class="buttons">
-
-<button
-    class="save"
-    onclick="saveDraft()">
-
-    Save Draft
-
-</button>
-
-
-<button
-    class="generate"
-    onclick="generatePDF()">
-
-    Generate Final PDF
-
-</button>
-
-</div>
-
+<!-- =====================================================
+     EMPLOYEE FORM
+===================================================== -->
 
 <div
-    id="status"
-    class="status">
+    id="employeePanel"
+    class="container">
+
+    <div class="card">
+
+        <div class="title">
+            Personal Details
+        </div>
+
+        <div class="subtitle">
+
+            Please enter your information exactly
+            as it should appear in your onboarding
+            documents.
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Full Name
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+
+                Email Address
+
+                <span class="optional">
+                    (Optional if mobile is provided)
+                </span>
+
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email address">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+
+                Mobile Number
+
+                <span class="optional">
+                    (Optional if email is provided)
+                </span>
+
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your mobile number">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+
+                Place
+                <span class="required">*</span>
+
+            </label>
+
+            <input
+                type="text"
+                id="place"
+                placeholder="Enter place">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+
+                Date / DOJ
+                <span class="required">*</span>
+
+            </label>
+
+            <input
+                type="date"
+                id="date">
+
+        </div>
+
+
+        <div class="employee-buttons">
+
+            <button
+                class="save"
+                onclick="saveDraft()">
+
+                Save Draft
+
+            </button>
+
+
+            <button
+                class="generate"
+                onclick="generatePDF()">
+
+                Generate Final PDF
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="status"
+            class="status">
+        </div>
+
+
+        <div class="return-box">
+
+            <h3>
+                Already started an application?
+            </h3>
+
+            <p>
+
+                Enter the email OR mobile number
+                previously used to save your draft.
+
+            </p>
+
+
+            <button
+                class="load"
+                onclick="loadExistingDraft()">
+
+                Load My Saved Draft
+
+            </button>
+
+
+            <button
+                class="clear"
+                onclick="clearCurrentDraft()">
+
+                Clear My Current Draft
+
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
 
 
-<!-- LOAD -->
-
-<div class="return-box">
-
-<h3>
-    Already started an application?
-</h3>
-
-
-<p>
-
-    Enter the email OR mobile number you
-    previously used to find your saved draft.
-
-</p>
-
+<!-- =====================================================
+     ADMIN BUTTON
+===================================================== -->
 
 <button
-    class="load"
-    onclick="loadExistingDraft()">
+    class="admin-button"
+    onclick="openAdmin()">
 
-    Load My Saved Draft
+    HR / Admin Setup
 
 </button>
 
 
-<button
-    class="clear"
-    onclick="clearCurrentDraft()">
+<!-- =====================================================
+     ADMIN PANEL
+===================================================== -->
 
-    Clear My Current Draft
+<div
+    id="adminPanel"
+    class="admin-wrapper">
 
-</button>
 
-</div>
+    <div class="admin-top">
 
+        <h2>
+            LOA PDF Mapping - HR / Admin
+        </h2>
+
+        <p>
+
+            Map the exact location on every PDF page
+            where each employee value should appear.
+
+        </p>
+
+    </div>
+
+
+    <div class="admin-controls">
+
+        <button
+            onclick="loadAdminPDF()">
+
+            Load LOA.pdf
+
+        </button>
+
+
+        <button
+            onclick="zoomOut()">
+
+            − Zoom Out
+
+        </button>
+
+
+        <button
+            onclick="zoomIn()">
+
+            + Zoom In
+
+        </button>
+
+
+        <button
+            onclick="resetZoom()">
+
+            Reset Zoom
+
+        </button>
+
+
+        <button
+            class="green"
+            onclick="showMappingCode()">
+
+            Copy Mapping Configuration
+
+        </button>
+
+
+        <button
+            class="close-admin"
+            onclick="closeAdmin()">
+
+            Close Admin
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="adminStatus"
+        class="status info"
+        style="display:block;">
+
+        Click "Load LOA.pdf" to start mapping.
+
+    </div>
+
+
+    <div class="admin-workspace">
+
+
+        <!-- =============================================
+             ADMIN SIDE PANEL
+        ============================================== -->
+
+        <div class="admin-side">
+
+            <h3>
+                Field Mapping
+            </h3>
+
+
+            <label>
+                PDF Page
+            </label>
+
+            <select id="pageSelect">
+            </select>
+
+
+            <label>
+                Field
+            </label>
+
+            <select id="fieldSelect">
+
+                <option value="">
+                    -- Select Field --
+                </option>
+
+                <option value="Name">
+                    Name
+                </option>
+
+                <option value="Email">
+                    Email
+                </option>
+
+                <option value="Phone">
+                    Phone
+                </option>
+
+                <option value="Place">
+                    Place
+                </option>
+
+                <option value="Date">
+                    Date
+                </option>
+
+            </select>
+
+
+            <button
+                class="green"
+                onclick="startMapping()">
+
+                Start Mapping
+
+            </button>
+
+
+            <button
+                onclick="deleteCurrentMapping()">
+
+                Delete Selected Mapping
+
+            </button>
+
+
+            <button
+                class="red"
+                onclick="clearAllMappings()">
+
+                Clear All Mappings
+
+            </button>
+
+
+            <div
+                class="coordinates"
+                id="coordinates">
+
+                <strong>
+                    Current Mapping
+                </strong>
+
+                <br>
+
+                No mapping selected.
+
+            </div>
+
+
+            <div class="mapping-list">
+
+                <strong>
+                    Saved Mappings
+                </strong>
+
+                <div id="mappingList">
+
+                    No mappings saved.
+
+                </div>
+
+            </div>
+
+
+            <div class="instructions">
+
+                <strong>
+                    How to map:
+                </strong>
+
+                <br><br>
+
+                1. Load LOA.pdf.
+
+                <br>
+
+                2. Select the PDF page.
+
+                <br>
+
+                3. Select the field.
+
+                <br>
+
+                4. Click Start Mapping.
+
+                <br>
+
+                5. Draw a rectangle exactly over
+                   the location where the value should appear.
+
+                <br>
+
+                6. Release the mouse.
+
+                <br>
+
+                7. The mapping is automatically saved.
+
+                <br><br>
+
+                You can map the same field many times.
+
+                <br><br>
+
+                Example:
+
+                <br>
+
+                Name → Page 1
+
+                <br>
+
+                Name → Page 2
+
+                <br>
+
+                Name → Page 4
+
+                <br>
+
+                The employee enters their name only once.
+
+            </div>
+
+        </div>
+
+
+        <!-- =============================================
+             PDF
+        ============================================== -->
+
+        <div
+            class="pdf-area"
+            id="pdfArea">
+
+            <div
+                style="
+                    color:white;
+                    text-align:center;
+                    padding:100px 20px;
+                ">
+
+                LOA.pdf will appear here.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =============================================
+         MAPPING CODE
+    ============================================== -->
+
+    <div id="mappingCodeBox">
+
+        <h3>
+            Mapping Configuration
+        </h3>
+
+        <p style="font-size:13px;color:#666;">
+
+            Copy this configuration and replace the
+            <strong>MAPPINGS</strong> section in this
+            index.html.
+
+        </p>
+
+        <textarea
+            id="mappingCode"
+            readonly>
+        </textarea>
+
+        <button
+            class="green"
+            onclick="copyMappingCode()"
+            style="
+                margin-top:10px;
+                background:#198754;
+                color:white;
+            ">
+
+            Copy Configuration
+
+        </button>
+
+    </div>
 
 </div>
 
@@ -462,148 +1059,121 @@ button {
 </div>
 
 
-</div>
+<!-- =====================================================
+     PDF LIB
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 
+<!-- =====================================================
+     PDF.JS
+===================================================== -->
 
-<!-- PDF LIBRARY -->
-
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js">
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 
 <script>
 
-
 /* =====================================================
-   SETTINGS
+   PDF.JS WORKER
 ===================================================== */
 
-
-/*
-   LOA.pdf is in the SAME folder as index.html.
-*/
-
-const PDF_URL =
-    "./LOA.pdf";
-
-
-/*
-   Employee drafts are stored locally
-   in the employee's browser.
-
-   This is suitable for our prototype.
-*/
-
-const DRAFTS_KEY =
-    "employeeOnboardingDrafts";
-
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
 /* =====================================================
-   PDF MAPPINGS
-=====================================================
+   PDF FILE
+===================================================== */
 
+const PDF_URL = "./LOA.pdf";
+
+
+/* =====================================================
+   EMPLOYEE STORAGE
+===================================================== */
+
+const CANDIDATES_KEY =
+    "loaCandidates";
+
+
+/* =====================================================
+   ADMIN STORAGE
+===================================================== */
+
+const ADMIN_MAPPING_KEY =
+    "loaAdminMappings";
+
+
+/* =====================================================
    IMPORTANT:
+   AFTER HR FINISHES MAPPING,
 
-   These are DUMMY mappings for testing.
+   REPLACE THIS OBJECT WITH THE CONFIGURATION
+   GENERATED BY THE ADMIN MAPPER.
 
-   Later you will give me the coordinates
-   for EVERY location on EVERY PDF page.
+   EXAMPLE:
 
-   Example:
+   [
+       {
+           field: "Name",
+           page: 1,
+           x: 100,
+           yTop: 100,
+           width: 200,
+           height: 25
+       }
+   ]
 
-   Page 1 Name
-   Page 2 Full Name
-   Page 2 Aadhaar Name
-   Page 3 Name in Block Letters
-
+   Multiple entries for the same field are allowed.
 ===================================================== */
 
-
-const MAPPINGS = {
-
+const MAPPINGS = [
 
     /*
     -----------------------------------------------------
-    NAME
-    -----------------------------------------------------
+    YOUR DUMMY MAPPINGS
 
-    This can have MULTIPLE locations.
+    These are the coordinates you gave me.
 
-    All locations receive the employee's
-    Full Name.
-    */
-
-    Name: [
-
-        {
-            page: 1,
-
-            x: 191.2,
-            y: 722.0,
-            width: 276.0,
-            height: 22.0,
-
-            canvasWidth: 1000,
-            canvasHeight: 1414
-        }
-
-    ],
-
-
-    /*
-    -----------------------------------------------------
-    DATE
+    They are treated as PDF-point coordinates
+    with Y measured from the TOP.
     -----------------------------------------------------
     */
 
-    Date: [
+    {
+        field: "Name",
+        page: 1,
+        x: 191.2,
+        yTop: 722.0,
+        width: 276.0,
+        height: 22.0
+    },
 
-        {
-            page: 1,
+    {
+        field: "Date",
+        page: 1,
+        x: 209.2,
+        yTop: 824.0,
+        width: 138.0,
+        height: 21.0
+    },
 
-            x: 209.2,
-            y: 824.0,
-            width: 138.0,
-            height: 21.0,
+    {
+        field: "Place",
+        page: 1,
+        x: 209.2,
+        yTop: 847.0,
+        width: 139.0,
+        height: 21.0
+    }
 
-            canvasWidth: 1000,
-            canvasHeight: 1414
-        }
-
-    ],
-
-
-    /*
-    -----------------------------------------------------
-    PLACE
-    -----------------------------------------------------
-    */
-
-    Place: [
-
-        {
-            page: 1,
-
-            x: 209.2,
-            y: 847.0,
-            width: 139.0,
-            height: 21.0,
-
-            canvasWidth: 1000,
-            canvasHeight: 1414
-        }
-
-    ]
-
-
-};
-
+];
 
 
 /* =====================================================
-   ELEMENTS
+   EMPLOYEE ELEMENTS
 ===================================================== */
 
 const nameInput =
@@ -625,104 +1195,1529 @@ const statusBox =
     document.getElementById("status");
 
 
-
 /* =====================================================
-   CLEAN EMAIL
+   ADMIN VARIABLES
 ===================================================== */
 
-function cleanEmail(email) {
+let adminPDFDocument = null;
 
-    return email
-        .trim()
-        .toLowerCase();
+let adminPDFBytes = null;
+
+let adminZoom = 1.3;
+
+let mappingMode = false;
+
+let mappingStartX = 0;
+
+let mappingStartY = 0;
+
+let mappingTempBox = null;
+
+
+/* =====================================================
+   ADMIN MAPPINGS
+
+   Load saved local mappings first.
+===================================================== */
+
+let adminMappings =
+    loadAdminMappings();
+
+
+/* =====================================================
+   OPEN ADMIN
+===================================================== */
+
+function openAdmin() {
+
+    document.getElementById(
+        "employeePanel"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "adminPanel"
+    ).style.display = "block";
+
+
+    window.scrollTo(
+        0,
+        0
+    );
 
 }
 
 
-
 /* =====================================================
-   CLEAN PHONE
+   CLOSE ADMIN
 ===================================================== */
 
-function cleanPhone(phone) {
+function closeAdmin() {
 
-    return phone
-        .replace(/\D/g, "");
+    document.getElementById(
+        "adminPanel"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "employeePanel"
+    ).style.display = "block";
 
 }
 
 
-
 /* =====================================================
-   GET DRAFTS
+   LOAD ADMIN PDF
 ===================================================== */
 
-function getDrafts() {
-
-    const saved =
-        localStorage.getItem(
-            DRAFTS_KEY
-        );
-
-
-    if (!saved) {
-
-        return {};
-
-    }
-
+async function loadAdminPDF() {
 
     try {
 
-        const data =
-            JSON.parse(saved);
+        setAdminStatus(
+            "Loading LOA.pdf...",
+            "info"
+        );
 
 
-        if (
-            typeof data !== "object" ||
-            data === null
-        ) {
+        const response =
+            await fetch(PDF_URL);
 
-            return {};
+
+        if (!response.ok) {
+
+            throw new Error(
+                "LOA.pdf could not be loaded."
+            );
 
         }
 
 
-        return data;
+        const buffer =
+            await response.arrayBuffer();
+
+
+        adminPDFBytes =
+            new Uint8Array(
+                buffer
+            ).slice();
+
+
+        const displayBytes =
+            new Uint8Array(
+                buffer
+            ).slice();
+
+
+        adminPDFDocument =
+            await pdfjsLib
+                .getDocument({
+                    data: displayBytes
+                })
+                .promise;
+
+
+        createPageSelector();
+
+
+        setAdminStatus(
+            "LOA.pdf loaded successfully. Pages: "
+            +
+            adminPDFDocument.numPages,
+            "success"
+        );
+
+
+        await renderAdminPDF();
+
+
+        updateAdminMappingList();
 
     }
     catch(error) {
 
         console.error(error);
 
-        return {};
+        setAdminStatus(
+            "PDF loading failed: "
+            +
+            error.message,
+            "error"
+        );
 
     }
 
 }
 
 
-
 /* =====================================================
-   SAVE DRAFTS
+   PAGE SELECTOR
 ===================================================== */
 
-function saveDrafts(drafts) {
+function createPageSelector() {
+
+    const select =
+        document.getElementById(
+            "pageSelect"
+        );
+
+
+    select.innerHTML =
+        "";
+
+
+    for (
+        let i = 1;
+        i <= adminPDFDocument.numPages;
+        i++
+    ) {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            i;
+
+
+        option.textContent =
+            "Page " + i;
+
+
+        select.appendChild(
+            option
+        );
+
+    }
+
+
+    select.onchange =
+        function() {
+
+            renderAdminPDF();
+
+        };
+
+}
+
+
+/* =====================================================
+   RENDER ADMIN PDF
+
+   IMPORTANT:
+   Coordinates are captured relative to
+   the displayed page and converted into
+   PDF POINT coordinates.
+
+   Therefore zoom does not change the
+   final PDF position.
+===================================================== */
+
+async function renderAdminPDF() {
+
+    if (!adminPDFDocument) {
+
+        return;
+
+    }
+
+
+    const pageNumber =
+        Number(
+            document.getElementById(
+                "pageSelect"
+            ).value
+        );
+
+
+    const page =
+        await adminPDFDocument.getPage(
+            pageNumber
+        );
+
+
+    const viewport =
+        page.getViewport({
+            scale: adminZoom
+        });
+
+
+    const pdfArea =
+        document.getElementById(
+            "pdfArea"
+        );
+
+
+    pdfArea.innerHTML =
+        "";
+
+
+    const wrapper =
+        document.createElement(
+            "div"
+        );
+
+
+    wrapper.className =
+        "pdf-page-wrapper";
+
+
+    wrapper.style.width =
+        viewport.width + "px";
+
+
+    wrapper.style.height =
+        viewport.height + "px";
+
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    canvas.className =
+        "pdf-canvas";
+
+
+    canvas.width =
+        viewport.width;
+
+
+    canvas.height =
+        viewport.height;
+
+
+    wrapper.appendChild(
+        canvas
+    );
+
+
+    const layer =
+        document.createElement(
+            "div"
+        );
+
+
+    layer.className =
+        "mapping-layer";
+
+
+    layer.style.width =
+        viewport.width + "px";
+
+
+    layer.style.height =
+        viewport.height + "px";
+
+
+    wrapper.appendChild(
+        layer
+    );
+
+
+    pdfArea.appendChild(
+        wrapper
+    );
+
+
+    const context =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    await page.render({
+
+        canvasContext:
+            context,
+
+        viewport:
+            viewport
+
+    }).promise;
+
+
+    setupAdminMouseMapping(
+        layer,
+        canvas,
+        page
+    );
+
+
+    displayAdminMappings(
+        layer,
+        pageNumber,
+        viewport
+    );
+
+}
+
+
+/* =====================================================
+   START MAPPING
+===================================================== */
+
+function startMapping() {
+
+    const field =
+        document.getElementById(
+            "fieldSelect"
+        ).value;
+
+
+    if (!field) {
+
+        alert(
+            "Please select a field first."
+        );
+
+        return;
+
+    }
+
+
+    if (!adminPDFDocument) {
+
+        alert(
+            "Please load LOA.pdf first."
+        );
+
+        return;
+
+    }
+
+
+    mappingMode =
+        true;
+
+
+    setAdminStatus(
+
+        "Now draw a rectangle around "
+        +
+        field
+        +
+        " on the selected page.",
+
+        "info"
+
+    );
+
+
+    document.getElementById(
+        "coordinates"
+    ).innerHTML =
+
+        "<strong>Mapping Mode</strong>"
+        +
+        "<br>"
+        +
+        "Draw a rectangle on the PDF.";
+
+}
+
+
+/* =====================================================
+   ADMIN MOUSE MAPPING
+===================================================== */
+
+function setupAdminMouseMapping(
+    layer,
+    canvas,
+    page
+) {
+
+    layer.onmousedown =
+        function(event) {
+
+            if (!mappingMode) {
+
+                return;
+
+            }
+
+
+            const field =
+                document.getElementById(
+                    "fieldSelect"
+                ).value;
+
+
+            if (!field) {
+
+                return;
+
+            }
+
+
+            const rect =
+                layer.getBoundingClientRect();
+
+
+            mappingStartX =
+                event.clientX -
+                rect.left;
+
+
+            mappingStartY =
+                event.clientY -
+                rect.top;
+
+
+            mappingTempBox =
+                document.createElement(
+                    "div"
+                );
+
+
+            mappingTempBox.className =
+                "mapping-box temp";
+
+
+            mappingTempBox.style.left =
+                mappingStartX + "px";
+
+
+            mappingTempBox.style.top =
+                mappingStartY + "px";
+
+
+            mappingTempBox.style.width =
+                "0px";
+
+
+            mappingTempBox.style.height =
+                "0px";
+
+
+            const label =
+                document.createElement(
+                    "span"
+                );
+
+
+            label.textContent =
+                field;
+
+
+            mappingTempBox.appendChild(
+                label
+            );
+
+
+            layer.appendChild(
+                mappingTempBox
+            );
+
+        };
+
+
+    layer.onmousemove =
+        function(event) {
+
+            if (
+                !mappingMode ||
+                !mappingTempBox
+            ) {
+
+                return;
+
+            }
+
+
+            const rect =
+                layer.getBoundingClientRect();
+
+
+            const currentX =
+                event.clientX -
+                rect.left;
+
+
+            const currentY =
+                event.clientY -
+                rect.top;
+
+
+            const x =
+                Math.min(
+                    mappingStartX,
+                    currentX
+                );
+
+
+            const y =
+                Math.min(
+                    mappingStartY,
+                    currentY
+                );
+
+
+            const width =
+                Math.abs(
+                    currentX -
+                    mappingStartX
+                );
+
+
+            const height =
+                Math.abs(
+                    currentY -
+                    mappingStartY
+                );
+
+
+            mappingTempBox.style.left =
+                x + "px";
+
+
+            mappingTempBox.style.top =
+                y + "px";
+
+
+            mappingTempBox.style.width =
+                width + "px";
+
+
+            mappingTempBox.style.height =
+                height + "px";
+
+        };
+
+
+    layer.onmouseup =
+        async function(event) {
+
+            if (
+                !mappingMode ||
+                !mappingTempBox
+            ) {
+
+                return;
+
+            }
+
+
+            mappingMode =
+                false;
+
+
+            const rect =
+                layer.getBoundingClientRect();
+
+
+            const endX =
+                event.clientX -
+                rect.left;
+
+
+            const endY =
+                event.clientY -
+                rect.top;
+
+
+            const displayX =
+                Math.min(
+                    mappingStartX,
+                    endX
+                );
+
+
+            const displayY =
+                Math.min(
+                    mappingStartY,
+                    endY
+                );
+
+
+            const displayWidth =
+                Math.abs(
+                    endX -
+                    mappingStartX
+                );
+
+
+            const displayHeight =
+                Math.abs(
+                    endY -
+                    mappingStartY
+                );
+
+
+            if (
+                displayWidth < 5 ||
+                displayHeight < 5
+            ) {
+
+                mappingTempBox.remove();
+
+                mappingTempBox = null;
+
+                alert(
+                    "Please draw a larger rectangle."
+                );
+
+                return;
+
+            }
+
+
+            /*
+            -------------------------------------------------
+            IMPORTANT COORDINATE CONVERSION
+            -------------------------------------------------
+
+            PDF.js displays the page using pixels.
+
+            PDF itself uses PDF POINTS.
+
+            We convert the displayed rectangle
+            back into actual PDF dimensions.
+
+            Y is stored from TOP for easy mapping.
+            -------------------------------------------------
+            */
+
+            const viewport =
+                page.getViewport({
+                    scale: adminZoom
+                });
+
+
+            const pdfWidth =
+                viewport.width /
+                adminZoom;
+
+
+            const pdfHeight =
+                viewport.height /
+                adminZoom;
+
+
+            const pdfX =
+                displayX /
+                adminZoom;
+
+
+            const pdfYTop =
+                displayY /
+                adminZoom;
+
+
+            const pdfBoxWidth =
+                displayWidth /
+                adminZoom;
+
+
+            const pdfBoxHeight =
+                displayHeight /
+                adminZoom;
+
+
+            const pageNumber =
+                Number(
+                    document.getElementById(
+                        "pageSelect"
+                    ).value
+                );
+
+
+            const field =
+                document.getElementById(
+                    "fieldSelect"
+                ).value;
+
+
+            const newMapping = {
+
+                field:
+                    field,
+
+                page:
+                    pageNumber,
+
+                x:
+                    Number(
+                        pdfX.toFixed(2)
+                    ),
+
+                yTop:
+                    Number(
+                        pdfYTop.toFixed(2)
+                    ),
+
+                width:
+                    Number(
+                        pdfBoxWidth.toFixed(2)
+                    ),
+
+                height:
+                    Number(
+                        pdfBoxHeight.toFixed(2)
+                    ),
+
+                pdfWidth:
+                    Number(
+                        pdfWidth.toFixed(2)
+                    ),
+
+                pdfHeight:
+                    Number(
+                        pdfHeight.toFixed(2)
+                    )
+
+            };
+
+
+            /*
+               Remove old mapping for the
+               same field + page.
+
+               This allows HR to redraw it.
+            */
+
+            adminMappings =
+                adminMappings.filter(
+                    function(item) {
+
+                        return !(
+                            item.field === field
+                            &&
+                            Number(item.page) === pageNumber
+                        );
+
+                    }
+                );
+
+
+            adminMappings.push(
+                newMapping
+            );
+
+
+            saveAdminMappings();
+
+
+            mappingTempBox.remove();
+
+            mappingTempBox = null;
+
+
+            updateCoordinateDisplay(
+                newMapping
+            );
+
+
+            updateAdminMappingList();
+
+
+            await renderAdminPDF();
+
+
+            setAdminStatus(
+
+                field
+                +
+                " mapping saved on Page "
+                +
+                pageNumber
+                +
+                ".",
+
+                "success"
+
+            );
+
+        };
+
+}
+
+
+/* =====================================================
+   DISPLAY SAVED ADMIN MAPPINGS
+===================================================== */
+
+function displayAdminMappings(
+    layer,
+    pageNumber,
+    viewport
+) {
+
+    const pageMappings =
+        adminMappings.filter(
+            function(map) {
+
+                return Number(map.page) ===
+                    Number(pageNumber);
+
+            }
+        );
+
+
+    pageMappings.forEach(
+        function(map) {
+
+            const box =
+                document.createElement(
+                    "div"
+                );
+
+
+            box.className =
+                "mapping-box";
+
+
+            box.style.left =
+                (
+                    Number(map.x) *
+                    adminZoom
+                )
+                + "px";
+
+
+            box.style.top =
+                (
+                    Number(map.yTop) *
+                    adminZoom
+                )
+                + "px";
+
+
+            box.style.width =
+                (
+                    Number(map.width) *
+                    adminZoom
+                )
+                + "px";
+
+
+            box.style.height =
+                (
+                    Number(map.height) *
+                    adminZoom
+                )
+                + "px";
+
+
+            const label =
+                document.createElement(
+                    "span"
+                );
+
+
+            label.textContent =
+                map.field;
+
+
+            box.appendChild(
+                label
+            );
+
+
+            layer.appendChild(
+                box
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SAVE ADMIN MAPPINGS
+===================================================== */
+
+function saveAdminMappings() {
 
     localStorage.setItem(
 
-        DRAFTS_KEY,
+        ADMIN_MAPPING_KEY,
 
-        JSON.stringify(drafts)
+        JSON.stringify(
+            adminMappings
+        )
 
     );
 
 }
 
 
+/* =====================================================
+   LOAD ADMIN MAPPINGS
+===================================================== */
+
+function loadAdminMappings() {
+
+    const saved =
+        localStorage.getItem(
+            ADMIN_MAPPING_KEY
+        );
+
+
+    if (!saved) {
+
+        return [];
+
+    }
+
+
+    try {
+
+        const parsed =
+            JSON.parse(
+                saved
+            );
+
+
+        if (!Array.isArray(parsed)) {
+
+            return [];
+
+        }
+
+
+        return parsed;
+
+    }
+    catch(error) {
+
+        return [];
+
+    }
+
+}
+
 
 /* =====================================================
-   GET FORM DATA
+   UPDATE COORDINATE DISPLAY
+===================================================== */
+
+function updateCoordinateDisplay(
+    map
+) {
+
+    document.getElementById(
+        "coordinates"
+    ).innerHTML =
+
+        "<strong>"
+        +
+        map.field
+        +
+        " - Page "
+        +
+        map.page
+        +
+        "</strong>"
+
+        +
+        "<br>"
+
+        +
+        "X: "
+        +
+        Number(map.x).toFixed(2)
+
+        +
+        "<br>"
+
+        +
+        "Y: "
+        +
+        Number(map.yTop).toFixed(2)
+
+        +
+        "<br>"
+
+        +
+        "Width: "
+        +
+        Number(map.width).toFixed(2)
+
+        +
+        "<br>"
+
+        +
+        "Height: "
+        +
+        Number(map.height).toFixed(2);
+
+}
+
+
+/* =====================================================
+   UPDATE ADMIN MAPPING LIST
+===================================================== */
+
+function updateAdminMappingList() {
+
+    const list =
+        document.getElementById(
+            "mappingList"
+        );
+
+
+    list.innerHTML =
+        "";
+
+
+    if (
+        adminMappings.length === 0
+    ) {
+
+        list.textContent =
+            "No mappings saved.";
+
+        return;
+
+    }
+
+
+    adminMappings
+        .sort(
+            function(a,b) {
+
+                if (
+                    Number(a.page) !==
+                    Number(b.page)
+                ) {
+
+                    return (
+                        Number(a.page)
+                        -
+                        Number(b.page)
+                    );
+
+                }
+
+
+                return a.field.localeCompare(
+                    b.field
+                );
+
+            }
+        )
+        .forEach(
+            function(map) {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "mapping-item";
+
+
+                item.innerHTML =
+
+                    "<strong>"
+                    +
+                    map.field
+                    +
+                    "</strong>"
+
+                    +
+                    " - Page "
+                    +
+                    map.page
+
+                    +
+                    "<br>"
+
+                    +
+                    "X: "
+                    +
+                    Number(map.x).toFixed(2)
+
+                    +
+                    " | Y: "
+                    +
+                    Number(map.yTop).toFixed(2)
+
+                    +
+                    "<br>"
+
+                    +
+                    "W: "
+                    +
+                    Number(map.width).toFixed(2)
+
+                    +
+                    " | H: "
+                    +
+                    Number(map.height).toFixed(2);
+
+
+                list.appendChild(
+                    item
+                );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   DELETE CURRENT MAPPING
+===================================================== */
+
+function deleteCurrentMapping() {
+
+    const field =
+        document.getElementById(
+            "fieldSelect"
+        ).value;
+
+
+    const page =
+        Number(
+            document.getElementById(
+                "pageSelect"
+            ).value
+        );
+
+
+    if (!field) {
+
+        alert(
+            "Select a field first."
+        );
+
+        return;
+
+    }
+
+
+    const before =
+        adminMappings.length;
+
+
+    adminMappings =
+        adminMappings.filter(
+            function(map) {
+
+                return !(
+                    map.field === field
+                    &&
+                    Number(map.page) === page
+                );
+
+            }
+        );
+
+
+    if (
+        adminMappings.length === before
+    ) {
+
+        alert(
+            "No mapping found for "
+            +
+            field
+            +
+            " on Page "
+            +
+            page
+            +
+            "."
+        );
+
+        return;
+
+    }
+
+
+    saveAdminMappings();
+
+
+    updateAdminMappingList();
+
+
+    renderAdminPDF();
+
+
+    setAdminStatus(
+
+        field
+        +
+        " mapping deleted from Page "
+        +
+        page
+        +
+        ".",
+
+        "success"
+
+    );
+
+}
+
+
+/* =====================================================
+   CLEAR ALL ADMIN MAPPINGS
+===================================================== */
+
+function clearAllMappings() {
+
+    const answer =
+        confirm(
+            "Delete ALL saved PDF mappings?"
+        );
+
+
+    if (!answer) {
+
+        return;
+
+    }
+
+
+    adminMappings = [];
+
+
+    localStorage.removeItem(
+        ADMIN_MAPPING_KEY
+    );
+
+
+    updateAdminMappingList();
+
+
+    renderAdminPDF();
+
+
+    setAdminStatus(
+        "All mappings cleared.",
+        "success"
+    );
+
+}
+
+
+/* =====================================================
+   ZOOM
+===================================================== */
+
+function zoomIn() {
+
+    if (!adminPDFDocument) {
+
+        return;
+
+    }
+
+
+    adminZoom += 0.2;
+
+
+    renderAdminPDF();
+
+}
+
+
+function zoomOut() {
+
+    if (!adminPDFDocument) {
+
+        return;
+
+    }
+
+
+    if (adminZoom > 0.6) {
+
+        adminZoom -= 0.2;
+
+    }
+
+
+    renderAdminPDF();
+
+}
+
+
+function resetZoom() {
+
+    if (!adminPDFDocument) {
+
+        return;
+
+    }
+
+
+    adminZoom =
+        1.3;
+
+
+    renderAdminPDF();
+
+}
+
+
+/* =====================================================
+   ADMIN STATUS
+===================================================== */
+
+function setAdminStatus(
+    message,
+    type
+) {
+
+    const box =
+        document.getElementById(
+            "adminStatus"
+        );
+
+
+    box.textContent =
+        message;
+
+
+    box.className =
+        "status "
+        +
+        type;
+
+
+    box.style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   MAPPING CODE
+
+   This creates a clean configuration that
+   can be pasted into MAPPINGS.
+===================================================== */
+
+function showMappingCode() {
+
+    if (
+        adminMappings.length === 0
+    ) {
+
+        alert(
+            "No mappings have been created yet."
+        );
+
+        return;
+
+    }
+
+
+    const cleanMappings =
+        adminMappings.map(
+            function(map) {
+
+                return {
+
+                    field:
+                        map.field,
+
+                    page:
+                        Number(map.page),
+
+                    x:
+                        Number(map.x),
+
+                    yTop:
+                        Number(map.yTop),
+
+                    width:
+                        Number(map.width),
+
+                    height:
+                        Number(map.height)
+
+                };
+
+            }
+        );
+
+
+    const code =
+
+`const MAPPINGS = ${JSON.stringify(
+    cleanMappings,
+    null,
+    4
+)};`;
+
+
+    document.getElementById(
+        "mappingCode"
+    ).value =
+        code;
+
+
+    document.getElementById(
+        "mappingCodeBox"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "mappingCodeBox"
+    ).scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =====================================================
+   COPY MAPPING CODE
+===================================================== */
+
+async function copyMappingCode() {
+
+    const textarea =
+        document.getElementById(
+            "mappingCode"
+        );
+
+
+    try {
+
+        await navigator.clipboard.writeText(
+            textarea.value
+        );
+
+
+        alert(
+            "Mapping configuration copied."
+        );
+
+    }
+    catch(error) {
+
+        textarea.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+
+        alert(
+            "Mapping configuration copied."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   EMPLOYEE DATA
 ===================================================== */
 
 function getFormData() {
@@ -752,12 +2747,44 @@ function getFormData() {
 }
 
 
+/* =====================================================
+   CLEAN EMAIL
+===================================================== */
+
+function cleanEmail(
+    email
+) {
+
+    return email
+        .trim()
+        .toLowerCase();
+
+}
+
+
+/* =====================================================
+   CLEAN PHONE
+===================================================== */
+
+function cleanPhone(
+    phone
+) {
+
+    return phone.replace(
+        /\D/g,
+        ""
+    );
+
+}
+
 
 /* =====================================================
    IDENTIFIERS
 ===================================================== */
 
-function getIdentifiers(data) {
+function getIdentifiers(
+    data
+) {
 
     const identifiers = [];
 
@@ -765,13 +2792,11 @@ function getIdentifiers(data) {
     if (data.email) {
 
         identifiers.push(
-
             "email:"
             +
             cleanEmail(
                 data.email
             )
-
         );
 
     }
@@ -780,13 +2805,11 @@ function getIdentifiers(data) {
     if (data.phone) {
 
         identifiers.push(
-
             "phone:"
             +
             cleanPhone(
                 data.phone
             )
-
         );
 
     }
@@ -797,13 +2820,67 @@ function getIdentifiers(data) {
 }
 
 
+/* =====================================================
+   GET CANDIDATES
+===================================================== */
+
+function getCandidates() {
+
+    const saved =
+        localStorage.getItem(
+            CANDIDATES_KEY
+        );
+
+
+    if (!saved) {
+
+        return {};
+
+    }
+
+
+    try {
+
+        return JSON.parse(
+            saved
+        );
+
+    }
+    catch(error) {
+
+        return {};
+
+    }
+
+}
+
+
+/* =====================================================
+   SAVE CANDIDATES
+===================================================== */
+
+function saveCandidates(
+    candidates
+) {
+
+    localStorage.setItem(
+
+        CANDIDATES_KEY,
+
+        JSON.stringify(
+            candidates
+        )
+
+    );
+
+}
+
 
 /* =====================================================
    SAVE DRAFT
 ===================================================== */
 
 function saveDraft() {
-
 
     const data =
         getFormData();
@@ -815,43 +2892,37 @@ function saveDraft() {
     ) {
 
         alert(
-
-            "Please enter either your email address OR mobile number before saving your draft."
-
+            "Please enter either your email address OR mobile number."
         );
 
         emailInput.focus();
 
-        return;
+        return false;
 
     }
 
 
-    const drafts =
-        getDrafts();
+    const candidates =
+        getCandidates();
 
 
     const identifiers =
-        getIdentifiers(data);
+        getIdentifiers(
+            data
+        );
 
 
-    /*
-       If an existing record is found,
-       remove its old identifiers first.
-    */
-
-    let existingRecord =
-        null;
+    let existingRecord = null;
 
 
     for (
         const id of identifiers
     ) {
 
-        if (drafts[id]) {
+        if (candidates[id]) {
 
             existingRecord =
-                drafts[id];
+                candidates[id];
 
             break;
 
@@ -868,33 +2939,30 @@ function saveDraft() {
             );
 
 
-        for (
-            const id of oldIdentifiers
-        ) {
+        oldIdentifiers.forEach(
+            function(id) {
 
-            delete drafts[id];
+                delete candidates[id];
+
+            }
+        );
+
+    }
+
+
+    identifiers.forEach(
+        function(id) {
+
+            candidates[id] =
+                data;
 
         }
-
-    }
-
-
-    /*
-       Save the same record under
-       email AND phone.
-    */
-
-    for (
-        const id of identifiers
-    ) {
-
-        drafts[id] =
-            data;
-
-    }
+    );
 
 
-    saveDrafts(drafts);
+    saveCandidates(
+        candidates
+    );
 
 
     showStatus(
@@ -905,22 +2973,21 @@ function saveDraft() {
 
     );
 
+
+    return true;
+
 }
 
 
-
 /* =====================================================
-   LOAD EXISTING DRAFT
+   LOAD DRAFT
 ===================================================== */
 
 function loadExistingDraft() {
 
-
     const identifier =
         prompt(
-
             "Enter your email address OR mobile number:"
-
         );
 
 
@@ -931,8 +2998,8 @@ function loadExistingDraft() {
     }
 
 
-    const drafts =
-        getDrafts();
+    const candidates =
+        getCandidates();
 
 
     let key;
@@ -963,15 +3030,13 @@ function loadExistingDraft() {
 
 
     const data =
-        drafts[key];
+        candidates[key];
 
 
     if (!data) {
 
         alert(
-
-            "No saved draft was found for this email or mobile number."
-
+            "No saved draft was found."
         );
 
         return;
@@ -1010,13 +3075,11 @@ function loadExistingDraft() {
 }
 
 
-
 /* =====================================================
    CLEAR DRAFT
 ===================================================== */
 
 function clearCurrentDraft() {
-
 
     const email =
         emailInput.value.trim();
@@ -1032,9 +3095,7 @@ function clearCurrentDraft() {
     ) {
 
         alert(
-
             "Enter your email OR mobile number first."
-
         );
 
         return;
@@ -1048,13 +3109,11 @@ function clearCurrentDraft() {
     if (email) {
 
         identifiers.push(
-
             "email:"
             +
             cleanEmail(
                 email
             )
-
         );
 
     }
@@ -1063,34 +3122,50 @@ function clearCurrentDraft() {
     if (phone) {
 
         identifiers.push(
-
             "phone:"
             +
             cleanPhone(
                 phone
             )
-
         );
 
     }
 
 
-    const drafts =
-        getDrafts();
+    const candidates =
+        getCandidates();
 
 
-    let record =
-        null;
+    let found =
+        false;
 
 
     for (
         const id of identifiers
     ) {
 
-        if (drafts[id]) {
+        if (candidates[id]) {
 
-            record =
-                drafts[id];
+            const record =
+                candidates[id];
+
+
+            getIdentifiers(
+                record
+            ).forEach(
+                function(recordId) {
+
+                    delete candidates[
+                        recordId
+                    ];
+
+                }
+            );
+
+
+            found =
+                true;
+
 
             break;
 
@@ -1099,7 +3174,7 @@ function clearCurrentDraft() {
     }
 
 
-    if (!record) {
+    if (!found) {
 
         alert(
             "No saved draft was found."
@@ -1110,77 +3185,37 @@ function clearCurrentDraft() {
     }
 
 
-    const recordIdentifiers =
-        getIdentifiers(record);
+    saveCandidates(
+        candidates
+    );
 
 
-    for (
-        const id of recordIdentifiers
-    ) {
+    nameInput.value = "";
 
-        delete drafts[id];
+    emailInput.value = "";
 
-    }
+    phoneInput.value = "";
 
+    placeInput.value = "";
 
-    saveDrafts(drafts);
-
-
-    nameInput.value =
-        "";
-
-    emailInput.value =
-        "";
-
-    phoneInput.value =
-        "";
-
-    placeInput.value =
-        "";
-
-    dateInput.value =
-        "";
+    dateInput.value = "";
 
 
     showStatus(
-
         "Your saved draft has been deleted.",
-
         "success"
-
     );
 
 }
 
 
-
 /* =====================================================
-   STATUS
+   VALIDATE EMPLOYEE FORM
 ===================================================== */
 
-function showStatus(
-    message,
-    type
+function validateForm(
+    data
 ) {
-
-    statusBox.textContent =
-        message;
-
-    statusBox.className =
-        "status "
-        +
-        type;
-
-}
-
-
-
-/* =====================================================
-   VALIDATE
-===================================================== */
-
-function validateForm(data) {
-
 
     if (!data.name) {
 
@@ -1201,9 +3236,7 @@ function validateForm(data) {
     ) {
 
         alert(
-
             "Please enter either your email address OR mobile number."
-
         );
 
         emailInput.focus();
@@ -1231,9 +3264,7 @@ function validateForm(data) {
 
     if (
         data.phone &&
-        cleanPhone(
-            data.phone
-        ).length < 7
+        cleanPhone(data.phone).length < 7
     ) {
 
         alert(
@@ -1263,7 +3294,7 @@ function validateForm(data) {
     if (!data.date) {
 
         alert(
-            "Please select the date / DOJ."
+            "Please select the date."
         );
 
         dateInput.focus();
@@ -1278,6 +3309,43 @@ function validateForm(data) {
 }
 
 
+/* =====================================================
+   FIELD VALUE
+
+   This decides what gets written into the PDF.
+===================================================== */
+
+function getFieldValue(
+    field,
+    data
+) {
+
+    switch(field) {
+
+        case "Name":
+            return data.name;
+
+        case "Email":
+            return data.email;
+
+        case "Phone":
+            return data.phone;
+
+        case "Place":
+            return data.place;
+
+        case "Date":
+            return formatDate(
+                data.date
+            );
+
+        default:
+            return "";
+
+    }
+
+}
+
 
 /* =====================================================
    GENERATE PDF
@@ -1285,43 +3353,15 @@ function validateForm(data) {
 
 async function generatePDF() {
 
-
     const data =
         getFormData();
 
 
-    /*
-       Validate.
-    */
-
     if (
-        !validateForm(data)
+        !validateForm(
+            data
+        )
     ) {
-
-        return;
-
-    }
-
-
-    /*
-       Save automatically.
-    */
-
-    saveDraft();
-
-
-    /*
-       Check mappings.
-    */
-
-    if (
-        !MAPPINGS.Name ||
-        MAPPINGS.Name.length === 0
-    ) {
-
-        alert(
-            "Name PDF mapping is missing."
-        );
 
         return;
 
@@ -1330,14 +3370,22 @@ async function generatePDF() {
 
     try {
 
-
         showStatus(
 
-            "Loading your onboarding form...",
+            "Preparing your completed onboarding PDF...",
 
             "info"
 
         );
+
+
+        /*
+        -------------------------------------------------
+        SAVE DRAFT AUTOMATICALLY
+        -------------------------------------------------
+        */
+
+        saveDraft();
 
 
         /*
@@ -1355,9 +3403,7 @@ async function generatePDF() {
         if (!response.ok) {
 
             throw new Error(
-
-                "LOA.pdf could not be loaded. Make sure LOA.pdf is in the same GitHub folder as index.html."
-
+                "LOA.pdf could not be loaded."
             );
 
         }
@@ -1379,17 +3425,9 @@ async function generatePDF() {
             );
 
 
-        /*
-        -------------------------------------------------
-        FONT
-        -------------------------------------------------
-        */
-
         const font =
             await pdfDoc.embedFont(
-
                 PDFLib.StandardFonts.Helvetica
-
             );
 
 
@@ -1397,12 +3435,10 @@ async function generatePDF() {
             pdfDoc.getPages();
 
 
-        if (
-            pages.length === 0
-        ) {
+        if (!pages.length) {
 
             throw new Error(
-                "The LOA PDF contains no pages."
+                "LOA.pdf has no pages."
             );
 
         }
@@ -1410,104 +3446,82 @@ async function generatePDF() {
 
         /*
         -------------------------------------------------
-        WRITE NAME
+        PROCESS EVERY MAPPING
         -------------------------------------------------
         */
 
-        if (MAPPINGS.Name) {
+        for (
+            const mapping
+            of MAPPINGS
+        ) {
 
-            for (
-                const mapping
-                of MAPPINGS.Name
-            ) {
-
-                writeMapping(
-
-                    pdfDoc,
-                    pages,
-                    mapping,
-                    data.name,
-                    font
-
+            const pageNumber =
+                Number(
+                    mapping.page
                 );
 
+
+            if (
+                pageNumber < 1 ||
+                pageNumber > pages.length
+            ) {
+
+                console.warn(
+                    "Skipping invalid page mapping:",
+                    mapping
+                );
+
+                continue;
+
             }
+
+
+            const page =
+                pages[
+                    pageNumber - 1
+                ];
+
+
+            const value =
+                getFieldValue(
+                    mapping.field,
+                    data
+                );
+
+
+            if (
+                value === ""
+                ||
+                value === null
+                ||
+                value === undefined
+            ) {
+
+                continue;
+
+            }
+
+
+            addTextToPDF(
+
+                page,
+
+                mapping,
+
+                String(value),
+
+                font
+
+            );
 
         }
 
 
         /*
         -------------------------------------------------
-        WRITE DATE
+        SAVE
         -------------------------------------------------
         */
-
-        if (MAPPINGS.Date) {
-
-            for (
-                const mapping
-                of MAPPINGS.Date
-            ) {
-
-                writeMapping(
-
-                    pdfDoc,
-                    pages,
-                    mapping,
-                    formatDate(
-                        data.date
-                    ),
-                    font
-
-                );
-
-            }
-
-        }
-
-
-        /*
-        -------------------------------------------------
-        WRITE PLACE
-        -------------------------------------------------
-        */
-
-        if (MAPPINGS.Place) {
-
-            for (
-                const mapping
-                of MAPPINGS.Place
-            ) {
-
-                writeMapping(
-
-                    pdfDoc,
-                    pages,
-                    mapping,
-                    data.place,
-                    font
-
-                );
-
-            }
-
-        }
-
-
-        /*
-        -------------------------------------------------
-        SAVE PDF
-        -------------------------------------------------
-        */
-
-        showStatus(
-
-            "Creating your completed PDF...",
-
-            "info"
-
-        );
-
 
         const output =
             await pdfDoc.save();
@@ -1532,28 +3546,6 @@ async function generatePDF() {
             );
 
 
-        /*
-        -------------------------------------------------
-        FILE NAME
-        -------------------------------------------------
-        */
-
-        const filename =
-            "Onboarding Documents - "
-            +
-            cleanFileName(
-                data.name
-            )
-            +
-            ".pdf";
-
-
-        /*
-        -------------------------------------------------
-        DOWNLOAD
-        -------------------------------------------------
-        */
-
         const link =
             document.createElement(
                 "a"
@@ -1565,7 +3557,14 @@ async function generatePDF() {
 
 
         link.download =
-            filename;
+
+            "Onboarding Documents - "
+            +
+            cleanName(
+                data.name
+            )
+            +
+            ".pdf";
 
 
         document.body.appendChild(
@@ -1582,7 +3581,6 @@ async function generatePDF() {
 
 
         setTimeout(
-
             function() {
 
                 URL.revokeObjectURL(
@@ -1590,9 +3588,7 @@ async function generatePDF() {
                 );
 
             },
-
             2000
-
         );
 
 
@@ -1607,8 +3603,9 @@ async function generatePDF() {
     }
     catch(error) {
 
-
-        console.error(error);
+        console.error(
+            error
+        );
 
 
         showStatus(
@@ -1624,7 +3621,7 @@ async function generatePDF() {
 
         alert(
 
-            "PDF generation failed:\n\n"
+            "PDF generation failed.\n\n"
             +
             error.message
 
@@ -1635,59 +3632,16 @@ async function generatePDF() {
 }
 
 
-
 /* =====================================================
-   WRITE MAPPING
+   ADD TEXT TO PDF
 ===================================================== */
 
-function writeMapping(
-
-    pdfDoc,
-    pages,
+function addTextToPDF(
+    page,
     mapping,
     text,
     font
-
 ) {
-
-
-    /*
-       Validate page number.
-    */
-
-    const pageNumber =
-        Number(
-            mapping.page
-        );
-
-
-    if (
-        pageNumber < 1 ||
-        pageNumber > pages.length
-    ) {
-
-        throw new Error(
-
-            "Mapping refers to PDF page "
-            +
-            pageNumber
-            +
-            ", but the PDF only has "
-            +
-            pages.length
-            +
-            " pages."
-
-        );
-
-    }
-
-
-    const page =
-        pages[
-            pageNumber - 1
-        ];
-
 
     const pdfWidth =
         Number(
@@ -1701,168 +3655,69 @@ function writeMapping(
         );
 
 
-    /*
-       Canvas dimensions are the dimensions
-       used by your mapping tool.
-    */
-
-    const canvasWidth =
-        Number(
-            mapping.canvasWidth
-        );
-
-
-    const canvasHeight =
-        Number(
-            mapping.canvasHeight
-        );
-
-
-    const mapX =
+    const x =
         Number(
             mapping.x
         );
 
 
-    const mapY =
+    const yTop =
         Number(
-            mapping.y
+            mapping.yTop
         );
 
 
-    const mapWidth =
+    const width =
         Number(
             mapping.width
         );
 
 
-    const mapHeight =
+    const height =
         Number(
             mapping.height
         );
 
 
     /*
-       Validate numbers.
-    */
-
-    const values = [
-
-        canvasWidth,
-        canvasHeight,
-        mapX,
-        mapY,
-        mapWidth,
-        mapHeight,
-        pdfWidth,
-        pdfHeight
-
-    ];
-
-
-    for (
-        const value
-        of values
-    ) {
-
-        if (
-            !Number.isFinite(value)
-        ) {
-
-            throw new Error(
-                "Invalid PDF mapping detected."
-            );
-
-        }
-
-    }
-
-
-    /*
-       Convert mapping coordinates
-       to PDF coordinates.
-    */
-
-    const scaleX =
-        pdfWidth /
-        canvasWidth;
-
-
-    const scaleY =
-        pdfHeight /
-        canvasHeight;
-
-
-    const x =
-        mapX *
-        scaleX;
-
-
-    const boxWidth =
-        mapWidth *
-        scaleX;
-
-
-    const boxHeight =
-        mapHeight *
-        scaleY;
-
-
-    /*
-       PDF coordinate system starts
-       from bottom-left.
-
-       Mapping coordinate system starts
-       from top-left.
-
-       Therefore we convert Y.
+    -------------------------------------------------
+    Convert TOP-BASED coordinate to PDF's
+    BOTTOM-BASED coordinate.
+    -------------------------------------------------
     */
 
     const y =
         pdfHeight
         -
-        (
-            mapY *
-            scaleY
-        )
+        yTop
         -
-        boxHeight;
+        height;
 
 
     /*
-       Font size.
+    -------------------------------------------------
+    Font size based on mapped rectangle.
+    -------------------------------------------------
     */
 
     let fontSize =
-        boxHeight * 0.60;
-
-
-    if (
-        !Number.isFinite(fontSize)
-        ||
-        fontSize <= 0
-    ) {
-
-        fontSize = 10;
-
-    }
+        height * 0.70;
 
 
     fontSize =
         Math.max(
-
             6,
-
             Math.min(
                 24,
                 fontSize
             )
-
         );
 
 
     /*
-       Write text.
+    -------------------------------------------------
+    Draw text.
+    -------------------------------------------------
     */
 
     page.drawText(
@@ -1878,7 +3733,7 @@ function writeMapping(
                 y
                 +
                 (
-                    boxHeight
+                    height
                     -
                     fontSize
                 )
@@ -1900,7 +3755,7 @@ function writeMapping(
             maxWidth:
                 Math.max(
                     10,
-                    boxWidth
+                    width
                 )
 
         }
@@ -1910,13 +3765,13 @@ function writeMapping(
 }
 
 
-
 /* =====================================================
    DATE FORMAT
 ===================================================== */
 
-function formatDate(date) {
-
+function formatDate(
+    date
+) {
 
     if (!date) {
 
@@ -1955,42 +3810,52 @@ function formatDate(date) {
 }
 
 
-
 /* =====================================================
    CLEAN FILE NAME
 ===================================================== */
 
-function cleanFileName(name) {
+function cleanName(
+    name
+) {
 
-
-    const cleaned =
-        name
+    return name
 
         .replace(
             /[^a-z0-9 ]/gi,
             ""
         )
 
-        .trim();
+        .trim()
 
-
-    if (!cleaned) {
-
-        return "Employee";
-
-    }
-
-
-    return cleaned.substring(
-        0,
-        80
-    );
+        .substring(
+            0,
+            60
+        );
 
 }
 
 
-</script>
+/* =====================================================
+   EMPLOYEE STATUS
+===================================================== */
 
+function showStatus(
+    message,
+    type
+) {
+
+    statusBox.textContent =
+        message;
+
+
+    statusBox.className =
+        "status "
+        +
+        type;
+
+}
+
+</script>
 
 </body>
 
