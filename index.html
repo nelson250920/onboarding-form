@@ -130,11 +130,6 @@ button {
     cursor: pointer;
 }
 
-button:disabled {
-    background: #aaa;
-    cursor: not-allowed;
-}
-
 .save {
     background: #6c757d;
     color: white;
@@ -304,6 +299,7 @@ button:disabled {
     placeholder="Enter your full name"
 >
 
+
 </div>
 
 
@@ -325,6 +321,7 @@ button:disabled {
     id="email"
     placeholder="Enter your email address"
 >
+
 
 </div>
 
@@ -348,6 +345,7 @@ button:disabled {
     placeholder="Enter your mobile number"
 >
 
+
 </div>
 
 
@@ -368,6 +366,7 @@ button:disabled {
     placeholder="Enter place"
 >
 
+
 </div>
 
 
@@ -377,7 +376,7 @@ button:disabled {
 
 <label>
 
-    Date / DOJ
+    Date
     <span class="required">*</span>
 
 </label>
@@ -386,6 +385,7 @@ button:disabled {
     type="date"
     id="date"
 >
+
 
 </div>
 
@@ -420,7 +420,7 @@ button:disabled {
 </div>
 
 
-<!-- RETURN -->
+<!-- LOAD EXISTING -->
 
 <div class="return-box">
 
@@ -453,6 +453,7 @@ button:disabled {
 
 </button>
 
+
 </div>
 
 
@@ -484,41 +485,69 @@ button:disabled {
 
 
 /*
-   IMPORTANT:
-
-   LOA.pdf is in the SAME GitHub folder
-   as index.html.
-
-   Therefore we use:
+   LOA.pdf MUST be in the same GitHub folder
+   as this index.html.
 */
 
 const PDF_URL = "./LOA.pdf";
 
 
 /*
-   Draft storage.
+   Browser storage names.
 */
 
-const CANDIDATES_KEY =
-    "loaCandidates";
+const CANDIDATES_KEY = "loaCandidates";
 
 
 /*
-   =====================================================
-   YOUR MANUAL PDF MAPPINGS
-   =====================================================
+   IMPORTANT
+   Actual PDF page size.
 
-   These values came from your Mapper.
+   From your PDF information:
 
-   Page 1
+   Width  = 612 pt
+   Height = 792 pt
+*/
+
+const PDF_WIDTH = 612;
+
+const PDF_HEIGHT = 792;
+
+
+/*
+   Mapper canvas size.
+
+   From your mapper:
+
+   Width  = 795
+   Height = 1029
+*/
+
+const MAPPER_WIDTH = 795;
+
+const MAPPER_HEIGHT = 1029;
+
+
+/* =====================================================
+   YOUR SAVED MAPPINGS
+===================================================== */
+
+
+/*
+   These are the coordinates you supplied.
+
+   The mapper coordinates start from the TOP.
+
+   PDF-lib coordinates start from the BOTTOM.
+
+   The code below converts them correctly.
 */
 
 
 const MAPPINGS = {
 
-    Name: {
 
-        page: 1,
+    Name: {
 
         x: 146.9,
 
@@ -533,8 +562,6 @@ const MAPPINGS = {
 
     Place: {
 
-        page: 1,
-
         x: 160.7,
 
         y: 633.1,
@@ -547,8 +574,6 @@ const MAPPINGS = {
 
 
     Date: {
-
-        page: 1,
 
         x: 161.5,
 
@@ -563,25 +588,8 @@ const MAPPINGS = {
 };
 
 
-/*
-   IMPORTANT:
-
-   These are the dimensions used by the
-   Mapper when you created the coordinates.
-
-   We will use the PDF's actual dimensions
-   to calculate the final position.
-
-*/
-
-const MAPPER_CANVAS_WIDTH = 1000;
-
-const MAPPER_CANVAS_HEIGHT = 1414;
-
-
-
 /* =====================================================
-   FORM ELEMENTS
+   ELEMENTS
 ===================================================== */
 
 const nameInput =
@@ -603,9 +611,97 @@ const statusBox =
     document.getElementById("status");
 
 
+/* =====================================================
+   CLEAN EMAIL
+===================================================== */
+
+function cleanEmail(email) {
+
+    return email
+        .trim()
+        .toLowerCase();
+
+}
+
 
 /* =====================================================
-   GET SAVED CANDIDATES
+   CLEAN PHONE
+===================================================== */
+
+function cleanPhone(phone) {
+
+    return phone.replace(/\D/g, "");
+
+}
+
+
+/* =====================================================
+   GET FORM DATA
+===================================================== */
+
+function getFormData() {
+
+    return {
+
+        name:
+            nameInput.value.trim(),
+
+        email:
+            emailInput.value.trim(),
+
+        phone:
+            phoneInput.value.trim(),
+
+        place:
+            placeInput.value.trim(),
+
+        date:
+            dateInput.value,
+
+        lastSaved:
+            new Date().toISOString()
+
+    };
+
+}
+
+
+/* =====================================================
+   GET IDENTIFIERS
+===================================================== */
+
+function getIdentifiers(data) {
+
+    const identifiers = [];
+
+
+    if (data.email) {
+
+        identifiers.push(
+            "email:" +
+            cleanEmail(data.email)
+        );
+
+    }
+
+
+    if (data.phone) {
+
+        identifiers.push(
+            "phone:" +
+            cleanPhone(data.phone)
+        );
+
+    }
+
+
+    return identifiers;
+
+}
+
+
+/* =====================================================
+   GET CANDIDATES
 ===================================================== */
 
 function getCandidates() {
@@ -653,7 +749,6 @@ function getCandidates() {
 }
 
 
-
 /* =====================================================
    SAVE CANDIDATES
 ===================================================== */
@@ -671,120 +766,19 @@ function saveCandidates(candidates) {
 }
 
 
-
 /* =====================================================
-   CLEAN EMAIL
+   SHOW STATUS
 ===================================================== */
 
-function cleanEmail(email) {
+function showStatus(message, type) {
 
-    return email
-        .trim()
-        .toLowerCase();
+    statusBox.textContent =
+        message;
 
-}
-
-
-
-/* =====================================================
-   CLEAN PHONE
-===================================================== */
-
-function cleanPhone(phone) {
-
-    return phone
-        .replace(/\D/g, "");
+    statusBox.className =
+        "status " + type;
 
 }
-
-
-
-/* =====================================================
-   GET IDENTIFIERS
-===================================================== */
-
-function getIdentifiers(data) {
-
-    const identifiers = [];
-
-
-    if (data.email) {
-
-        identifiers.push(
-
-            "email:" +
-            cleanEmail(data.email)
-
-        );
-
-    }
-
-
-    if (data.phone) {
-
-        identifiers.push(
-
-            "phone:" +
-            cleanPhone(data.phone)
-
-        );
-
-    }
-
-
-    return identifiers;
-
-}
-
-
-
-/* =====================================================
-   FORM DATA
-===================================================== */
-
-function getFormData() {
-
-    return {
-
-        name:
-            nameInput.value.trim(),
-
-        email:
-            emailInput.value.trim(),
-
-        phone:
-            phoneInput.value.trim(),
-
-        place:
-            placeInput.value.trim(),
-
-        date:
-            dateInput.value,
-
-        lastSaved:
-            new Date().toISOString()
-
-    };
-
-}
-
-
-
-/* =====================================================
-   IDENTIFIER CHECK
-===================================================== */
-
-function hasIdentifier(data) {
-
-    return (
-
-        data.email !== "" ||
-        data.phone !== ""
-
-    );
-
-}
-
 
 
 /* =====================================================
@@ -793,12 +787,18 @@ function hasIdentifier(data) {
 
 function saveDraft() {
 
-
     const data =
         getFormData();
 
 
-    if (!hasIdentifier(data)) {
+    /*
+       Need email OR phone.
+    */
+
+    if (
+        !data.email &&
+        !data.phone
+    ) {
 
         alert(
             "Please enter either your email address OR mobile number."
@@ -820,7 +820,7 @@ function saveDraft() {
 
 
     /*
-       Look for existing record.
+       Look for an existing record.
     */
 
     let existingRecord = null;
@@ -843,8 +843,8 @@ function saveDraft() {
 
 
     /*
-       Remove old identifiers
-       before updating.
+       If an old record exists,
+       remove its old identifiers.
     */
 
     if (existingRecord) {
@@ -867,7 +867,8 @@ function saveDraft() {
 
 
     /*
-       Save under email and/or phone.
+       Save record under email,
+       phone, or both.
     */
 
     for (
@@ -897,19 +898,15 @@ function saveDraft() {
 }
 
 
-
 /* =====================================================
    LOAD EXISTING DRAFT
 ===================================================== */
 
 function loadExistingDraft() {
 
-
     const identifier =
         prompt(
-
             "Enter your email address OR mobile number:"
-
         );
 
 
@@ -924,7 +921,7 @@ function loadExistingDraft() {
         getCandidates();
 
 
-    let key = "";
+    let key;
 
 
     if (
@@ -952,9 +949,7 @@ function loadExistingDraft() {
     if (!data) {
 
         alert(
-
             "No saved draft was found for this email or mobile number."
-
         );
 
         return;
@@ -993,13 +988,11 @@ function loadExistingDraft() {
 }
 
 
-
 /* =====================================================
    CLEAR CURRENT DRAFT
 ===================================================== */
 
 function clearCurrentDraft() {
-
 
     const email =
         emailInput.value.trim();
@@ -1009,12 +1002,13 @@ function clearCurrentDraft() {
         phoneInput.value.trim();
 
 
-    if (!email && !phone) {
+    if (
+        !email &&
+        !phone
+    ) {
 
         alert(
-
             "Enter your email OR mobile number first."
-
         );
 
         return;
@@ -1028,10 +1022,8 @@ function clearCurrentDraft() {
     if (email) {
 
         identifiers.push(
-
             "email:" +
             cleanEmail(email)
-
         );
 
     }
@@ -1040,10 +1032,8 @@ function clearCurrentDraft() {
     if (phone) {
 
         identifiers.push(
-
             "phone:" +
             cleanPhone(phone)
-
         );
 
     }
@@ -1066,12 +1056,13 @@ function clearCurrentDraft() {
                 candidates[id];
 
 
-            const recordIds =
+            const recordIdentifiers =
                 getIdentifiers(record);
 
 
             for (
-                const recordId of recordIds
+                const recordId
+                of recordIdentifiers
             ) {
 
                 delete candidates[recordId];
@@ -1122,23 +1113,6 @@ function clearCurrentDraft() {
     );
 
 }
-
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-function showStatus(message, type) {
-
-    statusBox.textContent =
-        message;
-
-    statusBox.className =
-        "status " + type;
-
-}
-
 
 
 /* =====================================================
@@ -1227,7 +1201,7 @@ function validateForm(data) {
     if (!data.date) {
 
         alert(
-            "Please select the date / DOJ."
+            "Please select the date."
         );
 
         dateInput.focus();
@@ -1242,7 +1216,6 @@ function validateForm(data) {
 }
 
 
-
 /* =====================================================
    GENERATE PDF
 ===================================================== */
@@ -1255,10 +1228,12 @@ async function generatePDF() {
 
 
     /*
-       Validate.
+       Validate first.
     */
 
-    if (!validateForm(data)) {
+    if (
+        !validateForm(data)
+    ) {
 
         return;
 
@@ -1266,8 +1241,7 @@ async function generatePDF() {
 
 
     /*
-       Save draft automatically
-       before generating.
+       Automatically save draft.
     */
 
     saveDraft();
@@ -1286,7 +1260,8 @@ async function generatePDF() {
 
 
         /*
-           Load LOA.pdf from GitHub.
+           Load LOA.pdf automatically
+           from GitHub.
         */
 
         const response =
@@ -1297,7 +1272,7 @@ async function generatePDF() {
 
             throw new Error(
 
-                "LOA.pdf could not be loaded. Please make sure LOA.pdf is in the same GitHub folder as index.html."
+                "LOA.pdf could not be loaded. Make sure LOA.pdf is in the same folder as index.html."
 
             );
 
@@ -1319,7 +1294,7 @@ async function generatePDF() {
 
 
         /*
-           Font.
+           Embed font.
         */
 
         const font =
@@ -1331,44 +1306,53 @@ async function generatePDF() {
 
 
         /*
-           Pages.
+           Get pages.
         */
 
         const pages =
             pdfDoc.getPages();
 
 
-        if (!pages.length) {
+        if (
+            pages.length === 0
+        ) {
 
             throw new Error(
-                "LOA PDF has no pages."
+                "The LOA PDF has no pages."
             );
 
         }
 
 
         /*
-           We currently have 1 page.
+           Prototype uses page 1.
         */
 
         const page =
             pages[0];
 
 
+        /*
+           Get actual PDF dimensions.
+        */
+
         const pdfWidth =
-            Number(
-                page.getWidth()
-            );
+            page.getWidth();
 
 
         const pdfHeight =
-            Number(
-                page.getHeight()
-            );
+            page.getHeight();
+
+
+        console.log(
+            "PDF size:",
+            pdfWidth,
+            pdfHeight
+        );
 
 
         /*
-           Add Name.
+           NAME
         */
 
         addMappedText(
@@ -1389,7 +1373,7 @@ async function generatePDF() {
 
 
         /*
-           Add Place.
+           PLACE
         */
 
         addMappedText(
@@ -1410,7 +1394,7 @@ async function generatePDF() {
 
 
         /*
-           Add Date.
+           DATE
         */
 
         addMappedText(
@@ -1431,8 +1415,17 @@ async function generatePDF() {
 
 
         /*
-           Save final PDF.
+           Save PDF.
         */
+
+        showStatus(
+
+            "Creating your completed PDF...",
+
+            "info"
+
+        );
+
 
         const output =
             await pdfDoc.save();
@@ -1506,6 +1499,7 @@ async function generatePDF() {
 
         );
 
+
     }
     catch(error) {
 
@@ -1537,18 +1531,22 @@ async function generatePDF() {
 }
 
 
-
 /* =====================================================
-   ADD MAPPED TEXT
+   MAP MAPPER COORDINATES TO PDF
 ===================================================== */
 
 function addMappedText(
 
     page,
+
     mapping,
+
     text,
+
     pdfWidth,
+
     pdfHeight,
+
     font
 
 ) {
@@ -1564,41 +1562,66 @@ function addMappedText(
 
 
     /*
-       Convert Mapper coordinates
-       into PDF coordinates.
+       Mapper coordinates:
+
+       795 × 1029
+
+       Actual PDF:
+
+       612 × 792
     */
+
 
     const scaleX =
         pdfWidth /
-        MAPPER_CANVAS_WIDTH;
+        MAPPER_WIDTH;
 
 
     const scaleY =
         pdfHeight /
-        MAPPER_CANVAS_HEIGHT;
+        MAPPER_HEIGHT;
 
+
+    /*
+       Convert X.
+    */
 
     const x =
         mapping.x *
         scaleX;
 
 
-    const boxWidth =
+    /*
+       Convert width.
+    */
+
+    const width =
         mapping.width *
         scaleX;
 
 
-    const boxHeight =
+    /*
+       Convert height.
+    */
+
+    const height =
         mapping.height *
         scaleY;
 
 
     /*
-       Mapper uses top-left coordinates.
+       Mapper Y starts from TOP.
 
-       PDF uses bottom-left coordinates.
+       PDF Y starts from BOTTOM.
 
-       Therefore we convert Y.
+       Therefore:
+
+       PDF Y =
+       PDF height
+       -
+       mapped Y
+       -
+       mapped height
     */
 
     const y =
@@ -1609,21 +1632,20 @@ function addMappedText(
             scaleY
         )
         -
-        boxHeight;
+        height;
 
 
     /*
-       Calculate font size from
-       mapped rectangle.
+       Calculate font size
+       based on mapped box.
     */
 
     let fontSize =
-        boxHeight * 0.75;
+        height * 0.72;
 
 
     if (
-        !Number.isFinite(fontSize)
-        ||
+        !Number.isFinite(fontSize) ||
         fontSize <= 0
     ) {
 
@@ -1632,13 +1654,17 @@ function addMappedText(
     }
 
 
+    /*
+       Keep font readable.
+    */
+
     fontSize =
         Math.max(
 
             6,
 
             Math.min(
-                24,
+                18,
                 fontSize
             )
 
@@ -1659,14 +1685,11 @@ function addMappedText(
                 x,
 
             y:
-                y
-                +
+                y +
                 (
-                    boxHeight
-                    -
+                    height -
                     fontSize
-                )
-                / 2,
+                ) / 2,
 
             size:
                 fontSize,
@@ -1684,7 +1707,7 @@ function addMappedText(
             maxWidth:
                 Math.max(
                     10,
-                    boxWidth
+                    width
                 )
 
         }
@@ -1692,7 +1715,6 @@ function addMappedText(
     );
 
 }
-
 
 
 /* =====================================================
@@ -1722,6 +1744,14 @@ function formatDate(date) {
     }
 
 
+    /*
+       YYYY-MM-DD
+
+       becomes
+
+       DD/MM/YYYY
+    */
+
     return (
 
         parts[2]
@@ -1737,7 +1767,6 @@ function formatDate(date) {
     );
 
 }
-
 
 
 /* =====================================================
