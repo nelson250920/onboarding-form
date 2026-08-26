@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Employee Onboarding</title>
 
@@ -63,11 +67,22 @@ body {
     line-height: 1.5;
 }
 
-.field {
-    margin-bottom: 18px;
+.info {
+    background: #eaf3fa;
+    border: 1px solid #cbddea;
+    color: #1f4e78;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 25px;
 }
 
-label {
+.field {
+    margin-bottom: 19px;
+}
+
+.field label {
     display: block;
     font-size: 14px;
     font-weight: bold;
@@ -78,66 +93,163 @@ label {
     color: #dc3545;
 }
 
-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    font-size: 15px;
+.optional {
+    color: #777;
+    font-weight: normal;
+    font-size: 12px;
 }
 
-input:focus {
+.field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bcbcbc;
+    border-radius: 6px;
+    font-size: 15px;
+    background: white;
+}
+
+.field input:focus {
     outline: none;
     border-color: #1f4e78;
+    box-shadow: 0 0 0 2px rgba(31,78,120,0.12);
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
 }
 
 button {
-    width: 100%;
+    flex: 1;
     border: none;
     border-radius: 6px;
-    padding: 14px;
-    background: #198754;
-    color: white;
-    font-size: 15px;
+    padding: 13px 15px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 10px;
 }
 
-button:hover {
+.save {
+    background: #6c757d;
+    color: white;
+}
+
+.save:hover {
+    background: #545b62;
+}
+
+.generate {
+    background: #198754;
+    color: white;
+}
+
+.generate:hover {
     background: #146c43;
 }
 
-#status {
+.load {
+    background: #1f4e78;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.load:hover {
+    background: #163a5c;
+}
+
+.clear {
+    background: #dc3545;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.clear:hover {
+    background: #bb2d3b;
+}
+
+.status {
+    display: none;
     margin-top: 18px;
     padding: 12px;
     border-radius: 6px;
-    display: none;
     font-size: 13px;
+    line-height: 1.5;
 }
 
-.success {
-    display: block !important;
+.status.success {
+    display: block;
     background: #d1e7dd;
     color: #0f5132;
 }
 
-.error {
-    display: block !important;
+.status.error {
+    display: block;
     background: #f8d7da;
     color: #842029;
 }
 
+.status.info {
+    display: block;
+    background: #cff4fc;
+    color: #055160;
+}
+
+.return-box {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.return-box h3 {
+    margin-top: 0;
+    color: #1f4e78;
+    font-size: 16px;
+}
+
+.return-box p {
+    font-size: 13px;
+    color: #666;
+}
+
+.footer {
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+    margin: 25px 0;
+}
+
+@media(max-width:600px) {
+
+    .card {
+        padding: 22px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="header">
 
-    <h1>Employee Onboarding</h1>
+    <h1>
+        Employee Onboarding
+    </h1>
 
-    <p>Please enter your details carefully</p>
+    <p>
+        Please enter your details carefully
+    </p>
 
 </div>
 
@@ -146,249 +258,1070 @@ button:hover {
 
 <div class="card">
 
-    <div class="title">
-        Onboarding Details
-    </div>
 
-    <div class="subtitle">
-        Please enter the information exactly as it
-        should appear in your onboarding documents.
-    </div>
-
-
-    <div class="field">
-
-        <label>
-            Full Name <span class="required">*</span>
-        </label>
-
-        <input
-            id="name"
-            type="text"
-            placeholder="Enter your full name"
-        >
-
-    </div>
-
-
-    <div class="field">
-
-        <label>
-            Email Address <span class="required">*</span>
-        </label>
-
-        <input
-            id="email"
-            type="email"
-            placeholder="Enter your email address"
-        >
-
-    </div>
-
-
-    <div class="field">
-
-        <label>
-            Mobile Number
-        </label>
-
-        <input
-            id="phone"
-            type="tel"
-            placeholder="Enter your mobile number"
-        >
-
-    </div>
-
-
-    <div class="field">
-
-        <label>
-            Place <span class="required">*</span>
-        </label>
-
-        <input
-            id="place"
-            type="text"
-            placeholder="Enter place"
-        >
-
-    </div>
-
-
-    <div class="field">
-
-        <label>
-            Date / DOJ <span class="required">*</span>
-        </label>
-
-        <input
-            id="date"
-            type="date"
-        >
-
-    </div>
-
-
-    <button onclick="generatePDF()">
-        SUBMIT &amp; GENERATE PDF
-    </button>
-
-
-    <div id="status"></div>
-
+<div class="title">
+    Personal Details
 </div>
+
+
+<div class="subtitle">
+
+    Please enter your information exactly
+    as it should appear in your onboarding
+    documents.
 
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<div class="info">
+
+    <strong>Email OR Mobile Number</strong>
+    is required. You can provide either one
+    or both.
+
+</div>
+
+
+<!-- NAME -->
+
+<div class="field">
+
+<label>
+
+    Full Name
+    <span class="required">*</span>
+
+</label>
+
+<input
+    type="text"
+    id="name"
+    placeholder="Enter your full name"
+>
+
+</div>
+
+
+<!-- EMAIL -->
+
+<div class="field">
+
+<label>
+
+    Email Address
+    <span class="optional">
+        (Optional if mobile is provided)
+    </span>
+
+</label>
+
+<input
+    type="email"
+    id="email"
+    placeholder="Enter your email address"
+>
+
+</div>
+
+
+<!-- PHONE -->
+
+<div class="field">
+
+<label>
+
+    Mobile Number
+    <span class="optional">
+        (Optional if email is provided)
+    </span>
+
+</label>
+
+<input
+    type="tel"
+    id="phone"
+    placeholder="Enter your mobile number"
+>
+
+</div>
+
+
+<!-- PLACE -->
+
+<div class="field">
+
+<label>
+
+    Place
+    <span class="required">*</span>
+
+</label>
+
+<input
+    type="text"
+    id="place"
+    placeholder="Enter place"
+>
+
+</div>
+
+
+<!-- DATE -->
+
+<div class="field">
+
+<label>
+
+    Date / DOJ
+    <span class="required">*</span>
+
+</label>
+
+<input
+    type="date"
+    id="date"
+>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+<button
+    class="save"
+    onclick="saveDraft()">
+
+    Save Draft
+
+</button>
+
+
+<button
+    class="generate"
+    onclick="generatePDF()">
+
+    Generate Final PDF
+
+</button>
+
+</div>
+
+
+<div
+    id="status"
+    class="status">
+</div>
+
+
+<!-- LOAD -->
+
+<div class="return-box">
+
+<h3>
+    Already started an application?
+</h3>
+
+
+<p>
+
+    Enter the email OR mobile number you
+    previously used to find your saved draft.
+
+</p>
+
+
+<button
+    class="load"
+    onclick="loadExistingDraft()">
+
+    Load My Saved Draft
+
+</button>
+
+
+<button
+    class="clear"
+    onclick="clearCurrentDraft()">
+
+    Clear My Current Draft
+
+</button>
+
+</div>
+
+
+</div>
+
+
+<div class="footer">
+
+    Employee Onboarding System
+
+</div>
+
+
+</div>
+
+
+
+<!-- PDF LIBRARY -->
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js">
+</script>
 
 
 <script>
 
-/*
-=========================================================
-LOA PDF
-=========================================================
-The PDF is automatically loaded from the same website.
-=========================================================
-*/
 
-const PDF_URL = "./LOA.pdf";
+/* =====================================================
+   SETTINGS
+===================================================== */
 
 
 /*
-=========================================================
-YOUR MAPPINGS
-=========================================================
-
-TEMPORARY TEST VALUES.
-
-We will replace these with your actual
-mouse-mapped coordinates from Prototype 4.
-=========================================================
+   LOA.pdf is in the SAME folder as index.html.
 */
+
+const PDF_URL =
+    "./LOA.pdf";
+
+
+/*
+   Employee drafts are stored locally
+   in the employee's browser.
+
+   This is suitable for our prototype.
+*/
+
+const DRAFTS_KEY =
+    "employeeOnboardingDrafts";
+
+
+
+/* =====================================================
+   PDF MAPPINGS
+=====================================================
+
+   IMPORTANT:
+
+   These are DUMMY mappings for testing.
+
+   Later you will give me the coordinates
+   for EVERY location on EVERY PDF page.
+
+   Example:
+
+   Page 1 Name
+   Page 2 Full Name
+   Page 2 Aadhaar Name
+   Page 3 Name in Block Letters
+
+===================================================== */
+
 
 const MAPPINGS = {
 
-    Name: {
-        x: 100,
-        y: 100,
-        width: 250,
-        height: 30,
-        canvasWidth: 1000,
-        canvasHeight: 1414
-    },
 
-    Place: {
-        x: 100,
-        y: 150,
-        width: 200,
-        height: 30,
-        canvasWidth: 1000,
-        canvasHeight: 1414
-    },
+    /*
+    -----------------------------------------------------
+    NAME
+    -----------------------------------------------------
 
-    Date: {
-        x: 100,
-        y: 200,
-        width: 150,
-        height: 30,
-        canvasWidth: 1000,
-        canvasHeight: 1414
-    }
+    This can have MULTIPLE locations.
+
+    All locations receive the employee's
+    Full Name.
+    */
+
+    Name: [
+
+        {
+            page: 1,
+
+            x: 191.2,
+            y: 722.0,
+            width: 276.0,
+            height: 22.0,
+
+            canvasWidth: 1000,
+            canvasHeight: 1414
+        }
+
+    ],
+
+
+    /*
+    -----------------------------------------------------
+    DATE
+    -----------------------------------------------------
+    */
+
+    Date: [
+
+        {
+            page: 1,
+
+            x: 209.2,
+            y: 824.0,
+            width: 138.0,
+            height: 21.0,
+
+            canvasWidth: 1000,
+            canvasHeight: 1414
+        }
+
+    ],
+
+
+    /*
+    -----------------------------------------------------
+    PLACE
+    -----------------------------------------------------
+    */
+
+    Place: [
+
+        {
+            page: 1,
+
+            x: 209.2,
+            y: 847.0,
+            width: 139.0,
+            height: 21.0,
+
+            canvasWidth: 1000,
+            canvasHeight: 1414
+        }
+
+    ]
+
 
 };
 
 
-/*
-=========================================================
-STATUS
-=========================================================
-*/
 
-function showStatus(message, type) {
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
-    const box =
-        document.getElementById("status");
+const nameInput =
+    document.getElementById("name");
 
-    box.textContent =
+const emailInput =
+    document.getElementById("email");
+
+const phoneInput =
+    document.getElementById("phone");
+
+const placeInput =
+    document.getElementById("place");
+
+const dateInput =
+    document.getElementById("date");
+
+const statusBox =
+    document.getElementById("status");
+
+
+
+/* =====================================================
+   CLEAN EMAIL
+===================================================== */
+
+function cleanEmail(email) {
+
+    return email
+        .trim()
+        .toLowerCase();
+
+}
+
+
+
+/* =====================================================
+   CLEAN PHONE
+===================================================== */
+
+function cleanPhone(phone) {
+
+    return phone
+        .replace(/\D/g, "");
+
+}
+
+
+
+/* =====================================================
+   GET DRAFTS
+===================================================== */
+
+function getDrafts() {
+
+    const saved =
+        localStorage.getItem(
+            DRAFTS_KEY
+        );
+
+
+    if (!saved) {
+
+        return {};
+
+    }
+
+
+    try {
+
+        const data =
+            JSON.parse(saved);
+
+
+        if (
+            typeof data !== "object" ||
+            data === null
+        ) {
+
+            return {};
+
+        }
+
+
+        return data;
+
+    }
+    catch(error) {
+
+        console.error(error);
+
+        return {};
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SAVE DRAFTS
+===================================================== */
+
+function saveDrafts(drafts) {
+
+    localStorage.setItem(
+
+        DRAFTS_KEY,
+
+        JSON.stringify(drafts)
+
+    );
+
+}
+
+
+
+/* =====================================================
+   GET FORM DATA
+===================================================== */
+
+function getFormData() {
+
+    return {
+
+        name:
+            nameInput.value.trim(),
+
+        email:
+            emailInput.value.trim(),
+
+        phone:
+            phoneInput.value.trim(),
+
+        place:
+            placeInput.value.trim(),
+
+        date:
+            dateInput.value,
+
+        lastSaved:
+            new Date().toISOString()
+
+    };
+
+}
+
+
+
+/* =====================================================
+   IDENTIFIERS
+===================================================== */
+
+function getIdentifiers(data) {
+
+    const identifiers = [];
+
+
+    if (data.email) {
+
+        identifiers.push(
+
+            "email:"
+            +
+            cleanEmail(
+                data.email
+            )
+
+        );
+
+    }
+
+
+    if (data.phone) {
+
+        identifiers.push(
+
+            "phone:"
+            +
+            cleanPhone(
+                data.phone
+            )
+
+        );
+
+    }
+
+
+    return identifiers;
+
+}
+
+
+
+/* =====================================================
+   SAVE DRAFT
+===================================================== */
+
+function saveDraft() {
+
+
+    const data =
+        getFormData();
+
+
+    if (
+        !data.email &&
+        !data.phone
+    ) {
+
+        alert(
+
+            "Please enter either your email address OR mobile number before saving your draft."
+
+        );
+
+        emailInput.focus();
+
+        return;
+
+    }
+
+
+    const drafts =
+        getDrafts();
+
+
+    const identifiers =
+        getIdentifiers(data);
+
+
+    /*
+       If an existing record is found,
+       remove its old identifiers first.
+    */
+
+    let existingRecord =
+        null;
+
+
+    for (
+        const id of identifiers
+    ) {
+
+        if (drafts[id]) {
+
+            existingRecord =
+                drafts[id];
+
+            break;
+
+        }
+
+    }
+
+
+    if (existingRecord) {
+
+        const oldIdentifiers =
+            getIdentifiers(
+                existingRecord
+            );
+
+
+        for (
+            const id of oldIdentifiers
+        ) {
+
+            delete drafts[id];
+
+        }
+
+    }
+
+
+    /*
+       Save the same record under
+       email AND phone.
+    */
+
+    for (
+        const id of identifiers
+    ) {
+
+        drafts[id] =
+            data;
+
+    }
+
+
+    saveDrafts(drafts);
+
+
+    showStatus(
+
+        "Draft saved successfully. You can return later using your email OR mobile number.",
+
+        "success"
+
+    );
+
+}
+
+
+
+/* =====================================================
+   LOAD EXISTING DRAFT
+===================================================== */
+
+function loadExistingDraft() {
+
+
+    const identifier =
+        prompt(
+
+            "Enter your email address OR mobile number:"
+
+        );
+
+
+    if (!identifier) {
+
+        return;
+
+    }
+
+
+    const drafts =
+        getDrafts();
+
+
+    let key;
+
+
+    if (
+        identifier.includes("@")
+    ) {
+
+        key =
+            "email:"
+            +
+            cleanEmail(
+                identifier
+            );
+
+    }
+    else {
+
+        key =
+            "phone:"
+            +
+            cleanPhone(
+                identifier
+            );
+
+    }
+
+
+    const data =
+        drafts[key];
+
+
+    if (!data) {
+
+        alert(
+
+            "No saved draft was found for this email or mobile number."
+
+        );
+
+        return;
+
+    }
+
+
+    nameInput.value =
+        data.name || "";
+
+
+    emailInput.value =
+        data.email || "";
+
+
+    phoneInput.value =
+        data.phone || "";
+
+
+    placeInput.value =
+        data.place || "";
+
+
+    dateInput.value =
+        data.date || "";
+
+
+    showStatus(
+
+        "Your saved draft has been loaded successfully.",
+
+        "success"
+
+    );
+
+}
+
+
+
+/* =====================================================
+   CLEAR DRAFT
+===================================================== */
+
+function clearCurrentDraft() {
+
+
+    const email =
+        emailInput.value.trim();
+
+
+    const phone =
+        phoneInput.value.trim();
+
+
+    if (
+        !email &&
+        !phone
+    ) {
+
+        alert(
+
+            "Enter your email OR mobile number first."
+
+        );
+
+        return;
+
+    }
+
+
+    const identifiers = [];
+
+
+    if (email) {
+
+        identifiers.push(
+
+            "email:"
+            +
+            cleanEmail(
+                email
+            )
+
+        );
+
+    }
+
+
+    if (phone) {
+
+        identifiers.push(
+
+            "phone:"
+            +
+            cleanPhone(
+                phone
+            )
+
+        );
+
+    }
+
+
+    const drafts =
+        getDrafts();
+
+
+    let record =
+        null;
+
+
+    for (
+        const id of identifiers
+    ) {
+
+        if (drafts[id]) {
+
+            record =
+                drafts[id];
+
+            break;
+
+        }
+
+    }
+
+
+    if (!record) {
+
+        alert(
+            "No saved draft was found."
+        );
+
+        return;
+
+    }
+
+
+    const recordIdentifiers =
+        getIdentifiers(record);
+
+
+    for (
+        const id of recordIdentifiers
+    ) {
+
+        delete drafts[id];
+
+    }
+
+
+    saveDrafts(drafts);
+
+
+    nameInput.value =
+        "";
+
+    emailInput.value =
+        "";
+
+    phoneInput.value =
+        "";
+
+    placeInput.value =
+        "";
+
+    dateInput.value =
+        "";
+
+
+    showStatus(
+
+        "Your saved draft has been deleted.",
+
+        "success"
+
+    );
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function showStatus(
+    message,
+    type
+) {
+
+    statusBox.textContent =
         message;
 
-    box.className =
+    statusBox.className =
+        "status "
+        +
         type;
 
 }
 
 
-/*
-=========================================================
-GENERATE PDF
-=========================================================
-*/
+
+/* =====================================================
+   VALIDATE
+===================================================== */
+
+function validateForm(data) {
+
+
+    if (!data.name) {
+
+        alert(
+            "Please enter your full name."
+        );
+
+        nameInput.focus();
+
+        return false;
+
+    }
+
+
+    if (
+        !data.email &&
+        !data.phone
+    ) {
+
+        alert(
+
+            "Please enter either your email address OR mobile number."
+
+        );
+
+        emailInput.focus();
+
+        return false;
+
+    }
+
+
+    if (
+        data.email &&
+        !data.email.includes("@")
+    ) {
+
+        alert(
+            "Please enter a valid email address."
+        );
+
+        emailInput.focus();
+
+        return false;
+
+    }
+
+
+    if (
+        data.phone &&
+        cleanPhone(
+            data.phone
+        ).length < 7
+    ) {
+
+        alert(
+            "Please enter a valid mobile number."
+        );
+
+        phoneInput.focus();
+
+        return false;
+
+    }
+
+
+    if (!data.place) {
+
+        alert(
+            "Please enter your place."
+        );
+
+        placeInput.focus();
+
+        return false;
+
+    }
+
+
+    if (!data.date) {
+
+        alert(
+            "Please select the date / DOJ."
+        );
+
+        dateInput.focus();
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =====================================================
+   GENERATE PDF
+===================================================== */
 
 async function generatePDF() {
 
-    const name =
-        document.getElementById("name")
-        .value
-        .trim();
 
-    const email =
-        document.getElementById("email")
-        .value
-        .trim();
-
-    const phone =
-        document.getElementById("phone")
-        .value
-        .trim();
-
-    const place =
-        document.getElementById("place")
-        .value
-        .trim();
-
-    const date =
-        document.getElementById("date")
-        .value;
+    const data =
+        getFormData();
 
 
     /*
-    VALIDATION
+       Validate.
     */
 
-    if (!name) {
-
-        alert("Please enter your full name.");
-
-        return;
-
-    }
-
-
-    if (!email) {
-
-        alert("Please enter your email address.");
+    if (
+        !validateForm(data)
+    ) {
 
         return;
 
     }
 
 
-    if (!place) {
+    /*
+       Save automatically.
+    */
 
-        alert("Please enter your place.");
-
-        return;
-
-    }
+    saveDraft();
 
 
-    if (!date) {
+    /*
+       Check mappings.
+    */
 
-        alert("Please enter the DOJ.");
+    if (
+        !MAPPINGS.Name ||
+        MAPPINGS.Name.length === 0
+    ) {
+
+        alert(
+            "Name PDF mapping is missing."
+        );
 
         return;
 
@@ -397,24 +1330,34 @@ async function generatePDF() {
 
     try {
 
+
         showStatus(
-            "Generating your onboarding PDF...",
-            "success"
+
+            "Loading your onboarding form...",
+
+            "info"
+
         );
 
 
         /*
-        DOWNLOAD LOA.PDF
+        -------------------------------------------------
+        LOAD LOA.PDF
+        -------------------------------------------------
         */
 
         const response =
-            await fetch(PDF_URL);
+            await fetch(
+                PDF_URL
+            );
 
 
         if (!response.ok) {
 
             throw new Error(
-                "LOA.pdf could not be loaded."
+
+                "LOA.pdf could not be loaded. Make sure LOA.pdf is in the same GitHub folder as index.html."
+
             );
 
         }
@@ -425,7 +1368,9 @@ async function generatePDF() {
 
 
         /*
+        -------------------------------------------------
         LOAD PDF
+        -------------------------------------------------
         */
 
         const pdfDoc =
@@ -434,9 +1379,17 @@ async function generatePDF() {
             );
 
 
+        /*
+        -------------------------------------------------
+        FONT
+        -------------------------------------------------
+        */
+
         const font =
             await pdfDoc.embedFont(
+
                 PDFLib.StandardFonts.Helvetica
+
             );
 
 
@@ -444,113 +1397,167 @@ async function generatePDF() {
             pdfDoc.getPages();
 
 
-        if (!pages.length) {
+        if (
+            pages.length === 0
+        ) {
 
             throw new Error(
-                "LOA PDF has no pages."
+                "The LOA PDF contains no pages."
             );
 
         }
 
 
-        const page =
-            pages[0];
-
-
-        const pdfWidth =
-            page.getWidth();
-
-
-        const pdfHeight =
-            page.getHeight();
-
-
         /*
-        PLACE NAME
+        -------------------------------------------------
+        WRITE NAME
+        -------------------------------------------------
         */
 
-        addText(
-            page,
-            MAPPINGS.Name,
-            name,
-            pdfWidth,
-            pdfHeight,
-            font
-        );
+        if (MAPPINGS.Name) {
+
+            for (
+                const mapping
+                of MAPPINGS.Name
+            ) {
+
+                writeMapping(
+
+                    pdfDoc,
+                    pages,
+                    mapping,
+                    data.name,
+                    font
+
+                );
+
+            }
+
+        }
 
 
         /*
-        PLACE
+        -------------------------------------------------
+        WRITE DATE
+        -------------------------------------------------
         */
 
-        addText(
-            page,
-            MAPPINGS.Place,
-            place,
-            pdfWidth,
-            pdfHeight,
-            font
-        );
+        if (MAPPINGS.Date) {
+
+            for (
+                const mapping
+                of MAPPINGS.Date
+            ) {
+
+                writeMapping(
+
+                    pdfDoc,
+                    pages,
+                    mapping,
+                    formatDate(
+                        data.date
+                    ),
+                    font
+
+                );
+
+            }
+
+        }
 
 
         /*
-        DATE
+        -------------------------------------------------
+        WRITE PLACE
+        -------------------------------------------------
         */
 
-        addText(
-            page,
-            MAPPINGS.Date,
-            formatDate(date),
-            pdfWidth,
-            pdfHeight,
-            font
-        );
+        if (MAPPINGS.Place) {
+
+            for (
+                const mapping
+                of MAPPINGS.Place
+            ) {
+
+                writeMapping(
+
+                    pdfDoc,
+                    pages,
+                    mapping,
+                    data.place,
+                    font
+
+                );
+
+            }
+
+        }
 
 
         /*
+        -------------------------------------------------
         SAVE PDF
+        -------------------------------------------------
         */
+
+        showStatus(
+
+            "Creating your completed PDF...",
+
+            "info"
+
+        );
+
 
         const output =
             await pdfDoc.save();
 
 
+        const blob =
+            new Blob(
+
+                [output],
+
+                {
+                    type:
+                        "application/pdf"
+                }
+
+            );
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
         /*
+        -------------------------------------------------
         FILE NAME
-
-        Required format:
-
-        Onboarding Documents - Nelson.pdf
+        -------------------------------------------------
         */
 
         const filename =
             "Onboarding Documents - "
             +
-            cleanName(name)
+            cleanFileName(
+                data.name
+            )
             +
             ".pdf";
 
 
-        const blob =
-            new Blob(
-                [output],
-                {
-                    type:
-                        "application/pdf"
-                }
-            );
-
-
-        const url =
-            URL.createObjectURL(blob);
-
-
         /*
-        DOWNLOAD TO CANDIDATE
+        -------------------------------------------------
+        DOWNLOAD
+        -------------------------------------------------
         */
 
         const link =
-            document.createElement("a");
+            document.createElement(
+                "a"
+            );
 
 
         link.href =
@@ -561,43 +1568,66 @@ async function generatePDF() {
             filename;
 
 
-        document.body.appendChild(link);
+        document.body.appendChild(
+            link
+        );
+
 
         link.click();
 
-        document.body.removeChild(link);
+
+        document.body.removeChild(
+            link
+        );
 
 
         setTimeout(
+
             function() {
 
-                URL.revokeObjectURL(url);
+                URL.revokeObjectURL(
+                    url
+                );
 
             },
+
             2000
+
         );
 
 
         showStatus(
-            "Your onboarding PDF has been generated and downloaded successfully.",
-            "success"
-        );
 
+            "Your completed onboarding PDF has been generated and downloaded successfully.",
+
+            "success"
+
+        );
 
     }
     catch(error) {
 
+
         console.error(error);
 
+
         showStatus(
-            "PDF generation failed: " + error.message,
+
+            "PDF generation failed: "
+            +
+            error.message,
+
             "error"
+
         );
 
+
         alert(
+
             "PDF generation failed:\n\n"
             +
             error.message
+
         );
 
     }
@@ -605,59 +1635,206 @@ async function generatePDF() {
 }
 
 
-/*
-=========================================================
-ADD TEXT TO PDF
-=========================================================
-*/
 
-function addText(
-    page,
+/* =====================================================
+   WRITE MAPPING
+===================================================== */
+
+function writeMapping(
+
+    pdfDoc,
+    pages,
     mapping,
     text,
-    pdfWidth,
-    pdfHeight,
     font
+
 ) {
+
+
+    /*
+       Validate page number.
+    */
+
+    const pageNumber =
+        Number(
+            mapping.page
+        );
+
+
+    if (
+        pageNumber < 1 ||
+        pageNumber > pages.length
+    ) {
+
+        throw new Error(
+
+            "Mapping refers to PDF page "
+            +
+            pageNumber
+            +
+            ", but the PDF only has "
+            +
+            pages.length
+            +
+            " pages."
+
+        );
+
+    }
+
+
+    const page =
+        pages[
+            pageNumber - 1
+        ];
+
+
+    const pdfWidth =
+        Number(
+            page.getWidth()
+        );
+
+
+    const pdfHeight =
+        Number(
+            page.getHeight()
+        );
+
+
+    /*
+       Canvas dimensions are the dimensions
+       used by your mapping tool.
+    */
+
+    const canvasWidth =
+        Number(
+            mapping.canvasWidth
+        );
+
+
+    const canvasHeight =
+        Number(
+            mapping.canvasHeight
+        );
+
+
+    const mapX =
+        Number(
+            mapping.x
+        );
+
+
+    const mapY =
+        Number(
+            mapping.y
+        );
+
+
+    const mapWidth =
+        Number(
+            mapping.width
+        );
+
+
+    const mapHeight =
+        Number(
+            mapping.height
+        );
+
+
+    /*
+       Validate numbers.
+    */
+
+    const values = [
+
+        canvasWidth,
+        canvasHeight,
+        mapX,
+        mapY,
+        mapWidth,
+        mapHeight,
+        pdfWidth,
+        pdfHeight
+
+    ];
+
+
+    for (
+        const value
+        of values
+    ) {
+
+        if (
+            !Number.isFinite(value)
+        ) {
+
+            throw new Error(
+                "Invalid PDF mapping detected."
+            );
+
+        }
+
+    }
+
+
+    /*
+       Convert mapping coordinates
+       to PDF coordinates.
+    */
 
     const scaleX =
         pdfWidth /
-        mapping.canvasWidth;
+        canvasWidth;
 
 
     const scaleY =
         pdfHeight /
-        mapping.canvasHeight;
+        canvasHeight;
 
 
     const x =
-        mapping.x *
+        mapX *
         scaleX;
 
 
-    const width =
-        mapping.width *
+    const boxWidth =
+        mapWidth *
         scaleX;
 
 
-    const height =
-        mapping.height *
+    const boxHeight =
+        mapHeight *
         scaleY;
 
+
+    /*
+       PDF coordinate system starts
+       from bottom-left.
+
+       Mapping coordinate system starts
+       from top-left.
+
+       Therefore we convert Y.
+    */
 
     const y =
         pdfHeight
         -
         (
-            mapping.y *
+            mapY *
             scaleY
         )
         -
-        height;
+        boxHeight;
 
+
+    /*
+       Font size.
+    */
 
     let fontSize =
-        height * 0.60;
+        boxHeight * 0.60;
 
 
     if (
@@ -673,33 +1850,45 @@ function addText(
 
     fontSize =
         Math.max(
+
             6,
+
             Math.min(
                 24,
                 fontSize
             )
+
         );
 
 
+    /*
+       Write text.
+    */
+
     page.drawText(
+
         String(text),
+
         {
 
-            x: x,
+            x:
+                x,
 
             y:
                 y
                 +
                 (
-                    height
+                    boxHeight
                     -
                     fontSize
                 )
                 / 2,
 
-            size: fontSize,
+            size:
+                fontSize,
 
-            font: font,
+            font:
+                font,
 
             color:
                 PDFLib.rgb(
@@ -711,28 +1900,38 @@ function addText(
             maxWidth:
                 Math.max(
                     10,
-                    width
+                    boxWidth
                 )
 
         }
+
     );
 
 }
 
 
-/*
-=========================================================
-DATE
-=========================================================
-*/
+
+/* =====================================================
+   DATE FORMAT
+===================================================== */
 
 function formatDate(date) {
+
+
+    if (!date) {
+
+        return "";
+
+    }
+
 
     const parts =
         date.split("-");
 
 
-    if (parts.length !== 3) {
+    if (
+        parts.length !== 3
+    ) {
 
         return date;
 
@@ -740,6 +1939,7 @@ function formatDate(date) {
 
 
     return (
+
         parts[2]
         +
         "/"
@@ -749,29 +1949,49 @@ function formatDate(date) {
         "/"
         +
         parts[0]
+
     );
 
 }
 
 
-/*
-=========================================================
-CLEAN NAME
-=========================================================
-*/
 
-function cleanName(name) {
+/* =====================================================
+   CLEAN FILE NAME
+===================================================== */
 
-    return name
+function cleanFileName(name) {
+
+
+    const cleaned =
+        name
+
         .replace(
             /[^a-z0-9 ]/gi,
             ""
         )
+
         .trim();
+
+
+    if (!cleaned) {
+
+        return "Employee";
+
+    }
+
+
+    return cleaned.substring(
+        0,
+        80
+    );
 
 }
 
+
 </script>
 
+
 </body>
+
 </html>
