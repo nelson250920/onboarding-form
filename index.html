@@ -12,6 +12,10 @@
 
 <style>
 
+/* =====================================================
+   GLOBAL
+===================================================== */
+
 * {
     box-sizing: border-box;
 }
@@ -19,9 +23,10 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f1f3f5;
+    background: #eef1f5;
     color: #222;
 }
+
 
 /* =====================================================
    HEADER
@@ -30,18 +35,20 @@ body {
 .header {
     background: #1f4e78;
     color: white;
-    padding: 16px 24px;
+    padding: 16px 22px;
 }
 
 .header h1 {
     margin: 0;
-    font-size: 22px;
+    font-size: 21px;
 }
 
 .header p {
     margin: 5px 0 0;
     font-size: 13px;
+    opacity: 0.9;
 }
+
 
 /* =====================================================
    TOOLBAR
@@ -49,23 +56,31 @@ body {
 
 .toolbar {
     background: white;
-    padding: 12px 20px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #d5d9de;
+    padding: 10px 16px;
 
     display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 button,
 .file-label {
     background: #1f4e78;
     color: white;
+
     border: none;
-    padding: 9px 14px;
     border-radius: 5px;
+
+    padding: 9px 13px;
+
     cursor: pointer;
+
     font-size: 13px;
 }
 
@@ -79,10 +94,6 @@ button:disabled {
     cursor: not-allowed;
 }
 
-.file-label {
-    display: inline-block;
-}
-
 #pdfInput {
     display: none;
 }
@@ -90,98 +101,114 @@ button:disabled {
 .file-name {
     color: #555;
     font-size: 13px;
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
-.page-info {
-    font-weight: bold;
-    color: #1f4e78;
-    min-width: 95px;
-    text-align: center;
-}
 
 /* =====================================================
    STATUS
 ===================================================== */
 
 .status {
-    padding: 9px 20px;
     background: #e8f1f8;
     color: #1f4e78;
+
+    padding: 9px 16px;
+
     font-size: 13px;
+
+    border-bottom: 1px solid #d5d9de;
 }
 
-.status.success {
-    background: #d1e7dd;
-    color: #0f5132;
-}
-
-.status.error {
-    background: #f8d7da;
-    color: #842029;
-}
-
-.status.warning {
-    background: #fff3cd;
-    color: #664d03;
-}
 
 /* =====================================================
    WORKSPACE
 ===================================================== */
 
 .workspace {
-    padding: 20px;
     display: flex;
-    gap: 20px;
+    gap: 16px;
+
+    padding: 16px;
+
     align-items: flex-start;
 }
+
 
 /* =====================================================
    ADMIN PANEL
 ===================================================== */
 
 .panel {
-    width: 350px;
+    width: 345px;
+
     background: white;
+
     border-radius: 8px;
-    padding: 18px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+    padding: 17px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.08);
+
     flex-shrink: 0;
+
+    max-height: calc(100vh - 130px);
+
+    overflow-y: auto;
 }
 
 .panel h2 {
-    margin-top: 0;
-    font-size: 18px;
+    margin: 0 0 15px;
+
     color: #1f4e78;
+
+    font-size: 18px;
 }
 
 .panel h3 {
-    font-size: 15px;
-    margin-top: 22px;
+    margin: 22px 0 9px;
+
     color: #444;
+
+    font-size: 14px;
 }
+
+
+/* =====================================================
+   CONTROLS
+===================================================== */
 
 .panel label {
     display: block;
-    font-size: 13px;
-    font-weight: bold;
-    margin-top: 12px;
+
+    margin-top: 10px;
     margin-bottom: 5px;
+
+    font-size: 12px;
+    font-weight: bold;
 }
 
-.panel select {
+.panel select,
+.panel input[type="text"] {
     width: 100%;
+
     padding: 9px;
+
     border: 1px solid #bbb;
+
     border-radius: 5px;
+
     font-size: 13px;
+
     background: white;
 }
 
 .start-button {
     width: 100%;
-    margin-top: 12px;
+
+    margin-top: 10px;
+
     background: #198754;
 }
 
@@ -191,57 +218,158 @@ button:disabled {
 
 .save-button {
     width: 100%;
-    margin-top: 8px;
+
+    margin-top: 7px;
+
     background: #0d6efd;
+}
+
+.save-button:hover {
+    background: #0b5ed7;
 }
 
 .delete-button {
     width: 100%;
-    margin-top: 8px;
+
+    margin-top: 7px;
+
     background: #dc3545;
+}
+
+.delete-button:hover {
+    background: #bb2d3b;
 }
 
 .clear-button {
     width: 100%;
-    margin-top: 8px;
+
+    margin-top: 7px;
+
     background: #6c757d;
+}
+
+.clear-button:hover {
+    background: #5c636a;
 }
 
 .export-button {
     width: 100%;
-    margin-top: 8px;
+
+    margin-top: 7px;
+
     background: #6f42c1;
 }
 
-.import-button {
-    width: 100%;
-    margin-top: 8px;
-    background: #fd7e14;
+.export-button:hover {
+    background: #59359a;
 }
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+.page-controls {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 7px;
+
+    margin-top: 8px;
+}
+
+.page-controls button {
+    background: #495057;
+}
+
+.page-controls button:hover {
+    background: #343a40;
+}
+
+.page-info {
+    margin-top: 8px;
+
+    padding: 8px;
+
+    background: #f1f3f5;
+
+    border-radius: 5px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #444;
+}
+
+
+/* =====================================================
+   SAVED MESSAGE
+===================================================== */
+
+.saved-message {
+    background: #d1e7dd;
+
+    color: #0f5132;
+
+    padding: 9px;
+
+    border-radius: 5px;
+
+    margin-top: 9px;
+
+    font-size: 12px;
+
+    display: none;
+}
+
 
 /* =====================================================
    MAPPING LIST
 ===================================================== */
 
 .mapping-list {
-    margin-top: 20px;
+    margin-top: 18px;
+
     border-top: 1px solid #ddd;
+
     padding-top: 12px;
 }
 
 .mapping-list-title {
+    font-size: 14px;
+
     font-weight: bold;
+
     color: #1f4e78;
-    margin-bottom: 10px;
+
+    margin-bottom: 9px;
 }
 
 .mapping-item {
-    background: #f5f7f9;
-    border: 1px solid #ddd;
+    background: #f6f8fa;
+
+    border: 1px solid #d9dee3;
+
     border-radius: 5px;
+
     padding: 8px;
-    margin-bottom: 8px;
-    font-size: 12px;
+
+    margin-bottom: 7px;
+
+    font-size: 11px;
+
+    line-height: 1.45;
+
+    cursor: pointer;
+}
+
+.mapping-item:hover {
+    background: #edf3f8;
 }
 
 .mapping-item strong {
@@ -253,29 +381,49 @@ button:disabled {
     font-weight: bold;
 }
 
-.saved-message {
-    background: #d1e7dd;
-    color: #0f5132;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 12px;
-    font-size: 13px;
-    display: none;
+.mapping-item .delete-small {
+    float: right;
+
+    background: #dc3545;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 3px;
+
+    padding: 3px 6px;
+
+    font-size: 10px;
+
+    cursor: pointer;
 }
+
+.mapping-item .delete-small:hover {
+    background: #bb2d3b;
+}
+
 
 /* =====================================================
    INSTRUCTIONS
 ===================================================== */
 
 .instructions {
-    margin-top: 15px;
+    margin-top: 14px;
+
     background: #fff8e1;
+
     border: 1px solid #ffe082;
+
     padding: 10px;
+
     border-radius: 5px;
-    font-size: 12px;
-    line-height: 1.5;
+
+    font-size: 11px;
+
+    line-height: 1.55;
 }
+
 
 /* =====================================================
    PDF AREA
@@ -283,15 +431,22 @@ button:disabled {
 
 .pdf-area {
     flex: 1;
-    background: #777;
-    padding: 25px;
-    min-height: 800px;
+
+    background: #666;
+
+    padding: 22px;
+
+    min-height: calc(100vh - 130px);
+
     overflow: auto;
 
     display: flex;
+
     justify-content: center;
+
     align-items: flex-start;
 }
+
 
 /* =====================================================
    PDF CONTAINER
@@ -299,13 +454,19 @@ button:disabled {
 
 #pdfContainer {
     position: relative;
+
     background: white;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+
+    box-shadow:
+        0 3px 18px rgba(0,0,0,0.35);
+
+    flex-shrink: 0;
 }
 
 #pdfCanvas {
     display: block;
 }
+
 
 /* =====================================================
    MAPPING LAYER
@@ -313,10 +474,13 @@ button:disabled {
 
 #mappingLayer {
     position: absolute;
+
     left: 0;
     top: 0;
+
     cursor: crosshair;
 }
+
 
 /* =====================================================
    MAPPING BOX
@@ -327,69 +491,73 @@ button:disabled {
 
     border: 2px solid #e63946;
 
-    background: rgba(230,57,70,0.15);
+    background:
+        rgba(230,57,70,0.15);
 
     pointer-events: none;
 
-    z-index: 10;
+    z-index: 20;
 }
 
 .mapping-box span {
     position: absolute;
 
-    top: -23px;
+    top: -22px;
     left: -2px;
 
     background: #e63946;
+
     color: white;
 
-    padding: 3px 7px;
+    padding: 3px 6px;
 
-    font-size: 11px;
+    font-size: 10px;
 
     border-radius: 3px;
 
     white-space: nowrap;
 }
 
-/* Saved mappings */
+
+/* =====================================================
+   SAVED BOX
+===================================================== */
 
 .mapping-box.saved {
-    border-color: #198754;
-    background: rgba(25,135,84,0.12);
+    border-color: #0077b6;
+
+    background:
+        rgba(0,119,182,0.12);
+
+    z-index: 10;
 }
 
 .mapping-box.saved span {
-    background: #198754;
+    background: #0077b6;
 }
 
-/* Checkbox mappings */
-
-.mapping-box.checkbox {
-    border-color: #6f42c1;
-    background: rgba(111,66,193,0.15);
-}
-
-.mapping-box.checkbox span {
-    background: #6f42c1;
-}
 
 /* =====================================================
-   EMPTY PDF MESSAGE
+   CHECKBOX MAPPING
 ===================================================== */
 
-.empty-message {
-    color: #777;
-    padding: 120px 40px;
-    text-align: center;
-    line-height: 1.6;
+.mapping-box.checkbox-box {
+    border-color: #ff8800;
+
+    background:
+        rgba(255,136,0,0.18);
 }
 
+.mapping-box.checkbox-box span {
+    background: #ff8800;
+}
+
+
 /* =====================================================
-   RESPONSIVE
+   SMALL SCREEN
 ===================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 850px) {
 
     .workspace {
         flex-direction: column;
@@ -397,6 +565,8 @@ button:disabled {
 
     .panel {
         width: 100%;
+
+        max-height: none;
     }
 
     .pdf-area {
@@ -424,7 +594,7 @@ button:disabled {
     </h1>
 
     <p>
-        Admin / HR Setup — 9 Page PDF Field Mapping
+        Admin / HR — 9 Page PDF Field Mapping
     </p>
 
 </div>
@@ -444,13 +614,11 @@ button:disabled {
 
     </label>
 
-
     <input
         type="file"
         id="pdfInput"
         accept="application/pdf"
     >
-
 
     <span
         class="file-name"
@@ -461,55 +629,37 @@ button:disabled {
     </span>
 
 
-    <button
-        onclick="previousPage()"
-        id="previousButton"
-        disabled>
+    <button onclick="previousPage()">
 
         ◀ Previous
 
     </button>
 
 
-    <span
-        class="page-info"
-        id="pageInfo">
-
-        Page 0 / 0
-
-    </span>
-
-
-    <button
-        onclick="nextPage()"
-        id="nextButton"
-        disabled>
+    <button onclick="nextPage()">
 
         Next ▶
 
     </button>
 
 
-    <button
-        onclick="zoomOut()">
+    <button onclick="zoomOut()">
 
         − Zoom
 
     </button>
 
 
-    <button
-        onclick="zoomIn()">
+    <button onclick="zoomIn()">
 
         + Zoom
 
     </button>
 
 
-    <button
-        onclick="resetZoom()">
+    <button onclick="resetZoom()">
 
-        Reset Zoom
+        Reset
 
     </button>
 
@@ -524,7 +674,7 @@ button:disabled {
     class="status"
     id="status">
 
-    Please select your 9-page Onboarding Documents.pdf file.
+    Please select your 9-page Onboarding Documents.pdf.
 
 </div>
 
@@ -538,7 +688,7 @@ button:disabled {
 
     <!-- =================================================
          ADMIN PANEL
-    ================================================= -->
+    ================================================== -->
 
     <div class="panel">
 
@@ -547,12 +697,38 @@ button:disabled {
         </h2>
 
 
-        <!-- FIELD SELECT -->
+        <!-- PAGE -->
+
+        <label>
+            Current PDF Page
+        </label>
+
+        <div class="page-controls">
+
+            <button onclick="previousPage()">
+                ◀ Previous
+            </button>
+
+            <button onclick="nextPage()">
+                Next ▶
+            </button>
+
+        </div>
+
+        <div
+            class="page-info"
+            id="pageInfo">
+
+            Page 1 of 9
+
+        </div>
+
+
+        <!-- FIELD -->
 
         <label>
             Select Field
         </label>
-
 
         <select id="fieldSelect">
 
@@ -561,7 +737,7 @@ button:disabled {
             </option>
 
 
-            <optgroup label="Personal Details">
+            <optgroup label="Candidate Personal Details">
 
                 <option value="name">
                     Name as per Aadhaar
@@ -591,6 +767,11 @@ button:disabled {
                     Religion
                 </option>
 
+            </optgroup>
+
+
+            <optgroup label="Contact Details">
+
                 <option value="email">
                     Email ID
                 </option>
@@ -605,7 +786,7 @@ button:disabled {
             <optgroup label="Employment Details">
 
                 <option value="doj">
-                    Date of Joining (DOJ)
+                    Date of Joining
                 </option>
 
                 <option value="employmentStatus">
@@ -631,7 +812,7 @@ button:disabled {
             </optgroup>
 
 
-            <optgroup label="Bank / KYC">
+            <optgroup label="Bank / Identity">
 
                 <option value="bankAccount">
                     Bank Account Number
@@ -649,6 +830,10 @@ button:disabled {
                     PAN Number
                 </option>
 
+                <option value="uan">
+                    UAN
+                </option>
+
             </optgroup>
 
 
@@ -660,10 +845,6 @@ button:disabled {
 
                 <option value="epsMember">
                     EPS Membership
-                </option>
-
-                <option value="uan">
-                    UAN
                 </option>
 
                 <option value="withdrawEPF">
@@ -697,6 +878,23 @@ button:disabled {
 
                 <option value="pincode">
                     Pincode
+                </option>
+
+            </optgroup>
+
+
+            <optgroup label="Declaration">
+
+                <option value="declaration">
+                    Declaration
+                </option>
+
+                <option value="place">
+                    Place
+                </option>
+
+                <option value="declarationDate">
+                    Declaration Date
                 </option>
 
             </optgroup>
@@ -833,23 +1031,6 @@ button:disabled {
 
             </optgroup>
 
-
-            <optgroup label="Declaration">
-
-                <option value="declaration">
-                    Declaration
-                </option>
-
-                <option value="place">
-                    Place
-                </option>
-
-                <option value="declarationDate">
-                    Declaration Date
-                </option>
-
-            </optgroup>
-
         </select>
 
 
@@ -859,15 +1040,14 @@ button:disabled {
             Mapping Type
         </label>
 
-
         <select id="mappingType">
 
             <option value="text">
-                Text / Date / Number
+                Text / Value
             </option>
 
             <option value="checkbox">
-                Checkbox / Radio Selection
+                Checkbox / Tick
             </option>
 
         </select>
@@ -899,13 +1079,13 @@ button:disabled {
         </button>
 
 
-        <!-- DELETE -->
+        <!-- DELETE CURRENT -->
 
         <button
             class="delete-button"
-            onclick="deleteMapping()">
+            onclick="deleteSelectedFieldMappings()">
 
-            Delete / Redraw Selected Field
+            Delete Selected Field Mappings
 
         </button>
 
@@ -916,7 +1096,7 @@ button:disabled {
             class="clear-button"
             onclick="clearAllMappings()">
 
-            Clear All Mappings
+            Clear ALL Mappings
 
         </button>
 
@@ -927,31 +1107,10 @@ button:disabled {
             class="export-button"
             onclick="exportMappings()">
 
-            Export Mappings JSON
+            Export Mapping JSON
 
         </button>
 
-
-        <!-- IMPORT -->
-
-        <button
-            class="import-button"
-            onclick="document.getElementById('mappingImport').click()">
-
-            Import Mappings JSON
-
-        </button>
-
-
-        <input
-            type="file"
-            id="mappingImport"
-            accept="application/json"
-            style="display:none"
-        >
-
-
-        <!-- SAVED MESSAGE -->
 
         <div
             class="saved-message"
@@ -962,7 +1121,9 @@ button:disabled {
         </div>
 
 
-        <!-- MAPPING LIST -->
+        <!-- =================================================
+             SAVED MAPPINGS
+        ================================================== -->
 
         <div class="mapping-list">
 
@@ -982,7 +1143,9 @@ button:disabled {
         </div>
 
 
-        <!-- INSTRUCTIONS -->
+        <!-- =================================================
+             INSTRUCTIONS
+        ================================================== -->
 
         <div class="instructions">
 
@@ -992,48 +1155,61 @@ button:disabled {
 
             <br><br>
 
-            1. Choose the 9-page PDF.
+            1. Load the 9-page PDF.
 
-            <br><br>
+            <br>
 
-            2. Go to the required PDF page using
-            Previous / Next.
+            2. Select the page.
 
-            <br><br>
+            <br>
 
             3. Select a field.
 
-            <br><br>
+            <br>
 
-            4. Select Text or Checkbox/Radio.
+            4. Select Text or Checkbox.
 
-            <br><br>
+            <br>
 
             5. Click Start Mapping.
 
-            <br><br>
+            <br>
 
-            6. Draw a rectangle exactly over the
-            location where that information belongs.
+            6. Draw the rectangle on the PDF.
 
-            <br><br>
+            <br>
 
             7. Click Save Mapping.
 
             <br><br>
 
-            8. Repeat for every field on all
-            9 pages.
+            <strong>
+                IMPORTANT:
+            </strong>
+
+            The same field can be mapped
+            multiple times.
 
             <br><br>
 
-            <strong>
-                Important:
-            </strong>
+            Example:
 
-            The mapper automatically records the
-            page number and the position relative
-            to that page.
+            <br>
+
+            Page 6 → Date
+
+            <br>
+
+            Page 7 → Date
+
+            <br>
+
+            Both mappings will remain saved.
+
+            <br><br>
+
+            You can also map Date twice
+            on the same page.
 
         </div>
 
@@ -1042,22 +1218,22 @@ button:disabled {
 
     <!-- =================================================
          PDF AREA
-    ================================================= -->
+    ================================================== -->
 
     <div class="pdf-area">
 
         <div id="pdfContainer">
 
-            <div class="empty-message">
+            <div
+                style="
+                    color:#777;
+                    padding:100px 35px;
+                    text-align:center;
+                ">
 
                 Choose your
-                <strong>
-                    Onboarding Documents.pdf
-                </strong>
-
-                <br>
-
-                to display the PDF here.
+                Onboarding Documents.pdf
+                to display it here.
 
             </div>
 
@@ -1085,9 +1261,9 @@ button:disabled {
 ===================================================== */
 
 const STORAGE_KEY =
-    "onboardingDocumentsMappings";
+    "onboardingDocumentMappings_v2";
 
-const REQUIRED_PAGE_COUNT =
+const EXPECTED_PAGES =
     9;
 
 
@@ -1103,9 +1279,11 @@ let pdfCanvas = null;
 
 let mappingLayer = null;
 
-let currentPageNumber = 1;
+let originalPDFBytes = null;
 
-let zoom = 1.3;
+let zoom = 1.2;
+
+let currentPageNumber = 1;
 
 let isDrawing = false;
 
@@ -1118,9 +1296,31 @@ let currentBox = null;
 let currentMapping = null;
 
 
-/* =====================================================
-   MAPPINGS
-===================================================== */
+/*
+   IMPORTANT:
+
+   mappings is now an ARRAY.
+
+   This is what allows duplicate fields.
+
+   Example:
+
+   [
+       {
+           id: "mapping_1",
+           field: "Date",
+           page: 6
+       },
+
+       {
+           id: "mapping_2",
+           field: "Date",
+           page: 7
+       }
+   ]
+
+   They do NOT overwrite each other.
+*/
 
 let mappings =
     loadMappings();
@@ -1170,21 +1370,6 @@ const saveButton =
         "saveButton"
     );
 
-const previousButton =
-    document.getElementById(
-        "previousButton"
-    );
-
-const nextButton =
-    document.getElementById(
-        "nextButton"
-    );
-
-const pageInfo =
-    document.getElementById(
-        "pageInfo"
-    );
-
 const mappingList =
     document.getElementById(
         "mappingList"
@@ -1195,9 +1380,9 @@ const savedMessage =
         "savedMessage"
     );
 
-const mappingImport =
+const pageInfo =
     document.getElementById(
-        "mappingImport"
+        "pageInfo"
     );
 
 
@@ -1222,28 +1407,38 @@ function loadMappings() {
 
     if (!saved) {
 
-        return {};
+        return [];
 
     }
 
     try {
 
         const parsed =
-            JSON.parse(
-                saved
-            );
+            JSON.parse(saved);
 
-        if (
-            typeof parsed !== "object" ||
-            parsed === null ||
-            Array.isArray(parsed)
-        ) {
+        /*
+           New format:
+           Array
+        */
 
-            return {};
+        if (Array.isArray(parsed)) {
+
+            return parsed;
 
         }
 
-        return parsed;
+        /*
+           If an old object exists,
+           start fresh because the old
+           format cannot safely support
+           duplicate fields.
+        */
+
+        console.warn(
+            "Old mapping format detected. Starting new mapping storage."
+        );
+
+        return [];
 
     }
     catch(error) {
@@ -1253,7 +1448,7 @@ function loadMappings() {
             error
         );
 
-        return {};
+        return [];
 
     }
 
@@ -1284,7 +1479,9 @@ function saveMappingsToStorage() {
 ===================================================== */
 
 pdfInput.addEventListener(
+
     "change",
+
     async function(event) {
 
         const file =
@@ -1298,22 +1495,29 @@ pdfInput.addEventListener(
 
         try {
 
-            status.className =
-                "status";
-
             status.textContent =
                 "Reading PDF...";
 
+
             const buffer =
                 await file.arrayBuffer();
+
+
+            originalPDFBytes =
+                new Uint8Array(
+                    buffer
+                ).slice();
+
 
             const displayBytes =
                 new Uint8Array(
                     buffer
                 ).slice();
 
+
             fileName.textContent =
                 file.name;
+
 
             pdfDocument =
                 await pdfjsLib
@@ -1323,44 +1527,47 @@ pdfInput.addEventListener(
                     })
                     .promise;
 
+
             if (
                 pdfDocument.numPages !==
-                REQUIRED_PAGE_COUNT
+                EXPECTED_PAGES
             ) {
 
-                status.className =
-                    "status warning";
+                alert(
+                    "This PDF contains " +
+                    pdfDocument.numPages +
+                    " pages.\n\n" +
+                    "The Onboarding Documents PDF must contain exactly 9 pages."
+                );
 
                 status.textContent =
-                    "Warning: PDF contains "
-                    + pdfDocument.numPages
-                    + " pages. Expected exactly 9 pages.";
+                    "Wrong number of pages.";
 
-            }
-            else {
+                startButton.disabled =
+                    true;
 
-                status.className =
-                    "status success";
-
-                status.textContent =
-                    "9-page Onboarding Documents PDF loaded successfully.";
+                return;
 
             }
 
-            currentPageNumber = 1;
+
+            status.textContent =
+                "PDF loaded successfully. 9 pages detected.";
+
 
             startButton.disabled =
                 false;
 
-            previousButton.disabled =
-                true;
 
-            nextButton.disabled =
-                pdfDocument.numPages <= 1;
+            currentPageNumber =
+                1;
+
 
             await renderCurrentPage();
 
+
             updateMappingList();
+
 
         }
         catch(error) {
@@ -1370,12 +1577,9 @@ pdfInput.addEventListener(
             );
 
             alert(
-                "Could not load PDF.\n\n"
-                + error.message
+                "Could not load PDF.\n\n" +
+                error.message
             );
-
-            status.className =
-                "status error";
 
             status.textContent =
                 "PDF loading failed.";
@@ -1383,6 +1587,7 @@ pdfInput.addEventListener(
         }
 
     }
+
 );
 
 
@@ -1398,10 +1603,12 @@ async function renderCurrentPage() {
 
     }
 
+
     pdfPage =
         await pdfDocument.getPage(
             currentPageNumber
         );
+
 
     const viewport =
         pdfPage.getViewport({
@@ -1409,17 +1616,14 @@ async function renderCurrentPage() {
                 zoom
         });
 
+
     pdfContainer.innerHTML =
         "";
 
-    pdfContainer.style.width =
-        viewport.width + "px";
 
-    pdfContainer.style.height =
-        viewport.height + "px";
-
-
-    /* Canvas */
+    /*
+       Canvas
+    */
 
     pdfCanvas =
         document.createElement(
@@ -1435,6 +1639,7 @@ async function renderCurrentPage() {
     pdfCanvas.height =
         viewport.height;
 
+
     pdfCanvas.style.width =
         viewport.width + "px";
 
@@ -1447,12 +1652,15 @@ async function renderCurrentPage() {
             "2d"
         );
 
+
     pdfContainer.appendChild(
         pdfCanvas
     );
 
 
-    /* Mapping layer */
+    /*
+       Mapping layer
+    */
 
     mappingLayer =
         document.createElement(
@@ -1462,18 +1670,22 @@ async function renderCurrentPage() {
     mappingLayer.id =
         "mappingLayer";
 
+
     mappingLayer.style.width =
         viewport.width + "px";
 
     mappingLayer.style.height =
         viewport.height + "px";
 
+
     pdfContainer.appendChild(
         mappingLayer
     );
 
 
-    /* Render */
+    /*
+       Render PDF.
+    */
 
     await pdfPage.render({
 
@@ -1488,50 +1700,43 @@ async function renderCurrentPage() {
 
     setupMouseMapping();
 
+
     displayMappings();
 
-    updatePageControls();
+
+    updatePageInfo();
 
 }
 
 
 /* =====================================================
-   PAGE CONTROLS
+   PAGE INFO
 ===================================================== */
 
-function updatePageControls() {
+function updatePageInfo() {
+
+    pageInfo.textContent =
+        "Page " +
+        currentPageNumber +
+        " of " +
+        EXPECTED_PAGES;
+
+}
+
+
+/* =====================================================
+   PREVIOUS PAGE
+===================================================== */
+
+async function previousPage() {
 
     if (!pdfDocument) {
-
-        pageInfo.textContent =
-            "Page 0 / 0";
 
         return;
 
     }
 
-    pageInfo.textContent =
-        "Page "
-        + currentPageNumber
-        + " / "
-        + pdfDocument.numPages;
-
-
-    previousButton.disabled =
-        currentPageNumber <= 1;
-
-
-    nextButton.disabled =
-        currentPageNumber >=
-        pdfDocument.numPages;
-
-}
-
-
-async function previousPage() {
-
     if (
-        !pdfDocument ||
         currentPageNumber <= 1
     ) {
 
@@ -1545,15 +1750,29 @@ async function previousPage() {
 
     await renderCurrentPage();
 
+    status.textContent =
+        "Viewing page " +
+        currentPageNumber +
+        " of 9.";
+
 }
 
 
+/* =====================================================
+   NEXT PAGE
+===================================================== */
+
 async function nextPage() {
 
+    if (!pdfDocument) {
+
+        return;
+
+    }
+
     if (
-        !pdfDocument ||
         currentPageNumber >=
-        pdfDocument.numPages
+        EXPECTED_PAGES
     ) {
 
         return;
@@ -1565,6 +1784,11 @@ async function nextPage() {
     currentPageNumber++;
 
     await renderCurrentPage();
+
+    status.textContent =
+        "Viewing page " +
+        currentPageNumber +
+        " of 9.";
 
 }
 
@@ -1588,48 +1812,53 @@ function startMapping() {
 
     }
 
-    if (!mappingLayer) {
+    if (!pdfDocument) {
 
         alert(
-            "Please load the PDF first."
+            "Please load the 9-page PDF first."
         );
 
         return;
 
     }
 
-    cancelCurrentDrawing();
-
-    currentMapping = null;
-
-    saveButton.disabled =
-        true;
-
-    status.className =
-        "status";
-
-    status.textContent =
-        "Draw a rectangle around the "
-        + getFieldLabel(field)
-        + " area on Page "
-        + currentPageNumber
-        + ".";
-
-}
-
-
-/* =====================================================
-   MOUSE DRAWING
-===================================================== */
-
-function setupMouseMapping() {
-
     if (!mappingLayer) {
+
+        alert(
+            "PDF page is not ready."
+        );
 
         return;
 
     }
 
+
+    cancelCurrentDrawing();
+
+
+    saveButton.disabled =
+        true;
+
+
+    const label =
+        getFieldLabel(field);
+
+
+    status.textContent =
+        "Draw a rectangle around " +
+        label +
+        " on page " +
+        currentPageNumber +
+        ".";
+
+}
+
+
+/* =====================================================
+   MOUSE MAPPING
+===================================================== */
+
+function setupMouseMapping() {
 
     mappingLayer.onmousedown =
         function(event) {
@@ -1640,18 +1869,22 @@ function setupMouseMapping() {
             if (!field) {
 
                 alert(
-                    "Please select a field first."
+                    "Select a field first."
                 );
 
                 return;
 
             }
 
+
             isDrawing =
                 true;
 
+
             const rect =
-                mappingLayer.getBoundingClientRect();
+                mappingLayer
+                    .getBoundingClientRect();
+
 
             startX =
                 event.clientX -
@@ -1674,27 +1907,34 @@ function setupMouseMapping() {
                     "div"
                 );
 
+
             currentBox.className =
-                "mapping-box "
-                +
-                (
-                    mappingType.value ===
-                    "checkbox"
-                    ?
-                    "checkbox"
-                    :
-                    ""
+                "mapping-box";
+
+
+            if (
+                mappingType.value ===
+                "checkbox"
+            ) {
+
+                currentBox.classList.add(
+                    "checkbox-box"
                 );
+
+            }
 
 
             currentBox.style.left =
                 startX + "px";
 
+
             currentBox.style.top =
                 startY + "px";
 
+
             currentBox.style.width =
                 "0px";
+
 
             currentBox.style.height =
                 "0px";
@@ -1705,6 +1945,7 @@ function setupMouseMapping() {
                     "span"
                 );
 
+
             label.textContent =
                 getFieldLabel(field);
 
@@ -1712,6 +1953,7 @@ function setupMouseMapping() {
             currentBox.appendChild(
                 label
             );
+
 
             mappingLayer.appendChild(
                 currentBox
@@ -1732,12 +1974,16 @@ function setupMouseMapping() {
 
             }
 
+
             const rect =
-                mappingLayer.getBoundingClientRect();
+                mappingLayer
+                    .getBoundingClientRect();
+
 
             const mouseX =
                 event.clientX -
                 rect.left;
+
 
             const mouseY =
                 event.clientY -
@@ -1750,17 +1996,20 @@ function setupMouseMapping() {
                     mouseX
                 );
 
+
             const y =
                 Math.min(
                     startY,
                     mouseY
                 );
 
+
             const width =
                 Math.abs(
                     mouseX -
                     startX
                 );
+
 
             const height =
                 Math.abs(
@@ -1772,11 +2021,14 @@ function setupMouseMapping() {
             currentBox.style.left =
                 x + "px";
 
+
             currentBox.style.top =
                 y + "px";
 
+
             currentBox.style.width =
                 width + "px";
+
 
             currentBox.style.height =
                 height + "px";
@@ -1793,8 +2045,10 @@ function setupMouseMapping() {
 
             }
 
+
             isDrawing =
                 false;
+
 
             if (!currentBox) {
 
@@ -1804,11 +2058,14 @@ function setupMouseMapping() {
 
 
             const rect =
-                mappingLayer.getBoundingClientRect();
+                mappingLayer
+                    .getBoundingClientRect();
+
 
             const endX =
                 event.clientX -
                 rect.left;
+
 
             const endY =
                 event.clientY -
@@ -1821,17 +2078,20 @@ function setupMouseMapping() {
                     endX
                 );
 
+
             const y =
                 Math.min(
                     startY,
                     endY
                 );
 
+
             const width =
                 Math.abs(
                     endX -
                     startX
                 );
+
 
             const height =
                 Math.abs(
@@ -1847,7 +2107,8 @@ function setupMouseMapping() {
 
                 currentBox.remove();
 
-                currentBox = null;
+                currentBox =
+                    null;
 
                 alert(
                     "Please draw a larger rectangle."
@@ -1858,18 +2119,33 @@ function setupMouseMapping() {
             }
 
 
+            /*
+               UNIQUE ID
+
+               This is the important part.
+
+               Every mapping gets a unique ID,
+               even if field/page are identical.
+            */
+
             currentMapping = {
+
+                id:
+                    createMappingId(),
 
                 field:
                     fieldSelect.value,
+
+                label:
+                    getFieldLabel(
+                        fieldSelect.value
+                    ),
 
                 type:
                     mappingType.value,
 
                 page:
-                    Number(
-                        currentPageNumber
-                    ),
+                    currentPageNumber,
 
                 x:
                     Number(x),
@@ -1900,18 +2176,38 @@ function setupMouseMapping() {
                 false;
 
 
-            status.className =
-                "status";
-
             status.textContent =
                 getFieldLabel(
                     fieldSelect.value
-                )
-                + " area selected on Page "
-                + currentPageNumber
-                + ". Click Save Mapping.";
+                ) +
+                " selected on page " +
+                currentPageNumber +
+                ". Click Save Mapping.";
 
         };
+
+}
+
+
+/* =====================================================
+   CREATE UNIQUE MAPPING ID
+===================================================== */
+
+function createMappingId() {
+
+    return (
+
+        "mapping_" +
+
+        Date.now() +
+
+        "_" +
+
+        Math.random()
+            .toString(36)
+            .substring(2, 9)
+
+    );
 
 }
 
@@ -1925,7 +2221,7 @@ function saveMapping() {
     if (!currentMapping) {
 
         alert(
-            "Please draw a rectangle first."
+            "Draw a rectangle first."
         );
 
         return;
@@ -1948,20 +2244,22 @@ function saveMapping() {
     }
 
 
-    const field =
-        currentMapping.field;
-
-
     /*
-       One mapping per field.
-       Redrawing the same field replaces
-       the previous mapping.
+       IMPORTANT:
+
+       PUSH instead of:
+
+       mappings[field] = ...
+
+       Therefore duplicate fields
+       are preserved.
     */
 
-    mappings[field] =
-        {
-            ...currentMapping
-        };
+    mappings.push({
+
+        ...currentMapping
+
+    });
 
 
     saveMappingsToStorage();
@@ -1971,18 +2269,22 @@ function saveMapping() {
 
         currentBox.remove();
 
-        currentBox = null;
+        currentBox =
+            null;
 
     }
 
 
-    currentMapping = null;
+    currentMapping =
+        null;
+
 
     saveButton.disabled =
         true;
 
 
     updateMappingList();
+
 
     displayMappings();
 
@@ -1998,16 +2300,13 @@ function saveMapping() {
                 "none";
 
         },
-        2000
+        1800
     );
 
 
-    status.className =
-        "status success";
-
     status.textContent =
-        getFieldLabel(field)
-        + " mapping saved successfully.";
+        "Mapping saved successfully. " +
+        "You can map the same field again.";
 
 }
 
@@ -2016,9 +2315,7 @@ function saveMapping() {
    VALIDATE MAPPING
 ===================================================== */
 
-function isValidMapping(
-    map
-) {
+function isValidMapping(map) {
 
     if (!map) {
 
@@ -2029,13 +2326,13 @@ function isValidMapping(
 
     const values = [
 
-        map.page,
         map.x,
         map.y,
         map.width,
         map.height,
         map.canvasWidth,
-        map.canvasHeight
+        map.canvasHeight,
+        map.page
 
     ];
 
@@ -2052,26 +2349,6 @@ function isValidMapping(
             return false;
 
         }
-
-    }
-
-
-    if (
-        map.page < 1 ||
-        map.page > 100
-    ) {
-
-        return false;
-
-    }
-
-
-    if (
-        map.x < 0 ||
-        map.y < 0
-    ) {
-
-        return false;
 
     }
 
@@ -2096,19 +2373,40 @@ function isValidMapping(
     }
 
 
+    if (
+        map.page < 1 ||
+        map.page > 9
+    ) {
+
+        return false;
+
+    }
+
+
+    if (
+        map.type !== "text" &&
+        map.type !== "checkbox"
+    ) {
+
+        return false;
+
+    }
+
+
     return true;
 
 }
 
 
 /* =====================================================
-   DELETE MAPPING
+   DELETE SELECTED FIELD MAPPINGS
 ===================================================== */
 
-function deleteMapping() {
+function deleteSelectedFieldMappings() {
 
     const field =
         fieldSelect.value;
+
 
     if (!field) {
 
@@ -2121,12 +2419,26 @@ function deleteMapping() {
     }
 
 
-    if (!mappings[field]) {
+    const matches =
+        mappings.filter(
+            function(map) {
+
+                return (
+                    map.field === field
+                );
+
+            }
+        );
+
+
+    if (
+        matches.length === 0
+    ) {
 
         alert(
-            "There is no saved mapping for "
-            + getFieldLabel(field)
-            + "."
+            "No mappings found for " +
+            getFieldLabel(field) +
+            "."
         );
 
         return;
@@ -2136,9 +2448,19 @@ function deleteMapping() {
 
     const answer =
         confirm(
-            "Delete the mapping for "
-            + getFieldLabel(field)
-            + "?"
+
+            "Delete ALL mappings for:\n\n" +
+
+            getFieldLabel(field) +
+
+            "\n\n" +
+
+            "This will delete " +
+
+            matches.length +
+
+            " mapping(s)."
+
         );
 
 
@@ -2149,7 +2471,16 @@ function deleteMapping() {
     }
 
 
-    delete mappings[field];
+    mappings =
+        mappings.filter(
+            function(map) {
+
+                return (
+                    map.field !== field
+                );
+
+            }
+        );
 
 
     saveMappingsToStorage();
@@ -2159,12 +2490,83 @@ function deleteMapping() {
     updateMappingList();
 
 
-    status.className =
-        "status";
+    status.textContent =
+        "All mappings for " +
+        getFieldLabel(field) +
+        " deleted.";
+
+}
+
+
+/* =====================================================
+   DELETE ONE MAPPING
+===================================================== */
+
+function deleteOneMapping(id) {
+
+    const map =
+        mappings.find(
+            function(item) {
+
+                return (
+                    item.id === id
+                );
+
+            }
+        );
+
+
+    if (!map) {
+
+        return;
+
+    }
+
+
+    const answer =
+        confirm(
+
+            "Delete this mapping?\n\n" +
+
+            getFieldLabel(
+                map.field
+            ) +
+
+            "\nPage " +
+
+            map.page
+
+        );
+
+
+    if (!answer) {
+
+        return;
+
+    }
+
+
+    mappings =
+        mappings.filter(
+            function(item) {
+
+                return (
+                    item.id !== id
+                );
+
+            }
+        );
+
+
+    saveMappingsToStorage();
+
+    displayMappings();
+
+    updateMappingList();
+
 
     status.textContent =
-        getFieldLabel(field)
-        + " mapping deleted.";
+        "Mapping deleted.";
 
 }
 
@@ -2175,10 +2577,32 @@ function deleteMapping() {
 
 function clearAllMappings() {
 
+    if (
+        mappings.length === 0
+    ) {
+
+        alert(
+            "There are no saved mappings."
+        );
+
+        return;
+
+    }
+
+
     const answer =
         confirm(
-            "Are you sure you want to clear ALL saved mappings?"
+
+            "Are you sure you want to delete ALL " +
+
+            mappings.length +
+
+            " saved mappings?\n\n" +
+
+            "This cannot be undone."
+
         );
+
 
     if (!answer) {
 
@@ -2187,7 +2611,7 @@ function clearAllMappings() {
     }
 
 
-    mappings = {};
+    mappings = [];
 
 
     localStorage.removeItem(
@@ -2200,127 +2624,8 @@ function clearAllMappings() {
     updateMappingList();
 
 
-    status.className =
-        "status";
-
     status.textContent =
         "All mappings cleared.";
-
-}
-
-
-/* =====================================================
-   DISPLAY SAVED MAPPINGS
-===================================================== */
-
-function displayMappings() {
-
-    if (!mappingLayer) {
-
-        return;
-
-    }
-
-
-    const oldBoxes =
-        mappingLayer.querySelectorAll(
-            ".saved"
-        );
-
-
-    oldBoxes.forEach(
-        function(box) {
-
-            box.remove();
-
-        }
-    );
-
-
-    for (
-        const field in mappings
-    ) {
-
-        const map =
-            mappings[field];
-
-
-        if (
-            !isValidMapping(
-                map
-            )
-        ) {
-
-            continue;
-
-        }
-
-
-        if (
-            Number(map.page) !==
-            Number(currentPageNumber)
-        ) {
-
-            continue;
-
-        }
-
-
-        const box =
-            document.createElement(
-                "div"
-            );
-
-
-        box.className =
-            "mapping-box saved "
-            +
-            (
-                map.type ===
-                "checkbox"
-                ?
-                "checkbox"
-                :
-                ""
-            );
-
-
-        box.style.left =
-            map.x + "px";
-
-
-        box.style.top =
-            map.y + "px";
-
-
-        box.style.width =
-            map.width + "px";
-
-
-        box.style.height =
-            map.height + "px";
-
-
-        const label =
-            document.createElement(
-                "span"
-            );
-
-
-        label.textContent =
-            getFieldLabel(field);
-
-
-        box.appendChild(
-            label
-        );
-
-
-        mappingLayer.appendChild(
-            box
-        );
-
-    }
 
 }
 
@@ -2335,14 +2640,8 @@ function updateMappingList() {
         "";
 
 
-    const fields =
-        Object.keys(
-            mappings
-        );
-
-
     if (
-        fields.length === 0
+        mappings.length === 0
     ) {
 
         mappingList.textContent =
@@ -2353,25 +2652,42 @@ function updateMappingList() {
     }
 
 
-    fields.sort(
-        function(a, b) {
+    /*
+       Sort display:
 
-            return (
-                Number(mappings[a].page || 0)
-                -
-                Number(mappings[b].page || 0)
-            );
+       Page first,
+       then field.
+    */
 
-        }
-    );
+    const sorted =
+        [...mappings].sort(
+            function(a, b) {
+
+                if (
+                    a.page !== b.page
+                ) {
+
+                    return (
+                        a.page -
+                        b.page
+                    );
+
+                }
+
+                return String(
+                    a.label
+                ).localeCompare(
+                    String(
+                        b.label
+                    )
+                );
+
+            }
+        );
 
 
-    fields.forEach(
-        function(field) {
-
-            const map =
-                mappings[field];
-
+    sorted.forEach(
+        function(map) {
 
             if (
                 !isValidMapping(
@@ -2396,86 +2712,83 @@ function updateMappingList() {
 
             item.innerHTML =
 
-                "<strong>"
-                +
+                "<button " +
+
+                "class=\"delete-small\" " +
+
+                "onclick=\"event.stopPropagation(); deleteOneMapping('" +
+
+                escapeForAttribute(
+                    map.id
+                ) +
+
+                "')\">" +
+
+                "Delete" +
+
+                "</button>" +
+
+                "<strong>" +
+
                 escapeHTML(
-                    getFieldLabel(field)
-                )
-                +
-                "</strong>"
-                +
+                    map.label
+                ) +
 
-                "<br>"
+                "</strong>" +
 
-                +
+                "<br>" +
 
-                "<span class='page-label'>"
-                +
-                "Page "
-                +
-                map.page
-                +
-                "</span>"
+                "<span class=\"page-label\">" +
 
-                +
+                "Page " +
 
-                "<br>"
+                map.page +
 
-                +
+                "</span>" +
 
-                "Type: "
-                +
+                " • " +
+
                 escapeHTML(
                     map.type
-                )
+                ) +
 
-                +
+                "<br>" +
 
-                "<br>"
+                "X: " +
 
-                +
-
-                "X: "
-                +
                 Number(
                     map.x
-                ).toFixed(1)
+                ).toFixed(1) +
 
-                +
+                " | Y: " +
 
-                "<br>"
-
-                +
-
-                "Y: "
-                +
                 Number(
                     map.y
-                ).toFixed(1)
+                ).toFixed(1) +
 
-                +
+                "<br>" +
 
-                "<br>"
+                "W: " +
 
-                +
-
-                "Width: "
-                +
                 Number(
                     map.width
-                ).toFixed(1)
+                ).toFixed(1) +
 
-                +
+                " | H: " +
 
-                "<br>"
-
-                +
-
-                "Height: "
-                +
                 Number(
                     map.height
                 ).toFixed(1);
+
+
+            item.onclick =
+                function() {
+
+                    goToMapping(
+                        map.id
+                    );
+
+                };
 
 
             mappingList.appendChild(
@@ -2489,12 +2802,317 @@ function updateMappingList() {
 
 
 /* =====================================================
-   FIELD LABEL
+   DISPLAY SAVED MAPPINGS
 ===================================================== */
 
-function getFieldLabel(
-    field
-) {
+function displayMappings() {
+
+    if (!mappingLayer) {
+
+        return;
+
+    }
+
+
+    /*
+       Remove old saved boxes.
+    */
+
+    const oldBoxes =
+        mappingLayer.querySelectorAll(
+            ".saved"
+        );
+
+
+    oldBoxes.forEach(
+        function(box) {
+
+            box.remove();
+
+        }
+    );
+
+
+    /*
+       Display mappings for current page.
+    */
+
+    mappings.forEach(
+        function(map) {
+
+            if (
+                !isValidMapping(
+                    map
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                Number(map.page) !==
+                Number(
+                    currentPageNumber
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const box =
+                document.createElement(
+                    "div"
+                );
+
+
+            box.className =
+                "mapping-box saved";
+
+
+            if (
+                map.type ===
+                "checkbox"
+            ) {
+
+                box.classList.add(
+                    "checkbox-box"
+                );
+
+            }
+
+
+            /*
+               Mapping coordinates are
+               stored relative to the
+               current rendered canvas.
+
+               When zoom changes,
+               scale them proportionally.
+            */
+
+            const scaleX =
+                pdfCanvas.width /
+                map.canvasWidth;
+
+
+            const scaleY =
+                pdfCanvas.height /
+                map.canvasHeight;
+
+
+            box.style.left =
+                (
+                    map.x *
+                    scaleX
+                ) + "px";
+
+
+            box.style.top =
+                (
+                    map.y *
+                    scaleY
+                ) + "px";
+
+
+            box.style.width =
+                (
+                    map.width *
+                    scaleX
+                ) + "px";
+
+
+            box.style.height =
+                (
+                    map.height *
+                    scaleY
+                ) + "px";
+
+
+            const label =
+                document.createElement(
+                    "span"
+                );
+
+
+            label.textContent =
+                map.label;
+
+
+            box.appendChild(
+                label
+            );
+
+
+            mappingLayer.appendChild(
+                box
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   GO TO SPECIFIC MAPPING
+===================================================== */
+
+async function goToMapping(id) {
+
+    const map =
+        mappings.find(
+            function(item) {
+
+                return (
+                    item.id === id
+                );
+
+            }
+        );
+
+
+    if (!map) {
+
+        return;
+
+    }
+
+
+    if (!pdfDocument) {
+
+        return;
+
+    }
+
+
+    currentPageNumber =
+        Number(
+            map.page
+        );
+
+
+    await renderCurrentPage();
+
+
+    status.textContent =
+        "Showing " +
+        map.label +
+        " on page " +
+        map.page +
+        ".";
+
+}
+
+
+/* =====================================================
+   CANCEL CURRENT DRAWING
+===================================================== */
+
+function cancelCurrentDrawing() {
+
+    isDrawing =
+        false;
+
+
+    if (currentBox) {
+
+        currentBox.remove();
+
+        currentBox =
+            null;
+
+    }
+
+
+    currentMapping =
+        null;
+
+
+    saveButton.disabled =
+        true;
+
+}
+
+
+/* =====================================================
+   ZOOM IN
+===================================================== */
+
+function zoomIn() {
+
+    if (!pdfDocument) {
+
+        return;
+
+    }
+
+
+    zoom += 0.2;
+
+
+    renderCurrentPage();
+
+}
+
+
+/* =====================================================
+   ZOOM OUT
+===================================================== */
+
+function zoomOut() {
+
+    if (!pdfDocument) {
+
+        return;
+
+    }
+
+
+    if (
+        zoom > 0.6
+    ) {
+
+        zoom -= 0.2;
+
+    }
+
+
+    renderCurrentPage();
+
+}
+
+
+/* =====================================================
+   RESET ZOOM
+===================================================== */
+
+function resetZoom() {
+
+    if (!pdfDocument) {
+
+        return;
+
+    }
+
+
+    zoom =
+        1.2;
+
+
+    renderCurrentPage();
+
+}
+
+
+/* =====================================================
+   FIELD LABELS
+===================================================== */
+
+function getFieldLabel(field) {
 
     const labels = {
 
@@ -2526,7 +3144,7 @@ function getFieldLabel(
             "Mobile Number",
 
         doj:
-            "Date of Joining (DOJ)",
+            "Date of Joining",
 
         employmentStatus:
             "Employment Status",
@@ -2584,6 +3202,15 @@ function getFieldLabel(
 
         pincode:
             "Pincode",
+
+        declaration:
+            "Declaration",
+
+        place:
+            "Place",
+
+        declarationDate:
+            "Declaration Date",
 
         nominee1_name:
             "Nominee 1 Name",
@@ -2667,23 +3294,13 @@ function getFieldLabel(
             "Nominee 4 Age",
 
         nominee4_percentage:
-            "Nominee 4 Percentage",
-
-        declaration:
-            "Declaration",
-
-        place:
-            "Place",
-
-        declarationDate:
-            "Declaration Date"
+            "Nominee 4 Percentage"
 
     };
 
 
     return (
-        labels[field]
-        ||
+        labels[field] ||
         field
     );
 
@@ -2691,30 +3308,33 @@ function getFieldLabel(
 
 
 /* =====================================================
-   ESCAPE HTML
+   HTML ESCAPING
 ===================================================== */
 
-function escapeHTML(
-    value
-) {
+function escapeHTML(value) {
 
     return String(value || "")
+
         .replace(
             /&/g,
             "&amp;"
         )
+
         .replace(
             /</g,
             "&lt;"
         )
+
         .replace(
             />/g,
             "&gt;"
         )
+
         .replace(
             /"/g,
             "&quot;"
         )
+
         .replace(
             /'/g,
             "&#039;"
@@ -2724,97 +3344,20 @@ function escapeHTML(
 
 
 /* =====================================================
-   CANCEL CURRENT DRAWING
+   ATTRIBUTE ESCAPING
 ===================================================== */
 
-function cancelCurrentDrawing() {
+function escapeForAttribute(value) {
 
-    isDrawing =
-        false;
-
-
-    if (currentBox) {
-
-        currentBox.remove();
-
-        currentBox = null;
-
-    }
-
-
-    currentMapping =
-        null;
-
-
-    saveButton.disabled =
-        true;
-
-}
-
-
-/* =====================================================
-   ZOOM IN
-===================================================== */
-
-async function zoomIn() {
-
-    if (!pdfDocument) {
-
-        return;
-
-    }
-
-
-    zoom += 0.2;
-
-
-    await renderCurrentPage();
-
-}
-
-
-/* =====================================================
-   ZOOM OUT
-===================================================== */
-
-async function zoomOut() {
-
-    if (!pdfDocument) {
-
-        return;
-
-    }
-
-
-    if (zoom > 0.6) {
-
-        zoom -= 0.2;
-
-    }
-
-
-    await renderCurrentPage();
-
-}
-
-
-/* =====================================================
-   RESET ZOOM
-===================================================== */
-
-async function resetZoom() {
-
-    if (!pdfDocument) {
-
-        return;
-
-    }
-
-
-    zoom = 1.3;
-
-
-    await renderCurrentPage();
+    return String(value || "")
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        );
 
 }
 
@@ -2825,17 +3368,106 @@ async function resetZoom() {
 
 function exportMappings() {
 
-    const data =
+    if (
+        mappings.length === 0
+    ) {
+
+        alert(
+            "There are no mappings to export."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Export in a clean format that
+       can later be transferred into
+       candidate.html.
+    */
+
+    const exportData = {
+
+        version:
+            2,
+
+        pdfPages:
+            EXPECTED_PAGES,
+
+        mappings:
+            mappings
+
+    };
+
+
+    const json =
         JSON.stringify(
-            mappings,
+            exportData,
             null,
             4
         );
 
 
+    /*
+       Try clipboard first.
+    */
+
+    if (
+        navigator.clipboard &&
+        navigator.clipboard.writeText
+    ) {
+
+        navigator.clipboard
+            .writeText(
+                json
+            )
+            .then(
+                function() {
+
+                    downloadMappingJSON(
+                        json
+                    );
+
+                    alert(
+                        "Mapping JSON copied to clipboard and downloaded."
+                    );
+
+                }
+            )
+            .catch(
+                function() {
+
+                    downloadMappingJSON(
+                        json
+                    );
+
+                }
+            );
+
+    }
+    else {
+
+        downloadMappingJSON(
+            json
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DOWNLOAD MAPPING JSON
+===================================================== */
+
+function downloadMappingJSON(
+    json
+) {
+
     const blob =
         new Blob(
-            [data],
+            [json],
             {
                 type:
                     "application/json"
@@ -2860,7 +3492,7 @@ function exportMappings() {
 
 
     link.download =
-        "Onboarding-Documents-Mappings.json";
+        "onboarding-pdf-mappings.json";
 
 
     document.body.appendChild(
@@ -2884,128 +3516,17 @@ function exportMappings() {
             );
 
         },
-        1000
+        1500
     );
-
-
-    status.className =
-        "status success";
-
-    status.textContent =
-        "Mappings exported successfully.";
 
 }
 
 
 /* =====================================================
-   IMPORT MAPPINGS
-===================================================== */
-
-mappingImport.addEventListener(
-    "change",
-    async function(event) {
-
-        const file =
-            event.target.files[0];
-
-        if (!file) {
-
-            return;
-
-        }
-
-
-        try {
-
-            const text =
-                await file.text();
-
-
-            const imported =
-                JSON.parse(
-                    text
-                );
-
-
-            if (
-                typeof imported !==
-                "object"
-                ||
-                imported === null
-                ||
-                Array.isArray(imported)
-            ) {
-
-                throw new Error(
-                    "Invalid mapping JSON."
-                );
-
-            }
-
-
-            mappings =
-                imported;
-
-
-            saveMappingsToStorage();
-
-
-            updateMappingList();
-
-            displayMappings();
-
-
-            status.className =
-                "status success";
-
-            status.textContent =
-                "Mappings imported successfully.";
-
-        }
-        catch(error) {
-
-            console.error(
-                error
-            );
-
-            alert(
-                "Could not import mappings.\n\n"
-                + error.message
-            );
-
-        }
-
-
-        event.target.value =
-            "";
-
-    }
-);
-
-
-/* =====================================================
-   FIELD CHANGE
-===================================================== */
-
-fieldSelect.addEventListener(
-    "change",
-    function() {
-
-        cancelCurrentDrawing();
-
-        displayMappings();
-
-    }
-);
-
-
-/* =====================================================
-   INITIAL DISPLAY
+   INITIALIZE
 ===================================================== */
 
 updateMappingList();
-
-updatePageControls();
 
 
 </script>
