@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Employee Onboarding</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f5f7;
+    color: #222;
+}
+
+.header {
+    background: #1f4e78;
+    color: white;
+    padding: 24px 20px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.header p {
+    margin: 7px 0 0;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 650px;
+    margin: 35px auto;
+    padding: 0 15px;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+.title {
+    color: #1f4e78;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.required {
+    color: #dc3545;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #1f4e78;
+}
+
+button {
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    background: #198754;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #146c43;
+}
+
+#status {
+    margin-top: 18px;
+    padding: 12px;
+    border-radius: 6px;
+    display: none;
+    font-size: 13px;
+}
+
+.success {
+    display: block !important;
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.error {
+    display: block !important;
+    background: #f8d7da;
+    color: #842029;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+    <h1>Employee Onboarding</h1>
+
+    <p>Please enter your details carefully</p>
+
+</div>
+
+
+<div class="container">
+
+<div class="card">
+
+    <div class="title">
+        Onboarding Details
+    </div>
+
+    <div class="subtitle">
+        Please enter the information exactly as it
+        should appear in your onboarding documents.
+    </div>
+
+
+    <div class="field">
+
+        <label>
+            Full Name <span class="required">*</span>
+        </label>
+
+        <input
+            id="name"
+            type="text"
+            placeholder="Enter your full name"
+        >
+
+    </div>
+
+
+    <div class="field">
+
+        <label>
+            Email Address <span class="required">*</span>
+        </label>
+
+        <input
+            id="email"
+            type="email"
+            placeholder="Enter your email address"
+        >
+
+    </div>
+
+
+    <div class="field">
+
+        <label>
+            Mobile Number
+        </label>
+
+        <input
+            id="phone"
+            type="tel"
+            placeholder="Enter your mobile number"
+        >
+
+    </div>
+
+
+    <div class="field">
+
+        <label>
+            Place <span class="required">*</span>
+        </label>
+
+        <input
+            id="place"
+            type="text"
+            placeholder="Enter place"
+        >
+
+    </div>
+
+
+    <div class="field">
+
+        <label>
+            Date / DOJ <span class="required">*</span>
+        </label>
+
+        <input
+            id="date"
+            type="date"
+        >
+
+    </div>
+
+
+    <button onclick="generatePDF()">
+        SUBMIT &amp; GENERATE PDF
+    </button>
+
+
+    <div id="status"></div>
+
+</div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+
+<script>
+
+/*
+=========================================================
+LOA PDF
+=========================================================
+The PDF is automatically loaded from the same website.
+=========================================================
+*/
+
+const PDF_URL = "./LOA.pdf";
+
+
+/*
+=========================================================
+YOUR MAPPINGS
+=========================================================
+
+TEMPORARY TEST VALUES.
+
+We will replace these with your actual
+mouse-mapped coordinates from Prototype 4.
+=========================================================
+*/
+
+const MAPPINGS = {
+
+    Name: {
+        x: 100,
+        y: 100,
+        width: 250,
+        height: 30,
+        canvasWidth: 1000,
+        canvasHeight: 1414
+    },
+
+    Place: {
+        x: 100,
+        y: 150,
+        width: 200,
+        height: 30,
+        canvasWidth: 1000,
+        canvasHeight: 1414
+    },
+
+    Date: {
+        x: 100,
+        y: 200,
+        width: 150,
+        height: 30,
+        canvasWidth: 1000,
+        canvasHeight: 1414
+    }
+
+};
+
+
+/*
+=========================================================
+STATUS
+=========================================================
+*/
+
+function showStatus(message, type) {
+
+    const box =
+        document.getElementById("status");
+
+    box.textContent =
+        message;
+
+    box.className =
+        type;
+
+}
+
+
+/*
+=========================================================
+GENERATE PDF
+=========================================================
+*/
+
+async function generatePDF() {
+
+    const name =
+        document.getElementById("name")
+        .value
+        .trim();
+
+    const email =
+        document.getElementById("email")
+        .value
+        .trim();
+
+    const phone =
+        document.getElementById("phone")
+        .value
+        .trim();
+
+    const place =
+        document.getElementById("place")
+        .value
+        .trim();
+
+    const date =
+        document.getElementById("date")
+        .value;
+
+
+    /*
+    VALIDATION
+    */
+
+    if (!name) {
+
+        alert("Please enter your full name.");
+
+        return;
+
+    }
+
+
+    if (!email) {
+
+        alert("Please enter your email address.");
+
+        return;
+
+    }
+
+
+    if (!place) {
+
+        alert("Please enter your place.");
+
+        return;
+
+    }
+
+
+    if (!date) {
+
+        alert("Please enter the DOJ.");
+
+        return;
+
+    }
+
+
+    try {
+
+        showStatus(
+            "Generating your onboarding PDF...",
+            "success"
+        );
+
+
+        /*
+        DOWNLOAD LOA.PDF
+        */
+
+        const response =
+            await fetch(PDF_URL);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "LOA.pdf could not be loaded."
+            );
+
+        }
+
+
+        const pdfBytes =
+            await response.arrayBuffer();
+
+
+        /*
+        LOAD PDF
+        */
+
+        const pdfDoc =
+            await PDFLib.PDFDocument.load(
+                pdfBytes
+            );
+
+
+        const font =
+            await pdfDoc.embedFont(
+                PDFLib.StandardFonts.Helvetica
+            );
+
+
+        const pages =
+            pdfDoc.getPages();
+
+
+        if (!pages.length) {
+
+            throw new Error(
+                "LOA PDF has no pages."
+            );
+
+        }
+
+
+        const page =
+            pages[0];
+
+
+        const pdfWidth =
+            page.getWidth();
+
+
+        const pdfHeight =
+            page.getHeight();
+
+
+        /*
+        PLACE NAME
+        */
+
+        addText(
+            page,
+            MAPPINGS.Name,
+            name,
+            pdfWidth,
+            pdfHeight,
+            font
+        );
+
+
+        /*
+        PLACE
+        */
+
+        addText(
+            page,
+            MAPPINGS.Place,
+            place,
+            pdfWidth,
+            pdfHeight,
+            font
+        );
+
+
+        /*
+        DATE
+        */
+
+        addText(
+            page,
+            MAPPINGS.Date,
+            formatDate(date),
+            pdfWidth,
+            pdfHeight,
+            font
+        );
+
+
+        /*
+        SAVE PDF
+        */
+
+        const output =
+            await pdfDoc.save();
+
+
+        /*
+        FILE NAME
+
+        Required format:
+
+        Onboarding Documents - Nelson.pdf
+        */
+
+        const filename =
+            "Onboarding Documents - "
+            +
+            cleanName(name)
+            +
+            ".pdf";
+
+
+        const blob =
+            new Blob(
+                [output],
+                {
+                    type:
+                        "application/pdf"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(blob);
+
+
+        /*
+        DOWNLOAD TO CANDIDATE
+        */
+
+        const link =
+            document.createElement("a");
+
+
+        link.href =
+            url;
+
+
+        link.download =
+            filename;
+
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+
+        setTimeout(
+            function() {
+
+                URL.revokeObjectURL(url);
+
+            },
+            2000
+        );
+
+
+        showStatus(
+            "Your onboarding PDF has been generated and downloaded successfully.",
+            "success"
+        );
+
+
+    }
+    catch(error) {
+
+        console.error(error);
+
+        showStatus(
+            "PDF generation failed: " + error.message,
+            "error"
+        );
+
+        alert(
+            "PDF generation failed:\n\n"
+            +
+            error.message
+        );
+
+    }
+
+}
+
+
+/*
+=========================================================
+ADD TEXT TO PDF
+=========================================================
+*/
+
+function addText(
+    page,
+    mapping,
+    text,
+    pdfWidth,
+    pdfHeight,
+    font
+) {
+
+    const scaleX =
+        pdfWidth /
+        mapping.canvasWidth;
+
+
+    const scaleY =
+        pdfHeight /
+        mapping.canvasHeight;
+
+
+    const x =
+        mapping.x *
+        scaleX;
+
+
+    const width =
+        mapping.width *
+        scaleX;
+
+
+    const height =
+        mapping.height *
+        scaleY;
+
+
+    const y =
+        pdfHeight
+        -
+        (
+            mapping.y *
+            scaleY
+        )
+        -
+        height;
+
+
+    let fontSize =
+        height * 0.60;
+
+
+    if (
+        !Number.isFinite(fontSize)
+        ||
+        fontSize <= 0
+    ) {
+
+        fontSize = 10;
+
+    }
+
+
+    fontSize =
+        Math.max(
+            6,
+            Math.min(
+                24,
+                fontSize
+            )
+        );
+
+
+    page.drawText(
+        String(text),
+        {
+
+            x: x,
+
+            y:
+                y
+                +
+                (
+                    height
+                    -
+                    fontSize
+                )
+                / 2,
+
+            size: fontSize,
+
+            font: font,
+
+            color:
+                PDFLib.rgb(
+                    0,
+                    0,
+                    0
+                ),
+
+            maxWidth:
+                Math.max(
+                    10,
+                    width
+                )
+
+        }
+    );
+
+}
+
+
+/*
+=========================================================
+DATE
+=========================================================
+*/
+
+function formatDate(date) {
+
+    const parts =
+        date.split("-");
+
+
+    if (parts.length !== 3) {
+
+        return date;
+
+    }
+
+
+    return (
+        parts[2]
+        +
+        "/"
+        +
+        parts[1]
+        +
+        "/"
+        +
+        parts[0]
+    );
+
+}
+
+
+/*
+=========================================================
+CLEAN NAME
+=========================================================
+*/
+
+function cleanName(name) {
+
+    return name
+        .replace(
+            /[^a-z0-9 ]/gi,
+            ""
+        )
+        .trim();
+
+}
+
+</script>
+
+</body>
+</html>
