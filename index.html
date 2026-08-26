@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,7 +95,8 @@ button:disabled {
     cursor: not-allowed;
 }
 
-#pdfInput {
+#pdfInput,
+#mappingJsonInput {
     display: none;
 }
 
@@ -262,6 +264,18 @@ button:disabled {
 
 .export-button:hover {
     background: #59359a;
+}
+
+.import-button {
+    width: 100%;
+
+    margin-top: 7px;
+
+    background: #fd7e14;
+}
+
+.import-button:hover {
+    background: #dc6502;
 }
 
 
@@ -1101,6 +1115,23 @@ button:disabled {
         </button>
 
 
+        <!-- IMPORT -->
+
+        <button
+            class="import-button"
+            onclick="document.getElementById('mappingJsonInput').click()">
+
+            Import Mapping JSON
+
+        </button>
+
+        <input
+            type="file"
+            id="mappingJsonInput"
+            accept="application/json,.json"
+        >
+
+
         <!-- EXPORT -->
 
         <button
@@ -1211,6 +1242,22 @@ button:disabled {
             You can also map Date twice
             on the same page.
 
+            <br><br>
+
+            <strong>
+                IMPORT / EXPORT:
+            </strong>
+
+            <br>
+
+            Use Export Mapping JSON to create
+            a backup of your mappings.
+
+            <br>
+
+            Use Import Mapping JSON to restore
+            a previously exported mapping file.
+
         </div>
 
     </div>
@@ -1297,29 +1344,25 @@ let currentMapping = null;
 
 
 /*
-   IMPORTANT:
+   mappings is an ARRAY.
 
-   mappings is now an ARRAY.
-
-   This is what allows duplicate fields.
+   This allows duplicate fields.
 
    Example:
 
    [
        {
            id: "mapping_1",
-           field: "Date",
+           field: "doj",
            page: 6
        },
 
        {
            id: "mapping_2",
-           field: "Date",
+           field: "doj",
            page: 7
        }
    ]
-
-   They do NOT overwrite each other.
 */
 
 let mappings =
@@ -1385,6 +1428,11 @@ const pageInfo =
         "pageInfo"
     );
 
+const mappingJsonInput =
+    document.getElementById(
+        "mappingJsonInput"
+    );
+
 
 /* =====================================================
    PDF.JS WORKER
@@ -1416,23 +1464,11 @@ function loadMappings() {
         const parsed =
             JSON.parse(saved);
 
-        /*
-           New format:
-           Array
-        */
-
         if (Array.isArray(parsed)) {
 
             return parsed;
 
         }
-
-        /*
-           If an old object exists,
-           start fresh because the old
-           format cannot safely support
-           duplicate fields.
-        */
 
         console.warn(
             "Old mapping format detected. Starting new mapping storage."
@@ -1621,10 +1657,6 @@ async function renderCurrentPage() {
         "";
 
 
-    /*
-       Canvas
-    */
-
     pdfCanvas =
         document.createElement(
             "canvas"
@@ -1632,6 +1664,7 @@ async function renderCurrentPage() {
 
     pdfCanvas.id =
         "pdfCanvas";
+
 
     pdfCanvas.width =
         viewport.width;
@@ -1658,14 +1691,11 @@ async function renderCurrentPage() {
     );
 
 
-    /*
-       Mapping layer
-    */
-
     mappingLayer =
         document.createElement(
             "div"
         );
+
 
     mappingLayer.id =
         "mappingLayer";
@@ -1682,10 +1712,6 @@ async function renderCurrentPage() {
         mappingLayer
     );
 
-
-    /*
-       Render PDF.
-    */
 
     await pdfPage.render({
 
@@ -2119,15 +2145,6 @@ function setupMouseMapping() {
             }
 
 
-            /*
-               UNIQUE ID
-
-               This is the important part.
-
-               Every mapping gets a unique ID,
-               even if field/page are identical.
-            */
-
             currentMapping = {
 
                 id:
@@ -2244,17 +2261,6 @@ function saveMapping() {
     }
 
 
-    /*
-       IMPORTANT:
-
-       PUSH instead of:
-
-       mappings[field] = ...
-
-       Therefore duplicate fields
-       are preserved.
-    */
-
     mappings.push({
 
         ...currentMapping
@@ -2287,6 +2293,10 @@ function saveMapping() {
 
 
     displayMappings();
+
+
+    savedMessage.textContent =
+        "Mapping saved successfully.";
 
 
     savedMessage.style.display =
@@ -2375,7 +2385,7 @@ function isValidMapping(map) {
 
     if (
         map.page < 1 ||
-        map.page > 9
+        map.page > EXPECTED_PAGES
     ) {
 
         return false;
@@ -2386,6 +2396,16 @@ function isValidMapping(map) {
     if (
         map.type !== "text" &&
         map.type !== "checkbox"
+    ) {
+
+        return false;
+
+    }
+
+
+    if (
+        typeof map.field !== "string" ||
+        !map.field
     ) {
 
         return false;
@@ -2652,13 +2672,6 @@ function updateMappingList() {
     }
 
 
-    /*
-       Sort display:
-
-       Page first,
-       then field.
-    */
-
     const sorted =
         [...mappings].sort(
             function(a, b) {
@@ -2814,10 +2827,6 @@ function displayMappings() {
     }
 
 
-    /*
-       Remove old saved boxes.
-    */
-
     const oldBoxes =
         mappingLayer.querySelectorAll(
             ".saved"
@@ -2832,10 +2841,6 @@ function displayMappings() {
         }
     );
 
-
-    /*
-       Display mappings for current page.
-    */
 
     mappings.forEach(
         function(map) {
@@ -2884,15 +2889,6 @@ function displayMappings() {
 
             }
 
-
-            /*
-               Mapping coordinates are
-               stored relative to the
-               current rendered canvas.
-
-               When zoom changes,
-               scale them proportionally.
-            */
 
             const scaleX =
                 pdfCanvas.width /
@@ -2983,6 +2979,10 @@ async function goToMapping(id) {
 
 
     if (!pdfDocument) {
+
+        alert(
+            "Please load the PDF first."
+        );
 
         return;
 
@@ -3173,14 +3173,14 @@ function getFieldLabel(field) {
         pan:
             "PAN Number",
 
+        uan:
+            "UAN",
+
         epfMember:
             "EPF Membership",
 
         epsMember:
             "EPS Membership",
-
-        uan:
-            "UAN",
 
         withdrawEPF:
             "Previous EPF Withdrawal",
@@ -3350,10 +3350,12 @@ function escapeHTML(value) {
 function escapeForAttribute(value) {
 
     return String(value || "")
+
         .replace(
             /\\/g,
             "\\\\"
         )
+
         .replace(
             /'/g,
             "\\'"
@@ -3381,12 +3383,6 @@ function exportMappings() {
     }
 
 
-    /*
-       Export in a clean format that
-       can later be transferred into
-       candidate.html.
-    */
-
     const exportData = {
 
         version:
@@ -3408,10 +3404,6 @@ function exportMappings() {
             4
         );
 
-
-    /*
-       Try clipboard first.
-    */
 
     if (
         navigator.clipboard &&
@@ -3442,6 +3434,10 @@ function exportMappings() {
                         json
                     );
 
+                    alert(
+                        "Mapping JSON downloaded."
+                    );
+
                 }
             );
 
@@ -3450,6 +3446,10 @@ function exportMappings() {
 
         downloadMappingJSON(
             json
+        );
+
+        alert(
+            "Mapping JSON downloaded."
         );
 
     }
@@ -3523,6 +3523,462 @@ function downloadMappingJSON(
 
 
 /* =====================================================
+   IMPORT MAPPING JSON
+===================================================== */
+
+mappingJsonInput.addEventListener(
+
+    "change",
+
+    async function(event) {
+
+        const file =
+            event.target.files[0];
+
+        if (!file) {
+
+            return;
+
+        }
+
+
+        try {
+
+            status.textContent =
+                "Reading mapping JSON...";
+
+
+            const text =
+                await file.text();
+
+
+            const importedData =
+                JSON.parse(
+                    text
+                );
+
+
+            /*
+               Validate root object.
+            */
+
+            if (
+                !importedData ||
+                typeof importedData !==
+                "object"
+            ) {
+
+                throw new Error(
+                    "Invalid JSON file."
+                );
+
+            }
+
+
+            /*
+               Validate version.
+            */
+
+            if (
+                importedData.version !== 2
+            ) {
+
+                throw new Error(
+
+                    "Unsupported mapping JSON version.\n\n" +
+
+                    "Expected version 2."
+
+                );
+
+            }
+
+
+            /*
+               Validate page count.
+            */
+
+            if (
+                importedData.pdfPages !==
+                EXPECTED_PAGES
+            ) {
+
+                throw new Error(
+
+                    "This mapping file is for " +
+
+                    (
+                        importedData.pdfPages ||
+                        "an unknown number of"
+                    ) +
+
+                    " PDF pages.\n\n" +
+
+                    "This application requires " +
+
+                    EXPECTED_PAGES +
+
+                    " pages."
+
+                );
+
+            }
+
+
+            /*
+               Validate mappings array.
+            */
+
+            if (
+                !Array.isArray(
+                    importedData.mappings
+                )
+            ) {
+
+                throw new Error(
+                    "The JSON file does not contain a valid mappings array."
+                );
+
+            }
+
+
+            /*
+               Validate every mapping.
+            */
+
+            const validMappings =
+                importedData.mappings.filter(
+                    function(map) {
+
+                        return isValidMapping(
+                            normalizeImportedMapping(
+                                map
+                            )
+                        );
+
+                    }
+                );
+
+
+            if (
+                validMappings.length !==
+                importedData.mappings.length
+            ) {
+
+                throw new Error(
+
+                    "The JSON contains invalid mapping data.\n\n" +
+
+                    "Valid mappings: " +
+
+                    validMappings.length +
+
+                    "\nTotal mappings: " +
+
+                    importedData.mappings.length
+
+                );
+
+            }
+
+
+            /*
+               Normalize and create unique IDs.
+            */
+
+            const usedIds =
+                new Set();
+
+
+            const finalMappings =
+                validMappings.map(
+                    function(rawMap) {
+
+                        const map =
+                            normalizeImportedMapping(
+                                rawMap
+                            );
+
+
+                        let id =
+                            String(
+                                map.id ||
+                                ""
+                            );
+
+
+                        if (
+                            !id ||
+                            usedIds.has(id)
+                        ) {
+
+                            id =
+                                createMappingId();
+
+                        }
+
+
+                        usedIds.add(id);
+
+
+                        return {
+
+                            ...map,
+
+                            id:
+                                id
+
+                        };
+
+                    }
+                );
+
+
+            /*
+               Confirm replacement.
+            */
+
+            if (
+                mappings.length > 0
+            ) {
+
+                const answer =
+                    confirm(
+
+                        "You currently have " +
+
+                        mappings.length +
+
+                        " saved mapping(s).\n\n" +
+
+                        "Importing this file will REPLACE " +
+
+                        "the current mappings with " +
+
+                        finalMappings.length +
+
+                        " imported mapping(s).\n\n" +
+
+                        "Continue?"
+
+                    );
+
+
+                if (!answer) {
+
+                    status.textContent =
+                        "Mapping import cancelled.";
+
+                    mappingJsonInput.value =
+                        "";
+
+                    return;
+
+                }
+
+            }
+
+
+            /*
+               Replace current mappings.
+            */
+
+            mappings =
+                finalMappings;
+
+
+            /*
+               Save to browser storage.
+            */
+
+            saveMappingsToStorage();
+
+
+            /*
+               Refresh mapping list.
+            */
+
+            updateMappingList();
+
+
+            /*
+               If a PDF is already loaded,
+               redraw current page.
+            */
+
+            if (pdfDocument) {
+
+                await renderCurrentPage();
+
+            }
+            else {
+
+                displayMappings();
+
+            }
+
+
+            /*
+               Success message.
+            */
+
+            savedMessage.textContent =
+                "Mapping JSON imported successfully.";
+
+
+            savedMessage.style.display =
+                "block";
+
+
+            setTimeout(
+                function() {
+
+                    savedMessage.style.display =
+                        "none";
+
+                },
+                2200
+            );
+
+
+            status.textContent =
+
+                "Imported " +
+
+                mappings.length +
+
+                " mapping(s) successfully.";
+
+
+            alert(
+
+                "Mapping JSON imported successfully.\n\n" +
+
+                mappings.length +
+
+                " mapping(s) loaded."
+
+            );
+
+        }
+        catch(error) {
+
+            console.error(
+                "Mapping import error:",
+                error
+            );
+
+
+            alert(
+
+                "Could not import Mapping JSON.\n\n" +
+
+                error.message
+
+            );
+
+
+            status.textContent =
+                "Mapping JSON import failed.";
+
+        }
+
+
+        /*
+           Allow the same file to be
+           selected again later.
+        */
+
+        mappingJsonInput.value =
+            "";
+
+    }
+
+);
+
+
+/* =====================================================
+   NORMALIZE IMPORTED MAPPING
+===================================================== */
+
+function normalizeImportedMapping(map) {
+
+    if (
+        !map ||
+        typeof map !== "object"
+    ) {
+
+        return null;
+
+    }
+
+
+    return {
+
+        id:
+            map.id,
+
+        field:
+            String(
+                map.field ||
+                ""
+            ),
+
+        label:
+            String(
+                map.label ||
+                getFieldLabel(
+                    map.field
+                )
+            ),
+
+        type:
+            String(
+                map.type ||
+                "text"
+            ),
+
+        page:
+            Number(
+                map.page
+            ),
+
+        x:
+            Number(
+                map.x
+            ),
+
+        y:
+            Number(
+                map.y
+            ),
+
+        width:
+            Number(
+                map.width
+            ),
+
+        height:
+            Number(
+                map.height
+            ),
+
+        canvasWidth:
+            Number(
+                map.canvasWidth
+            ),
+
+        canvasHeight:
+            Number(
+                map.canvasHeight
+            )
+
+    };
+
+}
+
+
+/* =====================================================
    INITIALIZE
 ===================================================== */
 
@@ -3535,3 +3991,4 @@ updateMappingList();
 </body>
 
 </html>
+```
