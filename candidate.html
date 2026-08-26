@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Employee Onboarding</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f5f7;
+    color: #222;
+}
+
+.header {
+    background: #1f4e78;
+    color: white;
+    padding: 24px 20px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.header p {
+    margin: 7px 0 0;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 650px;
+    margin: 35px auto;
+    padding: 0 15px;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+.title {
+    color: #1f4e78;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.info {
+    background: #eaf3fa;
+    border: 1px solid #cbddea;
+    color: #1f4e78;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.field {
+    margin-bottom: 19px;
+}
+
+.field label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.required {
+    color: #dc3545;
+}
+
+.optional {
+    color: #777;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bcbcbc;
+    border-radius: 6px;
+    font-size: 15px;
+    background: white;
+}
+
+.field input:focus {
+    outline: none;
+    border-color: #1f4e78;
+    box-shadow: 0 0 0 2px rgba(31,78,120,0.12);
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+button {
+    flex: 1;
+    border: none;
+    border-radius: 6px;
+    padding: 13px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.save {
+    background: #6c757d;
+    color: white;
+}
+
+.save:hover {
+    background: #545b62;
+}
+
+.generate {
+    background: #198754;
+    color: white;
+}
+
+.generate:hover {
+    background: #146c43;
+}
+
+.load {
+    background: #1f4e78;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.load:hover {
+    background: #163a5c;
+}
+
+.clear {
+    background: #dc3545;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.status {
+    display: none;
+    margin-top: 18px;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.status.success {
+    display: block;
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.status.error {
+    display: block;
+    background: #f8d7da;
+    color: #842029;
+}
+
+.status.info {
+    display: block;
+    background: #cff4fc;
+    color: #055160;
+}
+
+.return-box {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.return-box h3 {
+    margin-top: 0;
+    color: #1f4e78;
+    font-size: 16px;
+}
+
+.return-box p {
+    font-size: 13px;
+    color: #666;
+}
+
+.footer {
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+    margin: 25px 0;
+}
+
+@media(max-width:600px) {
+
+    .card {
+        padding: 22px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+    <h1>
+        Employee Onboarding
+    </h1>
+
+    <p>
+        Please enter your details carefully
+    </p>
+
+</div>
+
+
+<div class="container">
+
+<div class="card">
+
+
+<div class="title">
+    Personal Details
+</div>
+
+
+<div class="subtitle">
+
+    Please enter your information exactly
+    as it should appear in your onboarding
+    documents.
+
+</div>
+
+
+<div class="info">
+
+    <strong>Email OR Mobile Number</strong>
+    is required. You can provide either one
+    or both.
+
+</div>
+
+
+<!-- NAME -->
+
+<div class="field">
+
+<label>
+
+    Full Name
+    <span class="required">*</span>
+
+</label>
+
+<input
+    type="text"
+    id="name"
+    placeholder="Enter your full name"
+>
+
+</div>
+
+
+<!-- EMAIL -->
+
+<div class="field">
+
+<label>
+
+    Email Address
+    <span class="optional">(Optional if mobile is provided)</span>
+
+</label>
+
+<input
+    type="email"
+    id="email"
+    placeholder="Enter your email address"
+>
+
+</div>
+
+
+<!-- PHONE -->
+
+<div class="field">
+
+<label>
+
+    Mobile Number
+    <span class="optional">(Optional if email is provided)</span>
+
+</label>
+
+<input
+    type="tel"
+    id="phone"
+    placeholder="Enter your mobile number"
+>
+
+</div>
+
+
+<!-- PLACE -->
+
+<div class="field">
+
+<label>
+
+    Place
+    <span class="required">*</span>
+
+</label>
+
+<input
+    type="text"
+    id="place"
+    placeholder="Enter place"
+>
+
+</div>
+
+
+<!-- DATE -->
+
+<div class="field">
+
+<label>
+
+    Date
+    <span class="required">*</span>
+
+</label>
+
+<input
+    type="date"
+    id="date"
+>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+<button
+    class="save"
+    onclick="saveDraft()">
+
+    Save Draft
+
+</button>
+
+
+<button
+    class="generate"
+    onclick="generatePDF()">
+
+    Generate Final PDF
+
+</button>
+
+</div>
+
+
+<div
+    id="status"
+    class="status">
+</div>
+
+
+<!-- LOAD EXISTING -->
+
+<div class="return-box">
+
+<h3>
+    Already started an application?
+</h3>
+
+<p>
+
+    Enter the email OR mobile number you
+    previously used to find your saved draft.
+
+</p>
+
+
+<button
+    class="load"
+    onclick="loadExistingDraft()">
+
+    Load My Saved Draft
+
+</button>
+
+
+<button
+    class="clear"
+    onclick="clearCurrentDraft()">
+
+    Clear My Current Draft
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+<div class="footer">
+
+    Employee Onboarding System
+
+</div>
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js">
+</script>
+
+
+<script>
+
+
+/* =====================================================
+   SETTINGS
+===================================================== */
+
+const MAPPING_KEY =
+    "loaMappings";
+
+const CANDIDATES_KEY =
+    "loaCandidates";
+
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const nameInput =
+    document.getElementById("name");
+
+const emailInput =
+    document.getElementById("email");
+
+const phoneInput =
+    document.getElementById("phone");
+
+const placeInput =
+    document.getElementById("place");
+
+const dateInput =
+    document.getElementById("date");
+
+const statusBox =
+    document.getElementById("status");
+
+
+
+/* =====================================================
+   GET ALL CANDIDATES
+===================================================== */
+
+function getCandidates() {
+
+    const saved =
+        localStorage.getItem(
+            CANDIDATES_KEY
+        );
+
+    if (!saved) {
+        return {};
+    }
+
+    try {
+
+        const data =
+            JSON.parse(saved);
+
+        if (
+            typeof data !== "object" ||
+            data === null
+        ) {
+            return {};
+        }
+
+        return data;
+
+    }
+    catch(error) {
+
+        console.error(error);
+
+        return {};
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SAVE ALL CANDIDATES
+===================================================== */
+
+function saveCandidates(
+    candidates
+) {
+
+    localStorage.setItem(
+
+        CANDIDATES_KEY,
+
+        JSON.stringify(
+            candidates
+        )
+
+    );
+
+}
+
+
+
+/* =====================================================
+   CLEAN EMAIL
+===================================================== */
+
+function cleanEmail(
+    email
+) {
+
+    return email
+        .trim()
+        .toLowerCase();
+
+}
+
+
+
+/* =====================================================
+   CLEAN PHONE
+===================================================== */
+
+function cleanPhone(
+    phone
+) {
+
+    return phone
+        .replace(
+            /\D/g,
+            ""
+        );
+
+}
+
+
+
+/* =====================================================
+   GET IDENTIFIERS
+===================================================== */
+
+function getIdentifiers(
+    data
+) {
+
+    const identifiers = [];
+
+
+    if (data.email) {
+
+        identifiers.push(
+
+            "email:"
+            +
+            cleanEmail(
+                data.email
+            )
+
+        );
+
+    }
+
+
+    if (data.phone) {
+
+        identifiers.push(
+
+            "phone:"
+            +
+            cleanPhone(
+                data.phone
+            )
+
+        );
+
+    }
+
+
+    return identifiers;
+
+}
+
+
+
+/* =====================================================
+   GET FORM DATA
+===================================================== */
+
+function getFormData() {
+
+    return {
+
+        name:
+            nameInput.value.trim(),
+
+        email:
+            emailInput.value.trim(),
+
+        phone:
+            phoneInput.value.trim(),
+
+        place:
+            placeInput.value.trim(),
+
+        date:
+            dateInput.value,
+
+        lastSaved:
+            new Date().toISOString()
+
+    };
+
+}
+
+
+
+/* =====================================================
+   CHECK EMAIL OR PHONE
+===================================================== */
+
+function hasIdentifier(
+    data
+) {
+
+    return (
+
+        data.email !== ""
+        ||
+        data.phone !== ""
+
+    );
+
+}
+
+
+
+/* =====================================================
+   SAVE DRAFT
+===================================================== */
+
+function saveDraft() {
+
+
+    const data =
+        getFormData();
+
+
+    /*
+       At least one identifier
+       must be supplied.
+    */
+
+    if (
+        !hasIdentifier(
+            data
+        )
+    ) {
+
+        alert(
+
+            "Please enter either your email address OR mobile number."
+
+        );
+
+        emailInput.focus();
+
+        return false;
+
+    }
+
+
+    /*
+       Get all existing candidates.
+    */
+
+    const candidates =
+        getCandidates();
+
+
+    /*
+       Create identifiers.
+    */
+
+    const identifiers =
+        getIdentifiers(
+            data
+        );
+
+
+    /*
+       Check if this person already
+       has a record.
+    */
+
+    let existingRecord = null;
+
+
+    for (
+        const id of identifiers
+    ) {
+
+        if (
+            candidates[id]
+        ) {
+
+            existingRecord =
+                candidates[id];
+
+            break;
+
+        }
+
+    }
+
+
+    /*
+       If existing record found,
+       update it.
+    */
+
+    if (existingRecord) {
+
+        const existingIds =
+            getIdentifiers(
+                existingRecord
+            );
+
+
+        for (
+            const id of existingIds
+        ) {
+
+            delete candidates[id];
+
+        }
+
+    }
+
+
+    /*
+       Save using BOTH identifiers
+       when both are supplied.
+
+       This means the candidate can
+       later retrieve the same record
+       using either email OR phone.
+    */
+
+    for (
+        const id of identifiers
+    ) {
+
+        candidates[id] =
+            data;
+
+    }
+
+
+    saveCandidates(
+        candidates
+    );
+
+
+    showStatus(
+
+        "Draft saved successfully. You can return later using your email OR mobile number.",
+
+        "success"
+
+    );
+
+
+    return true;
+
+}
+
+
+
+/* =====================================================
+   LOAD EXISTING DRAFT
+===================================================== */
+
+function loadExistingDraft() {
+
+
+    const identifier =
+        prompt(
+
+            "Enter your email address OR mobile number:"
+
+        );
+
+
+    if (!identifier) {
+
+        return;
+
+    }
+
+
+    const candidates =
+        getCandidates();
+
+
+    let key = "";
+
+
+    /*
+       Determine whether input is
+       email or phone.
+    */
+
+    if (
+        identifier.includes("@")
+    ) {
+
+        key =
+            "email:"
+            +
+            cleanEmail(
+                identifier
+            );
+
+    }
+    else {
+
+        key =
+            "phone:"
+            +
+            cleanPhone(
+                identifier
+            );
+
+    }
+
+
+    const data =
+        candidates[key];
+
+
+    if (!data) {
+
+        alert(
+
+            "No saved draft was found for this email or mobile number."
+
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Fill the form.
+    */
+
+    nameInput.value =
+        data.name || "";
+
+
+    emailInput.value =
+        data.email || "";
+
+
+    phoneInput.value =
+        data.phone || "";
+
+
+    placeInput.value =
+        data.place || "";
+
+
+    dateInput.value =
+        data.date || "";
+
+
+    showStatus(
+
+        "Your saved draft has been loaded successfully.",
+
+        "success"
+
+    );
+
+}
+
+
+
+/* =====================================================
+   CLEAR CURRENT DRAFT
+===================================================== */
+
+function clearCurrentDraft() {
+
+
+    const email =
+        emailInput.value.trim();
+
+
+    const phone =
+        phoneInput.value.trim();
+
+
+    if (
+        !email &&
+        !phone
+    ) {
+
+        alert(
+
+            "Enter your email OR mobile number first."
+
+        );
+
+        return;
+
+    }
+
+
+    const identifiers = [];
+
+
+    if (email) {
+
+        identifiers.push(
+
+            "email:"
+            +
+            cleanEmail(
+                email
+            )
+
+        );
+
+    }
+
+
+    if (phone) {
+
+        identifiers.push(
+
+            "phone:"
+            +
+            cleanPhone(
+                phone
+            )
+
+        );
+
+    }
+
+
+    const candidates =
+        getCandidates();
+
+
+    let found =
+        false;
+
+
+    for (
+        const id of identifiers
+    ) {
+
+        if (
+            candidates[id]
+        ) {
+
+            /*
+               Remove all identifiers
+               belonging to that record.
+            */
+
+            const record =
+                candidates[id];
+
+
+            const recordIds =
+                getIdentifiers(
+                    record
+                );
+
+
+            for (
+                const recordId
+                of recordIds
+            ) {
+
+                delete candidates[
+                    recordId
+                ];
+
+            }
+
+
+            found =
+                true;
+
+
+            break;
+
+        }
+
+    }
+
+
+    if (!found) {
+
+        alert(
+            "No saved draft was found."
+        );
+
+        return;
+
+    }
+
+
+    saveCandidates(
+        candidates
+    );
+
+
+    nameInput.value =
+        "";
+
+    emailInput.value =
+        "";
+
+    phoneInput.value =
+        "";
+
+    placeInput.value =
+        "";
+
+    dateInput.value =
+        "";
+
+
+    showStatus(
+
+        "Your saved draft has been deleted.",
+
+        "success"
+
+    );
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function showStatus(
+    message,
+    type
+) {
+
+    statusBox.textContent =
+        message;
+
+    statusBox.className =
+        "status "
+        +
+        type;
+
+}
+
+
+
+/* =====================================================
+   VALIDATE FORM
+===================================================== */
+
+function validateForm(
+    data
+) {
+
+
+    if (!data.name) {
+
+        alert(
+            "Please enter your full name."
+        );
+
+        nameInput.focus();
+
+        return false;
+
+    }
+
+
+    /*
+       EMAIL OR PHONE
+    */
+
+    if (
+        !data.email &&
+        !data.phone
+    ) {
+
+        alert(
+
+            "Please enter either your email address OR mobile number."
+
+        );
+
+        emailInput.focus();
+
+        return false;
+
+    }
+
+
+    /*
+       Basic email validation.
+    */
+
+    if (
+        data.email &&
+        !data.email.includes("@")
+    ) {
+
+        alert(
+            "Please enter a valid email address."
+        );
+
+        emailInput.focus();
+
+        return false;
+
+    }
+
+
+    /*
+       Basic phone validation.
+    */
+
+    if (
+        data.phone &&
+        cleanPhone(
+            data.phone
+        ).length < 7
+    ) {
+
+        alert(
+            "Please enter a valid mobile number."
+        );
+
+        phoneInput.focus();
+
+        return false;
+
+    }
+
+
+    if (!data.place) {
+
+        alert(
+            "Please enter your place."
+        );
+
+        placeInput.focus();
+
+        return false;
+
+    }
+
+
+    if (!data.date) {
+
+        alert(
+            "Please select the date."
+        );
+
+        dateInput.focus();
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =====================================================
+   GET MAPPINGS
+===================================================== */
+
+function getMappings() {
+
+
+    const saved =
+        localStorage.getItem(
+            MAPPING_KEY
+        );
+
+
+    if (!saved) {
+
+        return null;
+
+    }
+
+
+    try {
+
+        return JSON.parse(
+            saved
+        );
+
+    }
+    catch(error) {
+
+        return null;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   GENERATE PDF
+===================================================== */
+
+async function generatePDF() {
+
+
+    const data =
+        getFormData();
+
+
+    /*
+       Validate.
+    */
+
+    if (
+        !validateForm(
+            data
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+       Save automatically before
+       generating PDF.
+    */
+
+    saveDraft();
+
+
+    const mappings =
+        getMappings();
+
+
+    if (!mappings) {
+
+        alert(
+
+            "No PDF mappings were found. Please configure the LOA PDF first."
+
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !mappings.Name ||
+        !mappings.Place ||
+        !mappings.Date
+    ) {
+
+        alert(
+
+            "Name, Place and Date mappings are required."
+
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+
+        showStatus(
+
+            "Preparing your completed LOA PDF...",
+
+            "info"
+
+        );
+
+
+        /*
+           Temporary local prototype
+           PDF selection.
+        */
+
+        const pdfFile =
+            await selectPDF();
+
+
+        if (!pdfFile) {
+
+            showStatus(
+
+                "PDF generation cancelled.",
+
+                "error"
+
+            );
+
+            return;
+
+        }
+
+
+        const buffer =
+            await pdfFile.arrayBuffer();
+
+
+        const pdfBytes =
+            new Uint8Array(
+                buffer
+            ).slice();
+
+
+        const pdfDoc =
+            await PDFLib.PDFDocument.load(
+                pdfBytes
+            );
+
+
+        const font =
+            await pdfDoc.embedFont(
+
+                PDFLib.StandardFonts.Helvetica
+
+            );
+
+
+        const pages =
+            pdfDoc.getPages();
+
+
+        if (
+            pages.length === 0
+        ) {
+
+            throw new Error(
+                "The PDF contains no pages."
+            );
+
+        }
+
+
+        const page =
+            pages[0];
+
+
+        const pdfWidth =
+            Number(
+                page.getWidth()
+            );
+
+
+        const pdfHeight =
+            Number(
+                page.getHeight()
+            );
+
+
+        /*
+           NAME
+        */
+
+        addText(
+
+            page,
+
+            mappings.Name,
+
+            data.name,
+
+            pdfWidth,
+
+            pdfHeight,
+
+            font
+
+        );
+
+
+        /*
+           PLACE
+        */
+
+        addText(
+
+            page,
+
+            mappings.Place,
+
+            data.place,
+
+            pdfWidth,
+
+            pdfHeight,
+
+            font
+
+        );
+
+
+        /*
+           DATE
+        */
+
+        addText(
+
+            page,
+
+            mappings.Date,
+
+            formatDate(
+                data.date
+            ),
+
+            pdfWidth,
+
+            pdfHeight,
+
+            font
+
+        );
+
+
+        /*
+           Save.
+        */
+
+        const output =
+            await pdfDoc.save();
+
+
+        const blob =
+            new Blob(
+
+                [output],
+
+                {
+                    type:
+                        "application/pdf"
+                }
+
+            );
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            url;
+
+
+        link.download =
+
+            "Completed_LOA_"
+            +
+            cleanFileName(
+                data.name
+            )
+            +
+            ".pdf";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        document.body.removeChild(
+            link
+        );
+
+
+        setTimeout(
+
+            function() {
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+            },
+
+            1500
+
+        );
+
+
+        showStatus(
+
+            "Your completed LOA PDF has been generated successfully.",
+
+            "success"
+
+        );
+
+
+    }
+    catch(error) {
+
+
+        console.error(
+            error
+        );
+
+
+        showStatus(
+
+            "PDF generation failed: "
+            +
+            error.message,
+
+            "error"
+
+        );
+
+
+        alert(
+
+            "PDF generation failed.\n\n"
+            +
+            error.message
+
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SELECT PDF
+===================================================== */
+
+function selectPDF() {
+
+
+    return new Promise(
+
+        function(resolve) {
+
+
+            const input =
+                document.createElement(
+                    "input"
+                );
+
+
+            input.type =
+                "file";
+
+
+            input.accept =
+                "application/pdf";
+
+
+            input.style.display =
+                "none";
+
+
+            document.body.appendChild(
+                input
+            );
+
+
+            input.addEventListener(
+
+                "change",
+
+                function() {
+
+
+                    const file =
+                        input.files[0];
+
+
+                    document.body.removeChild(
+                        input
+                    );
+
+
+                    resolve(
+                        file || null
+                    );
+
+                }
+
+            );
+
+
+            input.click();
+
+        }
+
+    );
+
+}
+
+
+
+/* =====================================================
+   ADD TEXT
+===================================================== */
+
+function addText(
+
+    page,
+    mapping,
+    text,
+    pdfWidth,
+    pdfHeight,
+    font
+
+) {
+
+
+    if (!mapping) {
+
+        throw new Error(
+            "Mapping is missing."
+        );
+
+    }
+
+
+    const canvasWidth =
+        Number(
+            mapping.canvasWidth
+        );
+
+
+    const canvasHeight =
+        Number(
+            mapping.canvasHeight
+        );
+
+
+    const mapX =
+        Number(
+            mapping.x
+        );
+
+
+    const mapY =
+        Number(
+            mapping.y
+        );
+
+
+    const mapWidth =
+        Number(
+            mapping.width
+        );
+
+
+    const mapHeight =
+        Number(
+            mapping.height
+        );
+
+
+    const values = [
+
+        canvasWidth,
+        canvasHeight,
+        mapX,
+        mapY,
+        mapWidth,
+        mapHeight,
+        pdfWidth,
+        pdfHeight
+
+    ];
+
+
+    for (
+        const value of values
+    ) {
+
+        if (
+            !Number.isFinite(
+                value
+            )
+        ) {
+
+            throw new Error(
+                "Invalid PDF mapping detected."
+            );
+
+        }
+
+    }
+
+
+    const scaleX =
+        pdfWidth /
+        canvasWidth;
+
+
+    const scaleY =
+        pdfHeight /
+        canvasHeight;
+
+
+    const x =
+        mapX *
+        scaleX;
+
+
+    const boxWidth =
+        mapWidth *
+        scaleX;
+
+
+    const boxHeight =
+        mapHeight *
+        scaleY;
+
+
+    const y =
+        pdfHeight
+        -
+        (
+            mapY *
+            scaleY
+        )
+        -
+        boxHeight;
+
+
+    let fontSize =
+        boxHeight *
+        0.60;
+
+
+    if (
+        !Number.isFinite(
+            fontSize
+        )
+        ||
+        fontSize <= 0
+    ) {
+
+        fontSize = 10;
+
+    }
+
+
+    fontSize =
+        Math.max(
+
+            6,
+
+            Math.min(
+                24,
+                fontSize
+            )
+
+        );
+
+
+    page.drawText(
+
+        String(text),
+
+        {
+
+            x:
+                x,
+
+            y:
+                y
+                +
+                (
+                    boxHeight
+                    -
+                    fontSize
+                )
+                / 2,
+
+            size:
+                fontSize,
+
+            font:
+                font,
+
+            color:
+                PDFLib.rgb(
+                    0,
+                    0,
+                    0
+                ),
+
+            maxWidth:
+                Math.max(
+                    10,
+                    boxWidth
+                )
+
+        }
+
+    );
+
+}
+
+
+
+/* =====================================================
+   DATE FORMAT
+===================================================== */
+
+function formatDate(
+    date
+) {
+
+
+    if (!date) {
+
+        return "";
+
+    }
+
+
+    const parts =
+        date.split("-");
+
+
+    if (
+        parts.length !== 3
+    ) {
+
+        return date;
+
+    }
+
+
+    return (
+
+        parts[2]
+        +
+        "/"
+        +
+        parts[1]
+        +
+        "/"
+        +
+        parts[0]
+
+    );
+
+}
+
+
+
+/* =====================================================
+   CLEAN FILE NAME
+===================================================== */
+
+function cleanFileName(
+    name
+) {
+
+
+    return name
+
+        .replace(
+            /[^a-z0-9]/gi,
+            "_"
+        )
+
+        .substring(
+            0,
+            50
+        );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
