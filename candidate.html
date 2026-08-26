@@ -2859,10 +2859,19 @@ function resolvePDFValue(field, data) {
    at the mapped box when the field is "checked".
 ===================================================== */
 
-function isCheckboxChecked(field, rawValue) {
+function isCheckboxChecked(mapping, rawValue) {
 
-    if (field === "declaration") {
-        // Any of the 6 declaration options counts as checked.
+    if (mapping.field === "declaration") {
+
+        // If this mapping records which numbered statement
+        // it belongs to (mapping.value), only mark it when
+        // the candidate picked that exact statement. Older
+        // mappings without a "value" fall back to marking on
+        // any declaration being made at all.
+        if (mapping.value) {
+            return String(rawValue) === String(mapping.value);
+        }
+
         return Boolean(rawValue);
     }
 
@@ -3003,7 +3012,7 @@ async function applyPDFMapping(
 
             if (mapping.type === "checkbox") {
 
-                if (!isCheckboxChecked(mapping.field, rawValue)) {
+                if (!isCheckboxChecked(mapping, rawValue)) {
                     continue;
                 }
 
@@ -3030,20 +3039,49 @@ async function applyPDFMapping(
             // Text mapping.
             if (!rawValue) continue;
 
-            const fontSize =
-                (mapping.size || 10) *
-                ((scaleX + scaleY) / 2);
+            // Start from a comfortably readable fixed size
+            // (a touch larger than the previous default),
+            // then shrink in small steps -- re-wrapping each
+            // time -- only as far as needed so the wrapped
+            // text actually fits inside the mapped box's
+            // height. This keeps short single-line fields
+            // (name, dob, etc.) large and legible, while
+            // narrow multi-line fields (nominee address)
+            // still fit without spilling into the row below.
+            const MIN_FONT_SIZE = 6;
 
-            const lineHeight =
+            let fontSize =
+                mapping.size || 11;
+
+            let lineHeight =
                 fontSize * 1.15;
 
-            const lines =
+            let lines =
                 wrapTextToWidth(
                     String(rawValue),
                     font,
                     fontSize,
                     boxWidth
                 );
+
+            while (
+                boxHeight > 0 &&
+                lines.length * lineHeight > boxHeight &&
+                fontSize > MIN_FONT_SIZE
+            ) {
+
+                fontSize -= 0.5;
+                lineHeight = fontSize * 1.15;
+
+                lines =
+                    wrapTextToWidth(
+                        String(rawValue),
+                        font,
+                        fontSize,
+                        boxWidth
+                    );
+
+            }
 
             let cursorY =
                 boxTopY - fontSize;
