@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Employee Onboarding</title>
+<title>Team Red Onboarding Documents Link</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -19,30 +14,48 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f3f5f7;
+    background: #f4f4f4;
     color: #222;
+    font-size: 10pt;
 }
 
 .header {
-    background: #1f4e78;
+    position: relative;
+    background: #C00000;
     color: white;
-    padding: 24px 20px;
+    padding: 30px 20px;
     text-align: center;
 }
 
 .header h1 {
     margin: 0;
-    font-size: 25px;
+    font-size: 24px;
 }
 
 .header p {
-    margin: 7px 0 0;
+    margin: 8px 0 0;
     font-size: 14px;
 }
 
+.language-box {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+}
+
+.language-box select {
+    padding: 7px 9px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    background: white;
+    color: #222;
+}
+
 .container {
-    max-width: 650px;
-    margin: 35px auto;
+    max-width: 900px;
+    margin: 25px auto;
     padding: 0 15px;
 }
 
@@ -50,77 +63,183 @@ body {
     background: white;
     border-radius: 10px;
     padding: 30px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.10);
+    margin-bottom: 20px;
 }
 
-.title {
-    color: #1f4e78;
-    font-size: 20px;
+.section-title {
+    color: #C00000;
+    font-size: 19px;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin: 25px 0 7px;
+    border-bottom: 2px solid #C00000;
+    padding-bottom: 7px;
 }
 
-.subtitle {
+.section-title:first-child {
+    margin-top: 0;
+}
+
+.section-subtitle {
     color: #666;
-    font-size: 13px;
-    margin-bottom: 25px;
+    margin-bottom: 22px;
     line-height: 1.5;
 }
 
-.info {
-    background: #eaf3fa;
-    border: 1px solid #cbddea;
-    color: #1f4e78;
-    padding: 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    line-height: 1.5;
+.welcome {
+    background: #fff5f5;
+    border-left: 5px solid #C00000;
+    padding: 15px;
     margin-bottom: 25px;
+    border-radius: 5px;
+}
+
+.welcome h2 {
+    color: #C00000;
+    margin: 0 0 8px;
+    font-size: 19px;
 }
 
 .field {
-    margin-bottom: 19px;
+    margin-bottom: 17px;
 }
 
 .field label {
     display: block;
-    font-size: 14px;
     font-weight: bold;
-    margin-bottom: 7px;
+    margin-bottom: 6px;
+    line-height: 1.4;
 }
 
 .required {
-    color: #dc3545;
+    color: #C00000;
+    font-weight: bold;
 }
 
-.optional {
-    color: #777;
-    font-weight: normal;
-    font-size: 12px;
-}
-
-.field input {
+.field input,
+.field select,
+.field textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #bcbcbc;
-    border-radius: 6px;
-    font-size: 15px;
+    padding: 9px 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
     background: white;
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
 }
 
-.field input:focus {
+.field textarea {
+    min-height: 75px;
+    resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
     outline: none;
-    border-color: #1f4e78;
-    box-shadow: 0 0 0 2px rgba(31,78,120,0.12);
+    border-color: #C00000;
+    box-shadow: 0 0 0 2px rgba(192,0,0,0.10);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 20px;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 5px;
+}
+
+.radio-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.radio-option input {
+    width: auto;
+    margin: 0;
+}
+
+.nominee-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 18px;
+    background: #fafafa;
+}
+
+.nominee-title {
+    color: #C00000;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 17px;
+}
+
+.add-nominee {
+    background: white;
+    color: #C00000;
+    border: 1px solid #C00000;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.add-nominee:hover {
+    background: #fff0f0;
+}
+
+.nominee-age {
+    background: #f2f2f2 !important;
+    color: #555;
+}
+
+.declaration {
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    padding: 15px;
+    margin-bottom: 12px;
+    background: #fafafa;
+}
+
+.declaration label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.declaration input {
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.declaration-place-date {
+    margin-top: 25px;
+    padding-top: 5px;
 }
 
 .buttons {
     display: flex;
     gap: 12px;
-    margin-top: 28px;
+    margin-top: 25px;
 }
 
-button {
+button.main-button {
     flex: 1;
     border: none;
     border-radius: 6px;
@@ -131,39 +250,21 @@ button {
 }
 
 .save {
-    background: #6c757d;
+    background: #666;
     color: white;
 }
 
 .save:hover {
-    background: #545b62;
+    background: #444;
 }
 
 .generate {
-    background: #198754;
+    background: #C00000;
     color: white;
 }
 
 .generate:hover {
-    background: #146c43;
-}
-
-.load {
-    background: #1f4e78;
-    color: white;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.load:hover {
-    background: #163a5c;
-}
-
-.clear {
-    background: #dc3545;
-    color: white;
-    width: 100%;
-    margin-top: 10px;
+    background: #990000;
 }
 
 .status {
@@ -171,7 +272,6 @@ button {
     margin-top: 18px;
     padding: 12px;
     border-radius: 6px;
-    font-size: 13px;
     line-height: 1.5;
 }
 
@@ -193,457 +293,1488 @@ button {
     color: #055160;
 }
 
-.return-box {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #ddd;
+.hidden {
+    display: none !important;
 }
 
-.return-box h3 {
-    margin-top: 0;
-    color: #1f4e78;
-    font-size: 16px;
-}
-
-.return-box p {
-    font-size: 13px;
-    color: #666;
+.note {
+    background: #fff8e1;
+    border: 1px solid #f0d98a;
+    padding: 11px;
+    border-radius: 5px;
+    margin-bottom: 18px;
+    line-height: 1.5;
 }
 
 .footer {
     text-align: center;
     color: #777;
-    font-size: 12px;
-    margin: 25px 0;
+    font-size: 11px;
+    padding: 10px 0 30px;
 }
 
-@media(max-width:600px) {
+@media(max-width:700px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
 
     .card {
-        padding: 22px;
+        padding: 20px;
     }
 
     .buttons {
         flex-direction: column;
     }
 
+    .language-box {
+        position: relative;
+        top: auto;
+        right: auto;
+        text-align: right;
+        background: #C00000;
+        padding: 8px 12px;
+    }
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<div class="header">
-
-    <h1>
-        Employee Onboarding
-    </h1>
-
-    <p>
-        Please enter your details carefully
-    </p>
-
+<div class="language-box">
+    <select id="languageSelect" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="te">English + Telugu</option>
+        <option value="kn">English + Kannada</option>
+        <option value="ta">English + Tamil</option>
+        <option value="ml">English + Malayalam</option>
+        <option value="hi">English + Hindi</option>
+    </select>
 </div>
 
+<div class="header">
+    <h1>Team Red Onboarding Documents Link</h1>
+    <p>Welcome to Team Red</p>
+</div>
 
 <div class="container">
 
 <div class="card">
 
-
-<div class="title">
-    Personal Details
+<div class="welcome">
+    <h2>Welcome to Team Red</h2>
+    <div data-i18n="welcomeText">
+        Please enter all your details carefully. Your information should be entered exactly as required for the onboarding documents.
+    </div>
 </div>
 
 
-<div class="subtitle">
+<!-- =====================================================
+     PERSONAL / EMPLOYEE DETAILS
+===================================================== -->
 
-    Please enter your information exactly
-    as it should appear in your onboarding
-    documents.
+<div class="section-title">Personal Details</div>
+
+<div class="section-subtitle" data-i18n="personalSubtitle">
+    Please provide your personal and employment information as per your official documents.
+</div>
+
+<div class="grid">
+
+    <!-- NAME - ONLY ONCE -->
+    <div class="field">
+        <label>
+            <span data-i18n="name">Name as per Aadhaar</span>
+            <span class="required">*</span>
+        </label>
+        <input type="text" id="name" required>
+    </div>
+
+
+    <!-- FATHER -->
+    <div class="field">
+        <label>
+            <span data-i18n="fatherName">Father's Name</span>
+            <span class="required">*</span>
+        </label>
+        <input type="text" id="fatherName" required>
+    </div>
+
+
+    <!-- SPOUSE -->
+    <div class="field">
+        <label>
+            <span data-i18n="spouseName">Spouse's Name</span>
+            <span id="spouseRequired" class="required">*</span>
+        </label>
+        <input type="text" id="spouseName">
+    </div>
+
+
+    <!-- DOB -->
+    <div class="field">
+        <label>
+            <span data-i18n="dob">Date of Birth as per Aadhaar</span>
+            <span class="required">*</span>
+        </label>
+        <input type="date" id="dob" required>
+    </div>
+
+
+    <!-- GENDER -->
+    <div class="field">
+        <label>
+            <span data-i18n="gender">Gender</span>
+            <span class="required">*</span>
+        </label>
+
+        <select id="gender" required>
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Transgender">Transgender</option>
+        </select>
+    </div>
+
+
+    <!-- MARITAL STATUS -->
+    <div class="field">
+        <label>
+            <span data-i18n="maritalStatus">Marital Status</span>
+            <span class="required">*</span>
+        </label>
+
+        <select id="maritalStatus" onchange="maritalStatusChanged()" required>
+            <option value="">Select</option>
+            <option value="Married">Married</option>
+            <option value="Unmarried">Unmarried</option>
+            <option value="Widow">Widow</option>
+            <option value="Widower">Widower</option>
+            <option value="Divorcee">Divorcee</option>
+        </select>
+    </div>
+
+
+    <!-- RELIGION -->
+    <div class="field">
+        <label>
+            <span data-i18n="religion">Religion</span>
+            <span class="required">*</span>
+        </label>
+        <input type="text" id="religion" required>
+    </div>
+
+
+    <!-- EMAIL -->
+    <div class="field">
+        <label>
+            <span data-i18n="email">Email ID</span>
+            <span class="required">*</span>
+        </label>
+        <input type="email" id="email" required>
+    </div>
+
+
+    <!-- MOBILE -->
+    <div class="field">
+        <label>
+            <span data-i18n="mobile">Mobile Number</span>
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="mobile"
+            inputmode="numeric"
+            maxlength="10"
+            pattern="[0-9]{10}"
+            oninput="digitsOnly(this)"
+            required
+        >
+    </div>
+
+
+    <!-- DOJ - ONLY ONE -->
+    <div class="field">
+        <label>
+            <span data-i18n="doj">Date of Joining (DOJ)</span>
+            <span class="required">*</span>
+        </label>
+
+        <input type="date" id="doj" required>
+    </div>
+
+
+    <!-- EMPLOYMENT STATUS -->
+    <div class="field">
+        <label>
+            <span data-i18n="employmentStatus">Employment Status</span>
+            <span class="required">*</span>
+        </label>
+
+        <select
+            id="employmentStatus"
+            onchange="employmentChanged()"
+            required
+        >
+            <option value="">Select</option>
+            <option value="Fresher">Fresher</option>
+            <option value="Experienced">Experienced</option>
+        </select>
+    </div>
+
+
+    <!-- INTERNATIONAL WORKER -->
+    <div class="field">
+        <label>
+            <span data-i18n="internationalWorker">International Worker</span>
+            <span class="required">*</span>
+        </label>
+
+        <select id="internationalWorker" required>
+            <option value="">Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
 
 </div>
 
 
-<div class="info">
+<!-- =====================================================
+     PREVIOUS EMPLOYMENT - EXPERIENCED ONLY
+===================================================== -->
 
-    <strong>Email OR Mobile Number</strong>
-    is required. You can provide either one
-    or both.
+<div id="previousEmployment" class="hidden">
+
+    <div class="section-title" data-i18n="previousEmployment">
+        Previous Employment Details
+    </div>
+
+    <div class="section-subtitle" data-i18n="previousEmploymentSubtitle">
+        These details are required only for experienced employees.
+    </div>
+
+    <div class="grid">
+
+        <div class="field">
+            <label>
+                <span data-i18n="previousCompany">
+                    Previous Company Name
+                </span>
+                <span class="required">*</span>
+            </label>
+
+            <input type="text" id="previousCompany">
+        </div>
+
+
+        <div class="field">
+            <label>
+                <span data-i18n="previousDOJ">
+                    Previous DOJ
+                </span>
+                <span class="required">*</span>
+            </label>
+
+            <input type="date" id="previousDOJ">
+        </div>
+
+
+        <div class="field">
+            <label>
+                <span data-i18n="previousDOE">
+                    Previous DOE
+                </span>
+                <span class="required">*</span>
+            </label>
+
+            <input type="date" id="previousDOE">
+        </div>
+
+    </div>
 
 </div>
 
 
-<!-- NAME -->
+<!-- =====================================================
+     KYC / BANK / IDENTIFICATION
+===================================================== -->
 
-<div class="field">
+<div class="section-title" data-i18n="kycTitle">
+    KYC / Bank Details
+</div>
 
-<label>
+<div class="section-subtitle" data-i18n="kycSubtitle">
+    Enter your KYC and bank information carefully.
+</div>
 
-    Full Name
-    <span class="required">*</span>
+<div class="grid">
 
-</label>
+    <!-- BANK ACCOUNT -->
+    <div class="field">
+        <label>
+            <span data-i18n="bankAccount">
+                Bank Account Number
+            </span>
+            <span class="required">*</span>
+        </label>
 
-<input
-    type="text"
-    id="name"
-    placeholder="Enter your full name"
+        <input
+            type="text"
+            id="bankAccount"
+            inputmode="numeric"
+            oninput="digitsOnly(this)"
+            required
+        >
+    </div>
+
+
+    <!-- IFSC -->
+    <div class="field">
+        <label>
+            <span data-i18n="ifsc">
+                IFSC Code
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="ifsc"
+            maxlength="11"
+            required
+        >
+    </div>
+
+
+    <!-- AADHAAR -->
+    <div class="field">
+        <label>
+            <span data-i18n="aadhaar">
+                Aadhaar Number
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="aadhaar"
+            inputmode="numeric"
+            maxlength="12"
+            pattern="[0-9]{12}"
+            oninput="digitsOnly(this)"
+            required
+        >
+    </div>
+
+
+    <!-- PAN -->
+    <div class="field">
+        <label>
+            <span data-i18n="pan">
+                PAN Number
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="pan"
+            maxlength="10"
+            oninput="this.value=this.value.toUpperCase()"
+            required
+        >
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     EPF / EPS / UAN
+===================================================== -->
+
+<div class="section-title" data-i18n="pfTitle">
+    EPF / EPS / UAN Details
+</div>
+
+<div class="grid">
+
+    <div class="field">
+        <label>
+            <span data-i18n="epfMember">
+                Whether earlier a member of Employees' Provident Fund Scheme, 1952
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <select id="epfMember" required>
+            <option value="">Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+
+
+    <div class="field">
+        <label>
+            <span data-i18n="epsMember">
+                Whether earlier a member of Employees' Pension Scheme, 1995
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <select id="epsMember" required>
+            <option value="">Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+
+
+    <!-- UAN ONLY ONCE -->
+    <div class="field">
+        <label>
+            <span data-i18n="uan">
+                Universal Account Number (UAN)
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="uan"
+            inputmode="numeric"
+            maxlength="12"
+            pattern="[0-9]{12}"
+            oninput="digitsOnly(this)"
+            required
+        >
+    </div>
+
+
+    <div class="field">
+        <label>
+            <span data-i18n="withdrawEPF">
+                Whether You Have Withdrawn Your Previous EPF (Employees' Provident Fund Scheme, 1952) Fund
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <select id="withdrawEPF" required>
+            <option value="">Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+
+
+    <div class="field">
+        <label>
+            <span data-i18n="withdrawEPS">
+                Whether You Have Withdrawn Your Previous EPS (Employees' Pension Scheme, 1995) Fund
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <select id="withdrawEPS" required>
+            <option value="">Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     PERMANENT ADDRESS
+===================================================== -->
+
+<div class="section-title" data-i18n="addressTitle">
+    Permanent Address
+</div>
+
+<div class="grid">
+
+    <div class="field full">
+        <label>
+            <span data-i18n="permanentAddress">
+                Permanent Address
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <textarea id="permanentAddress" required></textarea>
+    </div>
+
+
+    <div class="field">
+        <label>
+            <span data-i18n="city">
+                City
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <input type="text" id="city" required>
+    </div>
+
+
+    <div class="field">
+        <label>
+            <span data-i18n="district">
+                District
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <input type="text" id="district" required>
+    </div>
+
+
+    <div class="field">
+        <label>
+            <span data-i18n="state">
+                State
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <input type="text" id="state" required>
+    </div>
+
+
+    <div class="field">
+        <label>
+            <span data-i18n="pincode">
+                Pincode
+            </span>
+            <span class="required">*</span>
+        </label>
+
+        <input
+            type="text"
+            id="pincode"
+            inputmode="numeric"
+            maxlength="6"
+            pattern="[0-9]{6}"
+            oninput="digitsOnly(this)"
+            required
+        >
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     NOMINEE DETAILS
+===================================================== -->
+
+<div class="section-title" data-i18n="nomineeTitle">
+    Nominee Details
+</div>
+
+<div class="section-subtitle" data-i18n="nomineeSubtitle">
+    Maximum 4 nominees. The total share of all nominees must equal 100%.
+</div>
+
+<div id="nomineeContainer"></div>
+
+<button
+    type="button"
+    class="add-nominee"
+    id="addNomineeButton"
+    onclick="addNominee()"
 >
+    + Add Nominee
+</button>
+
+
+<!-- =====================================================
+     DECLARATION
+===================================================== -->
+
+<div class="section-title" data-i18n="declarationTitle">
+    DECLARATION
+</div>
+
+<div class="section-subtitle" data-i18n="declarationSubtitle">
+    Select only 1 out of 5.
+</div>
+
+
+<div class="declaration">
+    <label>
+        <input type="radio" name="declaration" value="1">
+        <span>
+            <strong>1.</strong>
+            I hereby certify that the person(s) mentioned is/are a member(s) of my family within the meaning of clause (33) of section 2 of the Code on Social Security, 2020 (36 of 2020).
+        </span>
+    </label>
+</div>
+
+
+<div class="declaration">
+    <label>
+        <input type="radio" name="declaration" value="2">
+        <span>
+            <strong>2.</strong>
+            I hereby declare that I have no family within the meaning of clause (33) of section 2 of the said Code.
+        </span>
+    </label>
+</div>
+
+
+<div class="declaration">
+    <label>
+        <input type="radio" name="declaration" value="3a">
+        <span>
+            <strong>3(a).</strong>
+            My father/mother/parents is/are not dependent on me.
+        </span>
+    </label>
+</div>
+
+
+<div class="declaration">
+    <label>
+        <input type="radio" name="declaration" value="3b">
+        <span>
+            <strong>3(b).</strong>
+            My husband's father/mother/parents is/are not dependent on my husband.
+        </span>
+    </label>
+</div>
+
+
+<div class="declaration">
+    <label>
+        <input type="radio" name="declaration" value="4">
+        <span>
+            <strong>4.</strong>
+            I have excluded my husband from my family by a notice dated the __________ to the competent authority in terms of clause (33) of section 2 of the said Code.
+        </span>
+    </label>
+</div>
+
+
+<div class="declaration">
+    <label>
+        <input type="radio" name="declaration" value="5">
+        <span>
+            <strong>5.</strong>
+            Nomination made herein invalidates my previous nomination.
+        </span>
+    </label>
+</div>
+
+
+<!-- =====================================================
+     PLACE + DECLARATION DATE
+===================================================== -->
+
+<div class="declaration-place-date">
+
+    <div class="grid">
+
+        <div class="field">
+            <label>
+                <span data-i18n="place">
+                    Place
+                </span>
+                <span class="required">*</span>
+            </label>
+
+            <input type="text" id="place" required>
+        </div>
+
+
+        <div class="field">
+            <label>
+                <span data-i18n="declarationDate">
+                    Date
+                </span>
+                <span class="required">*</span>
+            </label>
+
+            <input type="date" id="declarationDate" required>
+        </div>
+
+    </div>
 
 </div>
 
 
-<!-- EMAIL -->
-
-<div class="field">
-
-<label>
-
-    Email Address
-    <span class="optional">(Optional if mobile is provided)</span>
-
-</label>
-
-<input
-    type="email"
-    id="email"
-    placeholder="Enter your email address"
->
-
-</div>
-
-
-<!-- PHONE -->
-
-<div class="field">
-
-<label>
-
-    Mobile Number
-    <span class="optional">(Optional if email is provided)</span>
-
-</label>
-
-<input
-    type="tel"
-    id="phone"
-    placeholder="Enter your mobile number"
->
-
-</div>
-
-
-<!-- PLACE -->
-
-<div class="field">
-
-<label>
-
-    Place
-    <span class="required">*</span>
-
-</label>
-
-<input
-    type="text"
-    id="place"
-    placeholder="Enter place"
->
-
-</div>
-
-
-<!-- DATE -->
-
-<div class="field">
-
-<label>
-
-    Date
-    <span class="required">*</span>
-
-</label>
-
-<input
-    type="date"
-    id="date"
->
-
-</div>
-
-
-<!-- BUTTONS -->
+<!-- =====================================================
+     ACTIONS
+===================================================== -->
 
 <div class="buttons">
 
-<button
-    class="save"
-    onclick="saveDraft()">
-
-    Save Draft
-
-</button>
-
-
-<button
-    class="generate"
-    onclick="generatePDF()">
-
-    Generate Final PDF
-
-</button>
-
-</div>
+    <button
+        type="button"
+        class="main-button save"
+        onclick="saveDraft()"
+    >
+        Save Draft
+    </button>
 
 
-<div
-    id="status"
-    class="status">
-</div>
-
-
-<!-- LOAD EXISTING -->
-
-<div class="return-box">
-
-<h3>
-    Already started an application?
-</h3>
-
-<p>
-
-    Enter the email OR mobile number you
-    previously used to find your saved draft.
-
-</p>
-
-
-<button
-    class="load"
-    onclick="loadExistingDraft()">
-
-    Load My Saved Draft
-
-</button>
-
-
-<button
-    class="clear"
-    onclick="clearCurrentDraft()">
-
-    Clear My Current Draft
-
-</button>
-
+    <button
+        type="button"
+        class="main-button generate"
+        onclick="generatePDF()"
+    >
+        Generate Final PDF
+    </button>
 
 </div>
 
 
-</div>
+<div id="status" class="status"></div>
 
+</div>
 
 <div class="footer">
-
-    Employee Onboarding System
+    Team Red Onboarding Documents
+</div>
 
 </div>
 
 
-</div>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js">
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 <script>
 
-
 /* =====================================================
-   SETTINGS
+   CONFIGURATION
 ===================================================== */
 
-const MAPPING_KEY =
-    "loaMappings";
+const PDF_FILE_NAME = "Onboarding Documents.pdf";
 
-const CANDIDATES_KEY =
-    "loaCandidates";
+const DRAFT_KEY = "teamRedOnboardingDraft";
 
+let nomineeCount = 0;
 
 
 /* =====================================================
-   ELEMENTS
+   TRANSLATIONS
 ===================================================== */
 
-const nameInput =
-    document.getElementById("name");
+const translations = {
 
-const emailInput =
-    document.getElementById("email");
+    te: {
+        welcomeText: "దయచేసి మీ అన్ని వివరాలను జాగ్రత్తగా నమోదు చేయండి. ఆన్‌బోర్డింగ్ పత్రాలకు అవసరమైన విధంగా సమాచారాన్ని నమోదు చేయాలి.",
+        personalSubtitle: "మీ అధికారిక పత్రాల ప్రకారం మీ వ్యక్తిగత మరియు ఉద్యోగ సమాచారాన్ని అందించండి.",
+        name: "Name as per Aadhaar / ఆధార్ ప్రకారం పేరు",
+        fatherName: "Father's Name / తండ్రి పేరు",
+        spouseName: "Spouse's Name / జీవిత భాగస్వామి పేరు",
+        dob: "Date of Birth as per Aadhaar / ఆధార్ ప్రకారం పుట్టిన తేదీ",
+        gender: "Gender / లింగం",
+        maritalStatus: "Marital Status / వైవాహిక స్థితి",
+        religion: "Religion / మతం",
+        email: "Email ID / ఇమెయిల్ ఐడి",
+        mobile: "Mobile Number / మొబైల్ నంబర్",
+        doj: "Date of Joining (DOJ) / చేరిన తేదీ (DOJ)",
+        employmentStatus: "Employment Status / ఉద్యోగ స్థితి",
+        internationalWorker: "International Worker / అంతర్జాతీయ కార్మికుడు",
+        previousEmployment: "Previous Employment Details / మునుపటి ఉద్యోగ వివరాలు",
+        previousEmploymentSubtitle: "ఈ వివరాలు అనుభవం ఉన్న ఉద్యోగులకు మాత్రమే అవసరం.",
+        previousCompany: "Previous Company Name / మునుపటి కంపెనీ పేరు",
+        previousDOJ: "Previous DOJ / మునుపటి చేరిన తేదీ",
+        previousDOE: "Previous DOE / మునుపటి నిష్క్రమణ తేదీ",
+        kycTitle: "KYC / Bank Details / KYC / బ్యాంక్ వివరాలు",
+        kycSubtitle: "మీ KYC మరియు బ్యాంక్ వివరాలను జాగ్రత్తగా నమోదు చేయండి.",
+        bankAccount: "Bank Account Number / బ్యాంక్ ఖాతా సంఖ్య",
+        ifsc: "IFSC Code / IFSC కోడ్",
+        aadhaar: "Aadhaar Number / ఆధార్ సంఖ్య",
+        pan: "PAN Number / PAN సంఖ్య",
+        pfTitle: "EPF / EPS / UAN Details / EPF / EPS / UAN వివరాలు",
+        epfMember: "Whether earlier a member of Employees' Provident Fund Scheme, 1952 / గతంలో ఉద్యోగుల భవిష్య నిధి పథకం, 1952 సభ్యులా",
+        epsMember: "Whether earlier a member of Employees' Pension Scheme, 1995 / గతంలో ఉద్యోగుల పెన్షన్ పథకం, 1995 సభ్యులా",
+        uan: "Universal Account Number (UAN) / యూనివర్సల్ అకౌంట్ నంబర్ (UAN)",
+        withdrawEPF: "Whether You Have Withdrawn Your Previous EPF Fund / మీ గత EPF నిధిని ఉపసంహరించుకున్నారా",
+        withdrawEPS: "Whether You Have Withdrawn Your Previous EPS Fund / మీ గత EPS నిధిని ఉపసంహరించుకున్నారా",
+        addressTitle: "Permanent Address / శాశ్వత చిరునామా",
+        permanentAddress: "Permanent Address / శాశ్వత చిరునామా",
+        city: "City / నగరం",
+        district: "District / జిల్లా",
+        state: "State / రాష్ట్రం",
+        pincode: "Pincode / పిన్ కోడ్",
+        nomineeTitle: "Nominee Details / నామినీ వివరాలు",
+        nomineeSubtitle: "గరిష్టంగా 4 నామినీలు. అన్ని నామినీల వాటా మొత్తం 100% ఉండాలి.",
+        declarationTitle: "DECLARATION / ప్రకటన",
+        declarationSubtitle: "5లో 1 మాత్రమే ఎంచుకోండి.",
+        place: "Place / స్థలం",
+        declarationDate: "Date / తేదీ"
+    },
 
-const phoneInput =
-    document.getElementById("phone");
+    kn: {
+        welcomeText: "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಎಲ್ಲಾ ವಿವರಗಳನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ನಮೂದಿಸಿ. ಆನ್‌ಬೋರ್ಡಿಂಗ್ ದಾಖಲೆಗಳಿಗೆ ಅಗತ್ಯವಿರುವ ರೀತಿಯಲ್ಲಿ ಮಾಹಿತಿಯನ್ನು ನಮೂದಿಸಬೇಕು.",
+        personalSubtitle: "ನಿಮ್ಮ ಅಧಿಕೃತ ದಾಖಲೆಗಳ ಪ್ರಕಾರ ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಮತ್ತು ಉದ್ಯೋಗ ಮಾಹಿತಿಯನ್ನು ಒದಗಿಸಿ.",
+        name: "Name as per Aadhaar / ಆಧಾರ್ ಪ್ರಕಾರ ಹೆಸರು",
+        fatherName: "Father's Name / ತಂದೆಯ ಹೆಸರು",
+        spouseName: "Spouse's Name / ಸಂಗಾತಿಯ ಹೆಸರು",
+        dob: "Date of Birth as per Aadhaar / ಆಧಾರ್ ಪ್ರಕಾರ ಜನ್ಮ ದಿನಾಂಕ",
+        gender: "Gender / ಲಿಂಗ",
+        maritalStatus: "Marital Status / ವೈವಾಹಿಕ ಸ್ಥಿತಿ",
+        religion: "Religion / ಧರ್ಮ",
+        email: "Email ID / ಇಮೇಲ್ ಐಡಿ",
+        mobile: "Mobile Number / ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
+        doj: "Date of Joining (DOJ) / ಸೇರ್ಪಡೆ ದಿನಾಂಕ (DOJ)",
+        employmentStatus: "Employment Status / ಉದ್ಯೋಗ ಸ್ಥಿತಿ",
+        internationalWorker: "International Worker / ಅಂತರರಾಷ್ಟ್ರೀಯ ಕಾರ್ಮಿಕ",
+        previousEmployment: "Previous Employment Details / ಹಿಂದಿನ ಉದ್ಯೋಗ ವಿವರಗಳು",
+        previousEmploymentSubtitle: "ಈ ವಿವರಗಳು ಅನುಭವಿ ಉದ್ಯೋಗಿಗಳಿಗೆ ಮಾತ್ರ ಅಗತ್ಯವಿದೆ.",
+        previousCompany: "Previous Company Name / ಹಿಂದಿನ ಕಂಪನಿಯ ಹೆಸರು",
+        previousDOJ: "Previous DOJ / ಹಿಂದಿನ ಸೇರ್ಪಡೆ ದಿನಾಂಕ",
+        previousDOE: "Previous DOE / ಹಿಂದಿನ ನಿರ್ಗಮನ ದಿನಾಂಕ",
+        kycTitle: "KYC / Bank Details / KYC / ಬ್ಯಾಂಕ್ ವಿವರಗಳು",
+        kycSubtitle: "ನಿಮ್ಮ KYC ಮತ್ತು ಬ್ಯಾಂಕ್ ವಿವರಗಳನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ನಮೂದಿಸಿ.",
+        bankAccount: "Bank Account Number / ಬ್ಯಾಂಕ್ ಖಾತೆ ಸಂಖ್ಯೆ",
+        ifsc: "IFSC Code / IFSC ಕೋಡ್",
+        aadhaar: "Aadhaar Number / ಆಧಾರ್ ಸಂಖ್ಯೆ",
+        pan: "PAN Number / PAN ಸಂಖ್ಯೆ",
+        pfTitle: "EPF / EPS / UAN Details / EPF / EPS / UAN ವಿವರಗಳು",
+        epfMember: "Whether earlier a member of Employees' Provident Fund Scheme, 1952 / ಹಿಂದೆ ಉದ್ಯೋಗಿಗಳ ಭವಿಷ್ಯ ನಿಧಿ ಯೋಜನೆ, 1952ರ ಸದಸ್ಯರಾಗಿದ್ದೀರಾ",
+        epsMember: "Whether earlier a member of Employees' Pension Scheme, 1995 / ಹಿಂದೆ ಉದ್ಯೋಗಿಗಳ ಪಿಂಚಣಿ ಯೋಜನೆ, 1995ರ ಸದಸ್ಯರಾಗಿದ್ದೀರಾ",
+        uan: "Universal Account Number (UAN) / ಯೂನಿವರ್ಸಲ್ ಅಕೌಂಟ್ ಸಂಖ್ಯೆ (UAN)",
+        withdrawEPF: "Whether You Have Withdrawn Your Previous EPF Fund / ನಿಮ್ಮ ಹಿಂದಿನ EPF ನಿಧಿಯನ್ನು ಹಿಂಪಡೆದಿದ್ದೀರಾ",
+        withdrawEPS: "Whether You Have Withdrawn Your Previous EPS Fund / ನಿಮ್ಮ ಹಿಂದಿನ EPS ನಿಧಿಯನ್ನು ಹಿಂಪಡೆದಿದ್ದೀರಾ",
+        addressTitle: "Permanent Address / ಶಾಶ್ವತ ವಿಳಾಸ",
+        permanentAddress: "Permanent Address / ಶಾಶ್ವತ ವಿಳಾಸ",
+        city: "City / ನಗರ",
+        district: "District / ಜಿಲ್ಲೆ",
+        state: "State / ರಾಜ್ಯ",
+        pincode: "Pincode / ಪಿನ್ ಕೋಡ್",
+        nomineeTitle: "Nominee Details / ನಾಮಿನಿ ವಿವರಗಳು",
+        nomineeSubtitle: "ಗರಿಷ್ಠ 4 ನಾಮಿನಿಗಳು. ಎಲ್ಲಾ ನಾಮಿನಿಗಳ ಪಾಲು ಒಟ್ಟು 100% ಆಗಿರಬೇಕು.",
+        declarationTitle: "DECLARATION / ಘೋಷಣೆ",
+        declarationSubtitle: "5ರಲ್ಲಿ 1 ಮಾತ್ರ ಆಯ್ಕೆಮಾಡಿ.",
+        place: "Place / ಸ್ಥಳ",
+        declarationDate: "Date / ದಿನಾಂಕ"
+    },
 
-const placeInput =
-    document.getElementById("place");
+    ta: {
+        welcomeText: "உங்கள் அனைத்து விவரங்களையும் கவனமாக உள்ளிடவும். ஆன்போர்டிங் ஆவணங்களுக்கு தேவையான முறையில் தகவல்களை உள்ளிட வேண்டும்.",
+        personalSubtitle: "உங்கள் அதிகாரப்பூர்வ ஆவணங்களின்படி உங்கள் தனிப்பட்ட மற்றும் வேலைவாய்ப்பு தகவல்களை வழங்கவும்.",
+        name: "Name as per Aadhaar / ஆதார் படி பெயர்",
+        fatherName: "Father's Name / தந்தையின் பெயர்",
+        spouseName: "Spouse's Name / வாழ்க்கைத் துணையின் பெயர்",
+        dob: "Date of Birth as per Aadhaar / ஆதார் படி பிறந்த தேதி",
+        gender: "Gender / பாலினம்",
+        maritalStatus: "Marital Status / திருமண நிலை",
+        religion: "Religion / மதம்",
+        email: "Email ID / மின்னஞ்சல் ஐடி",
+        mobile: "Mobile Number / மொபைல் எண்",
+        doj: "Date of Joining (DOJ) / பணியில் சேர்ந்த தேதி (DOJ)",
+        employmentStatus: "Employment Status / வேலை நிலை",
+        internationalWorker: "International Worker / சர்வதேச தொழிலாளர்",
+        previousEmployment: "Previous Employment Details / முந்தைய வேலை விவரங்கள்",
+        previousEmploymentSubtitle: "இந்த விவரங்கள் அனுபவமுள்ள ஊழியர்களுக்கு மட்டுமே தேவையானவை.",
+        previousCompany: "Previous Company Name / முந்தைய நிறுவனத்தின் பெயர்",
+        previousDOJ: "Previous DOJ / முந்தைய சேர்ந்த தேதி",
+        previousDOE: "Previous DOE / முந்தைய வெளியேறிய தேதி",
+        kycTitle: "KYC / Bank Details / KYC / வங்கி விவரங்கள்",
+        kycSubtitle: "உங்கள் KYC மற்றும் வங்கி விவரங்களை கவனமாக உள்ளிடவும்.",
+        bankAccount: "Bank Account Number / வங்கி கணக்கு எண்",
+        ifsc: "IFSC Code / IFSC குறியீடு",
+        aadhaar: "Aadhaar Number / ஆதார் எண்",
+        pan: "PAN Number / PAN எண்",
+        pfTitle: "EPF / EPS / UAN Details / EPF / EPS / UAN விவரங்கள்",
+        epfMember: "Whether earlier a member of Employees' Provident Fund Scheme, 1952 / முன்பு ஊழியர் வருங்கால வைப்பு நிதி திட்டம், 1952 உறுப்பினராக இருந்தீர்களா",
+        epsMember: "Whether earlier a member of Employees' Pension Scheme, 1995 / முன்பு ஊழியர் ஓய்வூதிய திட்டம், 1995 உறுப்பினராக இருந்தீர்களா",
+        uan: "Universal Account Number (UAN) / யுனிவர்சல் அக்கவுண்ட் நம்பர் (UAN)",
+        withdrawEPF: "Whether You Have Withdrawn Your Previous EPF Fund / உங்கள் முந்தைய EPF நிதியை திரும்பப் பெற்றுள்ளீர்களா",
+        withdrawEPS: "Whether You Have Withdrawn Your Previous EPS Fund / உங்கள் முந்தைய EPS நிதியை திரும்பப் பெற்றுள்ளீர்களா",
+        addressTitle: "Permanent Address / நிரந்தர முகவரி",
+        permanentAddress: "Permanent Address / நிரந்தர முகவரி",
+        city: "City / நகரம்",
+        district: "District / மாவட்டம்",
+        state: "State / மாநிலம்",
+        pincode: "Pincode / அஞ்சல் குறியீடு",
+        nomineeTitle: "Nominee Details / நாமினி விவரங்கள்",
+        nomineeSubtitle: "அதிகபட்சம் 4 நாமினிகள். அனைத்து நாமினிகளின் பங்கு மொத்தம் 100% ஆக இருக்க வேண்டும்.",
+        declarationTitle: "DECLARATION / அறிவிப்பு",
+        declarationSubtitle: "5ல் 1ஐ மட்டும் தேர்வு செய்யவும்.",
+        place: "Place / இடம்",
+        declarationDate: "Date / தேதி"
+    },
 
-const dateInput =
-    document.getElementById("date");
+    ml: {
+        welcomeText: "നിങ്ങളുടെ എല്ലാ വിവരങ്ങളും ശ്രദ്ധാപൂർവ്വം നൽകുക. ഓൺബോർഡിംഗ് രേഖകൾക്ക് ആവശ്യമായ രീതിയിൽ വിവരങ്ങൾ നൽകണം.",
+        personalSubtitle: "നിങ്ങളുടെ ഔദ്യോഗിക രേഖകൾ പ്രകാരം വ്യക്തിഗതവും തൊഴിൽ സംബന്ധമായ വിവരങ്ങളും നൽകുക.",
+        name: "Name as per Aadhaar / ആധാർ പ്രകാരമുള്ള പേര്",
+        fatherName: "Father's Name / പിതാവിന്റെ പേര്",
+        spouseName: "Spouse's Name / പങ്കാളിയുടെ പേര്",
+        dob: "Date of Birth as per Aadhaar / ആധാർ പ്രകാരമുള്ള ജനന തീയതി",
+        gender: "Gender / ലിംഗം",
+        maritalStatus: "Marital Status / വൈവാഹിക നില",
+        religion: "Religion / മതം",
+        email: "Email ID / ഇമെയിൽ ഐഡി",
+        mobile: "Mobile Number / മൊബൈൽ നമ്പർ",
+        doj: "Date of Joining (DOJ) / ജോലിയിൽ ചേർന്ന തീയതി (DOJ)",
+        employmentStatus: "Employment Status / തൊഴിൽ നില",
+        internationalWorker: "International Worker / അന്താരാഷ്ട്ര തൊഴിലാളി",
+        previousEmployment: "Previous Employment Details / മുൻ തൊഴിൽ വിവരങ്ങൾ",
+        previousEmploymentSubtitle: "ഈ വിവരങ്ങൾ പരിചയസമ്പന്നരായ ജീവനക്കാർക്ക് മാത്രം ആവശ്യമാണ്.",
+        previousCompany: "Previous Company Name / മുൻ കമ്പനിയുടെ പേര്",
+        previousDOJ: "Previous DOJ / മുൻ ചേർന്ന തീയതി",
+        previousDOE: "Previous DOE / മുൻ ജോലി അവസാനിച്ച തീയതി",
+        kycTitle: "KYC / Bank Details / KYC / ബാങ്ക് വിവരങ്ങൾ",
+        kycSubtitle: "നിങ്ങളുടെ KYC, ബാങ്ക് വിവരങ്ങൾ ശ്രദ്ധാപൂർവ്വം നൽകുക.",
+        bankAccount: "Bank Account Number / ബാങ്ക് അക്കൗണ്ട് നമ്പർ",
+        ifsc: "IFSC Code / IFSC കോഡ്",
+        aadhaar: "Aadhaar Number / ആധാർ നമ്പർ",
+        pan: "PAN Number / PAN നമ്പർ",
+        pfTitle: "EPF / EPS / UAN Details / EPF / EPS / UAN വിവരങ്ങൾ",
+        epfMember: "Whether earlier a member of Employees' Provident Fund Scheme, 1952 / മുമ്പ് എംപ്ലോയീസ് പ്രൊവിഡന്റ് ഫണ്ട് സ്കീം, 1952 അംഗമായിരുന്നോ",
+        epsMember: "Whether earlier a member of Employees' Pension Scheme, 1995 / മുമ്പ് എംപ്ലോയീസ് പെൻഷൻ സ്കീം, 1995 അംഗമായിരുന്നോ",
+        uan: "Universal Account Number (UAN) / യൂണിവേഴ്സൽ അക്കൗണ്ട് നമ്പർ (UAN)",
+        withdrawEPF: "Whether You Have Withdrawn Your Previous EPF Fund / മുൻ EPF ഫണ്ട് പിൻവലിച്ചിട്ടുണ്ടോ",
+        withdrawEPS: "Whether You Have Withdrawn Your Previous EPS Fund / മുൻ EPS ഫണ്ട് പിൻവലിച്ചിട്ടുണ്ടോ",
+        addressTitle: "Permanent Address / സ്ഥിര വിലാസം",
+        permanentAddress: "Permanent Address / സ്ഥിര വിലാസം",
+        city: "City / നഗരം",
+        district: "District / ജില്ല",
+        state: "State / സംസ്ഥാനം",
+        pincode: "Pincode / പിൻകോഡ്",
+        nomineeTitle: "Nominee Details / നോമിനി വിവരങ്ങൾ",
+        nomineeSubtitle: "പരമാവധി 4 നോമിനികൾ. എല്ലാ നോമിനികളുടെയും വിഹിതം ആകെ 100% ആയിരിക്കണം.",
+        declarationTitle: "DECLARATION / പ്രഖ്യാപനം",
+        declarationSubtitle: "5ൽ 1 എണ്ണം മാത്രം തിരഞ്ഞെടുക്കുക.",
+        place: "Place / സ്ഥലം",
+        declarationDate: "Date / തീയതി"
+    },
 
-const statusBox =
-    document.getElementById("status");
-
+    hi: {
+        welcomeText: "कृपया अपनी सभी जानकारी ध्यानपूर्वक दर्ज करें। ऑनबोर्डिंग दस्तावेज़ों के लिए आवश्यक रूप में ही जानकारी दर्ज करें।",
+        personalSubtitle: "अपने आधिकारिक दस्तावेज़ों के अनुसार अपनी व्यक्तिगत और रोजगार संबंधी जानकारी प्रदान करें।",
+        name: "Name as per Aadhaar / आधार के अनुसार नाम",
+        fatherName: "Father's Name / पिता का नाम",
+        spouseName: "Spouse's Name / जीवनसाथी का नाम",
+        dob: "Date of Birth as per Aadhaar / आधार के अनुसार जन्म तिथि",
+        gender: "Gender / लिंग",
+        maritalStatus: "Marital Status / वैवाहिक स्थिति",
+        religion: "Religion / धर्म",
+        email: "Email ID / ईमेल आईडी",
+        mobile: "Mobile Number / मोबाइल नंबर",
+        doj: "Date of Joining (DOJ) / ज्वाइनिंग की तारीख (DOJ)",
+        employmentStatus: "Employment Status / रोजगार स्थिति",
+        internationalWorker: "International Worker / अंतरराष्ट्रीय कर्मचारी",
+        previousEmployment: "Previous Employment Details / पिछली नौकरी का विवरण",
+        previousEmploymentSubtitle: "ये विवरण केवल अनुभवी कर्मचारियों के लिए आवश्यक हैं।",
+        previousCompany: "Previous Company Name / पिछली कंपनी का नाम",
+        previousDOJ: "Previous DOJ / पिछली नौकरी में शामिल होने की तारीख",
+        previousDOE: "Previous DOE / पिछली नौकरी छोड़ने की तारीख",
+        kycTitle: "KYC / Bank Details / KYC / बैंक विवरण",
+        kycSubtitle: "अपनी KYC और बैंक जानकारी ध्यानपूर्वक दर्ज करें।",
+        bankAccount: "Bank Account Number / बैंक खाता संख्या",
+        ifsc: "IFSC Code / IFSC कोड",
+        aadhaar: "Aadhaar Number / आधार संख्या",
+        pan: "PAN Number / PAN संख्या",
+        pfTitle: "EPF / EPS / UAN Details / EPF / EPS / UAN विवरण",
+        epfMember: "Whether earlier a member of Employees' Provident Fund Scheme, 1952 / क्या पहले कर्मचारी भविष्य निधि योजना, 1952 के सदस्य थे",
+        epsMember: "Whether earlier a member of Employees' Pension Scheme, 1995 / क्या पहले कर्मचारी पेंशन योजना, 1995 के सदस्य थे",
+        uan: "Universal Account Number (UAN) / यूनिवर्सल अकाउंट नंबर (UAN)",
+        withdrawEPF: "Whether You Have Withdrawn Your Previous EPF Fund / क्या आपने अपना पिछला EPF फंड निकाला है",
+        withdrawEPS: "Whether You Have Withdrawn Your Previous EPS Fund / क्या आपने अपना पिछला EPS फंड निकाला है",
+        addressTitle: "Permanent Address / स्थायी पता",
+        permanentAddress: "Permanent Address / स्थायी पता",
+        city: "City / शहर",
+        district: "District / जिला",
+        state: "State / राज्य",
+        pincode: "Pincode / पिनकोड",
+        nomineeTitle: "Nominee Details / नामांकित व्यक्ति का विवरण",
+        nomineeSubtitle: "अधिकतम 4 नामांकित व्यक्ति। सभी नामांकित व्यक्तियों का कुल हिस्सा 100% होना चाहिए।",
+        declarationTitle: "DECLARATION / घोषणा",
+        declarationSubtitle: "5 में से केवल 1 चुनें।",
+        place: "Place / स्थान",
+        declarationDate: "Date / दिनांक"
+    }
+};
 
 
 /* =====================================================
-   GET ALL CANDIDATES
+   LANGUAGE
 ===================================================== */
 
-function getCandidates() {
+function changeLanguage() {
 
-    const saved =
-        localStorage.getItem(
-            CANDIDATES_KEY
-        );
+    const language =
+        document.getElementById("languageSelect").value;
 
-    if (!saved) {
-        return {};
+    if (language === "en") {
+        location.reload();
+        return;
     }
 
-    try {
+    const dictionary = translations[language];
 
-        const data =
-            JSON.parse(saved);
+    if (!dictionary) return;
 
-        if (
-            typeof data !== "object" ||
-            data === null
-        ) {
-            return {};
+    document.querySelectorAll("[data-i18n]")
+        .forEach(function(element) {
+
+            const key =
+                element.getAttribute("data-i18n");
+
+            if (dictionary[key]) {
+                element.textContent =
+                    dictionary[key];
+            }
+        });
+}
+
+
+/* =====================================================
+   MARITAL STATUS / SPOUSE
+===================================================== */
+
+function maritalStatusChanged() {
+
+    const status =
+        document.getElementById("maritalStatus").value;
+
+    const spouse =
+        document.getElementById("spouseName");
+
+    const required =
+        document.getElementById("spouseRequired");
+
+    const spouseMandatory =
+        status === "Married" ||
+        status === "Widow" ||
+        status === "Widower" ||
+        status === "Divorcee";
+
+    spouse.required = spouseMandatory;
+
+    if (spouseMandatory) {
+        required.style.display = "inline";
+    } else {
+        required.style.display = "none";
+        spouse.value = "";
+    }
+
+    updateNomineeRelations();
+}
+
+
+/* =====================================================
+   EMPLOYMENT STATUS
+===================================================== */
+
+function employmentChanged() {
+
+    const status =
+        document.getElementById("employmentStatus").value;
+
+    const box =
+        document.getElementById("previousEmployment");
+
+    const company =
+        document.getElementById("previousCompany");
+
+    const doj =
+        document.getElementById("previousDOJ");
+
+    const doe =
+        document.getElementById("previousDOE");
+
+    const fields = [
+        company,
+        doj,
+        doe
+    ];
+
+    if (status === "Experienced") {
+
+        box.classList.remove("hidden");
+
+        fields.forEach(function(field) {
+            field.required = true;
+        });
+
+    } else {
+
+        box.classList.add("hidden");
+
+        fields.forEach(function(field) {
+            field.required = false;
+            field.value = "";
+        });
+    }
+}
+
+
+/* =====================================================
+   NOMINEE RELATION OPTIONS
+===================================================== */
+
+function relationOptions() {
+
+    const maritalStatus =
+        document.getElementById("maritalStatus").value;
+
+    let options = `
+        <option value="">Select</option>
+        <option value="Father">Father</option>
+        <option value="Mother">Mother</option>
+    `;
+
+    if (
+        maritalStatus === "Married" ||
+        maritalStatus === "Widow" ||
+        maritalStatus === "Widower" ||
+        maritalStatus === "Divorcee"
+    ) {
+        options += `
+            <option value="Spouse">Spouse</option>
+        `;
+    }
+
+    options += `
+        <option value="Guardian">Guardian</option>
+    `;
+
+    return options;
+}
+
+
+function updateNomineeRelations() {
+
+    for (let i = 1; i <= 4; i++) {
+
+        const relation =
+            document.getElementById(
+                "nominee" + i + "_relation"
+            );
+
+        if (!relation) continue;
+
+        const currentValue =
+            relation.value;
+
+        relation.innerHTML =
+            relationOptions();
+
+        const available =
+            Array.from(relation.options)
+                .some(function(option) {
+                    return option.value === currentValue;
+                });
+
+        if (available) {
+            relation.value = currentValue;
         }
-
-        return data;
-
     }
-    catch(error) {
-
-        console.error(error);
-
-        return {};
-
-    }
-
 }
 
 
-
 /* =====================================================
-   SAVE ALL CANDIDATES
+   ADD NOMINEE
 ===================================================== */
 
-function saveCandidates(
-    candidates
-) {
+function addNominee() {
 
-    localStorage.setItem(
+    if (nomineeCount >= 4) {
 
-        CANDIDATES_KEY,
+        alert(
+            "Maximum 4 nominees are allowed."
+        );
 
-        JSON.stringify(
-            candidates
+        return;
+    }
+
+    nomineeCount++;
+
+    const number =
+        nomineeCount;
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "nominee-card";
+
+    div.id =
+        "nominee-" + number;
+
+    div.innerHTML = `
+
+        <div class="nominee-title">
+            Nominee ${number}
+        </div>
+
+        <div class="grid">
+
+            <div class="field">
+
+                <label>
+                    Name of Nominee
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="nominee${number}_name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Relation with Employee
+                    <span class="required">*</span>
+                </label>
+
+                <select
+                    id="nominee${number}_relation"
+                    required
+                >
+                    ${relationOptions()}
+                </select>
+
+            </div>
+
+
+            <div class="field full">
+
+                <label>
+                    Address of Nominee
+                    <span class="required">*</span>
+                </label>
+
+                <textarea
+                    id="nominee${number}_address"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Aadhaar Number of Nominee
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="nominee${number}_aadhaar"
+                    inputmode="numeric"
+                    maxlength="12"
+                    pattern="[0-9]{12}"
+                    oninput="digitsOnly(this)"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    DOB of Nominee
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="date"
+                    id="nominee${number}_dob"
+                    onchange="calculateNomineeAge(${number})"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Age
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    class="nominee-age"
+                    id="nominee${number}_age"
+                    readonly
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Percentage of Share
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="nominee${number}_percentage"
+                    min="1"
+                    max="100"
+                    step="1"
+                    required
+                >
+
+            </div>
+
+        </div>
+    `;
+
+    document
+        .getElementById("nomineeContainer")
+        .appendChild(div);
+
+    if (nomineeCount >= 4) {
+
+        document
+            .getElementById("addNomineeButton")
+            .style.display = "none";
+    }
+}
+
+
+/* =====================================================
+   NOMINEE AGE
+===================================================== */
+
+function calculateNomineeAge(number) {
+
+    const dob =
+        document.getElementById(
+            "nominee" + number + "_dob"
+        ).value;
+
+    const ageField =
+        document.getElementById(
+            "nominee" + number + "_age"
+        );
+
+    if (!dob) {
+        ageField.value = "";
+        return;
+    }
+
+    const birthDate =
+        new Date(dob + "T00:00:00");
+
+    const today =
+        new Date();
+
+    if (birthDate > today) {
+        ageField.value = "";
+        return;
+    }
+
+    let age =
+        today.getFullYear() -
+        birthDate.getFullYear();
+
+    const month =
+        today.getMonth() -
+        birthDate.getMonth();
+
+    if (
+        month < 0 ||
+        (
+            month === 0 &&
+            today.getDate() < birthDate.getDate()
         )
-
-    );
-
-}
-
-
-
-/* =====================================================
-   CLEAN EMAIL
-===================================================== */
-
-function cleanEmail(
-    email
-) {
-
-    return email
-        .trim()
-        .toLowerCase();
-
-}
-
-
-
-/* =====================================================
-   CLEAN PHONE
-===================================================== */
-
-function cleanPhone(
-    phone
-) {
-
-    return phone
-        .replace(
-            /\D/g,
-            ""
-        );
-
-}
-
-
-
-/* =====================================================
-   GET IDENTIFIERS
-===================================================== */
-
-function getIdentifiers(
-    data
-) {
-
-    const identifiers = [];
-
-
-    if (data.email) {
-
-        identifiers.push(
-
-            "email:"
-            +
-            cleanEmail(
-                data.email
-            )
-
-        );
-
+    ) {
+        age--;
     }
 
-
-    if (data.phone) {
-
-        identifiers.push(
-
-            "phone:"
-            +
-            cleanPhone(
-                data.phone
-            )
-
-        );
-
-    }
-
-
-    return identifiers;
-
+    ageField.value =
+        age >= 0 ? age : "";
 }
 
+
+/* =====================================================
+   DIGITS ONLY
+===================================================== */
+
+function digitsOnly(input) {
+
+    input.value =
+        input.value.replace(/\D/g, "");
+}
+
+
+/* =====================================================
+   GET NOMINEES
+===================================================== */
+
+function getNominees() {
+
+    const nominees = [];
+
+    for (let i = 1; i <= nomineeCount; i++) {
+
+        const card =
+            document.getElementById(
+                "nominee-" + i
+            );
+
+        if (!card) continue;
+
+        nominees.push({
+
+            name:
+                document.getElementById(
+                    "nominee" + i + "_name"
+                ).value.trim(),
+
+            address:
+                document.getElementById(
+                    "nominee" + i + "_address"
+                ).value.trim(),
+
+            relation:
+                document.getElementById(
+                    "nominee" + i + "_relation"
+                ).value,
+
+            aadhaar:
+                document.getElementById(
+                    "nominee" + i + "_aadhaar"
+                ).value,
+
+            dob:
+                document.getElementById(
+                    "nominee" + i + "_dob"
+                ).value,
+
+            age:
+                document.getElementById(
+                    "nominee" + i + "_age"
+                ).value,
+
+            percentage:
+                document.getElementById(
+                    "nominee" + i + "_percentage"
+                ).value
+        });
+    }
+
+    return nominees;
+}
 
 
 /* =====================================================
@@ -652,50 +1783,570 @@ function getIdentifiers(
 
 function getFormData() {
 
+    const declaration =
+        document.querySelector(
+            'input[name="declaration"]:checked'
+        );
+
     return {
 
         name:
-            nameInput.value.trim(),
+            document.getElementById("name").value.trim(),
+
+        fatherName:
+            document.getElementById("fatherName").value.trim(),
+
+        spouseName:
+            document.getElementById("spouseName").value.trim(),
+
+        dob:
+            document.getElementById("dob").value,
+
+        gender:
+            document.getElementById("gender").value,
+
+        maritalStatus:
+            document.getElementById("maritalStatus").value,
+
+        religion:
+            document.getElementById("religion").value.trim(),
 
         email:
-            emailInput.value.trim(),
+            document.getElementById("email").value.trim(),
 
-        phone:
-            phoneInput.value.trim(),
+        mobile:
+            document.getElementById("mobile").value.trim(),
+
+        doj:
+            document.getElementById("doj").value,
+
+        employmentStatus:
+            document.getElementById("employmentStatus").value,
+
+        internationalWorker:
+            document.getElementById("internationalWorker").value,
+
+        previousCompany:
+            document.getElementById("previousCompany").value.trim(),
+
+        previousDOJ:
+            document.getElementById("previousDOJ").value,
+
+        previousDOE:
+            document.getElementById("previousDOE").value,
+
+        bankAccount:
+            document.getElementById("bankAccount").value.trim(),
+
+        ifsc:
+            document.getElementById("ifsc").value.trim().toUpperCase(),
+
+        aadhaar:
+            document.getElementById("aadhaar").value,
+
+        pan:
+            document.getElementById("pan").value.trim().toUpperCase(),
+
+        epfMember:
+            document.getElementById("epfMember").value,
+
+        epsMember:
+            document.getElementById("epsMember").value,
+
+        uan:
+            document.getElementById("uan").value,
+
+        withdrawEPF:
+            document.getElementById("withdrawEPF").value,
+
+        withdrawEPS:
+            document.getElementById("withdrawEPS").value,
+
+        permanentAddress:
+            document.getElementById("permanentAddress").value.trim(),
+
+        city:
+            document.getElementById("city").value.trim(),
+
+        district:
+            document.getElementById("district").value.trim(),
+
+        state:
+            document.getElementById("state").value.trim(),
+
+        pincode:
+            document.getElementById("pincode").value,
+
+        nominees:
+            getNominees(),
+
+        declaration:
+            declaration
+                ? declaration.value
+                : "",
 
         place:
-            placeInput.value.trim(),
+            document.getElementById("place").value.trim(),
 
-        date:
-            dateInput.value,
+        declarationDate:
+            document.getElementById("declarationDate").value,
 
-        lastSaved:
+        savedAt:
             new Date().toISOString()
-
     };
-
 }
-
 
 
 /* =====================================================
-   CHECK EMAIL OR PHONE
+   VALIDATION HELPERS
 ===================================================== */
 
-function hasIdentifier(
-    data
-) {
+function requiredValue(label, value) {
 
-    return (
+    if (!value) {
 
-        data.email !== ""
-        ||
-        data.phone !== ""
+        alert(
+            "Please enter/select: " + label
+        );
 
-    );
+        return false;
+    }
 
+    return true;
 }
 
+
+/* =====================================================
+   VALIDATION
+===================================================== */
+
+function validateForm(data) {
+
+    const requiredFields = [
+
+        ["Name as per Aadhaar", data.name],
+        ["Father's Name", data.fatherName],
+        ["Date of Birth", data.dob],
+        ["Gender", data.gender],
+        ["Marital Status", data.maritalStatus],
+        ["Religion", data.religion],
+        ["Email ID", data.email],
+        ["Mobile Number", data.mobile],
+        ["Date of Joining (DOJ)", data.doj],
+        ["Employment Status", data.employmentStatus],
+        ["International Worker", data.internationalWorker],
+        ["Bank Account Number", data.bankAccount],
+        ["IFSC Code", data.ifsc],
+        ["Aadhaar Number", data.aadhaar],
+        ["PAN Number", data.pan],
+        ["EPF membership", data.epfMember],
+        ["EPS membership", data.epsMember],
+        ["Universal Account Number (UAN)", data.uan],
+        ["Previous EPF withdrawal", data.withdrawEPF],
+        ["Previous EPS withdrawal", data.withdrawEPS],
+        ["Permanent Address", data.permanentAddress],
+        ["City", data.city],
+        ["District", data.district],
+        ["State", data.state],
+        ["Pincode", data.pincode],
+        ["Place", data.place],
+        ["Declaration Date", data.declarationDate]
+    ];
+
+    for (const item of requiredFields) {
+
+        if (!requiredValue(item[0], item[1])) {
+            return false;
+        }
+    }
+
+
+    /* =================================================
+       SPOUSE
+    ================================================= */
+
+    const spouseRequired =
+        data.maritalStatus === "Married" ||
+        data.maritalStatus === "Widow" ||
+        data.maritalStatus === "Widower" ||
+        data.maritalStatus === "Divorcee";
+
+    if (spouseRequired && !data.spouseName) {
+
+        alert(
+            "Spouse's Name is mandatory for the selected marital status."
+        );
+
+        document
+            .getElementById("spouseName")
+            .focus();
+
+        return false;
+    }
+
+
+    /* =================================================
+       MOBILE
+    ================================================= */
+
+    if (!/^\d{10}$/.test(data.mobile)) {
+
+        alert(
+            "Mobile Number must contain exactly 10 digits."
+        );
+
+        document
+            .getElementById("mobile")
+            .focus();
+
+        return false;
+    }
+
+
+    /* =================================================
+       AADHAAR
+    ================================================= */
+
+    if (!/^\d{12}$/.test(data.aadhaar)) {
+
+        alert(
+            "Aadhaar Number must contain exactly 12 digits."
+        );
+
+        document
+            .getElementById("aadhaar")
+            .focus();
+
+        return false;
+    }
+
+
+    /* =================================================
+       UAN
+    ================================================= */
+
+    if (!/^\d{12}$/.test(data.uan)) {
+
+        alert(
+            "Universal Account Number (UAN) must contain exactly 12 digits."
+        );
+
+        document
+            .getElementById("uan")
+            .focus();
+
+        return false;
+    }
+
+
+    /* =================================================
+       PINCODE
+    ================================================= */
+
+    if (!/^\d{6}$/.test(data.pincode)) {
+
+        alert(
+            "Pincode must contain exactly 6 digits."
+        );
+
+        document
+            .getElementById("pincode")
+            .focus();
+
+        return false;
+    }
+
+
+    /* =================================================
+       PAN
+    ================================================= */
+
+    if (
+        !/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(data.pan)
+    ) {
+
+        alert(
+            "Please enter a valid PAN Number."
+        );
+
+        document
+            .getElementById("pan")
+            .focus();
+
+        return false;
+    }
+
+
+    /* =================================================
+       IFSC
+    ================================================= */
+
+    if (
+        !/^[A-Z]{4}0[A-Z0-9]{6}$/.test(data.ifsc)
+    ) {
+
+        alert(
+            "Please enter a valid IFSC Code."
+        );
+
+        document
+            .getElementById("ifsc")
+            .focus();
+
+        return false;
+    }
+
+
+    /* =================================================
+       DATE OF BIRTH
+    ================================================= */
+
+    const today =
+        new Date();
+
+    const employeeDOB =
+        new Date(data.dob + "T00:00:00");
+
+    if (employeeDOB > today) {
+
+        alert(
+            "Date of Birth cannot be in the future."
+        );
+
+        return false;
+    }
+
+
+    /* =================================================
+       PREVIOUS EMPLOYMENT
+    ================================================= */
+
+    if (
+        data.employmentStatus === "Experienced"
+    ) {
+
+        if (!data.previousCompany) {
+
+            alert(
+                "Please enter Previous Company Name."
+            );
+
+            return false;
+        }
+
+        if (!data.previousDOJ) {
+
+            alert(
+                "Please enter Previous DOJ."
+            );
+
+            return false;
+        }
+
+        if (!data.previousDOE) {
+
+            alert(
+                "Please enter Previous DOE."
+            );
+
+            return false;
+        }
+
+        const previousDOJ =
+            new Date(
+                data.previousDOJ + "T00:00:00"
+            );
+
+        const previousDOE =
+            new Date(
+                data.previousDOE + "T00:00:00"
+            );
+
+        if (previousDOE < previousDOJ) {
+
+            alert(
+                "Previous DOE cannot be earlier than Previous DOJ."
+            );
+
+            return false;
+        }
+
+        const currentDOJ =
+            new Date(
+                data.doj + "T00:00:00"
+            );
+
+        if (previousDOE > currentDOJ) {
+
+            alert(
+                "Previous DOE cannot be later than the current Date of Joining."
+            );
+
+            return false;
+        }
+    }
+
+
+    /* =================================================
+       NOMINEES
+    ================================================= */
+
+    if (data.nominees.length === 0) {
+
+        alert(
+            "Please enter at least one nominee."
+        );
+
+        return false;
+    }
+
+
+    let percentageTotal = 0;
+
+    for (
+        let i = 0;
+        i < data.nominees.length;
+        i++
+    ) {
+
+        const n =
+            data.nominees[i];
+
+        const number =
+            i + 1;
+
+
+        if (!n.name) {
+
+            alert(
+                "Please enter Nominee " +
+                number +
+                " Name."
+            );
+
+            return false;
+        }
+
+
+        if (!n.address) {
+
+            alert(
+                "Please enter Nominee " +
+                number +
+                " Address."
+            );
+
+            return false;
+        }
+
+
+        if (!n.relation) {
+
+            alert(
+                "Please select Nominee " +
+                number +
+                " Relation."
+            );
+
+            return false;
+        }
+
+
+        if (!n.aadhaar) {
+
+            alert(
+                "Please enter Nominee " +
+                number +
+                " Aadhaar Number."
+            );
+
+            return false;
+        }
+
+
+        if (!/^\d{12}$/.test(n.aadhaar)) {
+
+            alert(
+                "Nominee " +
+                number +
+                " Aadhaar Number must contain exactly 12 digits."
+            );
+
+            return false;
+        }
+
+
+        if (!n.dob) {
+
+            alert(
+                "Please enter Nominee " +
+                number +
+                " DOB."
+            );
+
+            return false;
+        }
+
+
+        if (!n.age) {
+
+            alert(
+                "Please check Nominee " +
+                number +
+                " Age."
+            );
+
+            return false;
+        }
+
+
+        if (
+            !n.percentage ||
+            Number(n.percentage) <= 0 ||
+            Number(n.percentage) > 100
+        ) {
+
+            alert(
+                "Please enter a valid Percentage of Share for Nominee " +
+                number +
+                "."
+            );
+
+            return false;
+        }
+
+
+        percentageTotal +=
+            Number(n.percentage);
+    }
+
+
+    if (percentageTotal !== 100) {
+
+        alert(
+            "The total Percentage of Share for all nominees must be exactly 100%."
+        );
+
+        return false;
+    }
+
+
+    /* =================================================
+       DECLARATION
+    ================================================= */
+
+    if (!data.declaration) {
+
+        alert(
+            "Please select exactly one declaration."
+        );
+
+        return false;
+    }
+
+
+    return true;
+}
 
 
 /* =====================================================
@@ -704,413 +2355,194 @@ function hasIdentifier(
 
 function saveDraft() {
 
-
     const data =
         getFormData();
 
-
     /*
-       At least one identifier
-       must be supplied.
+       Save Draft deliberately does NOT require
+       final validation. This allows the candidate
+       to save partially completed work.
     */
 
-    if (
-        !hasIdentifier(
-            data
-        )
-    ) {
-
-        alert(
-
-            "Please enter either your email address OR mobile number."
-
-        );
-
-        emailInput.focus();
-
-        return false;
-
-    }
-
-
-    /*
-       Get all existing candidates.
-    */
-
-    const candidates =
-        getCandidates();
-
-
-    /*
-       Create identifiers.
-    */
-
-    const identifiers =
-        getIdentifiers(
-            data
-        );
-
-
-    /*
-       Check if this person already
-       has a record.
-    */
-
-    let existingRecord = null;
-
-
-    for (
-        const id of identifiers
-    ) {
-
-        if (
-            candidates[id]
-        ) {
-
-            existingRecord =
-                candidates[id];
-
-            break;
-
-        }
-
-    }
-
-
-    /*
-       If existing record found,
-       update it.
-    */
-
-    if (existingRecord) {
-
-        const existingIds =
-            getIdentifiers(
-                existingRecord
-            );
-
-
-        for (
-            const id of existingIds
-        ) {
-
-            delete candidates[id];
-
-        }
-
-    }
-
-
-    /*
-       Save using BOTH identifiers
-       when both are supplied.
-
-       This means the candidate can
-       later retrieve the same record
-       using either email OR phone.
-    */
-
-    for (
-        const id of identifiers
-    ) {
-
-        candidates[id] =
-            data;
-
-    }
-
-
-    saveCandidates(
-        candidates
+    localStorage.setItem(
+        DRAFT_KEY,
+        JSON.stringify(data)
     );
-
 
     showStatus(
-
-        "Draft saved successfully. You can return later using your email OR mobile number.",
-
+        "Draft saved successfully.",
         "success"
-
     );
-
 
     return true;
-
 }
 
 
-
 /* =====================================================
-   LOAD EXISTING DRAFT
+   LOAD DRAFT
 ===================================================== */
 
-function loadExistingDraft() {
+function loadDraft() {
 
+    const saved =
+        localStorage.getItem(DRAFT_KEY);
 
-    const identifier =
-        prompt(
+    if (!saved) return;
 
-            "Enter your email address OR mobile number:"
+    try {
 
+        const data =
+            JSON.parse(saved);
+
+        setValue("name", data.name);
+        setValue("fatherName", data.fatherName);
+        setValue("spouseName", data.spouseName);
+        setValue("dob", data.dob);
+        setValue("gender", data.gender);
+        setValue("maritalStatus", data.maritalStatus);
+        setValue("religion", data.religion);
+        setValue("email", data.email);
+        setValue("mobile", data.mobile);
+        setValue("doj", data.doj);
+        setValue("employmentStatus", data.employmentStatus);
+        setValue("internationalWorker", data.internationalWorker);
+
+        setValue("previousCompany", data.previousCompany);
+        setValue("previousDOJ", data.previousDOJ);
+        setValue("previousDOE", data.previousDOE);
+
+        setValue("bankAccount", data.bankAccount);
+        setValue("ifsc", data.ifsc);
+        setValue("aadhaar", data.aadhaar);
+        setValue("pan", data.pan);
+
+        setValue("epfMember", data.epfMember);
+        setValue("epsMember", data.epsMember);
+        setValue("uan", data.uan);
+        setValue("withdrawEPF", data.withdrawEPF);
+        setValue("withdrawEPS", data.withdrawEPS);
+
+        setValue(
+            "permanentAddress",
+            data.permanentAddress
         );
 
+        setValue("city", data.city);
+        setValue("district", data.district);
+        setValue("state", data.state);
+        setValue("pincode", data.pincode);
 
-    if (!identifier) {
-
-        return;
-
-    }
-
-
-    const candidates =
-        getCandidates();
-
-
-    let key = "";
-
-
-    /*
-       Determine whether input is
-       email or phone.
-    */
-
-    if (
-        identifier.includes("@")
-    ) {
-
-        key =
-            "email:"
-            +
-            cleanEmail(
-                identifier
-            );
-
-    }
-    else {
-
-        key =
-            "phone:"
-            +
-            cleanPhone(
-                identifier
-            );
-
-    }
-
-
-    const data =
-        candidates[key];
-
-
-    if (!data) {
-
-        alert(
-
-            "No saved draft was found for this email or mobile number."
-
+        setValue("place", data.place);
+        setValue(
+            "declarationDate",
+            data.declarationDate
         );
 
-        return;
-
-    }
-
-
-    /*
-       Fill the form.
-    */
-
-    nameInput.value =
-        data.name || "";
+        maritalStatusChanged();
+        employmentChanged();
 
 
-    emailInput.value =
-        data.email || "";
-
-
-    phoneInput.value =
-        data.phone || "";
-
-
-    placeInput.value =
-        data.place || "";
-
-
-    dateInput.value =
-        data.date || "";
-
-
-    showStatus(
-
-        "Your saved draft has been loaded successfully.",
-
-        "success"
-
-    );
-
-}
-
-
-
-/* =====================================================
-   CLEAR CURRENT DRAFT
-===================================================== */
-
-function clearCurrentDraft() {
-
-
-    const email =
-        emailInput.value.trim();
-
-
-    const phone =
-        phoneInput.value.trim();
-
-
-    if (
-        !email &&
-        !phone
-    ) {
-
-        alert(
-
-            "Enter your email OR mobile number first."
-
-        );
-
-        return;
-
-    }
-
-
-    const identifiers = [];
-
-
-    if (email) {
-
-        identifiers.push(
-
-            "email:"
-            +
-            cleanEmail(
-                email
-            )
-
-        );
-
-    }
-
-
-    if (phone) {
-
-        identifiers.push(
-
-            "phone:"
-            +
-            cleanPhone(
-                phone
-            )
-
-        );
-
-    }
-
-
-    const candidates =
-        getCandidates();
-
-
-    let found =
-        false;
-
-
-    for (
-        const id of identifiers
-    ) {
+        /* Restore nominees */
 
         if (
-            candidates[id]
+            Array.isArray(data.nominees)
         ) {
 
-            /*
-               Remove all identifiers
-               belonging to that record.
-            */
+            data.nominees
+                .slice(0, 4)
+                .forEach(function(n) {
 
-            const record =
-                candidates[id];
+                    addNominee();
+
+                    const number =
+                        nomineeCount;
+
+                    setValue(
+                        "nominee" +
+                        number +
+                        "_name",
+                        n.name
+                    );
+
+                    setValue(
+                        "nominee" +
+                        number +
+                        "_address",
+                        n.address
+                    );
+
+                    setValue(
+                        "nominee" +
+                        number +
+                        "_relation",
+                        n.relation
+                    );
+
+                    setValue(
+                        "nominee" +
+                        number +
+                        "_aadhaar",
+                        n.aadhaar
+                    );
+
+                    setValue(
+                        "nominee" +
+                        number +
+                        "_dob",
+                        n.dob
+                    );
+
+                    setValue(
+                        "nominee" +
+                        number +
+                        "_percentage",
+                        n.percentage
+                    );
+
+                    calculateNomineeAge(number);
+                });
+        }
 
 
-            const recordIds =
-                getIdentifiers(
-                    record
+        updateNomineeRelations();
+
+
+        /* Restore declaration */
+
+        if (data.declaration) {
+
+            const declaration =
+                document.querySelector(
+                    'input[name="declaration"][value="' +
+                    data.declaration +
+                    '"]'
                 );
 
-
-            for (
-                const recordId
-                of recordIds
-            ) {
-
-                delete candidates[
-                    recordId
-                ];
-
+            if (declaration) {
+                declaration.checked = true;
             }
-
-
-            found =
-                true;
-
-
-            break;
-
         }
 
     }
+    catch(error) {
 
-
-    if (!found) {
-
-        alert(
-            "No saved draft was found."
+        console.error(
+            "Could not load draft:",
+            error
         );
-
-        return;
-
     }
-
-
-    saveCandidates(
-        candidates
-    );
-
-
-    nameInput.value =
-        "";
-
-    emailInput.value =
-        "";
-
-    phoneInput.value =
-        "";
-
-    placeInput.value =
-        "";
-
-    dateInput.value =
-        "";
-
-
-    showStatus(
-
-        "Your saved draft has been deleted.",
-
-        "success"
-
-    );
-
 }
 
+
+function setValue(id, value) {
+
+    const element =
+        document.getElementById(id);
+
+    if (element) {
+        element.value = value || "";
+    }
+}
 
 
 /* =====================================================
@@ -1122,400 +2554,339 @@ function showStatus(
     type
 ) {
 
-    statusBox.textContent =
+    const box =
+        document.getElementById("status");
+
+    box.textContent =
         message;
 
-    statusBox.className =
-        "status "
-        +
-        type;
-
+    box.className =
+        "status " + type;
 }
 
 
-
 /* =====================================================
-   VALIDATE FORM
+   PDF MAPPING
+=====================================================
+
+   IMPORTANT:
+
+   The PDF is expected to be located beside this
+   HTML file:
+
+       Onboarding Documents.pdf
+
+   The 9 pages have mixed Letter/A4 dimensions.
+
+   Do NOT invent coordinates.
+
+   The actual coordinate entries will be added
+   after the physical positions of every field
+   in the supplied 9-page PDF are confirmed.
+
 ===================================================== */
 
-function validateForm(
+const PDF_MAPPING = {
+
+    /*
+       Example structure only:
+
+       1: [
+           {
+               field: "name",
+               x: 100,
+               y: 700,
+               size: 10
+           }
+       ]
+
+       Page numbers are 1 through 9.
+
+       These coordinates are intentionally not
+       fabricated here.
+    */
+
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+    7: [],
+    8: [],
+    9: []
+};
+
+
+/* =====================================================
+   FORMAT DATE FOR PDF
+===================================================== */
+
+function formatDateForPDF(value) {
+
+    if (!value) return "";
+
+    const parts =
+        value.split("-");
+
+    if (parts.length !== 3) {
+        return value;
+    }
+
+    return (
+        parts[2] +
+        "/" +
+        parts[1] +
+        "/" +
+        parts[0]
+    );
+}
+
+
+/* =====================================================
+   PDF FIELD VALUE RESOLVER
+===================================================== */
+
+function resolvePDFValue(field, data) {
+
+    const values = {
+
+        name: data.name,
+        fatherName: data.fatherName,
+        spouseName: data.spouseName,
+
+        dob: formatDateForPDF(data.dob),
+
+        gender: data.gender,
+        maritalStatus: data.maritalStatus,
+        religion: data.religion,
+        email: data.email,
+        mobile: data.mobile,
+
+        doj: formatDateForPDF(data.doj),
+
+        employmentStatus: data.employmentStatus,
+        internationalWorker: data.internationalWorker,
+
+        previousCompany: data.previousCompany,
+
+        previousDOJ:
+            formatDateForPDF(data.previousDOJ),
+
+        previousDOE:
+            formatDateForPDF(data.previousDOE),
+
+        bankAccount: data.bankAccount,
+        ifsc: data.ifsc,
+        aadhaar: data.aadhaar,
+        pan: data.pan,
+
+        epfMember: data.epfMember,
+        epsMember: data.epsMember,
+        uan: data.uan,
+
+        withdrawEPF: data.withdrawEPF,
+        withdrawEPS: data.withdrawEPS,
+
+        permanentAddress: data.permanentAddress,
+        city: data.city,
+        district: data.district,
+        state: data.state,
+        pincode: data.pincode,
+
+        place: data.place,
+
+        declarationDate:
+            formatDateForPDF(data.declarationDate)
+    };
+
+
+    /* =================================================
+       NOMINEE FIELDS
+    ================================================= */
+
+    const nomineeMatch =
+        field.match(
+            /^nominee([1-4])_(name|address|relation|aadhaar|dob|age|percentage)$/
+        );
+
+    if (nomineeMatch) {
+
+        const nomineeNumber =
+            Number(nomineeMatch[1]);
+
+        const nomineeField =
+            nomineeMatch[2];
+
+        const nominee =
+            data.nominees[nomineeNumber - 1];
+
+        if (!nominee) {
+            return "";
+        }
+
+        if (nomineeField === "dob") {
+            return formatDateForPDF(
+                nominee.dob
+            );
+        }
+
+        return nominee[nomineeField] || "";
+    }
+
+
+    return values[field] || "";
+}
+
+/* =====================================================
+   APPLY PDF MAPPING
+===================================================== */
+
+async function applyPDFMapping(
+    pdfDoc,
     data
 ) {
 
-
-    if (!data.name) {
-
-        alert(
-            "Please enter your full name."
-        );
-
-        nameInput.focus();
-
-        return false;
-
-    }
-
-
     /*
-       EMAIL OR PHONE
+       This function is intentionally prepared
+       for the manual 9-page mapping.
+
+       It will write values once the actual
+       PDF coordinates are supplied.
     */
 
-    if (
-        !data.email &&
-        !data.phone
+    const pages =
+        pdfDoc.getPages();
+
+    for (
+        let pageNumber = 1;
+        pageNumber <= 9;
+        pageNumber++
     ) {
 
-        alert(
+        const mappings =
+            PDF_MAPPING[pageNumber] || [];
 
-            "Please enter either your email address OR mobile number."
+        if (!mappings.length) {
+            continue;
+        }
 
-        );
+        const page =
+            pages[pageNumber - 1];
 
-        emailInput.focus();
+        for (
+            const mapping of mappings
+        ) {
 
-        return false;
+            const value =
+                resolvePDFValue(
+                    mapping.field,
+                    data
+                );
 
+            if (!value) continue;
+
+            page.drawText(
+                String(value),
+                {
+                    x: mapping.x,
+                    y: mapping.y,
+                    size: mapping.size || 10,
+                    color: PDFLib.rgb(
+                        0,
+                        0,
+                        0
+                    )
+                }
+            );
+        }
     }
-
-
-    /*
-       Basic email validation.
-    */
-
-    if (
-        data.email &&
-        !data.email.includes("@")
-    ) {
-
-        alert(
-            "Please enter a valid email address."
-        );
-
-        emailInput.focus();
-
-        return false;
-
-    }
-
-
-    /*
-       Basic phone validation.
-    */
-
-    if (
-        data.phone &&
-        cleanPhone(
-            data.phone
-        ).length < 7
-    ) {
-
-        alert(
-            "Please enter a valid mobile number."
-        );
-
-        phoneInput.focus();
-
-        return false;
-
-    }
-
-
-    if (!data.place) {
-
-        alert(
-            "Please enter your place."
-        );
-
-        placeInput.focus();
-
-        return false;
-
-    }
-
-
-    if (!data.date) {
-
-        alert(
-            "Please select the date."
-        );
-
-        dateInput.focus();
-
-        return false;
-
-    }
-
-
-    return true;
-
 }
 
 
-
 /* =====================================================
-   GET MAPPINGS
-===================================================== */
-
-function getMappings() {
-
-
-    const saved =
-        localStorage.getItem(
-            MAPPING_KEY
-        );
-
-
-    if (!saved) {
-
-        return null;
-
-    }
-
-
-    try {
-
-        return JSON.parse(
-            saved
-        );
-
-    }
-    catch(error) {
-
-        return null;
-
-    }
-
-}
-
-
-
-/* =====================================================
-   GENERATE PDF
+   GENERATE FINAL PDF
 ===================================================== */
 
 async function generatePDF() {
 
-
     const data =
         getFormData();
 
-
-    /*
-       Validate.
-    */
-
-    if (
-        !validateForm(
-            data
-        )
-    ) {
-
+    if (!validateForm(data)) {
         return;
-
     }
 
 
-    /*
-       Save automatically before
-       generating PDF.
-    */
+    /* Save automatically */
 
-    saveDraft();
-
-
-    const mappings =
-        getMappings();
+    localStorage.setItem(
+        DRAFT_KEY,
+        JSON.stringify(data)
+    );
 
 
-    if (!mappings) {
-
-        alert(
-
-            "No PDF mappings were found. Please configure the LOA PDF first."
-
-        );
-
-        return;
-
-    }
-
-
-    if (
-        !mappings.Name ||
-        !mappings.Place ||
-        !mappings.Date
-    ) {
-
-        alert(
-
-            "Name, Place and Date mappings are required."
-
-        );
-
-        return;
-
-    }
+    showStatus(
+        "Preparing your completed 9-page Onboarding Documents PDF...",
+        "info"
+    );
 
 
     try {
 
-
-        showStatus(
-
-            "Preparing your completed LOA PDF...",
-
-            "info"
-
-        );
-
-
         /*
-           Temporary local prototype
-           PDF selection.
+           Load the fixed PDF from the same folder
+           as candidate.html.
         */
 
-        const pdfFile =
-            await selectPDF();
-
-
-        if (!pdfFile) {
-
-            showStatus(
-
-                "PDF generation cancelled.",
-
-                "error"
-
+        const response =
+            await fetch(
+                PDF_FILE_NAME,
+                {
+                    cache: "no-store"
+                }
             );
 
-            return;
+        if (!response.ok) {
 
+            throw new Error(
+                "Could not find \"" +
+                PDF_FILE_NAME +
+                "\". Keep the PDF in the same folder as candidate.html."
+            );
         }
 
 
         const buffer =
-            await pdfFile.arrayBuffer();
-
-
-        const pdfBytes =
-            new Uint8Array(
-                buffer
-            ).slice();
+            await response.arrayBuffer();
 
 
         const pdfDoc =
             await PDFLib.PDFDocument.load(
-                pdfBytes
+                buffer
             );
-
-
-        const font =
-            await pdfDoc.embedFont(
-
-                PDFLib.StandardFonts.Helvetica
-
-            );
-
-
-        const pages =
-            pdfDoc.getPages();
 
 
         if (
-            pages.length === 0
+            pdfDoc.getPageCount() !== 9
         ) {
 
             throw new Error(
-                "The PDF contains no pages."
+                "The selected Onboarding Documents.pdf must contain exactly 9 pages."
             );
-
         }
 
 
-        const page =
-            pages[0];
-
-
-        const pdfWidth =
-            Number(
-                page.getWidth()
-            );
-
-
-        const pdfHeight =
-            Number(
-                page.getHeight()
-            );
-
-
         /*
-           NAME
+           Apply the manually confirmed
+           9-page coordinate mapping.
         */
 
-        addText(
-
-            page,
-
-            mappings.Name,
-
-            data.name,
-
-            pdfWidth,
-
-            pdfHeight,
-
-            font
-
+        await applyPDFMapping(
+            pdfDoc,
+            data
         );
 
-
-        /*
-           PLACE
-        */
-
-        addText(
-
-            page,
-
-            mappings.Place,
-
-            data.place,
-
-            pdfWidth,
-
-            pdfHeight,
-
-            font
-
-        );
-
-
-        /*
-           DATE
-        */
-
-        addText(
-
-            page,
-
-            mappings.Date,
-
-            formatDate(
-                data.date
-            ),
-
-            pdfWidth,
-
-            pdfHeight,
-
-            font
-
-        );
-
-
-        /*
-           Save.
-        */
 
         const output =
             await pdfDoc.save();
@@ -1523,27 +2894,20 @@ async function generatePDF() {
 
         const blob =
             new Blob(
-
                 [output],
-
                 {
                     type:
                         "application/pdf"
                 }
-
             );
 
 
         const url =
-            URL.createObjectURL(
-                blob
-            );
+            URL.createObjectURL(blob);
 
 
         const link =
-            document.createElement(
-                "a"
-            );
+            document.createElement("a");
 
 
         link.href =
@@ -1551,437 +2915,131 @@ async function generatePDF() {
 
 
         link.download =
-
-            "Completed_LOA_"
-            +
-            cleanFileName(
-                data.name
-            )
-            +
+            "Onboarding Documents - " +
+            cleanFileName(data.name) +
             ".pdf";
 
 
-        document.body.appendChild(
-            link
-        );
-
+        document.body.appendChild(link);
 
         link.click();
 
-
-        document.body.removeChild(
-            link
-        );
+        document.body.removeChild(link);
 
 
         setTimeout(
-
             function() {
-
-                URL.revokeObjectURL(
-                    url
-                );
-
+                URL.revokeObjectURL(url);
             },
-
             1500
-
         );
 
 
         showStatus(
-
-            "Your completed LOA PDF has been generated successfully.",
-
+            "Your Onboarding Documents PDF has been downloaded successfully.",
             "success"
-
         );
-
 
     }
     catch(error) {
 
-
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         showStatus(
-
-            "PDF generation failed: "
-            +
+            "PDF generation failed: " +
             error.message,
-
             "error"
-
         );
-
 
         alert(
-
-            "PDF generation failed.\n\n"
-            +
+            "PDF generation failed.\n\n" +
             error.message
-
         );
-
     }
-
 }
-
-
-
-/* =====================================================
-   SELECT PDF
-===================================================== */
-
-function selectPDF() {
-
-
-    return new Promise(
-
-        function(resolve) {
-
-
-            const input =
-                document.createElement(
-                    "input"
-                );
-
-
-            input.type =
-                "file";
-
-
-            input.accept =
-                "application/pdf";
-
-
-            input.style.display =
-                "none";
-
-
-            document.body.appendChild(
-                input
-            );
-
-
-            input.addEventListener(
-
-                "change",
-
-                function() {
-
-
-                    const file =
-                        input.files[0];
-
-
-                    document.body.removeChild(
-                        input
-                    );
-
-
-                    resolve(
-                        file || null
-                    );
-
-                }
-
-            );
-
-
-            input.click();
-
-        }
-
-    );
-
-}
-
-
-
-/* =====================================================
-   ADD TEXT
-===================================================== */
-
-function addText(
-
-    page,
-    mapping,
-    text,
-    pdfWidth,
-    pdfHeight,
-    font
-
-) {
-
-
-    if (!mapping) {
-
-        throw new Error(
-            "Mapping is missing."
-        );
-
-    }
-
-
-    const canvasWidth =
-        Number(
-            mapping.canvasWidth
-        );
-
-
-    const canvasHeight =
-        Number(
-            mapping.canvasHeight
-        );
-
-
-    const mapX =
-        Number(
-            mapping.x
-        );
-
-
-    const mapY =
-        Number(
-            mapping.y
-        );
-
-
-    const mapWidth =
-        Number(
-            mapping.width
-        );
-
-
-    const mapHeight =
-        Number(
-            mapping.height
-        );
-
-
-    const values = [
-
-        canvasWidth,
-        canvasHeight,
-        mapX,
-        mapY,
-        mapWidth,
-        mapHeight,
-        pdfWidth,
-        pdfHeight
-
-    ];
-
-
-    for (
-        const value of values
-    ) {
-
-        if (
-            !Number.isFinite(
-                value
-            )
-        ) {
-
-            throw new Error(
-                "Invalid PDF mapping detected."
-            );
-
-        }
-
-    }
-
-
-    const scaleX =
-        pdfWidth /
-        canvasWidth;
-
-
-    const scaleY =
-        pdfHeight /
-        canvasHeight;
-
-
-    const x =
-        mapX *
-        scaleX;
-
-
-    const boxWidth =
-        mapWidth *
-        scaleX;
-
-
-    const boxHeight =
-        mapHeight *
-        scaleY;
-
-
-    const y =
-        pdfHeight
-        -
-        (
-            mapY *
-            scaleY
-        )
-        -
-        boxHeight;
-
-
-    let fontSize =
-        boxHeight *
-        0.60;
-
-
-    if (
-        !Number.isFinite(
-            fontSize
-        )
-        ||
-        fontSize <= 0
-    ) {
-
-        fontSize = 10;
-
-    }
-
-
-    fontSize =
-        Math.max(
-
-            6,
-
-            Math.min(
-                24,
-                fontSize
-            )
-
-        );
-
-
-    page.drawText(
-
-        String(text),
-
-        {
-
-            x:
-                x,
-
-            y:
-                y
-                +
-                (
-                    boxHeight
-                    -
-                    fontSize
-                )
-                / 2,
-
-            size:
-                fontSize,
-
-            font:
-                font,
-
-            color:
-                PDFLib.rgb(
-                    0,
-                    0,
-                    0
-                ),
-
-            maxWidth:
-                Math.max(
-                    10,
-                    boxWidth
-                )
-
-        }
-
-    );
-
-}
-
-
-
-/* =====================================================
-   DATE FORMAT
-===================================================== */
-
-function formatDate(
-    date
-) {
-
-
-    if (!date) {
-
-        return "";
-
-    }
-
-
-    const parts =
-        date.split("-");
-
-
-    if (
-        parts.length !== 3
-    ) {
-
-        return date;
-
-    }
-
-
-    return (
-
-        parts[2]
-        +
-        "/"
-        +
-        parts[1]
-        +
-        "/"
-        +
-        parts[0]
-
-    );
-
-}
-
 
 
 /* =====================================================
    CLEAN FILE NAME
 ===================================================== */
 
-function cleanFileName(
-    name
-) {
+function cleanFileName(name) {
 
-
-    return name
-
+    return String(name || "Candidate")
         .replace(
-            /[^a-z0-9]/gi,
+            /[<>:"/\\|?*\x00-\x1F]/g,
             "_"
         )
-
+        .replace(
+            /\s+/g,
+            " "
+        )
+        .trim()
         .substring(
             0,
-            50
+            80
         );
-
 }
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        addNominee();
+
+        loadDraft();
+
+        maritalStatusChanged();
+
+        employmentChanged();
+
+        /*
+           Set declaration date to today for
+           convenience. Candidate may change it.
+        */
+
+        const declarationDate =
+            document.getElementById(
+                "declarationDate"
+            );
+
+        if (
+            declarationDate &&
+            !declarationDate.value
+        ) {
+
+            const now =
+                new Date();
+
+            const yyyy =
+                now.getFullYear();
+
+            const mm =
+                String(
+                    now.getMonth() + 1
+                ).padStart(2, "0");
+
+            const dd =
+                String(
+                    now.getDate()
+                ).padStart(2, "0");
+
+            declarationDate.value =
+                yyyy +
+                "-" +
+                mm +
+                "-" +
+                dd;
+        }
+    }
+);
 
 </script>
 
-
 </body>
-
 </html>
