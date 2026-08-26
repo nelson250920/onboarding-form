@@ -8,7 +8,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>LOA PDF Mapper - HR</title>
+<title>Employee Onboarding</title>
 
 <style>
 
@@ -19,54 +19,115 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f1f3f5;
+    background: #f3f5f7;
     color: #222;
 }
 
 .header {
     background: #1f4e78;
     color: white;
-    padding: 18px 20px;
+    padding: 24px 20px;
+    text-align: center;
 }
 
 .header h1 {
     margin: 0;
-    font-size: 22px;
+    font-size: 25px;
 }
 
 .header p {
-    margin: 6px 0 0;
-    font-size: 13px;
-}
-
-.toolbar {
-    background: white;
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-button,
-select {
-    padding: 10px 13px;
-    border-radius: 5px;
-    border: 1px solid #bbb;
+    margin: 7px 0 0;
     font-size: 14px;
 }
 
-button {
-    background: #1f4e78;
-    color: white;
-    border: none;
-    cursor: pointer;
+.container {
+    max-width: 650px;
+    margin: 35px auto;
+    padding: 0 15px;
 }
 
-button:hover {
-    background: #163a5c;
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+.title {
+    color: #1f4e78;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.info {
+    background: #eaf3fa;
+    border: 1px solid #cbddea;
+    color: #1f4e78;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.field {
+    margin-bottom: 19px;
+}
+
+.field label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.required {
+    color: #dc3545;
+}
+
+.optional {
+    color: #777;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bcbcbc;
+    border-radius: 6px;
+    font-size: 15px;
+    background: white;
+}
+
+.field input:focus {
+    outline: none;
+    border-color: #1f4e78;
+    box-shadow: 0 0 0 2px rgba(31,78,120,0.12);
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+button {
+    flex: 1;
+    border: none;
+    border-radius: 6px;
+    padding: 13px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 button:disabled {
@@ -74,165 +135,105 @@ button:disabled {
     cursor: not-allowed;
 }
 
-.green {
-    background: #198754;
+.save {
+    background: #6c757d;
+    color: white;
 }
 
-.green:hover {
+.save:hover {
+    background: #545b62;
+}
+
+.generate {
+    background: #198754;
+    color: white;
+}
+
+.generate:hover {
     background: #146c43;
 }
 
-.red {
+.load {
+    background: #1f4e78;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.load:hover {
+    background: #163a5c;
+}
+
+.clear {
     background: #dc3545;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
 }
 
-.red:hover {
-    background: #b02a37;
-}
-
-.gray {
-    background: #6c757d;
+.clear:hover {
+    background: #bb2d3b;
 }
 
 .status {
-    padding: 10px 15px;
-    background: #e8f1f8;
-    color: #1f4e78;
+    display: none;
+    margin-top: 18px;
+    padding: 12px;
+    border-radius: 6px;
     font-size: 13px;
+    line-height: 1.5;
 }
 
-.workspace {
-    display: flex;
-    gap: 15px;
-    padding: 15px;
-    align-items: flex-start;
+.status.success {
+    display: block;
+    background: #d1e7dd;
+    color: #0f5132;
 }
 
-.panel {
-    width: 300px;
-    flex-shrink: 0;
-    background: white;
-    padding: 18px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.status.error {
+    display: block;
+    background: #f8d7da;
+    color: #842029;
 }
 
-.panel h2 {
+.status.info {
+    display: block;
+    background: #cff4fc;
+    color: #055160;
+}
+
+.return-box {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.return-box h3 {
     margin-top: 0;
     color: #1f4e78;
-    font-size: 18px;
+    font-size: 16px;
 }
 
-.panel label {
-    display: block;
-    margin-top: 12px;
-    margin-bottom: 6px;
-    font-weight: bold;
+.return-box p {
     font-size: 13px;
+    color: #666;
 }
 
-.panel select {
-    width: 100%;
-}
-
-.full {
-    width: 100%;
-    margin-top: 9px;
-}
-
-.mapping-list {
-    margin-top: 20px;
-    border-top: 1px solid #ddd;
-    padding-top: 12px;
-}
-
-.mapping-item {
-    background: #f5f7f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 9px;
-    margin-top: 8px;
-    font-size: 12px;
-    line-height: 1.5;
-}
-
-.mapping-item strong {
-    color: #1f4e78;
-    font-size: 14px;
-}
-
-.help {
-    margin-top: 15px;
-    padding: 10px;
-    background: #fff8e1;
-    border: 1px solid #ffe082;
-    border-radius: 5px;
-    font-size: 12px;
-    line-height: 1.5;
-}
-
-.pdf-area {
-    flex: 1;
-    min-height: 800px;
-    background: #777;
-    padding: 25px;
-    overflow: auto;
+.footer {
     text-align: center;
+    color: #777;
+    font-size: 12px;
+    margin: 25px 0;
 }
 
-#pdfContainer {
-    position: relative;
-    display: inline-block;
-    background: white;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.4);
-    text-align: left;
-}
+@media(max-width:600px) {
 
-#pdfCanvas {
-    display: block;
-}
-
-#mappingLayer {
-    position: absolute;
-    left: 0;
-    top: 0;
-    cursor: crosshair;
-}
-
-.mapping-box {
-    position: absolute;
-    border: 2px solid #e63946;
-    background: rgba(230,57,70,0.18);
-    pointer-events: none;
-    z-index: 20;
-}
-
-.mapping-box span {
-    position: absolute;
-    left: -2px;
-    top: -22px;
-    background: #e63946;
-    color: white;
-    padding: 3px 6px;
-    border-radius: 3px;
-    font-size: 11px;
-    white-space: nowrap;
-}
-
-.page-info {
-    color: white;
-    margin-bottom: 10px;
-    font-size: 13px;
-}
-
-@media(max-width:800px) {
-
-    .workspace {
-        flex-direction: column;
+    .card {
+        padding: 22px;
     }
 
-    .panel {
-        width: 100%;
+    .buttons {
+        flex-direction: column;
     }
 
 }
@@ -241,187 +242,216 @@ button:disabled {
 
 </head>
 
+
 <body>
+
 
 <div class="header">
 
-    <h1>LOA PDF Mapper</h1>
+    <h1>
+        Employee Onboarding
+    </h1>
 
-    <p>HR / Admin Mapping Setup</p>
+    <p>
+        Please enter your details carefully
+    </p>
 
 </div>
 
 
-<div class="toolbar">
+<div class="container">
 
-    <button onclick="zoomOut()">
-        − Zoom
-    </button>
+<div class="card">
 
-    <button onclick="zoomIn()">
-        + Zoom
-    </button>
 
-    <button onclick="resetZoom()">
-        Reset Zoom
-    </button>
+<div class="title">
+    Personal Details
+</div>
 
-    <button
-        class="green"
-        onclick="testMapping()">
 
-        Test Mapping
+<div class="subtitle">
 
-    </button>
+    Please enter your information exactly
+    as it should appear in your onboarding
+    documents.
+
+</div>
+
+
+<div class="info">
+
+    <strong>Email OR Mobile Number</strong>
+    is required. You can provide either one
+    or both.
+
+</div>
+
+
+<!-- NAME -->
+
+<div class="field">
+
+<label>
+
+    Full Name
+    <span class="required">*</span>
+
+</label>
+
+<input
+    type="text"
+    id="name"
+    placeholder="Enter your full name"
+>
+
+</div>
+
+
+<!-- EMAIL -->
+
+<div class="field">
+
+<label>
+
+    Email Address
+    <span class="optional">
+        (Optional if mobile is provided)
+    </span>
+
+</label>
+
+<input
+    type="email"
+    id="email"
+    placeholder="Enter your email address"
+>
+
+</div>
+
+
+<!-- PHONE -->
+
+<div class="field">
+
+<label>
+
+    Mobile Number
+    <span class="optional">
+        (Optional if email is provided)
+    </span>
+
+</label>
+
+<input
+    type="tel"
+    id="phone"
+    placeholder="Enter your mobile number"
+>
+
+</div>
+
+
+<!-- PLACE -->
+
+<div class="field">
+
+<label>
+
+    Place
+    <span class="required">*</span>
+
+</label>
+
+<input
+    type="text"
+    id="place"
+    placeholder="Enter place"
+>
+
+</div>
+
+
+<!-- DATE -->
+
+<div class="field">
+
+<label>
+
+    Date / DOJ
+    <span class="required">*</span>
+
+</label>
+
+<input
+    type="date"
+    id="date"
+>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+<button
+    class="save"
+    onclick="saveDraft()">
+
+    Save Draft
+
+</button>
+
+
+<button
+    class="generate"
+    onclick="generatePDF()">
+
+    Generate Final PDF
+
+</button>
 
 </div>
 
 
 <div
-    class="status"
-    id="status">
-
-    Loading LOA.pdf...
-
+    id="status"
+    class="status">
 </div>
 
 
-<div class="workspace">
+<!-- RETURN -->
+
+<div class="return-box">
+
+<h3>
+    Already started an application?
+</h3>
+
+<p>
+
+    Enter the email OR mobile number you
+    previously used to find your saved draft.
+
+</p>
 
 
-<div class="panel">
+<button
+    class="load"
+    onclick="loadExistingDraft()">
 
-    <h2>
-        Field Mapping
-    </h2>
+    Load My Saved Draft
 
-
-    <label>
-        Select Field
-    </label>
+</button>
 
 
-    <select id="fieldSelect">
+<button
+    class="clear"
+    onclick="clearCurrentDraft()">
 
-        <option value="">
-            -- Select Field --
-        </option>
+    Clear My Current Draft
 
-        <option value="Name">
-            Name
-        </option>
-
-        <option value="Date">
-            Date
-        </option>
-
-        <option value="Place">
-            Place
-        </option>
-
-    </select>
-
-
-    <button
-        id="startButton"
-        class="green full"
-        onclick="startMapping()">
-
-        Start Mapping
-
-    </button>
-
-
-    <button
-        id="saveButton"
-        class="full"
-        onclick="saveMapping()"
-        disabled>
-
-        Save Mapping
-
-    </button>
-
-
-    <button
-        class="red full"
-        onclick="deleteMapping()">
-
-        Delete Selected Mapping
-
-    </button>
-
-
-    <button
-        class="gray full"
-        onclick="clearMappings()">
-
-        Clear All Mappings
-
-    </button>
-
-
-    <div class="mapping-list">
-
-        <strong>
-            Saved Mappings
-        </strong>
-
-        <div id="mappingList">
-            No mappings saved.
-        </div>
-
-    </div>
-
-
-    <div class="help">
-
-        <strong>How to use:</strong>
-
-        <br><br>
-
-        1. Select <b>Name</b>.
-
-        <br>
-
-        2. Click <b>Start Mapping</b>.
-
-        <br>
-
-        3. Draw a rectangle exactly over
-        the Name location on the PDF.
-
-        <br>
-
-        4. Click <b>Save Mapping</b>.
-
-        <br>
-
-        5. Repeat for Date and Place.
-
-        <br><br>
-
-        You can zoom the PDF before mapping.
-
-    </div>
-
-</div>
-
-
-<div class="pdf-area">
-
-    <div class="page-info">
-
-        LOA PDF — Page 1
-
-    </div>
-
-
-    <div id="pdfContainer">
-
-        Loading PDF...
-
-    </div>
+</button>
 
 </div>
 
@@ -429,99 +459,185 @@ button:disabled {
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js">
+<div class="footer">
+
+    Employee Onboarding System
+
+</div>
+
+
+</div>
+
+
+<!-- PDF-LIB -->
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js">
 </script>
 
 
 <script>
 
+
 /* =====================================================
    SETTINGS
 ===================================================== */
 
+
+/*
+   IMPORTANT:
+
+   LOA.pdf is in the SAME GitHub folder
+   as index.html.
+
+   Therefore we use:
+*/
+
 const PDF_URL = "./LOA.pdf";
 
-const STORAGE_KEY = "loaMappings";
+
+/*
+   Draft storage.
+*/
+
+const CANDIDATES_KEY =
+    "loaCandidates";
+
+
+/*
+   =====================================================
+   YOUR MANUAL PDF MAPPINGS
+   =====================================================
+
+   These values came from your Mapper.
+
+   Page 1
+*/
+
+
+const MAPPINGS = {
+
+    Name: {
+
+        page: 1,
+
+        x: 146.9,
+
+        y: 554.6,
+
+        width: 162.3,
+
+        height: 16.2
+
+    },
+
+
+    Place: {
+
+        page: 1,
+
+        x: 160.7,
+
+        y: 633.1,
+
+        width: 131.5,
+
+        height: 15.4
+
+    },
+
+
+    Date: {
+
+        page: 1,
+
+        x: 161.5,
+
+        y: 650.0,
+
+        width: 130.0,
+
+        height: 13.1
+
+    }
+
+};
+
+
+/*
+   IMPORTANT:
+
+   These are the dimensions used by the
+   Mapper when you created the coordinates.
+
+   We will use the PDF's actual dimensions
+   to calculate the final position.
+
+*/
+
+const MAPPER_CANVAS_WIDTH = 1000;
+
+const MAPPER_CANVAS_HEIGHT = 1414;
+
 
 
 /* =====================================================
-   VARIABLES
+   FORM ELEMENTS
 ===================================================== */
 
-let pdfDocument = null;
+const nameInput =
+    document.getElementById("name");
 
-let pdfPage = null;
+const emailInput =
+    document.getElementById("email");
 
-let pdfCanvas = null;
+const phoneInput =
+    document.getElementById("phone");
 
-let mappingLayer = null;
+const placeInput =
+    document.getElementById("place");
 
-let zoom = 1.3;
-
-let isDrawing = false;
-
-let startX = 0;
-
-let startY = 0;
-
-let currentBox = null;
-
-let currentMapping = null;
-
-let mappings = loadMappings();
-
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
+const dateInput =
+    document.getElementById("date");
 
 const statusBox =
     document.getElementById("status");
 
-const pdfContainer =
-    document.getElementById("pdfContainer");
-
-const fieldSelect =
-    document.getElementById("fieldSelect");
-
-const saveButton =
-    document.getElementById("saveButton");
-
 
 
 /* =====================================================
-   PDF.JS
+   GET SAVED CANDIDATES
 ===================================================== */
 
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
-
-
-/* =====================================================
-   LOAD MAPPINGS
-===================================================== */
-
-function loadMappings() {
+function getCandidates() {
 
     const saved =
-        localStorage.getItem(STORAGE_KEY);
+        localStorage.getItem(
+            CANDIDATES_KEY
+        );
+
 
     if (!saved) {
+
         return {};
+
     }
+
 
     try {
 
         const data =
             JSON.parse(saved);
 
+
         if (
             typeof data !== "object" ||
             data === null
         ) {
+
             return {};
+
         }
+
 
         return data;
 
@@ -539,14 +655,17 @@ function loadMappings() {
 
 
 /* =====================================================
-   SAVE MAPPINGS
+   SAVE CANDIDATES
 ===================================================== */
 
-function saveMappings() {
+function saveCandidates(candidates) {
 
     localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(mappings)
+
+        CANDIDATES_KEY,
+
+        JSON.stringify(candidates)
+
     );
 
 }
@@ -554,849 +673,1022 @@ function saveMappings() {
 
 
 /* =====================================================
-   LOAD PDF
+   CLEAN EMAIL
 ===================================================== */
 
-async function loadPDF() {
+function cleanEmail(email) {
+
+    return email
+        .trim()
+        .toLowerCase();
+
+}
+
+
+
+/* =====================================================
+   CLEAN PHONE
+===================================================== */
+
+function cleanPhone(phone) {
+
+    return phone
+        .replace(/\D/g, "");
+
+}
+
+
+
+/* =====================================================
+   GET IDENTIFIERS
+===================================================== */
+
+function getIdentifiers(data) {
+
+    const identifiers = [];
+
+
+    if (data.email) {
+
+        identifiers.push(
+
+            "email:" +
+            cleanEmail(data.email)
+
+        );
+
+    }
+
+
+    if (data.phone) {
+
+        identifiers.push(
+
+            "phone:" +
+            cleanPhone(data.phone)
+
+        );
+
+    }
+
+
+    return identifiers;
+
+}
+
+
+
+/* =====================================================
+   FORM DATA
+===================================================== */
+
+function getFormData() {
+
+    return {
+
+        name:
+            nameInput.value.trim(),
+
+        email:
+            emailInput.value.trim(),
+
+        phone:
+            phoneInput.value.trim(),
+
+        place:
+            placeInput.value.trim(),
+
+        date:
+            dateInput.value,
+
+        lastSaved:
+            new Date().toISOString()
+
+    };
+
+}
+
+
+
+/* =====================================================
+   IDENTIFIER CHECK
+===================================================== */
+
+function hasIdentifier(data) {
+
+    return (
+
+        data.email !== "" ||
+        data.phone !== ""
+
+    );
+
+}
+
+
+
+/* =====================================================
+   SAVE DRAFT
+===================================================== */
+
+function saveDraft() {
+
+
+    const data =
+        getFormData();
+
+
+    if (!hasIdentifier(data)) {
+
+        alert(
+            "Please enter either your email address OR mobile number."
+        );
+
+        emailInput.focus();
+
+        return false;
+
+    }
+
+
+    const candidates =
+        getCandidates();
+
+
+    const identifiers =
+        getIdentifiers(data);
+
+
+    /*
+       Look for existing record.
+    */
+
+    let existingRecord = null;
+
+
+    for (
+        const id of identifiers
+    ) {
+
+        if (candidates[id]) {
+
+            existingRecord =
+                candidates[id];
+
+            break;
+
+        }
+
+    }
+
+
+    /*
+       Remove old identifiers
+       before updating.
+    */
+
+    if (existingRecord) {
+
+        const oldIdentifiers =
+            getIdentifiers(
+                existingRecord
+            );
+
+
+        for (
+            const id of oldIdentifiers
+        ) {
+
+            delete candidates[id];
+
+        }
+
+    }
+
+
+    /*
+       Save under email and/or phone.
+    */
+
+    for (
+        const id of identifiers
+    ) {
+
+        candidates[id] =
+            data;
+
+    }
+
+
+    saveCandidates(candidates);
+
+
+    showStatus(
+
+        "Draft saved successfully. You can return later using your email OR mobile number.",
+
+        "success"
+
+    );
+
+
+    return true;
+
+}
+
+
+
+/* =====================================================
+   LOAD EXISTING DRAFT
+===================================================== */
+
+function loadExistingDraft() {
+
+
+    const identifier =
+        prompt(
+
+            "Enter your email address OR mobile number:"
+
+        );
+
+
+    if (!identifier) {
+
+        return;
+
+    }
+
+
+    const candidates =
+        getCandidates();
+
+
+    let key = "";
+
+
+    if (
+        identifier.includes("@")
+    ) {
+
+        key =
+            "email:" +
+            cleanEmail(identifier);
+
+    }
+    else {
+
+        key =
+            "phone:" +
+            cleanPhone(identifier);
+
+    }
+
+
+    const data =
+        candidates[key];
+
+
+    if (!data) {
+
+        alert(
+
+            "No saved draft was found for this email or mobile number."
+
+        );
+
+        return;
+
+    }
+
+
+    nameInput.value =
+        data.name || "";
+
+
+    emailInput.value =
+        data.email || "";
+
+
+    phoneInput.value =
+        data.phone || "";
+
+
+    placeInput.value =
+        data.place || "";
+
+
+    dateInput.value =
+        data.date || "";
+
+
+    showStatus(
+
+        "Your saved draft has been loaded successfully.",
+
+        "success"
+
+    );
+
+}
+
+
+
+/* =====================================================
+   CLEAR CURRENT DRAFT
+===================================================== */
+
+function clearCurrentDraft() {
+
+
+    const email =
+        emailInput.value.trim();
+
+
+    const phone =
+        phoneInput.value.trim();
+
+
+    if (!email && !phone) {
+
+        alert(
+
+            "Enter your email OR mobile number first."
+
+        );
+
+        return;
+
+    }
+
+
+    const identifiers = [];
+
+
+    if (email) {
+
+        identifiers.push(
+
+            "email:" +
+            cleanEmail(email)
+
+        );
+
+    }
+
+
+    if (phone) {
+
+        identifiers.push(
+
+            "phone:" +
+            cleanPhone(phone)
+
+        );
+
+    }
+
+
+    const candidates =
+        getCandidates();
+
+
+    let found = false;
+
+
+    for (
+        const id of identifiers
+    ) {
+
+        if (candidates[id]) {
+
+            const record =
+                candidates[id];
+
+
+            const recordIds =
+                getIdentifiers(record);
+
+
+            for (
+                const recordId of recordIds
+            ) {
+
+                delete candidates[recordId];
+
+            }
+
+
+            found = true;
+
+            break;
+
+        }
+
+    }
+
+
+    if (!found) {
+
+        alert(
+            "No saved draft was found."
+        );
+
+        return;
+
+    }
+
+
+    saveCandidates(candidates);
+
+
+    nameInput.value = "";
+
+    emailInput.value = "";
+
+    phoneInput.value = "";
+
+    placeInput.value = "";
+
+    dateInput.value = "";
+
+
+    showStatus(
+
+        "Your saved draft has been deleted.",
+
+        "success"
+
+    );
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function showStatus(message, type) {
+
+    statusBox.textContent =
+        message;
+
+    statusBox.className =
+        "status " + type;
+
+}
+
+
+
+/* =====================================================
+   VALIDATE FORM
+===================================================== */
+
+function validateForm(data) {
+
+
+    if (!data.name) {
+
+        alert(
+            "Please enter your full name."
+        );
+
+        nameInput.focus();
+
+        return false;
+
+    }
+
+
+    if (
+        !data.email &&
+        !data.phone
+    ) {
+
+        alert(
+
+            "Please enter either your email address OR mobile number."
+
+        );
+
+        emailInput.focus();
+
+        return false;
+
+    }
+
+
+    if (
+        data.email &&
+        !data.email.includes("@")
+    ) {
+
+        alert(
+            "Please enter a valid email address."
+        );
+
+        emailInput.focus();
+
+        return false;
+
+    }
+
+
+    if (
+        data.phone &&
+        cleanPhone(data.phone).length < 7
+    ) {
+
+        alert(
+            "Please enter a valid mobile number."
+        );
+
+        phoneInput.focus();
+
+        return false;
+
+    }
+
+
+    if (!data.place) {
+
+        alert(
+            "Please enter your place."
+        );
+
+        placeInput.focus();
+
+        return false;
+
+    }
+
+
+    if (!data.date) {
+
+        alert(
+            "Please select the date / DOJ."
+        );
+
+        dateInput.focus();
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =====================================================
+   GENERATE PDF
+===================================================== */
+
+async function generatePDF() {
+
+
+    const data =
+        getFormData();
+
+
+    /*
+       Validate.
+    */
+
+    if (!validateForm(data)) {
+
+        return;
+
+    }
+
+
+    /*
+       Save draft automatically
+       before generating.
+    */
+
+    saveDraft();
+
 
     try {
 
-        statusBox.textContent =
-            "Loading LOA.pdf...";
+
+        showStatus(
+
+            "Loading LOA form...",
+
+            "info"
+
+        );
+
+
+        /*
+           Load LOA.pdf from GitHub.
+        */
 
         const response =
             await fetch(PDF_URL);
 
+
         if (!response.ok) {
 
             throw new Error(
-                "LOA.pdf could not be loaded."
+
+                "LOA.pdf could not be loaded. Please make sure LOA.pdf is in the same GitHub folder as index.html."
+
             );
 
         }
 
-        const bytes =
+
+        const pdfBytes =
             await response.arrayBuffer();
 
-        pdfDocument =
-            await pdfjsLib
-                .getDocument({
-                    data:
-                        new Uint8Array(bytes)
-                })
-                .promise;
 
-        statusBox.textContent =
-            "LOA.pdf loaded successfully.";
+        /*
+           Load PDF.
+        */
 
-        await renderPage();
-
-        updateMappingList();
-
-    }
-    catch(error) {
-
-        console.error(error);
-
-        statusBox.textContent =
-            "PDF loading failed.";
-
-        pdfContainer.innerHTML =
-            "<div style='padding:40px;color:#c00'>" +
-            error.message +
-            "</div>";
-
-    }
-
-}
-
-
-
-/* =====================================================
-   RENDER PAGE
-===================================================== */
-
-async function renderPage() {
-
-    pdfPage =
-        await pdfDocument.getPage(1);
-
-    const viewport =
-        pdfPage.getViewport({
-            scale:
-                zoom
-        });
-
-    pdfContainer.innerHTML = "";
-
-    pdfCanvas =
-        document.createElement("canvas");
-
-    pdfCanvas.id =
-        "pdfCanvas";
-
-    pdfCanvas.width =
-        Math.round(viewport.width);
-
-    pdfCanvas.height =
-        Math.round(viewport.height);
-
-    pdfCanvas.style.width =
-        viewport.width + "px";
-
-    pdfCanvas.style.height =
-        viewport.height + "px";
-
-    pdfContainer.appendChild(
-        pdfCanvas
-    );
-
-
-    mappingLayer =
-        document.createElement("div");
-
-    mappingLayer.id =
-        "mappingLayer";
-
-    mappingLayer.style.width =
-        viewport.width + "px";
-
-    mappingLayer.style.height =
-        viewport.height + "px";
-
-    pdfContainer.appendChild(
-        mappingLayer
-    );
-
-
-    const context =
-        pdfCanvas.getContext("2d");
-
-
-    await pdfPage.render({
-
-        canvasContext:
-            context,
-
-        viewport:
-            viewport
-
-    }).promise;
-
-
-    setupMapping();
-
-    displayMappings();
-
-}
-
-
-
-/* =====================================================
-   START MAPPING
-===================================================== */
-
-function startMapping() {
-
-    const field =
-        fieldSelect.value;
-
-    if (!field) {
-
-        alert(
-            "Please select Name, Date or Place first."
-        );
-
-        return;
-
-    }
-
-    currentMapping = null;
-
-    saveButton.disabled =
-        true;
-
-    if (currentBox) {
-
-        currentBox.remove();
-
-        currentBox = null;
-
-    }
-
-    statusBox.textContent =
-        "Now draw a rectangle around " +
-        field +
-        " on the PDF.";
-
-}
-
-
-
-/* =====================================================
-   DRAW MAPPING
-===================================================== */
-
-function setupMapping() {
-
-    mappingLayer.onmousedown =
-        function(event) {
-
-            const field =
-                fieldSelect.value;
-
-            if (!field) {
-
-                alert(
-                    "Select a field first."
-                );
-
-                return;
-
-            }
-
-            isDrawing =
-                true;
-
-            const rect =
-                mappingLayer.getBoundingClientRect();
-
-            startX =
-                event.clientX -
-                rect.left;
-
-            startY =
-                event.clientY -
-                rect.top;
-
-
-            if (currentBox) {
-
-                currentBox.remove();
-
-            }
-
-
-            currentBox =
-                document.createElement("div");
-
-            currentBox.className =
-                "mapping-box";
-
-            currentBox.style.left =
-                startX + "px";
-
-            currentBox.style.top =
-                startY + "px";
-
-            currentBox.style.width =
-                "0px";
-
-            currentBox.style.height =
-                "0px";
-
-
-            const label =
-                document.createElement("span");
-
-            label.textContent =
-                field;
-
-            currentBox.appendChild(
-                label
+        const pdfDoc =
+            await PDFLib.PDFDocument.load(
+                pdfBytes
             );
 
-            mappingLayer.appendChild(
-                currentBox
+
+        /*
+           Font.
+        */
+
+        const font =
+            await pdfDoc.embedFont(
+
+                PDFLib.StandardFonts.Helvetica
+
             );
 
-        };
 
+        /*
+           Pages.
+        */
 
-    mappingLayer.onmousemove =
-        function(event) {
+        const pages =
+            pdfDoc.getPages();
 
-            if (
-                !isDrawing ||
-                !currentBox
-            ) {
 
-                return;
+        if (!pages.length) {
 
-            }
+            throw new Error(
+                "LOA PDF has no pages."
+            );
 
-            const rect =
-                mappingLayer.getBoundingClientRect();
-
-            const mouseX =
-                event.clientX -
-                rect.left;
-
-            const mouseY =
-                event.clientY -
-                rect.top;
-
-            const x =
-                Math.min(
-                    startX,
-                    mouseX
-                );
-
-            const y =
-                Math.min(
-                    startY,
-                    mouseY
-                );
-
-            const width =
-                Math.abs(
-                    mouseX -
-                    startX
-                );
-
-            const height =
-                Math.abs(
-                    mouseY -
-                    startY
-                );
-
-            currentBox.style.left =
-                x + "px";
-
-            currentBox.style.top =
-                y + "px";
-
-            currentBox.style.width =
-                width + "px";
-
-            currentBox.style.height =
-                height + "px";
-
-        };
-
-
-    mappingLayer.onmouseup =
-        function(event) {
-
-            if (!isDrawing) {
-                return;
-            }
-
-            isDrawing =
-                false;
-
-            const rect =
-                mappingLayer.getBoundingClientRect();
-
-            const endX =
-                event.clientX -
-                rect.left;
-
-            const endY =
-                event.clientY -
-                rect.top;
-
-            const x =
-                Math.min(
-                    startX,
-                    endX
-                );
-
-            const y =
-                Math.min(
-                    startY,
-                    endY
-                );
-
-            const width =
-                Math.abs(
-                    endX -
-                    startX
-                );
-
-            const height =
-                Math.abs(
-                    endY -
-                    startY
-                );
-
-
-            if (
-                width < 5 ||
-                height < 5
-            ) {
-
-                if (currentBox) {
-                    currentBox.remove();
-                }
-
-                currentBox = null;
-
-                alert(
-                    "Please draw a larger rectangle."
-                );
-
-                return;
-
-            }
-
-
-            /*
-             IMPORTANT:
-
-             Store coordinates relative
-             to the actual PDF page.
-
-             We divide by zoom so that
-             changing zoom does NOT change
-             the mapping.
-            */
-
-            const pdfX =
-                x / zoom;
-
-            const pdfY =
-                y / zoom;
-
-            const pdfWidth =
-                width / zoom;
-
-            const pdfHeight =
-                height / zoom;
-
-
-            /*
-             Store actual PDF page dimensions.
-            */
-
-            const originalViewport =
-                pdfPage.getViewport({
-                    scale: 1
-                });
-
-
-            currentMapping = {
-
-                field:
-                    fieldSelect.value,
-
-                page:
-                    1,
-
-                x:
-                    pdfX,
-
-                y:
-                    pdfY,
-
-                width:
-                    pdfWidth,
-
-                height:
-                    pdfHeight,
-
-                pdfWidth:
-                    originalViewport.width,
-
-                pdfHeight:
-                    originalViewport.height
-
-            };
-
-
-            saveButton.disabled =
-                false;
-
-
-            statusBox.textContent =
-                fieldSelect.value +
-                " selected. Click Save Mapping.";
-
-        };
-
-}
-
-
-
-/* =====================================================
-   SAVE CURRENT MAPPING
-===================================================== */
-
-function saveMapping() {
-
-    if (!currentMapping) {
-
-        alert(
-            "Draw a rectangle first."
-        );
-
-        return;
-
-    }
-
-    mappings[
-        currentMapping.field
-    ] =
-        currentMapping;
-
-
-    saveMappings();
-
-
-    if (currentBox) {
-
-        currentBox.remove();
-
-        currentBox = null;
-
-    }
-
-
-    currentMapping = null;
-
-    saveButton.disabled =
-        true;
-
-
-    displayMappings();
-
-    updateMappingList();
-
-
-    statusBox.textContent =
-        "Mapping saved successfully.";
-
-}
-
-
-
-/* =====================================================
-   DISPLAY SAVED BOXES
-===================================================== */
-
-function displayMappings() {
-
-    if (!mappingLayer) {
-        return;
-    }
-
-
-    const old =
-        mappingLayer.querySelectorAll(
-            ".saved"
-        );
-
-
-    old.forEach(
-        box => box.remove()
-    );
-
-
-    for (
-        const field in mappings
-    ) {
-
-        const map =
-            mappings[field];
-
-
-        if (
-            Number(map.page) !== 1
-        ) {
-            continue;
         }
 
 
         /*
-           Convert PDF coordinates back
-           to current display coordinates.
+           We currently have 1 page.
         */
 
-        const x =
-            map.x * zoom;
-
-        const y =
-            map.y * zoom;
-
-        const width =
-            map.width * zoom;
-
-        const height =
-            map.height * zoom;
+        const page =
+            pages[0];
 
 
-        const box =
-            document.createElement("div");
-
-        box.className =
-            "mapping-box saved";
-
-        box.style.left =
-            x + "px";
-
-        box.style.top =
-            y + "px";
-
-        box.style.width =
-            width + "px";
-
-        box.style.height =
-            height + "px";
-
-
-        const label =
-            document.createElement("span");
-
-        label.textContent =
-            field;
-
-        box.appendChild(
-            label
-        );
-
-
-        mappingLayer.appendChild(
-            box
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   UPDATE LIST
-===================================================== */
-
-function updateMappingList() {
-
-    const list =
-        document.getElementById(
-            "mappingList"
-        );
-
-
-    list.innerHTML =
-        "";
-
-
-    const fields =
-        Object.keys(
-            mappings
-        );
-
-
-    if (
-        fields.length === 0
-    ) {
-
-        list.textContent =
-            "No mappings saved.";
-
-        return;
-
-    }
-
-
-    fields.forEach(
-        function(field) {
-
-            const map =
-                mappings[field];
-
-
-            const item =
-                document.createElement("div");
-
-            item.className =
-                "mapping-item";
-
-
-            item.innerHTML =
-
-                "<strong>" +
-                field +
-                "</strong>" +
-
-                "<br>X: " +
-                Number(map.x).toFixed(1) +
-
-                "<br>Y: " +
-                Number(map.y).toFixed(1) +
-
-                "<br>Width: " +
-                Number(map.width).toFixed(1) +
-
-                "<br>Height: " +
-                Number(map.height).toFixed(1);
-
-
-            list.appendChild(
-                item
+        const pdfWidth =
+            Number(
+                page.getWidth()
             );
 
-        }
-    );
+
+        const pdfHeight =
+            Number(
+                page.getHeight()
+            );
+
+
+        /*
+           Add Name.
+        */
+
+        addMappedText(
+
+            page,
+
+            MAPPINGS.Name,
+
+            data.name,
+
+            pdfWidth,
+
+            pdfHeight,
+
+            font
+
+        );
+
+
+        /*
+           Add Place.
+        */
+
+        addMappedText(
+
+            page,
+
+            MAPPINGS.Place,
+
+            data.place,
+
+            pdfWidth,
+
+            pdfHeight,
+
+            font
+
+        );
+
+
+        /*
+           Add Date.
+        */
+
+        addMappedText(
+
+            page,
+
+            MAPPINGS.Date,
+
+            formatDate(data.date),
+
+            pdfWidth,
+
+            pdfHeight,
+
+            font
+
+        );
+
+
+        /*
+           Save final PDF.
+        */
+
+        const output =
+            await pdfDoc.save();
+
+
+        /*
+           Create download.
+        */
+
+        const blob =
+            new Blob(
+
+                [output],
+
+                {
+                    type:
+                        "application/pdf"
+                }
+
+            );
+
+
+        const url =
+            URL.createObjectURL(blob);
+
+
+        const link =
+            document.createElement("a");
+
+
+        link.href =
+            url;
+
+
+        link.download =
+
+            "Onboarding Documents - "
+            +
+            cleanFileName(data.name)
+            +
+            ".pdf";
+
+
+        document.body.appendChild(link);
+
+
+        link.click();
+
+
+        document.body.removeChild(link);
+
+
+        setTimeout(
+
+            function() {
+
+                URL.revokeObjectURL(url);
+
+            },
+
+            2000
+
+        );
+
+
+        showStatus(
+
+            "Your completed onboarding PDF has been generated and downloaded successfully.",
+
+            "success"
+
+        );
+
+    }
+    catch(error) {
+
+
+        console.error(error);
+
+
+        showStatus(
+
+            "PDF generation failed: "
+            +
+            error.message,
+
+            "error"
+
+        );
+
+
+        alert(
+
+            "PDF generation failed.\n\n"
+            +
+            error.message
+
+        );
+
+    }
 
 }
 
 
 
 /* =====================================================
-   DELETE SELECTED
+   ADD MAPPED TEXT
 ===================================================== */
 
-function deleteMapping() {
+function addMappedText(
 
-    const field =
-        fieldSelect.value;
+    page,
+    mapping,
+    text,
+    pdfWidth,
+    pdfHeight,
+    font
 
-    if (!field) {
+) {
 
-        alert(
-            "Select a field first."
+
+    if (!mapping) {
+
+        throw new Error(
+            "PDF mapping is missing."
         );
-
-        return;
-
-    }
-
-    if (!mappings[field]) {
-
-        alert(
-            "No mapping exists for " +
-            field
-        );
-
-        return;
 
     }
 
 
-    delete mappings[field];
+    /*
+       Convert Mapper coordinates
+       into PDF coordinates.
+    */
 
-    saveMappings();
-
-    displayMappings();
-
-    updateMappingList();
-
-
-    statusBox.textContent =
-        field +
-        " mapping deleted.";
-
-}
+    const scaleX =
+        pdfWidth /
+        MAPPER_CANVAS_WIDTH;
 
 
+    const scaleY =
+        pdfHeight /
+        MAPPER_CANVAS_HEIGHT;
 
-/* =====================================================
-   CLEAR ALL
-===================================================== */
 
-function clearMappings() {
+    const x =
+        mapping.x *
+        scaleX;
 
-    if (
-        !confirm(
-            "Clear all saved mappings?"
+
+    const boxWidth =
+        mapping.width *
+        scaleX;
+
+
+    const boxHeight =
+        mapping.height *
+        scaleY;
+
+
+    /*
+       Mapper uses top-left coordinates.
+
+       PDF uses bottom-left coordinates.
+
+       Therefore we convert Y.
+    */
+
+    const y =
+        pdfHeight
+        -
+        (
+            mapping.y *
+            scaleY
         )
-    ) {
-
-        return;
-
-    }
+        -
+        boxHeight;
 
 
-    mappings = {};
+    /*
+       Calculate font size from
+       mapped rectangle.
+    */
 
-    localStorage.removeItem(
-        STORAGE_KEY
-    );
+    let fontSize =
+        boxHeight * 0.75;
 
-
-    displayMappings();
-
-    updateMappingList();
-
-
-    statusBox.textContent =
-        "All mappings cleared.";
-
-}
-
-
-
-/* =====================================================
-   ZOOM
-===================================================== */
-
-function zoomIn() {
-
-    if (!pdfDocument) {
-        return;
-    }
-
-    zoom += 0.2;
-
-    renderPage();
-
-}
-
-
-function zoomOut() {
-
-    if (!pdfDocument) {
-        return;
-    }
-
-    if (zoom > 0.6) {
-        zoom -= 0.2;
-    }
-
-    renderPage();
-
-}
-
-
-function resetZoom() {
-
-    if (!pdfDocument) {
-        return;
-    }
-
-    zoom = 1.3;
-
-    renderPage();
-
-}
-
-
-
-/* =====================================================
-   TEST MAPPING
-===================================================== */
-
-function testMapping() {
 
     if (
-        !mappings.Name ||
-        !mappings.Date ||
-        !mappings.Place
+        !Number.isFinite(fontSize)
+        ||
+        fontSize <= 0
     ) {
 
-        alert(
-            "Please map Name, Date and Place first."
-        );
-
-        return;
+        fontSize = 10;
 
     }
 
 
-    alert(
-        "All three mappings are saved.\n\n" +
-        "Name, Date and Place are ready for the employee PDF."
+    fontSize =
+        Math.max(
+
+            6,
+
+            Math.min(
+                24,
+                fontSize
+            )
+
+        );
+
+
+    /*
+       Draw text.
+    */
+
+    page.drawText(
+
+        String(text),
+
+        {
+
+            x:
+                x,
+
+            y:
+                y
+                +
+                (
+                    boxHeight
+                    -
+                    fontSize
+                )
+                / 2,
+
+            size:
+                fontSize,
+
+            font:
+                font,
+
+            color:
+                PDFLib.rgb(
+                    0,
+                    0,
+                    0
+                ),
+
+            maxWidth:
+                Math.max(
+                    10,
+                    boxWidth
+                )
+
+        }
+
     );
 
 }
@@ -1404,12 +1696,85 @@ function testMapping() {
 
 
 /* =====================================================
-   START
+   DATE FORMAT
 ===================================================== */
 
-loadPDF();
+function formatDate(date) {
+
+
+    if (!date) {
+
+        return "";
+
+    }
+
+
+    const parts =
+        date.split("-");
+
+
+    if (
+        parts.length !== 3
+    ) {
+
+        return date;
+
+    }
+
+
+    return (
+
+        parts[2]
+        +
+        "/"
+        +
+        parts[1]
+        +
+        "/"
+        +
+        parts[0]
+
+    );
+
+}
+
+
+
+/* =====================================================
+   CLEAN FILE NAME
+===================================================== */
+
+function cleanFileName(name) {
+
+
+    const cleaned =
+        name
+
+        .replace(
+            /[^a-z0-9 ]/gi,
+            ""
+        )
+
+        .trim();
+
+
+    if (!cleaned) {
+
+        return "Employee";
+
+    }
+
+
+    return cleaned.substring(
+        0,
+        50
+    );
+
+}
+
 
 </script>
+
 
 </body>
 
