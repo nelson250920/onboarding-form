@@ -180,11 +180,35 @@ body {
     background: #fafafa;
 }
 
+.nominee-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 17px;
+}
+
 .nominee-title {
     color: #C00000;
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 17px;
+    margin-bottom: 0;
+}
+
+.remove-nominee {
+    background: white;
+    color: #666;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.remove-nominee:hover {
+    background: #f8d7da;
+    color: #842029;
+    border-color: #842029;
 }
 
 .add-nominee {
@@ -265,6 +289,19 @@ button.main-button {
 
 .generate:hover {
     background: #990000;
+}
+
+.clear {
+    background: white;
+    color: #666;
+}
+
+button.clear {
+    border: 1px solid #ccc;
+}
+
+.clear:hover {
+    background: #f2f2f2;
 }
 
 .status {
@@ -1027,6 +1064,15 @@ button.main-button {
 
     <button
         type="button"
+        class="main-button clear"
+        onclick="clearAllInputs()"
+    >
+        Clear All
+    </button>
+
+
+    <button
+        type="button"
         class="main-button generate"
         onclick="generatePDF()"
     >
@@ -1478,6 +1524,26 @@ function updateNomineeRelations() {
 
 
 /* =====================================================
+   NOMINEE REQUIRED-FIELD HELPERS
+
+   Only Nominee 1 is mandatory. Nominees 2-4 are optional
+   extras added via "+ Add Nominee", so their fields are
+   not required -- a candidate can add one, decide not to
+   fill it in, and still submit.
+===================================================== */
+
+function requiredAttr(number) {
+    return number === 1 ? "required" : "";
+}
+
+function requiredMark(number) {
+    return number === 1
+        ? '<span class="required">*</span>'
+        : "";
+}
+
+
+/* =====================================================
    ADD NOMINEE
 ===================================================== */
 
@@ -1508,8 +1574,24 @@ function addNominee() {
 
     div.innerHTML = `
 
-        <div class="nominee-title">
-            Nominee ${number}
+        <div class="nominee-header">
+
+            <div class="nominee-title">
+                Nominee ${number}
+            </div>
+
+            ${
+                number > 1
+                    ? `<button
+                        type="button"
+                        class="remove-nominee"
+                        onclick="removeNominee(${number})"
+                    >
+                        Remove
+                    </button>`
+                    : ""
+            }
+
         </div>
 
         <div class="grid">
@@ -1518,13 +1600,13 @@ function addNominee() {
 
                 <label>
                     Name of Nominee
-                    <span class="required">*</span>
+                    ${requiredMark(number)}
                 </label>
 
                 <input
                     type="text"
                     id="nominee${number}_name"
-                    required
+                    ${requiredAttr(number)}
                 >
 
             </div>
@@ -1534,12 +1616,12 @@ function addNominee() {
 
                 <label>
                     Relation with Employee
-                    <span class="required">*</span>
+                    ${requiredMark(number)}
                 </label>
 
                 <select
                     id="nominee${number}_relation"
-                    required
+                    ${requiredAttr(number)}
                 >
                     ${relationOptions()}
                 </select>
@@ -1551,12 +1633,12 @@ function addNominee() {
 
                 <label>
                     Address of Nominee
-                    <span class="required">*</span>
+                    ${requiredMark(number)}
                 </label>
 
                 <textarea
                     id="nominee${number}_address"
-                    required
+                    ${requiredAttr(number)}
                 ></textarea>
 
             </div>
@@ -1566,7 +1648,7 @@ function addNominee() {
 
                 <label>
                     Aadhaar Number of Nominee
-                    <span class="required">*</span>
+                    ${requiredMark(number)}
                 </label>
 
                 <input
@@ -1576,7 +1658,7 @@ function addNominee() {
                     maxlength="12"
                     pattern="[0-9]{12}"
                     oninput="digitsOnly(this)"
-                    required
+                    ${requiredAttr(number)}
                 >
 
             </div>
@@ -1586,14 +1668,14 @@ function addNominee() {
 
                 <label>
                     DOB of Nominee
-                    <span class="required">*</span>
+                    ${requiredMark(number)}
                 </label>
 
                 <input
                     type="date"
                     id="nominee${number}_dob"
                     onchange="calculateNomineeAge(${number})"
-                    required
+                    ${requiredAttr(number)}
                 >
 
             </div>
@@ -1603,7 +1685,7 @@ function addNominee() {
 
                 <label>
                     Age
-                    <span class="required">*</span>
+                    ${requiredMark(number)}
                 </label>
 
                 <input
@@ -1611,7 +1693,7 @@ function addNominee() {
                     class="nominee-age"
                     id="nominee${number}_age"
                     readonly
-                    required
+                    ${requiredAttr(number)}
                 >
 
             </div>
@@ -1621,7 +1703,7 @@ function addNominee() {
 
                 <label>
                     Percentage of Share
-                    <span class="required">*</span>
+                    ${requiredMark(number)}
                 </label>
 
                 <input
@@ -1630,7 +1712,7 @@ function addNominee() {
                     min="1"
                     max="100"
                     step="1"
-                    required
+                    ${requiredAttr(number)}
                 >
 
             </div>
@@ -1642,12 +1724,86 @@ function addNominee() {
         .getElementById("nomineeContainer")
         .appendChild(div);
 
-    if (nomineeCount >= 4) {
+    document
+        .getElementById("addNomineeButton")
+        .style.display =
+            nomineeCount >= 4 ? "none" : "";
+}
 
-        document
-            .getElementById("addNomineeButton")
-            .style.display = "none";
+
+/* =====================================================
+   REMOVE NOMINEE
+
+   Nominee 1 can never be removed. Removing any other
+   nominee re-renders the whole nominee list from the
+   remaining values so numbering stays contiguous
+   (Nominee 2, 3, 4 -- never a gap).
+===================================================== */
+
+function removeNominee(number) {
+
+    if (number === 1) return;
+
+    if (
+        !confirm(
+            "Remove Nominee " + number + "?"
+        )
+    ) {
+        return;
     }
+
+    const remaining =
+        getNominees()
+            .filter(function(_, index) {
+                return (index + 1) !== number;
+            });
+
+    renderNominees(remaining);
+}
+
+
+/* =====================================================
+   RENDER NOMINEES
+
+   Rebuilds the nominee list from a plain array of nominee
+   value objects (as produced by getNominees(), or the
+   "nominees" array from a saved draft). Always leaves at
+   least one (blank) Nominee 1 in place. Used on page load,
+   after loading a draft, after removing a nominee, and by
+   "Clear All".
+===================================================== */
+
+function renderNominees(nomineesData) {
+
+    document
+        .getElementById("nomineeContainer")
+        .innerHTML = "";
+
+    nomineeCount = 0;
+
+    const list =
+        (Array.isArray(nomineesData) && nomineesData.length)
+            ? nomineesData.slice(0, 4)
+            : [{}];
+
+    list.forEach(function(n) {
+
+        addNominee();
+
+        const number =
+            nomineeCount;
+
+        setValue("nominee" + number + "_name", n.name);
+        setValue("nominee" + number + "_address", n.address);
+        setValue("nominee" + number + "_relation", n.relation);
+        setValue("nominee" + number + "_aadhaar", n.aadhaar);
+        setValue("nominee" + number + "_dob", n.dob);
+        setValue("nominee" + number + "_percentage", n.percentage);
+
+        calculateNomineeAge(number);
+    });
+
+    updateNomineeRelations();
 }
 
 
@@ -2387,7 +2543,14 @@ function loadDraft() {
     const saved =
         localStorage.getItem(DRAFT_KEY);
 
-    if (!saved) return;
+    if (!saved) {
+
+        // No draft saved yet -- still need exactly one
+        // (blank, mandatory) Nominee 1 on the form.
+        renderNominees(null);
+
+        return;
+    }
 
     try {
 
@@ -2444,67 +2607,7 @@ function loadDraft() {
 
         /* Restore nominees */
 
-        if (
-            Array.isArray(data.nominees)
-        ) {
-
-            data.nominees
-                .slice(0, 4)
-                .forEach(function(n) {
-
-                    addNominee();
-
-                    const number =
-                        nomineeCount;
-
-                    setValue(
-                        "nominee" +
-                        number +
-                        "_name",
-                        n.name
-                    );
-
-                    setValue(
-                        "nominee" +
-                        number +
-                        "_address",
-                        n.address
-                    );
-
-                    setValue(
-                        "nominee" +
-                        number +
-                        "_relation",
-                        n.relation
-                    );
-
-                    setValue(
-                        "nominee" +
-                        number +
-                        "_aadhaar",
-                        n.aadhaar
-                    );
-
-                    setValue(
-                        "nominee" +
-                        number +
-                        "_dob",
-                        n.dob
-                    );
-
-                    setValue(
-                        "nominee" +
-                        number +
-                        "_percentage",
-                        n.percentage
-                    );
-
-                    calculateNomineeAge(number);
-                });
-        }
-
-
-        updateNomineeRelations();
+        renderNominees(data.nominees);
 
 
         /* Restore declaration */
@@ -2530,6 +2633,11 @@ function loadDraft() {
             "Could not load draft:",
             error
         );
+
+        // Fall back to a single blank Nominee 1 so the
+        // form is still usable even if the saved draft
+        // was corrupted.
+        renderNominees(null);
     }
 }
 
@@ -3405,6 +3513,98 @@ function cleanFileName(name) {
 
 
 /* =====================================================
+   CLEAR ALL
+
+   Wipes every input on the form back to a blank state
+   (a single empty, required Nominee 1), and clears the
+   saved draft so a refresh doesn't bring the old data
+   back.
+===================================================== */
+
+function clearAllInputs() {
+
+    if (
+        !confirm(
+            "This will clear everything you've entered " +
+            "on this form. Continue?"
+        )
+    ) {
+        return;
+    }
+
+    document
+        .querySelectorAll("input, select, textarea")
+        .forEach(function(field) {
+
+            if (
+                field.type === "radio" ||
+                field.type === "checkbox"
+            ) {
+                field.checked = false;
+            }
+            else {
+                field.value = "";
+            }
+        });
+
+    renderNominees(null);
+
+    maritalStatusChanged();
+    employmentChanged();
+
+    setDefaultDeclarationDate();
+
+    localStorage.removeItem(DRAFT_KEY);
+
+    showStatus(
+        "All fields cleared.",
+        "info"
+    );
+}
+
+
+/* =====================================================
+   DEFAULT DECLARATION DATE
+
+   Set declaration date to today for convenience.
+   Candidate may change it.
+===================================================== */
+
+function setDefaultDeclarationDate() {
+
+    const declarationDate =
+        document.getElementById(
+            "declarationDate"
+        );
+
+    if (!declarationDate) return;
+
+    const now =
+        new Date();
+
+    const yyyy =
+        now.getFullYear();
+
+    const mm =
+        String(
+            now.getMonth() + 1
+        ).padStart(2, "0");
+
+    const dd =
+        String(
+            now.getDate()
+        ).padStart(2, "0");
+
+    declarationDate.value =
+        yyyy +
+        "-" +
+        mm +
+        "-" +
+        dd;
+}
+
+
+/* =====================================================
    INITIALIZE
 ===================================================== */
 
@@ -3412,51 +3612,23 @@ document.addEventListener(
     "DOMContentLoaded",
     function() {
 
-        addNominee();
-
+        // loadDraft() renders Nominee 1 (blank, or from a
+        // saved draft) -- no separate addNominee() call
+        // here, since that previously created a blank
+        // Nominee 1 that loadDraft() then duplicated into
+        // Nominee 2.
         loadDraft();
 
         maritalStatusChanged();
 
         employmentChanged();
 
-        /*
-           Set declaration date to today for
-           convenience. Candidate may change it.
-        */
-
-        const declarationDate =
-            document.getElementById(
-                "declarationDate"
-            );
-
         if (
-            declarationDate &&
-            !declarationDate.value
+            !document.getElementById(
+                "declarationDate"
+            ).value
         ) {
-
-            const now =
-                new Date();
-
-            const yyyy =
-                now.getFullYear();
-
-            const mm =
-                String(
-                    now.getMonth() + 1
-                ).padStart(2, "0");
-
-            const dd =
-                String(
-                    now.getDate()
-                ).padStart(2, "0");
-
-            declarationDate.value =
-                yyyy +
-                "-" +
-                mm +
-                "-" +
-                dd;
+            setDefaultDeclarationDate();
         }
     }
 );
