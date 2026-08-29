@@ -1048,6 +1048,15 @@ button:disabled {
 
             </optgroup>
 
+
+            <optgroup label="Signature">
+
+                <option value="signature">
+                    Signature (Image)
+                </option>
+
+            </optgroup>
+
         </select>
 
 
@@ -1067,7 +1076,19 @@ button:disabled {
                 Checkbox / Tick
             </option>
 
+            <option value="signature" class="hidden-field">
+                Image
+            </option>
+
         </select>
+
+        <div
+            id="signatureTypeNote"
+            class="hidden-field"
+            style="font-size:12px;color:#666;margin-top:-6px;margin-bottom:10px;"
+        >
+            Mapping type is automatically "Image" for the signature.
+        </div>
 
 
         <!-- DECLARATION OPTION
@@ -1445,6 +1466,11 @@ const declarationValueSelect =
         "declarationValueSelect"
     );
 
+const signatureTypeNote =
+    document.getElementById(
+        "signatureTypeNote"
+    );
+
 
 /* =====================================================
    TOGGLE DECLARATION STATEMENT PICKER
@@ -1472,6 +1498,49 @@ function updateDeclarationValueVisibility() {
     );
 
 }
+
+
+/* =====================================================
+   SIGNATURE FIELD -> FORCE "IMAGE" MAPPING TYPE
+
+   The signature isn't a text/checkbox value at all -- it's
+   the candidate's uploaded image. When "Signature (Image)"
+   is picked as the field, the Text/Checkbox dropdown is
+   meaningless, so it's locked and hidden in favor of a
+   plain note.
+===================================================== */
+
+function updateSignatureTypeUI() {
+
+    const isSignature =
+        fieldSelect.value === "signature";
+
+    mappingType.classList.toggle(
+        "hidden-field",
+        isSignature
+    );
+
+    signatureTypeNote.classList.toggle(
+        "hidden-field",
+        !isSignature
+    );
+
+    if (isSignature) {
+        mappingType.value = "signature";
+    }
+    else if (mappingType.value === "signature") {
+        mappingType.value = "text";
+    }
+
+}
+
+fieldSelect.addEventListener(
+    "change",
+    updateSignatureTypeUI
+);
+
+updateSignatureTypeUI();
+
 
 fieldSelect.addEventListener(
     "change",
@@ -3311,6 +3380,9 @@ function getFieldLabel(field) {
 
         declarationDate:
             "Declaration Date",
+
+        signature:
+            "Signature",
 
         nominee1_name:
             "Nominee 1 Name",
