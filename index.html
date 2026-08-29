@@ -6,126 +6,302 @@
 
 <title>Team Red Onboarding Documents Link</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lexend:wght@600;700;800&display=swap"
+    rel="stylesheet"
+>
+
 <style>
 * {
     box-sizing: border-box;
 }
 
+:root {
+    --red: #C00000;
+    --red-dark: #7a0000;
+    --red-deep: #4a0000;
+    --red-tint: #fdf1f1;
+    --red-tint-2: #fce4e4;
+    --ink: #221c1c;
+    --ink-soft: #55494a;
+    --line: #e7dede;
+    --paper: #ffffff;
+    --canvas: #f7f1ee;
+    --shadow: 220 30% 10%;
+    --font-display: "Lexend", "Poppins", Arial, sans-serif;
+    --font-body: "Manrope", Arial, sans-serif;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .fade-in {
+        animation: fadeInUp 0.6s ease both;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    color: #222;
-    font-size: 10pt;
+    font-family: var(--font-body);
+    background:
+        radial-gradient(1200px 500px at 10% -10%, var(--red-tint) 0%, transparent 55%),
+        radial-gradient(900px 500px at 110% 10%, var(--red-tint) 0%, transparent 50%),
+        var(--canvas);
+    color: var(--ink);
+    font-size: 10.5pt;
+    line-height: 1.5;
+}
+
+::selection {
+    background: var(--red);
+    color: white;
+}
+
+/* Firefox */
+* {
+    scrollbar-color: var(--red) var(--red-tint-2);
+}
+
+/* Webkit */
+::-webkit-scrollbar {
+    width: 11px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--red-tint-2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--red);
+    border-radius: 10px;
+    border: 2px solid var(--red-tint-2);
 }
 
 .header {
     position: relative;
-    background: #C00000;
+    background:
+        linear-gradient(120deg, var(--red-dark) 0%, var(--red) 45%, var(--red) 65%, var(--red-deep) 100%);
     color: white;
-    padding: 30px 20px;
+    padding: 46px 20px 40px;
     text-align: center;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(122, 0, 0, 0.25);
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(
+            135deg,
+            rgba(255,255,255,0.05) 0px,
+            rgba(255,255,255,0.05) 2px,
+            transparent 2px,
+            transparent 26px
+        );
+    pointer-events: none;
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 26px;
+    background: var(--canvas);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    transform: scaleX(1.4);
+}
+
+.header-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 14px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.35);
+    backdrop-filter: blur(2px);
 }
 
 .header h1 {
+    position: relative;
     margin: 0;
-    font-size: 24px;
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
 }
 
 .header p {
-    margin: 8px 0 0;
+    position: relative;
+    margin: 10px 0 0;
     font-size: 14px;
+    color: rgba(255,255,255,0.92);
+    font-weight: 500;
 }
 
 .language-box {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 16px;
+    right: 16px;
     z-index: 10;
 }
 
 .language-box select {
-    padding: 7px 9px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.55);
     font-size: 12px;
+    font-weight: 600;
+    background: rgba(255,255,255,0.14);
+    color: white;
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+}
+
+.language-box select option {
+    color: var(--ink);
     background: white;
-    color: #222;
 }
 
 .container {
-    max-width: 900px;
-    margin: 25px auto;
+    max-width: 920px;
+    margin: -18px auto 25px;
     padding: 0 15px;
+    position: relative;
 }
 
 .card {
-    background: white;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.10);
+    background: var(--paper);
+    border-radius: 16px;
+    padding: 34px;
+    box-shadow:
+        0 1px 2px rgba(20, 10, 10, 0.04),
+        0 18px 40px -18px rgba(90, 0, 0, 0.28);
     margin-bottom: 20px;
+    border: 1px solid var(--line);
 }
 
 .section-title {
-    color: #C00000;
-    font-size: 19px;
-    font-weight: bold;
-    margin: 25px 0 7px;
-    border-bottom: 2px solid #C00000;
-    padding-bottom: 7px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--red);
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    margin: 34px 0 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
 }
 
-.section-title:first-child {
+.section-title::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 3px;
+    background: var(--red);
+    box-shadow: 0 0 0 4px var(--red-tint-2);
+    flex-shrink: 0;
+}
+
+.section-title:first-of-type {
     margin-top: 0;
 }
 
 .section-subtitle {
-    color: #666;
-    margin-bottom: 22px;
-    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    line-height: 1.6;
+    font-size: 10pt;
 }
 
 .welcome {
-    background: #fff5f5;
-    border-left: 5px solid #C00000;
-    padding: 15px;
-    margin-bottom: 25px;
-    border-radius: 5px;
+    position: relative;
+    background: linear-gradient(135deg, var(--red-tint) 0%, #fff 100%);
+    border: 1px solid var(--red-tint-2);
+    padding: 20px 22px;
+    margin-bottom: 28px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.welcome::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: linear-gradient(180deg, var(--red), var(--red-dark));
 }
 
 .welcome h2 {
-    color: #C00000;
+    color: var(--red);
+    font-family: var(--font-display);
     margin: 0 0 8px;
-    font-size: 19px;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .field {
-    margin-bottom: 17px;
+    margin-bottom: 18px;
 }
 
 .field label {
     display: block;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 6px;
     line-height: 1.4;
+    font-size: 9.6pt;
+    color: var(--ink);
 }
 
 .required {
-    color: #C00000;
-    font-weight: bold;
+    color: var(--red);
+    font-weight: 700;
 }
 
 .field input,
 .field select,
 .field textarea {
     width: 100%;
-    padding: 9px 10px;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    background: white;
-    font-family: Arial, sans-serif;
+    padding: 10px 12px;
+    border: 1.5px solid #d8cfcf;
+    border-radius: 8px;
+    background: #fffdfd;
+    font-family: var(--font-body);
     font-size: 10pt;
+    color: var(--ink);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+    border-color: #c7abab;
 }
 
 .field textarea {
@@ -137,8 +313,9 @@ body {
 .field select:focus,
 .field textarea:focus {
     outline: none;
-    border-color: #C00000;
-    box-shadow: 0 0 0 2px rgba(192,0,0,0.10);
+    border-color: var(--red);
+    background: white;
+    box-shadow: 0 0 0 4px var(--red-tint-2);
 }
 
 .grid {
@@ -153,7 +330,7 @@ body {
 
 .radio-group {
     display: flex;
-    gap: 20px;
+    gap: 12px;
     align-items: center;
     flex-wrap: wrap;
     padding-top: 5px;
@@ -162,47 +339,83 @@ body {
 .radio-option {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    font-weight: normal;
+    gap: 8px;
+    font-weight: 500;
     cursor: pointer;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1.5px solid #d8cfcf;
+    background: #fffdfd;
+    transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.radio-option:hover {
+    border-color: #c7abab;
 }
 
 .radio-option input {
     width: auto;
     margin: 0;
+    accent-color: var(--red);
+}
+
+.radio-option:has(input:checked) {
+    border-color: var(--red);
+    background: var(--red-tint);
+    box-shadow: 0 0 0 3px var(--red-tint-2);
 }
 
 .nominee-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 22px;
     margin-bottom: 18px;
-    background: #fafafa;
+    background: linear-gradient(180deg, #fcfafa 0%, #faf6f6 100%);
+    position: relative;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.nominee-card:hover {
+    box-shadow: 0 10px 24px -14px rgba(90, 0, 0, 0.35);
 }
 
 .nominee-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 17px;
+    margin-bottom: 18px;
 }
 
 .nominee-title {
-    color: #C00000;
-    font-size: 16px;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--red);
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
     margin-bottom: 0;
+}
+
+.nominee-title::before {
+    content: "";
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--red), var(--red-dark));
+    flex-shrink: 0;
 }
 
 .remove-nominee {
     background: white;
-    color: #666;
-    border: 1px solid #ccc;
-    padding: 6px 12px;
-    border-radius: 5px;
-    font-size: 13px;
-    font-weight: bold;
+    color: var(--ink-soft);
+    border: 1.5px solid #d8cfcf;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 700;
     cursor: pointer;
+    transition: all 0.15s ease;
 }
 
 .remove-nominee:hover {
@@ -213,43 +426,54 @@ body {
 
 .add-nominee {
     background: white;
-    color: #C00000;
-    border: 1px solid #C00000;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-weight: bold;
+    color: var(--red);
+    border: 1.5px dashed var(--red);
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-weight: 700;
     cursor: pointer;
     margin-bottom: 20px;
+    transition: all 0.15s ease;
+    width: 100%;
 }
 
 .add-nominee:hover {
-    background: #fff0f0;
+    background: var(--red-tint);
+    border-style: solid;
 }
 
 .nominee-age {
-    background: #f2f2f2 !important;
-    color: #555;
+    background: #f2ecec !important;
+    color: var(--ink-soft);
 }
 
 .declaration {
-    border: 1px solid #ddd;
-    border-radius: 7px;
-    padding: 15px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 17px;
     margin-bottom: 12px;
-    background: #fafafa;
+    background: #fcfafa;
+    transition: all 0.15s ease;
+}
+
+.declaration:has(input:checked) {
+    border-color: var(--red);
+    background: var(--red-tint);
+    box-shadow: 0 0 0 3px var(--red-tint-2);
 }
 
 .declaration label {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    line-height: 1.5;
+    gap: 11px;
+    line-height: 1.55;
     cursor: pointer;
 }
 
 .declaration input {
     margin-top: 3px;
     flex-shrink: 0;
+    accent-color: var(--red);
 }
 
 .declaration-place-date {
@@ -257,77 +481,214 @@ body {
     padding-top: 5px;
 }
 
+.signature-drop {
+    display: block;
+    position: relative;
+    border: 2px dashed #d8b9b9;
+    border-radius: 12px;
+    padding: 26px 20px;
+    text-align: center;
+    background: #fffafa;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    margin-bottom: 4px;
+}
+
+.signature-drop:hover {
+    border-color: var(--red);
+    background: var(--red-tint);
+}
+
+.signature-drop input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.signature-drop-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-soft);
+}
+
+.signature-drop-inner strong {
+    color: var(--ink);
+    font-size: 13.5px;
+}
+
+.signature-drop-inner span {
+    font-size: 12px;
+}
+
+.signature-drop-filename {
+    font-weight: 600;
+    color: var(--red);
+    font-size: 13px;
+}
+
+.signature-preview {
+    display: flex;
+    gap: 18px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.signature-preview-panel {
+    flex: 1;
+    min-width: 200px;
+}
+
+.signature-preview-label {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-soft);
+    margin-bottom: 7px;
+}
+
+.signature-swatch {
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    background: white;
+    padding: 10px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signature-swatch img {
+    max-width: 100%;
+    max-height: 90px;
+    object-fit: contain;
+}
+
+.signature-swatch-checker {
+    background-image:
+        linear-gradient(45deg, #eee 25%, transparent 25%),
+        linear-gradient(-45deg, #eee 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #eee 75%),
+        linear-gradient(-45deg, transparent 75%, #eee 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+}
+
+.signature-message {
+    margin-top: 14px;
+    padding: 11px 13px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.signature-message.working {
+    background: #e6f6fb;
+    color: #055160;
+}
+
+.signature-message.ready {
+    background: #e7f6ec;
+    color: #0f5132;
+}
+
+.signature-message.error {
+    background: #fbe9ea;
+    color: #842029;
+}
+
 .buttons {
     display: flex;
     gap: 12px;
-    margin-top: 25px;
+    margin-top: 28px;
 }
 
 button.main-button {
     flex: 1;
     border: none;
-    border-radius: 6px;
-    padding: 13px 15px;
+    border-radius: 10px;
+    padding: 14px 15px;
     font-size: 14px;
-    font-weight: bold;
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.1px;
     cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
+}
+
+button.main-button:active {
+    transform: translateY(1px);
 }
 
 .save {
-    background: #666;
+    background: #4a4040;
     color: white;
 }
 
 .save:hover {
-    background: #444;
+    background: #332b2b;
+    box-shadow: 0 8px 18px -8px rgba(0,0,0,0.35);
 }
 
 .generate {
-    background: #C00000;
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
     color: white;
+    box-shadow: 0 10px 22px -10px rgba(122, 0, 0, 0.55);
 }
 
 .generate:hover {
-    background: #990000;
+    background: linear-gradient(135deg, var(--red-dark) 0%, var(--red-deep) 100%);
+    box-shadow: 0 12px 26px -10px rgba(122, 0, 0, 0.7);
 }
 
 .clear {
     background: white;
-    color: #666;
+    color: var(--ink-soft);
 }
 
 button.clear {
-    border: 1px solid #ccc;
+    border: 1.5px solid #d8cfcf;
 }
 
 .clear:hover {
-    background: #f2f2f2;
+    background: #f4eeee;
 }
 
 .status {
     display: none;
     margin-top: 18px;
-    padding: 12px;
-    border-radius: 6px;
+    padding: 13px 15px;
+    border-radius: 10px;
     line-height: 1.5;
+    font-weight: 500;
+    border: 1px solid transparent;
 }
 
 .status.success {
     display: block;
-    background: #d1e7dd;
+    background: #e7f6ec;
     color: #0f5132;
+    border-color: #b6e3c4;
 }
 
 .status.error {
     display: block;
-    background: #f8d7da;
+    background: #fbe9ea;
     color: #842029;
+    border-color: #f0b8bc;
 }
 
 .status.info {
     display: block;
-    background: #cff4fc;
+    background: #e6f6fb;
     color: #055160;
+    border-color: #b6e6f2;
 }
 
 .hidden {
@@ -337,20 +698,38 @@ button.clear {
 .note {
     background: #fff8e1;
     border: 1px solid #f0d98a;
-    padding: 11px;
-    border-radius: 5px;
+    padding: 13px 14px;
+    border-radius: 10px;
     margin-bottom: 18px;
-    line-height: 1.5;
+    line-height: 1.55;
 }
 
 .footer {
     text-align: center;
-    color: #777;
+    color: #8a7a7a;
     font-size: 11px;
-    padding: 10px 0 30px;
+    padding: 14px 0 34px;
+}
+
+.footer::before {
+    content: "";
+    display: block;
+    width: 46px;
+    height: 3px;
+    margin: 0 auto 14px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--red), var(--red-dark));
 }
 
 @media(max-width:700px) {
+
+    .header {
+        padding: 38px 18px 34px;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
 
     .grid {
         grid-template-columns: 1fr;
@@ -361,7 +740,8 @@ button.clear {
     }
 
     .card {
-        padding: 20px;
+        padding: 22px 18px;
+        border-radius: 14px;
     }
 
     .buttons {
@@ -372,9 +752,13 @@ button.clear {
         position: relative;
         top: auto;
         right: auto;
-        text-align: right;
-        background: #C00000;
-        padding: 8px 12px;
+        text-align: center;
+        background: var(--red-deep);
+        padding: 10px;
+    }
+
+    .language-box select {
+        border-color: rgba(255,255,255,0.4);
     }
 }
 </style>
@@ -394,13 +778,20 @@ button.clear {
 </div>
 
 <div class="header">
+    <div class="header-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M14 3v5h5" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M8 13l2.5 2.5L16 10" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
     <h1>Team Red Onboarding Documents Link</h1>
     <p>Welcome to Team Red</p>
 </div>
 
 <div class="container">
 
-<div class="card">
+<div class="card fade-in">
 
 <div class="welcome">
     <h2>Welcome to Team Red</h2>
@@ -1048,6 +1439,69 @@ button.clear {
 
 
 <!-- =====================================================
+     SIGNATURE
+===================================================== -->
+
+<div class="section-title">Signature</div>
+
+<div class="section-subtitle">
+    Upload a photo or scan of your signature on plain paper.
+    We automatically remove the background so only your
+    signature is placed on the documents.
+    <span class="required">*</span>
+</div>
+
+<label class="signature-drop" id="signatureDrop" for="signatureFile">
+
+    <input
+        type="file"
+        id="signatureFile"
+        accept="image/*"
+        onchange="handleSignatureUpload(event)"
+    >
+
+    <div class="signature-drop-inner" id="signatureDropPrompt">
+
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 16V4M12 4L7 9M12 4l5 5" stroke="#C00000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#C00000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <div>
+            <strong>Click to upload your signature</strong>
+            <span>PNG or JPG &middot; plain background works best</span>
+        </div>
+
+    </div>
+
+    <div class="signature-drop-filename hidden" id="signatureFileName"></div>
+
+</label>
+
+<div class="signature-preview hidden" id="signaturePreview">
+
+    <div class="signature-preview-panel">
+        <span class="signature-preview-label">Original</span>
+        <div class="signature-swatch">
+            <img id="signatureOriginalImg" alt="Original signature upload">
+        </div>
+    </div>
+
+    <div class="signature-preview-panel">
+        <span class="signature-preview-label">Background removed</span>
+        <div class="signature-swatch signature-swatch-checker">
+            <img id="signatureProcessedImg" alt="Signature with background removed">
+        </div>
+    </div>
+
+</div>
+
+<div id="signatureMessage" class="signature-message hidden"></div>
+
+
+
+
+<!-- =====================================================
      ACTIONS
 ===================================================== -->
 
@@ -1106,6 +1560,14 @@ const PDF_FILE_NAME = "Onboarding Documents.pdf";
 const DRAFT_KEY = "teamRedOnboardingDraft";
 
 let nomineeCount = 0;
+
+/*
+   Holds the processed (background-removed) signature as a
+   PNG data URL, ready to embed into the PDF. Populated by
+   handleSignatureUpload(), restored by loadDraft(), and
+   cleared by clearAllInputs().
+*/
+let signatureDataURL = "";
 
 
 /* =====================================================
@@ -1874,6 +2336,347 @@ function digitsOnly(input) {
 
 
 /* =====================================================
+   SIGNATURE UPLOAD
+
+   Runs entirely in the browser: reads the uploaded image,
+   removes the background using a brightness-based alpha
+   matte (dark ink -> opaque, light background ->
+   transparent, with smooth falloff at the edges), then
+   crops tightly to the signature's bounding box. The
+   result is a transparent PNG placed onto the PDF pages
+   wherever an admin has mapped a "signature" box.
+===================================================== */
+
+function handleSignatureUpload(event) {
+
+    const file =
+        event.target.files && event.target.files[0];
+
+    if (!file) return;
+
+    if (!file.type || file.type.indexOf("image/") !== 0) {
+
+        showSignatureMessage(
+            "Please upload an image file (PNG or JPG).",
+            "error"
+        );
+
+        event.target.value = "";
+
+        return;
+    }
+
+    showSignatureMessage(
+        "Processing your signature...",
+        "working"
+    );
+
+    const reader =
+        new FileReader();
+
+    reader.onload = function() {
+
+        const originalDataURL =
+            reader.result;
+
+        const img =
+            new Image();
+
+        img.onload = function() {
+
+            try {
+
+                const result =
+                    removeSignatureBackground(img);
+
+                signatureDataURL =
+                    result.dataURL;
+
+                document
+                    .getElementById("signatureOriginalImg")
+                    .src = originalDataURL;
+
+                document
+                    .getElementById("signatureProcessedImg")
+                    .src = signatureDataURL;
+
+                document
+                    .getElementById("signaturePreview")
+                    .classList.remove("hidden");
+
+                document
+                    .getElementById("signatureDropPrompt")
+                    .classList.add("hidden");
+
+                const fileNameBox =
+                    document.getElementById("signatureFileName");
+
+                fileNameBox.textContent =
+                    "Selected: " + file.name + " (click to change)";
+
+                fileNameBox.classList.remove("hidden");
+
+                showSignatureMessage(
+                    "Background removed. If it doesn't look " +
+                    "right, upload a clearer photo -- dark " +
+                    "ink on plain paper works best.",
+                    "ready"
+                );
+            }
+            catch (error) {
+
+                console.error(
+                    "Signature processing failed:",
+                    error
+                );
+
+                signatureDataURL = "";
+
+                showSignatureMessage(
+                    "Could not process that image. Please " +
+                    "try a different photo of your signature.",
+                    "error"
+                );
+            }
+        };
+
+        img.onerror = function() {
+
+            signatureDataURL = "";
+
+            showSignatureMessage(
+                "Could not read that image file. Please try again.",
+                "error"
+            );
+        };
+
+        img.src = originalDataURL;
+    };
+
+    reader.onerror = function() {
+
+        signatureDataURL = "";
+
+        showSignatureMessage(
+            "Could not read that file. Please try again.",
+            "error"
+        );
+    };
+
+    reader.readAsDataURL(file);
+}
+
+
+function showSignatureMessage(text, kind) {
+
+    const box =
+        document.getElementById("signatureMessage");
+
+    if (!box) return;
+
+    box.textContent = text;
+    box.className = "signature-message " + kind;
+    box.classList.remove("hidden");
+}
+
+
+function removeSignatureBackground(img) {
+
+    // Cap the working size so processing stays fast and
+    // the embedded PDF image stays small -- a signature
+    // never needs to be huge.
+    const MAX_DIMENSION = 1000;
+
+    const scale =
+        Math.min(
+            1,
+            MAX_DIMENSION / Math.max(img.naturalWidth, img.naturalHeight)
+        );
+
+    const width =
+        Math.max(1, Math.round(img.naturalWidth * scale));
+
+    const height =
+        Math.max(1, Math.round(img.naturalHeight * scale));
+
+    const canvas =
+        document.createElement("canvas");
+
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx =
+        canvas.getContext("2d");
+
+    ctx.drawImage(img, 0, 0, width, height);
+
+    const imageData =
+        ctx.getImageData(0, 0, width, height);
+
+    const data =
+        imageData.data;
+
+    // Brightness thresholds: pixels brighter than WHITE_CUT
+    // are treated as background (fully transparent); pixels
+    // darker than INK_CUT are treated as ink (fully opaque);
+    // everything between fades smoothly, which keeps
+    // anti-aliased pen edges looking natural instead of
+    // jagged.
+    const WHITE_CUT = 225;
+    const INK_CUT = 140;
+
+    let minX = width;
+    let minY = height;
+    let maxX = -1;
+    let maxY = -1;
+
+    for (let i = 0; i < data.length; i += 4) {
+
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+
+        const luminance =
+            (0.299 * r) + (0.587 * g) + (0.114 * b);
+
+        let alpha;
+
+        if (luminance >= WHITE_CUT) {
+            alpha = 0;
+        }
+        else if (luminance <= INK_CUT) {
+            alpha = 255;
+        }
+        else {
+            alpha =
+                255 *
+                (
+                    (WHITE_CUT - luminance) /
+                    (WHITE_CUT - INK_CUT)
+                );
+        }
+
+        data[i + 3] = Math.round(alpha);
+
+        // Render kept ink as a consistent dark charcoal so
+        // scans with a slight color cast all look uniform
+        // once placed on the documents.
+        if (alpha > 0) {
+
+            data[i] = 30;
+            data[i + 1] = 30;
+            data[i + 2] = 30;
+
+            const pixelIndex =
+                i / 4;
+
+            const x =
+                pixelIndex % width;
+
+            const y =
+                Math.floor(pixelIndex / width);
+
+            if (x < minX) minX = x;
+            if (x > maxX) maxX = x;
+            if (y < minY) minY = y;
+            if (y > maxY) maxY = y;
+        }
+    }
+
+    ctx.putImageData(imageData, 0, 0);
+
+    // Nothing recognized as ink -- return the full (now
+    // transparent) canvas rather than fail outright.
+    if (maxX < 0) {
+
+        return {
+            dataURL: canvas.toDataURL("image/png"),
+            width: width,
+            height: height
+        };
+    }
+
+    // Crop tightly to the signature with a small margin,
+    // so it fills its box on the PDF instead of floating
+    // in a sea of empty transparent space.
+    const margin =
+        Math.round(Math.max(width, height) * 0.02);
+
+    const cropX =
+        Math.max(0, minX - margin);
+
+    const cropY =
+        Math.max(0, minY - margin);
+
+    const cropWidth =
+        Math.min(width, maxX + margin) - cropX;
+
+    const cropHeight =
+        Math.min(height, maxY + margin) - cropY;
+
+    const trimmed =
+        document.createElement("canvas");
+
+    trimmed.width = cropWidth;
+    trimmed.height = cropHeight;
+
+    trimmed
+        .getContext("2d")
+        .drawImage(
+            canvas,
+            cropX,
+            cropY,
+            cropWidth,
+            cropHeight,
+            0,
+            0,
+            cropWidth,
+            cropHeight
+        );
+
+    return {
+        dataURL: trimmed.toDataURL("image/png"),
+        width: cropWidth,
+        height: cropHeight
+    };
+}
+
+
+function resetSignatureUpload() {
+
+    signatureDataURL = "";
+
+    const fileInput =
+        document.getElementById("signatureFile");
+
+    if (fileInput) fileInput.value = "";
+
+    const preview =
+        document.getElementById("signaturePreview");
+
+    if (preview) preview.classList.add("hidden");
+
+    const prompt =
+        document.getElementById("signatureDropPrompt");
+
+    if (prompt) prompt.classList.remove("hidden");
+
+    const fileNameBox =
+        document.getElementById("signatureFileName");
+
+    if (fileNameBox) {
+        fileNameBox.classList.add("hidden");
+        fileNameBox.textContent = "";
+    }
+
+    const message =
+        document.getElementById("signatureMessage");
+
+    if (message) message.classList.add("hidden");
+}
+
+
+/* =====================================================
    GET NOMINEES
 ===================================================== */
 
@@ -2046,6 +2849,9 @@ function getFormData() {
 
         declarationDate:
             document.getElementById("declarationDate").value,
+
+        signature:
+            signatureDataURL || "",
 
         savedAt:
             new Date().toISOString()
@@ -2347,6 +3153,27 @@ function validateForm(data) {
        NOMINEES
     ================================================= */
 
+    // Nominees beyond #1 are optional. If one was added
+    // but left completely blank, drop it silently instead
+    // of blocking submission -- only Nominee 1 (and any
+    // nominee that was partially filled in) must be
+    // complete.
+    data.nominees =
+        data.nominees.filter(function(n, i) {
+
+            if (i === 0) return true;
+
+            const isEmpty =
+                !n.name &&
+                !n.address &&
+                !n.relation &&
+                !n.aadhaar &&
+                !n.dob &&
+                !n.percentage;
+
+            return !isEmpty;
+        });
+
     if (data.nominees.length === 0) {
 
         alert(
@@ -2501,6 +3328,27 @@ function validateForm(data) {
     }
 
 
+    /* =================================================
+       SIGNATURE
+    ================================================= */
+
+    if (!data.signature) {
+
+        alert(
+            "Please upload your signature before generating the PDF."
+        );
+
+        document
+            .getElementById("signatureDrop")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        return false;
+    }
+
+
     return true;
 }
 
@@ -2626,6 +3474,44 @@ function loadDraft() {
             }
         }
 
+
+        /* Restore signature */
+
+        if (data.signature) {
+
+            signatureDataURL =
+                data.signature;
+
+            document
+                .getElementById("signatureOriginalImg")
+                .src = data.signature;
+
+            document
+                .getElementById("signatureProcessedImg")
+                .src = data.signature;
+
+            document
+                .getElementById("signaturePreview")
+                .classList.remove("hidden");
+
+            document
+                .getElementById("signatureDropPrompt")
+                .classList.add("hidden");
+
+            const fileNameBox =
+                document.getElementById("signatureFileName");
+
+            fileNameBox.textContent =
+                "Signature restored from your saved draft (click to change)";
+
+            fileNameBox.classList.remove("hidden");
+
+            showSignatureMessage(
+                "Signature restored from your saved draft.",
+                "ready"
+            );
+        }
+
     }
     catch(error) {
 
@@ -2697,6 +3583,7 @@ function showStatus(
 const PDF_MAPPING = {
     1: [
         { field: "name", type: "text", x: 180.2890625, y: 659.0494689941406, width: 246, height: 30, canvasWidth: 734, canvasHeight: 950 },
+        { field: "signature", type: "signature", x: 177.36456298828125, y: 704.3333435058594, width: 225, height: 35, canvasWidth: 734, canvasHeight: 950 },
         { field: "declarationDate", type: "text", x: 198.2890625, y: 758.0494689941406, width: 227, height: 24, canvasWidth: 734, canvasHeight: 950 },
         { field: "place", type: "text", x: 197.2890625, y: 787.0494689941406, width: 232, height: 25, canvasWidth: 734, canvasHeight: 950 },
     ],
@@ -2728,6 +3615,7 @@ const PDF_MAPPING = {
     3: [
         { field: "withdrawEPF", type: "checkbox", x: 590.5208435058594, y: 64.71615600585938, width: 68, height: 36, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "withdrawEPS", type: "checkbox", x: 593.5208435058594, y: 117.71615600585938, width: 72, height: 39, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "signature", type: "signature", x: 480.7916564941406, y: 268.6666679382324, width: 176, height: 40, canvasWidth: 715, canvasHeight: 1010 },
         { field: "declarationDate", type: "text", x: 142.52084350585938, y: 417.7161445617676, width: 245, height: 33, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "place", type: "text", x: 143.52084350585938, y: 463.7161445617676, width: 247, height: 30, canvasWidth: 1072, canvasHeight: 1515 },
     ],
@@ -2738,6 +3626,7 @@ const PDF_MAPPING = {
         { field: "gender", type: "text", x: 314.8828125, y: 351.7161560058594, width: 155, height: 25, canvasWidth: 1101, canvasHeight: 1425 },
         { field: "maritalStatus", type: "text", x: 575.8828125, y: 356.7161560058594, width: 286, height: 19, canvasWidth: 1101, canvasHeight: 1425 },
         { field: "permanentAddress", type: "text", x: 368.8828125, y: 385.71614837646484, width: 637, height: 49, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "signature", type: "signature", x: 386.36456298828125, y: 607.3333435058594, width: 180, height: 34, canvasWidth: 734, canvasHeight: 950 },
         { field: "nominee1_relation", type: "text", x: 387.8828125, y: 654.7161407470703, width: 113, height: 28, canvasWidth: 1101, canvasHeight: 1425 },
         { field: "nominee1_name", type: "text", x: 144.8828125, y: 656.7161254882812, width: 135, height: 29, canvasWidth: 1101, canvasHeight: 1425 },
         { field: "nominee1_percentage", type: "text", x: 595.8828125, y: 656.7161445617676, width: 151, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
@@ -2776,6 +3665,7 @@ const PDF_MAPPING = {
         { field: "nominee2_name", type: "text", x: 171.08074951171875, y: 422.7161445617676, width: 371, height: 35, canvasWidth: 1223, canvasHeight: 1583 },
         { field: "nominee2_dob", type: "text", x: 556.0807495117188, y: 424.7161445617676, width: 176, height: 39, canvasWidth: 1223, canvasHeight: 1583 },
         { field: "nominee2_relation", type: "text", x: 744.0807495117188, y: 426.7161445617676, width: 277, height: 36, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "signature", type: "signature", x: 474.36456298828125, y: 486, width: 183, height: 31, canvasWidth: 734, canvasHeight: 950 },
         { field: "nominee3_name", type: "text", x: 169.08074951171875, y: 488.7161445617676, width: 371, height: 34, canvasWidth: 1223, canvasHeight: 1583 },
         { field: "nominee3_dob", type: "text", x: 556.0807495117188, y: 492.7161445617676, width: 180, height: 31, canvasWidth: 1223, canvasHeight: 1583 },
         { field: "nominee3_relation", type: "text", x: 749.0807495117188, y: 493.7161445617676, width: 270, height: 34, canvasWidth: 1223, canvasHeight: 1583 },
@@ -2794,6 +3684,7 @@ const PDF_MAPPING = {
         { field: "maritalStatus", type: "text", x: 628.3385620117188, y: 549.7161445617676, width: 197, height: 28, canvasWidth: 952, canvasHeight: 1347 },
         { field: "doj", type: "text", x: 626.3385620117188, y: 666.7161407470703, width: 198, height: 32, canvasWidth: 952, canvasHeight: 1347 },
         { field: "permanentAddress", type: "text", x: 627.3385620117188, y: 755.7161254882812, width: 196, height: 133, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "signature", type: "signature", x: 460.3541564941406, y: 813.3333435058594, width: 233, height: 43, canvasWidth: 714, canvasHeight: 1010 },
         { field: "district", type: "text", x: 625.3385620117188, y: 892.7161254882812, width: 201, height: 25, canvasWidth: 952, canvasHeight: 1347 },
         { field: "state", type: "text", x: 626.3385620117188, y: 921.7161254882812, width: 202, height: 21, canvasWidth: 952, canvasHeight: 1347 },
         { field: "pincode", type: "text", x: 625.3385620117188, y: 946.7161254882812, width: 205, height: 21, canvasWidth: 952, canvasHeight: 1347 },
@@ -2803,6 +3694,7 @@ const PDF_MAPPING = {
     7: [
         { field: "name", type: "text", x: 279.33856201171875, y: 217.71615600585938, width: 295, height: 25, canvasWidth: 952, canvasHeight: 1347 },
         { field: "doj", type: "text", x: 734.3385620117188, y: 272.7161560058594, width: 86, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "signature", type: "signature", x: 415.3541564941406, y: 518.3333435058594, width: 229, height: 41, canvasWidth: 714, canvasHeight: 1010 },
     ],
     8: [
         { field: "nominee1_name", type: "text", x: 116.33856201171875, y: 247.71615600585938, width: 198, height: 24, canvasWidth: 952, canvasHeight: 1347 },
@@ -2826,10 +3718,12 @@ const PDF_MAPPING = {
         { field: "nominee4_name", type: "text", x: 111.33856201171875, y: 318.7161560058594, width: 205, height: 25, canvasWidth: 952, canvasHeight: 1347 },
         { field: "nominee4_relation", type: "text", x: 319.33856201171875, y: 319.7161560058594, width: 138, height: 24, canvasWidth: 952, canvasHeight: 1347 },
         { field: "declaration", type: "checkbox", x: 31.33856201171875, y: 404.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "signature", type: "signature", x: 406.3541564941406, y: 641.6666870117188, width: 246, height: 42, canvasWidth: 714, canvasHeight: 1010 },
         { field: "place", type: "text", x: 104.33856201171875, y: 884.7161254882812, width: 166, height: 31, canvasWidth: 952, canvasHeight: 1347 },
         { field: "declarationDate", type: "text", x: 105.33856201171875, y: 919.7161254882812, width: 165, height: 28, canvasWidth: 952, canvasHeight: 1347 },
     ],
     9: [
+        { field: "signature", type: "signature", x: 457.3541564941406, y: 189, width: 206, height: 36, canvasWidth: 714, canvasHeight: 1010 },
         { field: "declarationDate", type: "text", x: 143.33856201171875, y: 289.7161560058594, width: 206, height: 32, canvasWidth: 952, canvasHeight: 1347 },
     ],
 };
@@ -3198,6 +4092,55 @@ function drawCheckmark(page, box) {
 
 
 /* =====================================================
+   DRAW IMAGE IN BOX
+
+   Used for the signature. Scales the image to fit inside
+   the mapped box while preserving its aspect ratio
+   (contain-fit), and centers it there, rather than
+   stretching it to the box's exact shape.
+===================================================== */
+
+function drawImageInBox(page, image, box) {
+
+    if (box.width <= 0 || box.height <= 0) return;
+
+    const imageAspect =
+        image.width / image.height;
+
+    const boxAspect =
+        box.width / box.height;
+
+    let drawWidth;
+    let drawHeight;
+
+    if (imageAspect > boxAspect) {
+        drawWidth = box.width;
+        drawHeight = drawWidth / imageAspect;
+    }
+    else {
+        drawHeight = box.height;
+        drawWidth = drawHeight * imageAspect;
+    }
+
+    const drawX =
+        box.x + (box.width - drawWidth) / 2;
+
+    const drawY =
+        box.bottomY + (box.height - drawHeight) / 2;
+
+    page.drawImage(
+        image,
+        {
+            x: drawX,
+            y: drawY,
+            width: drawWidth,
+            height: drawHeight
+        }
+    );
+}
+
+
+/* =====================================================
    APPLY PDF MAPPING
 
    Every mapping carries its own canvasWidth/canvasHeight,
@@ -3221,6 +4164,14 @@ async function applyPDFMapping(
         await pdfDoc.embedFont(
             PDFLib.StandardFonts.Helvetica
         );
+
+    // Embed the signature once (if the candidate uploaded
+    // one) and reuse the same embedded image on every page
+    // that has a mapped "signature" box.
+    const signatureImage =
+        data.signature
+            ? await pdfDoc.embedPng(data.signature)
+            : null;
 
     const pages =
         pdfDoc.getPages();
@@ -3282,6 +4233,15 @@ async function applyPDFMapping(
                 width: boxWidth,
                 height: boxHeight
             };
+
+            if (mapping.type === "signature") {
+
+                if (signatureImage) {
+                    drawImageInBox(page, signatureImage, box);
+                }
+
+                continue;
+            }
 
             const rawValue =
                 resolvePDFValue(
@@ -3369,20 +4329,57 @@ async function generatePDF() {
            as candidate.html.
         */
 
-        const response =
-            await fetch(
-                PDF_FILE_NAME,
-                {
-                    cache: "no-store"
-                }
+        let response;
+
+        try {
+
+            response =
+                await fetch(
+                    encodeURI(PDF_FILE_NAME),
+                    {
+                        cache: "no-store"
+                    }
+                );
+        }
+        catch (fetchError) {
+
+            // fetch() only throws (rather than resolving
+            // with a non-ok status) on a network-level
+            // failure -- most commonly because this page
+            // was opened directly from disk (file://)
+            // instead of through its real web address, or
+            // there's no internet connection right now.
+
+            if (window.location.protocol === "file:") {
+
+                throw new Error(
+                    "This page was opened directly from a file on " +
+                    "your computer, so it can't load \"" +
+                    PDF_FILE_NAME +
+                    "\". Please open this form using its real web " +
+                    "address (the link you were given), not by " +
+                    "double-clicking the HTML file."
+                );
+            }
+
+            throw new Error(
+                "Could not load \"" +
+                PDF_FILE_NAME +
+                "\" (" +
+                fetchError.message +
+                "). Check your internet connection and try again."
             );
+        }
 
         if (!response.ok) {
 
             throw new Error(
                 "Could not find \"" +
                 PDF_FILE_NAME +
-                "\". Keep the PDF in the same folder as this page."
+                "\" (server responded with status " +
+                response.status +
+                "). Make sure the PDF is in the same folder as this " +
+                "page, with the exact same filename."
             );
         }
 
@@ -3548,6 +4545,8 @@ function clearAllInputs() {
         });
 
     renderNominees(null);
+
+    resetSignatureUpload();
 
     maritalStatusChanged();
     employmentChanged();
