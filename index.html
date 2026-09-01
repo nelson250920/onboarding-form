@@ -618,6 +618,87 @@ body {
     color: #842029;
 }
 
+.signature-edit {
+    margin-top: 16px;
+    padding: 16px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    background: #fcfafa;
+}
+
+.signature-edit-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+}
+
+.signature-edit-canvas-wrap {
+    position: relative;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    max-width: 100%;
+    width: fit-content;
+    margin: 0 auto;
+    line-height: 0;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+.signature-edit-canvas-wrap canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.signature-crop-box {
+    position: absolute;
+    border: 2px dashed var(--red);
+    background: rgba(192, 0, 0, 0.12);
+    pointer-events: none;
+}
+
+.signature-edit-hint {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-top: 8px;
+}
+
+.signature-edit-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+.edit-btn {
+    background: white;
+    color: var(--ink-soft);
+    border: 1.5px solid #d8cfcf;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.edit-btn:hover {
+    background: #f4eeee;
+}
+
+.edit-btn.primary {
+    background: var(--red);
+    color: white;
+    border-color: var(--red);
+}
+
+.edit-btn.primary:hover {
+    background: var(--red-dark);
+}
+
 .buttons {
     display: flex;
     gap: 12px;
@@ -1518,6 +1599,69 @@ button.clear {
 
 </div>
 
+<div class="signature-edit hidden" id="signatureEdit">
+
+    <div class="signature-edit-label">
+        Not quite right? Adjust it below, then click "Use This."
+    </div>
+
+    <div
+        class="signature-edit-canvas-wrap signature-swatch-checker"
+        id="signatureEditWrap"
+    >
+        <canvas id="signatureEditCanvas"></canvas>
+        <div class="signature-crop-box hidden" id="signatureCropBox"></div>
+    </div>
+
+    <div class="signature-edit-hint" id="signatureCropHint">
+        Click "Crop" then drag a box over just the part you want to keep.
+    </div>
+
+    <div class="signature-edit-buttons">
+
+        <button type="button" class="edit-btn" onclick="rotateSignature(-1)">
+            &#8634; Rotate Left
+        </button>
+
+        <button type="button" class="edit-btn" onclick="rotateSignature(1)">
+            &#8635; Rotate Right
+        </button>
+
+        <button
+            type="button"
+            class="edit-btn"
+            id="cropModeButton"
+            onclick="toggleCropMode()"
+        >
+            &#9986; Crop
+        </button>
+
+        <button
+            type="button"
+            class="edit-btn primary hidden"
+            id="applyCropButton"
+            onclick="applyCrop()"
+        >
+            Apply Crop
+        </button>
+
+        <button
+            type="button"
+            class="edit-btn hidden"
+            id="cancelCropButton"
+            onclick="cancelCropMode()"
+        >
+            Cancel
+        </button>
+
+        <button type="button" class="edit-btn" onclick="resetSignatureEdits()">
+            &#8635; Reset to Auto-Detected
+        </button>
+
+    </div>
+
+</div>
+
 <div id="signatureMessage" class="signature-message hidden"></div>
 
 
@@ -1590,6 +1734,14 @@ let nomineeCount = 0;
    cleared by clearAllInputs().
 */
 let signatureDataURL = "";
+
+/*
+   The pristine, automatically-processed signature, kept
+   separate from signatureDataURL so "Reset to Auto-
+   Detected" can always get back to it even after the
+   candidate rotates/crops.
+*/
+let autoDetectedSignatureDataURL = "";
 
 
 /* =====================================================
@@ -2388,6 +2540,23 @@ function handleSignatureUpload(event) {
         return;
     }
 
+    const MAX_FILE_SIZE_BYTES =
+        15 * 1024 * 1024;
+
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+
+        showSignatureMessage(
+            "That file is too large (over 15 MB). Please upload " +
+            "a smaller photo -- a close-up of just your signature " +
+            "doesn't need to be a huge, full-resolution file.",
+            "error"
+        );
+
+        event.target.value = "";
+
+        return;
+    }
+
     showSignatureMessage(
         "Processing your signature...",
         "working"
@@ -2454,6 +2623,26 @@ function handleSignatureUpload(event) {
 
 function processUploadedSignature(img, originalDataURL, fileName) {
 
+    const MIN_UPLOAD_DIMENSION =
+        150;
+
+    if (
+        img.naturalWidth < MIN_UPLOAD_DIMENSION ||
+        img.naturalHeight < MIN_UPLOAD_DIMENSION
+    ) {
+
+        signatureDataURL = "";
+
+        showSignatureMessage(
+            "That image's resolution is too low (" +
+            img.naturalWidth + "\u00D7" + img.naturalHeight +
+            "px). Please upload a clearer, higher-resolution photo.",
+            "error"
+        );
+
+        return;
+    }
+
     try {
 
         const result =
@@ -2474,7 +2663,33 @@ function processUploadedSignature(img, originalDataURL, fileName) {
             return;
         }
 
+        const MIN_SIGNATURE_WIDTH =
+            60;
+
+        const MIN_SIGNATURE_HEIGHT =
+            15;
+
+        if (
+            result.width < MIN_SIGNATURE_WIDTH ||
+            result.height < MIN_SIGNATURE_HEIGHT
+        ) {
+
+            signatureDataURL = "";
+
+            showSignatureMessage(
+                "The signature we found in that photo is too small " +
+                "to use clearly. Please retake the photo closer up, " +
+                "so your signature fills more of the frame.",
+                "error"
+            );
+
+            return;
+        }
+
         signatureDataURL =
+            result.dataURL;
+
+        autoDetectedSignatureDataURL =
             result.dataURL;
 
         document
@@ -2501,6 +2716,8 @@ function processUploadedSignature(img, originalDataURL, fileName) {
 
         fileNameBox.classList.remove("hidden");
 
+        showSignatureEditor();
+
         // Heuristic nudge: if the identified signature only
         // occupies a tiny sliver of the uploaded photo, it was
         // probably a photo of the whole page rather than a
@@ -2514,18 +2731,17 @@ function processUploadedSignature(img, originalDataURL, fileName) {
 
             showSignatureMessage(
                 "Background removed. Your signature came from a " +
-                "small part of a larger photo -- for the sharpest " +
-                "result, consider retaking it as a closer photo of " +
-                "just the signature.",
+                "small part of a larger photo -- if it doesn't look " +
+                "right below, use Crop to trim it, or retake a " +
+                "closer photo.",
                 "ready"
             );
         }
         else {
 
             showSignatureMessage(
-                "Background removed. If it doesn't look right, " +
-                "upload a clearer photo -- plain paper, no shadows, " +
-                "works best.",
+                "Background removed. Check the preview below -- " +
+                "you can rotate or crop it if it's not quite right.",
                 "ready"
             );
         }
@@ -2558,6 +2774,355 @@ function showSignatureMessage(text, kind) {
     box.textContent = text;
     box.className = "signature-message " + kind;
     box.classList.remove("hidden");
+}
+
+
+/* =====================================================
+   SIGNATURE EDITOR -- MANUAL REVISION
+
+   Automatic background removal + cropping is a best
+   effort -- it can't always guess which way a signature
+   should face, and it can't always tell where exactly the
+   candidate wants the edges trimmed. So after processing,
+   the candidate sees the result on an editable canvas and
+   can rotate and/or crop it themselves before it's used.
+===================================================== */
+
+let cropModeActive = false;
+let cropDragStart = null;
+let cropDragCurrent = null;
+
+function showSignatureEditor() {
+
+    document
+        .getElementById("signatureEdit")
+        .classList.remove("hidden");
+
+    renderSignatureEditCanvas();
+}
+
+
+function renderSignatureEditCanvas() {
+
+    const canvas =
+        document.getElementById("signatureEditCanvas");
+
+    const img =
+        new Image();
+
+    img.onload = function() {
+
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+
+        const ctx =
+            canvas.getContext("2d");
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+    };
+
+    img.src = signatureDataURL;
+}
+
+
+function rotateSignature(direction) {
+
+    if (!signatureDataURL) return;
+
+    const img =
+        new Image();
+
+    img.onload = function() {
+
+        const w = img.naturalWidth;
+        const h = img.naturalHeight;
+
+        const canvas =
+            document.createElement("canvas");
+
+        canvas.width = h;
+        canvas.height = w;
+
+        const ctx =
+            canvas.getContext("2d");
+
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate(direction * Math.PI / 2);
+        ctx.drawImage(img, -w / 2, -h / 2);
+
+        signatureDataURL =
+            canvas.toDataURL("image/png");
+
+        document
+            .getElementById("signatureProcessedImg")
+            .src = signatureDataURL;
+
+        renderSignatureEditCanvas();
+    };
+
+    img.src = signatureDataURL;
+}
+
+
+function toggleCropMode() {
+
+    cropModeActive = !cropModeActive;
+
+    const wrap =
+        document.getElementById("signatureEditWrap");
+
+    const cropModeButton =
+        document.getElementById("cropModeButton");
+
+    const applyCropButton =
+        document.getElementById("applyCropButton");
+
+    const cancelCropButton =
+        document.getElementById("cancelCropButton");
+
+    const hint =
+        document.getElementById("signatureCropHint");
+
+    if (cropModeActive) {
+
+        cropModeButton.classList.add("hidden");
+        applyCropButton.classList.remove("hidden");
+        cancelCropButton.classList.remove("hidden");
+        hint.classList.remove("hidden");
+
+        wrap.addEventListener("mousedown", cropDragStartHandler);
+        wrap.addEventListener("mousemove", cropDragMoveHandler);
+        window.addEventListener("mouseup", cropDragEndHandler);
+
+        wrap.addEventListener("touchstart", cropDragStartHandler, { passive: true });
+        wrap.addEventListener("touchmove", cropDragMoveHandler, { passive: false });
+        window.addEventListener("touchend", cropDragEndHandler);
+    }
+    else {
+
+        cropModeButton.classList.remove("hidden");
+        applyCropButton.classList.add("hidden");
+        cancelCropButton.classList.add("hidden");
+        hint.classList.add("hidden");
+
+        wrap.removeEventListener("mousedown", cropDragStartHandler);
+        wrap.removeEventListener("mousemove", cropDragMoveHandler);
+        window.removeEventListener("mouseup", cropDragEndHandler);
+
+        wrap.removeEventListener("touchstart", cropDragStartHandler);
+        wrap.removeEventListener("touchmove", cropDragMoveHandler);
+        window.removeEventListener("touchend", cropDragEndHandler);
+
+        document
+            .getElementById("signatureCropBox")
+            .classList.add("hidden");
+
+        cropDragStart = null;
+        cropDragCurrent = null;
+    }
+}
+
+
+function cancelCropMode() {
+
+    if (cropModeActive) {
+        toggleCropMode();
+    }
+}
+
+
+function getEventPoint(event, wrap) {
+
+    const rect =
+        wrap.getBoundingClientRect();
+
+    const point =
+        (event.touches && event.touches[0]) ||
+        (event.changedTouches && event.changedTouches[0]) ||
+        event;
+
+    return {
+        x: point.clientX - rect.left,
+        y: point.clientY - rect.top
+    };
+}
+
+
+function cropDragStartHandler(event) {
+
+    const wrap =
+        document.getElementById("signatureEditWrap");
+
+    cropDragStart =
+        getEventPoint(event, wrap);
+
+    cropDragCurrent =
+        cropDragStart;
+
+    updateCropBox();
+}
+
+
+function cropDragMoveHandler(event) {
+
+    if (!cropDragStart) return;
+
+    if (event.cancelable) event.preventDefault();
+
+    const wrap =
+        document.getElementById("signatureEditWrap");
+
+    cropDragCurrent =
+        getEventPoint(event, wrap);
+
+    updateCropBox();
+}
+
+
+function cropDragEndHandler() {
+
+    // Intentionally a no-op: cropDragStart/cropDragCurrent
+    // are left exactly as they were at the end of the drag,
+    // so they represent the final selection rectangle for
+    // applyCrop() to use. The next mousedown/touchstart
+    // starts a fresh rectangle from scratch.
+}
+
+
+function updateCropBox() {
+
+    if (!cropDragStart || !cropDragCurrent) return;
+
+    const box =
+        document.getElementById("signatureCropBox");
+
+    const x =
+        Math.min(cropDragStart.x, cropDragCurrent.x);
+
+    const y =
+        Math.min(cropDragStart.y, cropDragCurrent.y);
+
+    const w =
+        Math.abs(cropDragCurrent.x - cropDragStart.x);
+
+    const h =
+        Math.abs(cropDragCurrent.y - cropDragStart.y);
+
+    box.style.left = x + "px";
+    box.style.top = y + "px";
+    box.style.width = w + "px";
+    box.style.height = h + "px";
+
+    box.classList.remove("hidden");
+}
+
+
+function applyCrop() {
+
+    if (!cropDragStart || !cropDragCurrent) {
+
+        showSignatureMessage(
+            "Drag a box over the part of the image you want to keep, then click Apply Crop.",
+            "error"
+        );
+
+        return;
+    }
+
+    const canvas =
+        document.getElementById("signatureEditCanvas");
+
+    const wrap =
+        document.getElementById("signatureEditWrap");
+
+    // The canvas is drawn at full resolution but may be
+    // displayed smaller (CSS max-width) -- map the drag
+    // coordinates (in displayed pixels) back to actual
+    // canvas pixel coordinates.
+    const displayScale =
+        canvas.width / wrap.getBoundingClientRect().width;
+
+    const x1 =
+        Math.min(cropDragStart.x, cropDragCurrent.x) * displayScale;
+
+    const y1 =
+        Math.min(cropDragStart.y, cropDragCurrent.y) * displayScale;
+
+    const cropW =
+        Math.abs(cropDragCurrent.x - cropDragStart.x) * displayScale;
+
+    const cropH =
+        Math.abs(cropDragCurrent.y - cropDragStart.y) * displayScale;
+
+    if (cropW < 5 || cropH < 5) {
+
+        showSignatureMessage(
+            "That selection is too small. Please drag a larger box.",
+            "error"
+        );
+
+        return;
+    }
+
+    const outCanvas =
+        document.createElement("canvas");
+
+    outCanvas.width = Math.round(cropW);
+    outCanvas.height = Math.round(cropH);
+
+    outCanvas
+        .getContext("2d")
+        .drawImage(
+            canvas,
+            Math.round(x1),
+            Math.round(y1),
+            Math.round(cropW),
+            Math.round(cropH),
+            0,
+            0,
+            Math.round(cropW),
+            Math.round(cropH)
+        );
+
+    signatureDataURL =
+        outCanvas.toDataURL("image/png");
+
+    document
+        .getElementById("signatureProcessedImg")
+        .src = signatureDataURL;
+
+    toggleCropMode();
+    renderSignatureEditCanvas();
+
+    showSignatureMessage(
+        "Crop applied. You can crop again, rotate, or reset if needed.",
+        "ready"
+    );
+}
+
+
+function resetSignatureEdits() {
+
+    if (!autoDetectedSignatureDataURL) return;
+
+    signatureDataURL =
+        autoDetectedSignatureDataURL;
+
+    document
+        .getElementById("signatureProcessedImg")
+        .src = signatureDataURL;
+
+    if (cropModeActive) {
+        toggleCropMode();
+    }
+
+    renderSignatureEditCanvas();
+
+    showSignatureMessage(
+        "Reset to the automatically detected signature.",
+        "ready"
+    );
 }
 
 
@@ -3258,6 +3823,7 @@ function removeSignatureBackground(img) {
 function resetSignatureUpload() {
 
     signatureDataURL = "";
+    autoDetectedSignatureDataURL = "";
 
     const fileInput =
         document.getElementById("signatureFile");
@@ -3268,6 +3834,15 @@ function resetSignatureUpload() {
         document.getElementById("signaturePreview");
 
     if (preview) preview.classList.add("hidden");
+
+    const edit =
+        document.getElementById("signatureEdit");
+
+    if (edit) edit.classList.add("hidden");
+
+    if (cropModeActive) {
+        toggleCropMode();
+    }
 
     const prompt =
         document.getElementById("signatureDropPrompt");
@@ -4095,6 +4670,9 @@ function loadDraft() {
             signatureDataURL =
                 data.signature;
 
+            autoDetectedSignatureDataURL =
+                data.signature;
+
             document
                 .getElementById("signatureOriginalImg")
                 .src = data.signature;
@@ -4118,6 +4696,8 @@ function loadDraft() {
                 "Signature restored from your saved draft (click to change)";
 
             fileNameBox.classList.remove("hidden");
+
+            showSignatureEditor();
 
             showSignatureMessage(
                 "Signature restored from your saved draft.",
