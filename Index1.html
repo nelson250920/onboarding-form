@@ -1682,7 +1682,7 @@ function setValue(id, v) { const el = document.getElementById(id); if (el) el.va
 function showStatus(msg, type) { const b = document.getElementById("status"); b.textContent = msg; b.className = "status " + type; }
 
 /* ═══════════════════════════════════════════════════════════
-   PDF MAPPING — unchanged from your working version
+   PDF MAPPING — pages 1 to 3
 ═══════════════════════════════════════════════════════════ */
 const PDF_MAPPING = {
     1: [
@@ -1691,6 +1691,7 @@ const PDF_MAPPING = {
         { field: "place", type: "text", x: 197.2890625, y: 787.0494689941406, width: 232, height: 25, canvasWidth: 734, canvasHeight: 950 },
     ],
     2: [
+        /* ─── Left column: personal details ─── */
         { field: "name", type: "text", x: 388.71875, y: 155.71615600585938, width: 303, height: 37, canvasWidth: 715, canvasHeight: 1010 },
         { field: "fatherName", type: "text", x: 387.71875, y: 196.71615600585938, width: 304, height: 29, canvasWidth: 715, canvasHeight: 1010 },
         { field: "spouseName", type: "text", x: 388.71875, y: 231.71615600585938, width: 302, height: 27, canvasWidth: 715, canvasHeight: 1010 },
@@ -1700,6 +1701,8 @@ const PDF_MAPPING = {
         { field: "email", type: "text", x: 389.71875, y: 348.71614837646484, width: 244, height: 19, canvasWidth: 715, canvasHeight: 1010 },
         { field: "mobile", type: "text", x: 389.71875, y: 367.71614837646484, width: 244, height: 20, canvasWidth: 715, canvasHeight: 1010 },
         { field: "doj", type: "text", x: 395.71875, y: 392.71614837646484, width: 256, height: 25, canvasWidth: 715, canvasHeight: 1010 },
+
+        /* ─── Right column: KYC details ─── */
         { field: "name", type: "text", x: 585.5208435058594, y: 657.7161254882812, width: 404, height: 23, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "bankAccount", type: "text", x: 585.5208435058594, y: 683.7161254882812, width: 407, height: 22, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "ifsc", type: "text", x: 586.5208435058594, y: 707.7161254882812, width: 406, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
@@ -1707,21 +1710,31 @@ const PDF_MAPPING = {
         { field: "aadhaar", type: "text", x: 585.5208435058594, y: 776.7161254882812, width: 424, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "name", type: "text", x: 586.5208435058594, y: 814.7161254882812, width: 429, height: 26, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "pan", type: "text", x: 591.5208435058594, y: 843.7161254882812, width: 408, height: 34, canvasWidth: 1072, canvasHeight: 1515 },
-       { field: "epfMember", value: "Yes", type: "checkbox", x: 850, y: 895, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
-{ field: "epfMember", value: "No",  type: "checkbox", x: 920, y: 895, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
-{ field: "epsMember", value: "Yes", type: "checkbox", x: 850, y: 935, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
-{ field: "epsMember", value: "No",  type: "checkbox", x: 920, y: 935, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
-{ field: "internationalWorker", value: "Yes", type: "checkbox", x: 850, y: 1370, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
-{ field: "internationalWorker", value: "No",  type: "checkbox", x: 920, y: 1370, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },        { field: "previousDOJ", type: "text", x: 615.5208435058594, y: 1058.7161254882812, width: 107, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
+
+        /* ─── EPF / EPS membership (right column) ─── */
+        { field: "epfMember", value: "Yes", type: "checkbox", x: 795, y: 900, width: 14, height: 18, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "epfMember", value: "No",  type: "checkbox", x: 862, y: 900, width: 14, height: 18, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "epsMember", value: "Yes", type: "checkbox", x: 795, y: 940, width: 14, height: 18, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "epsMember", value: "No",  type: "checkbox", x: 862, y: 940, width: 14, height: 18, canvasWidth: 1072, canvasHeight: 1515 },
+
+        /* ─── International Worker (own column, mid-right) ─── */
+        { field: "internationalWorker", value: "Yes", type: "checkbox", x: 570, y: 1375, width: 14, height: 18, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "internationalWorker", value: "No",  type: "checkbox", x: 640, y: 1375, width: 14, height: 18, canvasWidth: 1072, canvasHeight: 1515 },
+
+        /* ─── Previous employment ─── */
+        { field: "previousDOJ", type: "text", x: 615.5208435058594, y: 1058.7161254882812, width: 107, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "previousCompany", type: "text", x: 97.52084350585938, y: 1061.7161254882812, width: 159, height: 95, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "uan", type: "text", x: 269.5208435058594, y: 1067.7161254882812, width: 147, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "previousDOE", type: "text", x: 733.5208435058594, y: 1071.7161254882812, width: 101, height: 26, canvasWidth: 1072, canvasHeight: 1515 },
     ],
     3: [
-       { field: "withdrawEPF", value: "Yes", type: "checkbox", x: 850, y: 66, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
-{ field: "withdrawEPF", value: "No",  type: "checkbox", x: 920, y: 66, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
-{ field: "withdrawEPS", value: "Yes", type: "checkbox", x: 850, y: 119, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
-{ field: "withdrawEPS", value: "No",  type: "checkbox", x: 920, y: 119, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
+        /* ─── Withdrawal checkboxes (right column) ─── */
+        { field: "withdrawEPF", value: "Yes", type: "checkbox", x: 795, y: 70, width: 14, height: 18, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "withdrawEPF", value: "No",  type: "checkbox", x: 862, y: 70, width: 14, height: 18, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "withdrawEPS", value: "Yes", type: "checkbox", x: 795, y: 122, width: 14, height: 18, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "withdrawEPS", value: "No",  type: "checkbox", x: 862, y: 122, width: 14, height: 18, canvasWidth: 1072, canvasHeight: 1515 },
+
+        /* ─── Declaration date & place ─── */
         { field: "declarationDate", type: "text", x: 142.52084350585938, y: 417.7161445617676, width: 245, height: 33, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "place", type: "text", x: 143.52084350585938, y: 463.7161445617676, width: 247, height: 30, canvasWidth: 1072, canvasHeight: 1515 },
     ],
