@@ -1285,4 +1285,838 @@ const translations = {
         aadhaar: "Aadhaar Number / आधार संख्या",
         pan: "PAN Number / PAN संख्या",
         pfTitle: "EPF / EPS / UAN Details / EPF / EPS / UAN विवरण",
-        epfMember: "Whether earlier a member of EPF Scheme, 1952 / EPF योजना 1952 के सद
+        epfMember: "Whether earlier a member of EPF Scheme, 1952 / EPF योजना 1952 के सदस्य थे",
+        epsMember: "Whether earlier a member of EPS, 1995 / EPS 1995 के सदस्य थे",
+        uan: "Universal Account Number (UAN) / UAN संख्या",
+        withdrawEPF: "Withdrawn Previous EPF Fund / पिछला EPF फंड निकाला है",
+        withdrawEPS: "Withdrawn Previous EPS Fund / पिछला EPS फंड निकाला है",
+        addressTitle: "Permanent Address / स्थायी पता",
+        permanentAddress: "Permanent Address / स्थायी पता",
+        city: "City / शहर",
+        district: "District / जिला",
+        state: "State / राज्य",
+        pincode: "Pincode / पिनकोड",
+        nomineeTitle: "Nominee Details / नामांकित व्यक्ति का विवरण",
+        nomineeSubtitle: "Maximum 4 nominees. Total share must equal 100%. / अधिकतम 4 नामांकित। कुल 100%।",
+        addNominee: "+ Add Nominee / + नामांकित जोड़ें",
+        declarationTitle: "DECLARATION / घोषणा",
+        declarationSubtitle: "Select only 1 out of 5. / 5 में से 1 चुनें।",
+        decl1: "I hereby certify that the person(s) mentioned is/are a member(s) of my family within the meaning of clause (33) of section 2 of the Code on Social Security, 2020. / सामाजिक सुरक्षा संहिता, 2020 की धारा 2 की उपधारा (33) के अर्थ में उल्लिखित व्यक्ति मेरे परिवार के सदस्य हैं।",
+        decl2: "I hereby declare that I have no family within the meaning of clause (33) of section 2 of the said Code. / उक्त संहिता की धारा 2 की उपधारा (33) के अर्थ में मेरा कोई परिवार नहीं है।",
+        decl3a: "My father/mother/parents is/are not dependent on me. / मेरे पिता/माता/माता-पिता मुझ पर आश्रित नहीं हैं।",
+        decl3b: "My husband's father/mother/parents is/are not dependent on my husband. / मेरे पति के पिता/माता/माता-पिता मेरे पति पर आश्रित नहीं हैं।",
+        decl4: "I have excluded my husband from my family by a notice dated the __________ to the competent authority. / सक्षम प्राधिकारी को नोटिस द्वारा मैंने अपने पति को परिवार से बाहर किया है।",
+        decl5: "Nomination made herein invalidates my previous nomination. / यहाँ की गई नामांकन मेरे पिछले नामांकन को अमान्य करती है।",
+        place: "Place / स्थान",
+        declarationDate: "Date / दिनांक",
+        actionNoteTitle: "What happens after you click Generate PDF / Generate PDF पर क्लिक करने के बाद",
+        actionNote1: "Your pre-filled 9-page onboarding pack downloads as a PDF. / आपका 9-पृष्ठ पैक PDF के रूप में डाउनलोड होगा।",
+        actionNote2: "Print it and sign in ink, or upload to DigiLocker to eSign. / प्रिंट कर हस्ताक्षर करें या DigiLocker में eSign करें।",
+        actionNote3: "Send the signed copy back to Team Red by email or WhatsApp. / हस्ताक्षरित प्रति ईमेल या WhatsApp से भेजें।",
+        saveBtn: "Save / सहेजें",
+        clearBtn: "Clear / साफ़ करें",
+        generateBtn: "Generate Final PDF / अंतिम PDF बनाएं",
+        selectOption: "Select / चुनें"
+    }
+};
+
+function changeLanguage() {
+    const lang = document.getElementById("languageSelect").value;
+    if (lang === "en") { try { saveDraftSilent(); } catch (e) {} location.reload(); return; }
+    const dict = translations[lang];
+    if (!dict) return;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+        const k = el.getAttribute("data-i18n");
+        if (!dict[k]) return;
+        el.textContent = dict[k];
+        if (el.dataset.split) { delete el.dataset.splitDone; splitElement(el); }
+    });
+    // Re-render step-specific animations
+    document.querySelectorAll(".how-step").forEach(s => s.classList.add("in-view"));
+}
+
+/* ENGLISH-ONLY FILTER */
+function englishOnly(input) {
+    const original = input.value;
+    const cleaned = original.replace(/[^\x20-\x7E]/g, "");
+    if (cleaned === original) return;
+    const cursorPos = input.selectionStart;
+    const removed = original.length - cleaned.length;
+    input.value = cleaned;
+    try {
+        const newPos = Math.max(0, cursorPos - removed);
+        input.setSelectionRange(newPos, newPos);
+    } catch (e) {}
+}
+
+function maritalStatusChanged() {
+    const s = document.getElementById("maritalStatus").value;
+    const spouse = document.getElementById("spouseName");
+    const req = document.getElementById("spouseRequired");
+    const m = ["Married","Widow","Widower","Divorcee"].includes(s);
+    spouse.required = m;
+    if (m) req.style.display = "inline";
+    else { req.style.display = "none"; spouse.value = ""; }
+    updateNomineeRelations();
+}
+
+function employmentChanged() {
+    const s = document.getElementById("employmentStatus").value;
+    const box = document.getElementById("previousEmployment");
+    const fields = [document.getElementById("previousCompany"), document.getElementById("previousDOJ"), document.getElementById("previousDOE")];
+    if (s === "Experienced") {
+        box.classList.remove("hidden");
+        fields.forEach(f => f.required = true);
+        box.querySelectorAll("[data-split]").forEach(function (el) { if (!el.dataset.splitDone) splitElement(el); });
+    } else {
+        box.classList.add("hidden");
+        fields.forEach(f => { f.required = false; f.value = ""; });
+    }
+    updateProgress();
+}
+
+function relationOptions() {
+    const ms = document.getElementById("maritalStatus").value;
+    let o = `<option value="">Select</option><option value="Father">Father</option><option value="Mother">Mother</option>`;
+    if (["Married","Widow","Widower","Divorcee"].includes(ms)) o += `<option value="Spouse">Spouse</option>`;
+    o += `<option value="Guardian">Guardian</option>`;
+    return o;
+}
+
+function updateNomineeRelations() {
+    for (let i = 1; i <= 4; i++) {
+        const rel = document.getElementById("nominee" + i + "_relation");
+        if (!rel) continue;
+        const cur = rel.value;
+        rel.innerHTML = relationOptions();
+        if (Array.from(rel.options).some(o => o.value === cur)) rel.value = cur;
+    }
+}
+
+function requiredAttr(n) { return n === 1 ? "required" : ""; }
+function requiredMark(n) { return n === 1 ? '<span class="required">*</span>' : ""; }
+
+function addNominee() {
+    if (nomineeCount >= 4) { alert("Maximum 4 nominees are allowed."); return; }
+    nomineeCount++;
+    const n = nomineeCount;
+    const div = document.createElement("div");
+    div.className = "nominee-card";
+    div.id = "nominee-" + n;
+    div.innerHTML = `
+        <div class="nominee-header">
+            <div class="nominee-title">Nominee ${n}</div>
+            ${n > 1 ? `<button type="button" class="remove-nominee" onclick="removeNominee(${n})">Remove</button>` : ""}
+        </div>
+        <div class="grid">
+            <div class="field"><label>Name of Nominee ${requiredMark(n)}</label><input type="text" id="nominee${n}_name" ${requiredAttr(n)}></div>
+            <div class="field"><label>Relation ${requiredMark(n)}</label><select id="nominee${n}_relation" ${requiredAttr(n)}>${relationOptions()}</select></div>
+            <div class="field full"><label>Address ${requiredMark(n)}</label><textarea id="nominee${n}_address" ${requiredAttr(n)}></textarea></div>
+            <div class="field"><label>Aadhaar ${requiredMark(n)}</label><input type="text" id="nominee${n}_aadhaar" inputmode="numeric" maxlength="12" oninput="digitsOnly(this)" ${requiredAttr(n)}></div>
+            <div class="field"><label>DOB ${requiredMark(n)}</label><input type="date" id="nominee${n}_dob" onchange="calculateNomineeAge(${n})" ${requiredAttr(n)}></div>
+            <div class="field"><label>Age ${requiredMark(n)}</label><input type="text" class="nominee-age" id="nominee${n}_age" readonly ${requiredAttr(n)}></div>
+            <div class="field"><label>Percentage ${requiredMark(n)}</label><input type="number" id="nominee${n}_percentage" min="1" max="100" ${requiredAttr(n)}></div>
+        </div>`;
+    document.getElementById("nomineeContainer").appendChild(div);
+    document.getElementById("addNomineeButton").style.display = nomineeCount >= 4 ? "none" : "";
+    attachValidationListeners(div);
+    updateProgress();
+}
+
+function removeNominee(n) {
+    if (n === 1) return;
+    if (!confirm("Remove Nominee " + n + "?")) return;
+    renderNominees(getNominees().filter((_, i) => (i + 1) !== n));
+}
+
+function renderNominees(data) {
+    document.getElementById("nomineeContainer").innerHTML = "";
+    nomineeCount = 0;
+    const list = (Array.isArray(data) && data.length) ? data.slice(0, 4) : [{}];
+    list.forEach(function (ni) {
+        addNominee();
+        const n = nomineeCount;
+        setValue("nominee" + n + "_name", ni.name);
+        setValue("nominee" + n + "_address", ni.address);
+        setValue("nominee" + n + "_relation", ni.relation);
+        setValue("nominee" + n + "_aadhaar", ni.aadhaar);
+        setValue("nominee" + n + "_dob", ni.dob);
+        setValue("nominee" + n + "_percentage", ni.percentage);
+        calculateNomineeAge(n);
+    });
+    updateNomineeRelations();
+    updateProgress();
+}
+
+function calculateNomineeAge(n) {
+    const dob = document.getElementById("nominee" + n + "_dob").value;
+    const ageField = document.getElementById("nominee" + n + "_age");
+    if (!dob) { ageField.value = ""; return; }
+    const bd = new Date(dob + "T00:00:00"), today = new Date();
+    if (bd > today) { ageField.value = ""; return; }
+    let age = today.getFullYear() - bd.getFullYear();
+    const m = today.getMonth() - bd.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < bd.getDate())) age--;
+    ageField.value = age >= 0 ? age : "";
+}
+
+function digitsOnly(i) { i.value = i.value.replace(/\D/g, ""); }
+
+function getNominees() {
+    const out = [];
+    for (let i = 1; i <= nomineeCount; i++) {
+        if (!document.getElementById("nominee-" + i)) continue;
+        out.push({
+            name: document.getElementById("nominee" + i + "_name").value.trim(),
+            address: document.getElementById("nominee" + i + "_address").value.trim(),
+            relation: document.getElementById("nominee" + i + "_relation").value,
+            aadhaar: document.getElementById("nominee" + i + "_aadhaar").value,
+            dob: document.getElementById("nominee" + i + "_dob").value,
+            age: document.getElementById("nominee" + i + "_age").value,
+            percentage: document.getElementById("nominee" + i + "_percentage").value
+        });
+    }
+    return out;
+}
+
+function getFormData() {
+    const dec = document.querySelector('input[name="declaration"]:checked');
+    return {
+        name: document.getElementById("name").value.trim(),
+        fatherName: document.getElementById("fatherName").value.trim(),
+        spouseName: document.getElementById("spouseName").value.trim(),
+        dob: document.getElementById("dob").value,
+        gender: document.getElementById("gender").value,
+        maritalStatus: document.getElementById("maritalStatus").value,
+        religion: document.getElementById("religion").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        mobile: document.getElementById("mobile").value.trim(),
+        doj: document.getElementById("doj").value,
+        employmentStatus: document.getElementById("employmentStatus").value,
+        internationalWorker: document.getElementById("internationalWorker").value,
+        previousCompany: document.getElementById("previousCompany").value.trim(),
+        previousDOJ: document.getElementById("previousDOJ").value,
+        previousDOE: document.getElementById("previousDOE").value,
+        bankAccount: document.getElementById("bankAccount").value.trim(),
+        ifsc: document.getElementById("ifsc").value.trim().toUpperCase(),
+        aadhaar: document.getElementById("aadhaar").value,
+        pan: document.getElementById("pan").value.trim().toUpperCase(),
+        epfMember: document.getElementById("epfMember").value,
+        epsMember: document.getElementById("epsMember").value,
+        uan: document.getElementById("uan").value,
+        withdrawEPF: document.getElementById("withdrawEPF").value,
+        withdrawEPS: document.getElementById("withdrawEPS").value,
+        permanentAddress: document.getElementById("permanentAddress").value.trim(),
+        city: document.getElementById("city").value.trim(),
+        district: document.getElementById("district").value.trim(),
+        state: document.getElementById("state").value.trim(),
+        pincode: document.getElementById("pincode").value,
+        nominees: getNominees(),
+        declaration: dec ? dec.value : "",
+        place: document.getElementById("place").value.trim(),
+        declarationDate: document.getElementById("declarationDate").value,
+        savedAt: new Date().toISOString()
+    };
+}
+
+function collectErrors(data) {
+    const errors = [];
+    const req = [
+        ["name","Name",data.name],["fatherName","Father's Name",data.fatherName],
+        ["dob","DOB",data.dob],["gender","Gender",data.gender],["maritalStatus","Marital Status",data.maritalStatus],
+        ["religion","Religion",data.religion],["email","Email",data.email],["mobile","Mobile",data.mobile],
+        ["doj","DOJ",data.doj],["employmentStatus","Employment Status",data.employmentStatus],
+        ["internationalWorker","International Worker",data.internationalWorker],
+        ["bankAccount","Bank Account",data.bankAccount],["ifsc","IFSC",data.ifsc],
+        ["aadhaar","Aadhaar",data.aadhaar],["pan","PAN",data.pan],
+        ["epfMember","EPF membership",data.epfMember],["epsMember","EPS membership",data.epsMember],
+        ["uan","UAN",data.uan],["withdrawEPF","Withdrawn EPF",data.withdrawEPF],["withdrawEPS","Withdrawn EPS",data.withdrawEPS],
+        ["permanentAddress","Address",data.permanentAddress],["city","City",data.city],["district","District",data.district],
+        ["state","State",data.state],["pincode","Pincode",data.pincode],
+        ["place","Place",data.place],["declarationDate","Declaration Date",data.declarationDate]
+    ];
+    req.forEach(([id, label, v]) => { if (!v) errors.push({ fieldId: id, label }); });
+
+    const spouseReq = ["Married","Widow","Widower","Divorcee"].includes(data.maritalStatus);
+    if (spouseReq && !data.spouseName) errors.push({ fieldId: "spouseName", label: "Spouse's Name" });
+
+    if (data.mobile && !/^\d{10}$/.test(data.mobile)) errors.push({ fieldId: "mobile", label: "Mobile (10 digits)" });
+    if (data.aadhaar && !/^\d{12}$/.test(data.aadhaar)) errors.push({ fieldId: "aadhaar", label: "Aadhaar (12 digits)" });
+    if (data.uan && !/^\d{12}$/.test(data.uan)) errors.push({ fieldId: "uan", label: "UAN (12 digits)" });
+    if (data.pincode && !/^\d{6}$/.test(data.pincode)) errors.push({ fieldId: "pincode", label: "Pincode (6 digits)" });
+    if (data.pan && !/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(data.pan)) errors.push({ fieldId: "pan", label: "PAN invalid" });
+    if (data.ifsc && !/^[A-Z]{4}0[A-Z0-9]{6}$/.test(data.ifsc)) errors.push({ fieldId: "ifsc", label: "IFSC invalid" });
+
+    if (data.employmentStatus === "Experienced") {
+        if (!data.previousCompany) errors.push({ fieldId: "previousCompany", label: "Previous Company" });
+        if (!data.previousDOJ) errors.push({ fieldId: "previousDOJ", label: "Previous DOJ" });
+        if (!data.previousDOE) errors.push({ fieldId: "previousDOE", label: "Previous DOE" });
+    }
+
+    const clean = data.nominees.filter((n, i) => i === 0 || !(!n.name && !n.address && !n.relation && !n.aadhaar && !n.dob && !n.percentage));
+    if (clean.length === 0) errors.push({ fieldId: "nominee1_name", label: "At least one Nominee" });
+    else {
+        let total = 0;
+        clean.forEach(function (n, i) {
+            const num = i + 1;
+            if (!n.name) errors.push({ fieldId: "nominee"+num+"_name", label: "Nominee "+num+" Name" });
+            if (!n.address) errors.push({ fieldId: "nominee"+num+"_address", label: "Nominee "+num+" Address" });
+            if (!n.relation) errors.push({ fieldId: "nominee"+num+"_relation", label: "Nominee "+num+" Relation" });
+            if (!n.aadhaar) errors.push({ fieldId: "nominee"+num+"_aadhaar", label: "Nominee "+num+" Aadhaar" });
+            else if (!/^\d{12}$/.test(n.aadhaar)) errors.push({ fieldId: "nominee"+num+"_aadhaar", label: "Nominee "+num+" Aadhaar (12)" });
+            if (!n.dob) errors.push({ fieldId: "nominee"+num+"_dob", label: "Nominee "+num+" DOB" });
+            if (!n.percentage) errors.push({ fieldId: "nominee"+num+"_percentage", label: "Nominee "+num+" %" });
+            total += Number(n.percentage) || 0;
+        });
+        if (total !== 100 && clean.every(n => n.percentage)) errors.push({ fieldId: "nominee1_percentage", label: "Shares must total 100%" });
+    }
+
+    if (!data.declaration) errors.push({ fieldId: "decl1", label: "Declaration" });
+    return errors;
+}
+
+function showErrorDrawer(errors) {
+    missingFields = errors;
+    const drawer = document.getElementById("errorDrawer");
+    const body = document.getElementById("errorDrawerBody");
+    document.getElementById("errorCount").textContent = errors.length === 1 ? "1 field needs attention" : errors.length + " fields need attention";
+    body.innerHTML = "";
+    errors.forEach(function (err, i) {
+        const btn = document.createElement("button");
+        btn.className = "error-item";
+        btn.type = "button";
+        btn.innerHTML = `<span class="error-item-num">${i+1}</span><span class="error-item-label">${err.label}</span><span class="error-item-arrow">→</span>`;
+        btn.addEventListener("click", () => scrollToField(err.fieldId));
+        body.appendChild(btn);
+    });
+    drawer.classList.add("visible");
+    errors.forEach(function (err) {
+        const el = document.getElementById(err.fieldId);
+        if (!el) return;
+        const w = el.closest(".field") || el.closest(".declaration");
+        if (w) {
+            w.classList.remove("field-valid");
+            w.classList.add(w.classList.contains("declaration") ? "declaration-invalid" : "field-invalid");
+        }
+    });
+}
+
+function hideErrorDrawer() { document.getElementById("errorDrawer").classList.remove("visible"); }
+
+function scrollToField(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const target = el.closest(".field") || el.closest(".declaration") || el;
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => { if (el.focus) el.focus({ preventScroll: true }); }, 400);
+}
+
+function focusFirstError() {
+    if (missingFields.length) { scrollToField(missingFields[0].fieldId); hideErrorDrawer(); }
+}
+
+function updateFieldState(field) {
+    if (!field || !field.closest) return;
+    const w = field.closest(".field");
+    if (!w) return;
+    if (field.closest(".hidden")) { w.classList.remove("field-valid", "field-invalid"); return; }
+    const v = (field.value || "").trim();
+    if (v) { w.classList.remove("field-invalid"); w.classList.add("field-valid"); }
+    else if (field.required && field.dataset.touched === "true") { w.classList.add("field-invalid"); w.classList.remove("field-valid"); }
+    else { w.classList.remove("field-valid", "field-invalid"); }
+}
+
+function attachValidationListeners(container) {
+    const scope = container || document;
+    scope.querySelectorAll("input, select, textarea").forEach(function (f) {
+        if (f.dataset.tr === "true") return;
+        f.dataset.tr = "true";
+        const isTextLike = f.tagName === "TEXTAREA" || (f.tagName === "INPUT" && (f.type === "text" || f.type === "email"));
+        if (isTextLike) f.addEventListener("input", function () { englishOnly(f); }, true);
+        f.addEventListener("blur", function () { f.dataset.touched = "true"; updateFieldState(f); });
+        f.addEventListener("input", function () { updateFieldState(f); updateProgress(); });
+        f.addEventListener("change", function () { f.dataset.touched = "true"; updateFieldState(f); updateProgress(); });
+    });
+    scope.querySelectorAll('input[name="declaration"]').forEach(function (r) {
+        if (r.dataset.tr === "true") return;
+        r.dataset.tr = "true";
+        r.addEventListener("change", function () {
+            document.querySelectorAll(".declaration").forEach(d => d.classList.remove("declaration-invalid"));
+            updateProgress();
+        });
+    });
+}
+
+function updateProgress() {
+    const req = Array.from(document.querySelectorAll("input[required], select[required], textarea[required]")).filter(f => !f.closest(".hidden"));
+    const filled = req.filter(f => (f.value || "").trim().length > 0).length;
+    document.getElementById("navProgressText").textContent = filled + " / " + req.length;
+}
+
+function saveDraftSilent() { try { sessionStorage.setItem(getDraftKey(), JSON.stringify(getFormData())); } catch (e) {} }
+
+function saveDraft() {
+    try {
+        sessionStorage.setItem(getDraftKey(), JSON.stringify(getFormData()));
+        showStatus("Draft saved. It will clear automatically when you close this tab.", "success");
+    } catch (e) { showStatus("Could not save draft.", "error"); }
+}
+
+function loadDraft() {
+    let saved = null;
+    try { saved = sessionStorage.getItem(getDraftKey()); } catch (e) {}
+    if (!saved) { renderNominees(null); return; }
+    try {
+        const d = JSON.parse(saved);
+        ["name","fatherName","spouseName","dob","gender","maritalStatus","religion","email","mobile","doj","employmentStatus","internationalWorker","previousCompany","previousDOJ","previousDOE","bankAccount","ifsc","aadhaar","pan","epfMember","epsMember","uan","withdrawEPF","withdrawEPS","permanentAddress","city","district","state","pincode","place","declarationDate"].forEach(k => setValue(k, d[k]));
+        maritalStatusChanged();
+        employmentChanged();
+        renderNominees(d.nominees);
+        if (d.declaration) { const dec = document.querySelector('input[name="declaration"][value="' + d.declaration + '"]'); if (dec) dec.checked = true; }
+        document.querySelectorAll("input, select, textarea").forEach(updateFieldState);
+        updateProgress();
+    } catch (e) { renderNominees(null); }
+}
+
+function setValue(id, v) { const el = document.getElementById(id); if (el) el.value = v || ""; }
+function showStatus(msg, type) { const b = document.getElementById("status"); b.textContent = msg; b.className = "status " + type; }
+
+/* ═══════════════════════════════════════════════════════════
+   PDF MAPPING — unchanged from your working version
+═══════════════════════════════════════════════════════════ */
+const PDF_MAPPING = {
+    1: [
+        { field: "name", type: "text", x: 180.2890625, y: 659.0494689941406, width: 246, height: 30, canvasWidth: 734, canvasHeight: 950 },
+        { field: "declarationDate", type: "text", x: 198.2890625, y: 758.0494689941406, width: 227, height: 24, canvasWidth: 734, canvasHeight: 950 },
+        { field: "place", type: "text", x: 197.2890625, y: 787.0494689941406, width: 232, height: 25, canvasWidth: 734, canvasHeight: 950 },
+    ],
+    2: [
+        { field: "name", type: "text", x: 388.71875, y: 155.71615600585938, width: 303, height: 37, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "fatherName", type: "text", x: 387.71875, y: 196.71615600585938, width: 304, height: 29, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "spouseName", type: "text", x: 388.71875, y: 231.71615600585938, width: 302, height: 27, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "dob", type: "text", x: 389.71875, y: 266.7161560058594, width: 299, height: 21, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "gender", type: "text", x: 394.71875, y: 294.71614837646484, width: 211, height: 19, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "maritalStatus", type: "text", x: 391.71875, y: 318.71614837646484, width: 225, height: 24, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "email", type: "text", x: 389.71875, y: 348.71614837646484, width: 244, height: 19, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "mobile", type: "text", x: 389.71875, y: 367.71614837646484, width: 244, height: 20, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "doj", type: "text", x: 395.71875, y: 392.71614837646484, width: 256, height: 25, canvasWidth: 715, canvasHeight: 1010 },
+        { field: "name", type: "text", x: 585.5208435058594, y: 657.7161254882812, width: 404, height: 23, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "bankAccount", type: "text", x: 585.5208435058594, y: 683.7161254882812, width: 407, height: 22, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "ifsc", type: "text", x: 586.5208435058594, y: 707.7161254882812, width: 406, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "name", type: "text", x: 585.5208435058594, y: 749.7161254882812, width: 420, height: 25, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "aadhaar", type: "text", x: 585.5208435058594, y: 776.7161254882812, width: 424, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "name", type: "text", x: 586.5208435058594, y: 814.7161254882812, width: 429, height: 26, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "pan", type: "text", x: 591.5208435058594, y: 843.7161254882812, width: 408, height: 34, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "epfMember", type: "checkbox", x: 593.5208435058594, y: 893.7161254882812, width: 46, height: 29, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "epsMember", type: "checkbox", x: 592.5208435058594, y: 933.7161254882812, width: 54, height: 32, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "previousDOJ", type: "text", x: 615.5208435058594, y: 1058.7161254882812, width: 107, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "previousCompany", type: "text", x: 97.52084350585938, y: 1061.7161254882812, width: 159, height: 95, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "uan", type: "text", x: 269.5208435058594, y: 1067.7161254882812, width: 147, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "previousDOE", type: "text", x: 733.5208435058594, y: 1071.7161254882812, width: 101, height: 26, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "internationalWorker", type: "checkbox", x: 586.5208435058594, y: 1369.0494384765625, width: 47, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
+    ],
+    3: [
+        { field: "withdrawEPF", type: "checkbox", x: 590.5208435058594, y: 64.71615600585938, width: 68, height: 36, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "withdrawEPS", type: "checkbox", x: 593.5208435058594, y: 117.71615600585938, width: 72, height: 39, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "declarationDate", type: "text", x: 142.52084350585938, y: 417.7161445617676, width: 245, height: 33, canvasWidth: 1072, canvasHeight: 1515 },
+        { field: "place", type: "text", x: 143.52084350585938, y: 463.7161445617676, width: 247, height: 30, canvasWidth: 1072, canvasHeight: 1515 },
+    ],
+    4: [
+        { field: "name", type: "text", x: 349.8828125, y: 266.7161560058594, width: 565, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "bankAccount", type: "text", x: 499.8828125, y: 323.7161560058594, width: 213, height: 22, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "dob", type: "text", x: 263.8828125, y: 324.7161560058594, width: 134, height: 19, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "gender", type: "text", x: 314.8828125, y: 351.7161560058594, width: 155, height: 25, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "maritalStatus", type: "text", x: 575.8828125, y: 356.7161560058594, width: 286, height: 19, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "permanentAddress", type: "text", x: 368.8828125, y: 385.71614837646484, width: 637, height: 49, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_relation", type: "text", x: 387.8828125, y: 654.7161407470703, width: 113, height: 28, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_name", type: "text", x: 144.8828125, y: 656.7161254882812, width: 135, height: 29, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_percentage", type: "text", x: 595.8828125, y: 656.7161445617676, width: 151, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_dob", type: "text", x: 504.8828125, y: 657.7161254882812, width: 80, height: 22, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_address", type: "text", x: 279.8828125, y: 657.7161407470703, width: 101, height: 74, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_relation", type: "text", x: 387.8828125, y: 724.7161254882812, width: 112, height: 28, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_dob", type: "text", x: 507.8828125, y: 728.0494689941406, width: 77, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_name", type: "text", x: 146.8828125, y: 728.7161254882812, width: 128, height: 24, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_percentage", type: "text", x: 594.8828125, y: 728.7161254882812, width: 147, height: 24, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_address", type: "text", x: 283.8828125, y: 735.7161407470703, width: 97, height: 93, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee3_relation", type: "text", x: 386.8828125, y: 753.0494689941406, width: 115, height: 27, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee3_name", type: "text", x: 149.8828125, y: 756.7161254882812, width: 125, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee3_dob", type: "text", x: 508.8828125, y: 756.7161407470703, width: 82, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee3_percentage", type: "text", x: 594.8828125, y: 757.7161254882812, width: 150, height: 21, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee4_name", type: "text", x: 145.8828125, y: 798.7161254882812, width: 129, height: 32, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee4_percentage", type: "text", x: 594.8828125, y: 798.7161254882812, width: 152, height: 33, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee4_dob", type: "text", x: 504.8828125, y: 801.7161254882812, width: 81, height: 28, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee4_relation", type: "text", x: 390.8828125, y: 802.7161254882812, width: 113, height: 27, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_name", type: "text", x: 213.8828125, y: 1184.7161254882812, width: 305, height: 24, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_age", type: "text", x: 522.8828125, y: 1185.0494384765625, width: 87, height: 23, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_relation", type: "text", x: 624.8828125, y: 1185.7161254882812, width: 292, height: 23, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_relation", type: "text", x: 625.8828125, y: 1208.0494384765625, width: 290, height: 21, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee3_relation", type: "text", x: 627.8828125, y: 1229.0494384765625, width: 289, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee4_relation", type: "text", x: 626.8828125, y: 1258.0494384765625, width: 291, height: 25, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_name", type: "text", x: 237.08074951171875, y: 1342.7161254882812, width: 338, height: 29, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee2_age", type: "text", x: 580.0807495117188, y: 1344.3828125, width: 96, height: 24, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee3_age", type: "text", x: 583.0807495117188, y: 1369.3828125, width: 97, height: 22, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee3_name", type: "text", x: 237.08074951171875, y: 1372.3828125, width: 334, height: 22, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee4_age", type: "text", x: 582.0807495117188, y: 1394.3828125, width: 98, height: 28, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee4_name", type: "text", x: 236.08074951171875, y: 1396.3828125, width: 338, height: 26, canvasWidth: 1223, canvasHeight: 1583 },
+    ],
+    5: [
+        { field: "nominee1_name", type: "text", x: 152.8828125, y: 321.7161445617676, width: 337, height: 33, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_dob", type: "text", x: 500.8828125, y: 323.7161445617676, width: 161, height: 34, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee1_relation", type: "text", x: 667.8828125, y: 323.7161445617676, width: 249, height: 34, canvasWidth: 1101, canvasHeight: 1425 },
+        { field: "nominee2_name", type: "text", x: 171.08074951171875, y: 422.7161445617676, width: 371, height: 35, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee2_dob", type: "text", x: 556.0807495117188, y: 424.7161445617676, width: 176, height: 39, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee2_relation", type: "text", x: 744.0807495117188, y: 426.7161445617676, width: 277, height: 36, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee3_name", type: "text", x: 169.08074951171875, y: 488.7161445617676, width: 371, height: 34, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee3_dob", type: "text", x: 556.0807495117188, y: 492.7161445617676, width: 180, height: 31, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee3_relation", type: "text", x: 749.0807495117188, y: 493.7161445617676, width: 270, height: 34, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee4_name", type: "text", x: 170.08074951171875, y: 557.7161445617676, width: 376, height: 30, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee4_relation", type: "text", x: 749.0807495117188, y: 559.7161445617676, width: 277, height: 34, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "nominee4_dob", type: "text", x: 556.0807495117188, y: 560.7161445617676, width: 179, height: 32, canvasWidth: 1223, canvasHeight: 1583 },
+        { field: "declarationDate", type: "text", x: 205.08074951171875, y: 728.7161254882812, width: 210, height: 30, canvasWidth: 1223, canvasHeight: 1583 },
+    ],
+    6: [
+        { field: "name", type: "text", x: 631.3385620117188, y: 307.71614837646484, width: 282, height: 34, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "fatherName", type: "text", x: 632.3385620117188, y: 350.71614837646484, width: 286, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "dob", type: "text", x: 630.3385620117188, y: 387.71614837646484, width: 193, height: 31, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "uan", type: "text", x: 631.3385620117188, y: 429.71614837646484, width: 194, height: 33, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "gender", type: "text", x: 629.3385620117188, y: 467.7161445617676, width: 196, height: 34, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "religion", type: "text", x: 627.3385620117188, y: 507.7161445617676, width: 195, height: 33, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "maritalStatus", type: "text", x: 628.3385620117188, y: 549.7161445617676, width: 197, height: 28, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "doj", type: "text", x: 626.3385620117188, y: 666.7161407470703, width: 198, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "permanentAddress", type: "text", x: 627.3385620117188, y: 755.7161254882812, width: 196, height: 133, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "district", type: "text", x: 625.3385620117188, y: 892.7161254882812, width: 201, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "state", type: "text", x: 626.3385620117188, y: 921.7161254882812, width: 202, height: 21, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "pincode", type: "text", x: 625.3385620117188, y: 946.7161254882812, width: 205, height: 21, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "email", type: "text", x: 628.3385620117188, y: 972.7161254882812, width: 200, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "mobile", type: "text", x: 626.3385620117188, y: 996.7161254882812, width: 204, height: 26, canvasWidth: 952, canvasHeight: 1347 },
+    ],
+    7: [
+        { field: "name", type: "text", x: 279.33856201171875, y: 217.71615600585938, width: 295, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "doj", type: "text", x: 734.3385620117188, y: 272.7161560058594, width: 86, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+    ],
+    8: [
+        { field: "nominee1_name", type: "text", x: 116.33856201171875, y: 247.71615600585938, width: 198, height: 24, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee1_relation", type: "text", x: 320.33856201171875, y: 247.71615600585938, width: 133, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee1_age", type: "text", x: 456.33856201171875, y: 247.71615600585938, width: 97, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee1_aadhaar", type: "text", x: 556.3385620117188, y: 247.71615600585938, width: 139, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee1_percentage", type: "text", x: 716.3385620117188, y: 249.71615600585938, width: 174, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee2_name", type: "text", x: 115.33856201171875, y: 271.7161560058594, width: 199, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee2_aadhaar", type: "text", x: 556.3385620117188, y: 271.7161560058594, width: 141, height: 21, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee2_relation", type: "text", x: 320.33856201171875, y: 272.7161560058594, width: 135, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee2_age", type: "text", x: 455.33856201171875, y: 272.7161560058594, width: 98, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee2_percentage", type: "text", x: 715.3385620117188, y: 272.7161560058594, width: 178, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee3_aadhaar", type: "text", x: 559.3385620117188, y: 294.7161560058594, width: 141, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee3_name", type: "text", x: 112.33856201171875, y: 295.7161560058594, width: 203, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee3_relation", type: "text", x: 317.33856201171875, y: 295.7161560058594, width: 138, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee3_percentage", type: "text", x: 716.3385620117188, y: 296.7161560058594, width: 180, height: 22, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee3_age", type: "text", x: 456.33856201171875, y: 297.7161560058594, width: 98, height: 21, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee4_aadhaar", type: "text", x: 560.3385620117188, y: 315.7161560058594, width: 144, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee4_percentage", type: "text", x: 716.3385620117188, y: 316.7161560058594, width: 184, height: 23, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee4_age", type: "text", x: 458.33856201171875, y: 317.7161560058594, width: 99, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee4_name", type: "text", x: 111.33856201171875, y: 318.7161560058594, width: 205, height: 25, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "nominee4_relation", type: "text", x: 319.33856201171875, y: 319.7161560058594, width: 138, height: 24, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "declaration", value: "1",  type: "checkbox", x: 31.33856201171875, y: 404.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "declaration", value: "2",  type: "checkbox", x: 31.33856201171875, y: 428.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "declaration", value: "3a", type: "checkbox", x: 31.33856201171875, y: 452.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "declaration", value: "3b", type: "checkbox", x: 31.33856201171875, y: 476.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "declaration", value: "4",  type: "checkbox", x: 31.33856201171875, y: 500.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "declaration", value: "5",  type: "checkbox", x: 31.33856201171875, y: 524.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "place", type: "text", x: 104.33856201171875, y: 884.7161254882812, width: 166, height: 31, canvasWidth: 952, canvasHeight: 1347 },
+        { field: "declarationDate", type: "text", x: 105.33856201171875, y: 919.7161254882812, width: 165, height: 28, canvasWidth: 952, canvasHeight: 1347 },
+    ],
+    9: [
+        { field: "declarationDate", type: "text", x: 143.33856201171875, y: 289.7161560058594, width: 206, height: 32, canvasWidth: 952, canvasHeight: 1347 },
+    ],
+};
+
+function formatDateForPDF(value) {
+    if (!value) return "";
+    const p = value.split("-");
+    return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : value;
+}
+
+function resolvePDFValue(field, data) {
+    const values = {
+        name: data.name, fatherName: data.fatherName, spouseName: data.spouseName,
+        dob: formatDateForPDF(data.dob), gender: data.gender,
+        maritalStatus: data.maritalStatus, religion: data.religion,
+        email: data.email, mobile: data.mobile, doj: formatDateForPDF(data.doj),
+        employmentStatus: data.employmentStatus, internationalWorker: data.internationalWorker,
+        previousCompany: data.previousCompany,
+        previousDOJ: formatDateForPDF(data.previousDOJ),
+        previousDOE: formatDateForPDF(data.previousDOE),
+        bankAccount: data.bankAccount, ifsc: data.ifsc,
+        aadhaar: data.aadhaar, pan: data.pan,
+        epfMember: data.epfMember, epsMember: data.epsMember, uan: data.uan,
+        withdrawEPF: data.withdrawEPF, withdrawEPS: data.withdrawEPS,
+        permanentAddress: data.permanentAddress, city: data.city,
+        district: data.district, state: data.state, pincode: data.pincode,
+        place: data.place, declaration: data.declaration,
+        declarationDate: formatDateForPDF(data.declarationDate)
+    };
+
+    const nomineeMatch = field.match(/^nominee([1-4])_(name|address|relation|aadhaar|dob|age|percentage)$/);
+    if (nomineeMatch) {
+        const nominee = data.nominees[Number(nomineeMatch[1]) - 1];
+        if (!nominee) return "";
+        if (nomineeMatch[2] === "dob") return formatDateForPDF(nominee.dob);
+        return nominee[nomineeMatch[2]] || "";
+    }
+
+    return values[field] || "";
+}
+
+function isCheckboxChecked(mapping, rawValue) {
+    if (mapping.field === "declaration") {
+        if (mapping.value) return String(rawValue) === String(mapping.value);
+        return Boolean(rawValue);
+    }
+    return String(rawValue).trim().toLowerCase() === "yes";
+}
+
+const YES_NO_WORD_FIELDS = new Set(["internationalWorker", "epfMember", "epsMember", "withdrawEPF", "withdrawEPS"]);
+
+function wrapTextToWidth(text, font, fontSize, maxWidth) {
+    const words = String(text).split(/\s+/).filter(Boolean);
+    const lines = [];
+    let current = "";
+    for (const word of words) {
+        const candidate = current ? current + " " + word : word;
+        if (font.widthOfTextAtSize(candidate, fontSize) <= maxWidth || !current) {
+            current = candidate;
+        } else {
+            lines.push(current);
+            current = word;
+        }
+    }
+    if (current) lines.push(current);
+    return lines.length ? lines : [""];
+}
+
+function drawTextInBox(page, font, text, box, baseSize) {
+    const MIN_FONT_SIZE = 6;
+    const BOTTOM_PADDING = 2;
+    let fontSize = baseSize || 9;
+    let lineHeight = fontSize * 1.15;
+    let lines = wrapTextToWidth(String(text), font, fontSize, box.width);
+
+    while (box.height > 0 && lines.length * lineHeight > box.height && fontSize > MIN_FONT_SIZE) {
+        fontSize -= 0.5;
+        lineHeight = fontSize * 1.15;
+        lines = wrapTextToWidth(String(text), font, fontSize, box.width);
+    }
+
+    const lastBaselineY = box.bottomY + BOTTOM_PADDING;
+    let cursorY = lastBaselineY + (lines.length - 1) * lineHeight;
+    for (const line of lines) {
+        if (cursorY > box.topY + lineHeight) { cursorY -= lineHeight; continue; }
+        page.drawText(line, { x: box.x, y: cursorY, size: fontSize, font: font, color: PDFLib.rgb(0, 0, 0) });
+        cursorY -= lineHeight;
+    }
+}
+
+function drawCheckmark(page, box) {
+    const size = Math.max(6, Math.min(box.width, box.height) * 0.8);
+    const cx = box.x + (box.width - size) / 2;
+    const cy = box.bottomY + (box.height - size) / 2;
+    const p0 = { x: cx + size * 0.05, y: cy + size * 0.45 };
+    const p1 = { x: cx + size * 0.40, y: cy + size * 0.08 };
+    const p2 = { x: cx + size * 0.95, y: cy + size * 0.85 };
+    const thickness = Math.max(1.3, size * 0.14);
+    page.drawLine({ start: p0, end: p1, thickness: thickness, color: PDFLib.rgb(0, 0, 0) });
+    page.drawLine({ start: p1, end: p2, thickness: thickness, color: PDFLib.rgb(0, 0, 0) });
+}
+
+async function applyPDFMapping(pdfDoc, data) {
+    const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const pages = pdfDoc.getPages();
+
+    for (let pageNumber = 1; pageNumber <= 9; pageNumber++) {
+        const mappings = PDF_MAPPING[pageNumber] || [];
+        if (!mappings.length) continue;
+        const page = pages[pageNumber - 1];
+        const pageWidth = page.getWidth();
+        const pageHeight = page.getHeight();
+
+        for (const mapping of mappings) {
+            const scaleX = pageWidth / mapping.canvasWidth;
+            const scaleY = pageHeight / mapping.canvasHeight;
+            const boxX = mapping.x * scaleX;
+            const boxWidth = mapping.width * scaleX;
+            const boxHeight = mapping.height * scaleY;
+            const boxTopY = pageHeight - (mapping.y * scaleY);
+            const boxBottomY = pageHeight - ((mapping.y + mapping.height) * scaleY);
+
+            const box = { x: boxX, topY: boxTopY, bottomY: boxBottomY, width: boxWidth, height: boxHeight };
+            const rawValue = resolvePDFValue(mapping.field, data);
+
+            if (mapping.type === "checkbox") {
+                if (YES_NO_WORD_FIELDS.has(mapping.field)) {
+                    if (!rawValue) continue;
+                    drawTextInBox(page, font, rawValue, box, mapping.size);
+                    continue;
+                }
+                if (!isCheckboxChecked(mapping, rawValue)) continue;
+                drawCheckmark(page, box);
+                continue;
+            }
+
+            if (!rawValue) continue;
+            drawTextInBox(page, font, rawValue, box, mapping.size);
+        }
+    }
+}
+
+async function generatePDF() {
+    const data = getFormData();
+    const errors = collectErrors(data);
+    if (errors.length > 0) { showErrorDrawer(errors); setTimeout(() => scrollToField(errors[0].fieldId), 250); return; }
+    hideErrorDrawer();
+    saveDraftSilent();
+    document.getElementById("loaderOverlay").classList.add("visible");
+    try {
+        let response;
+        try { response = await fetch(encodeURI(PDF_FILE_NAME), { cache: "no-store" }); }
+        catch (e) { throw new Error("Could not load the PDF template."); }
+        if (!response.ok) throw new Error("PDF template not found.");
+        const buffer = await response.arrayBuffer();
+        const pdfDoc = await PDFLib.PDFDocument.load(buffer);
+        if (pdfDoc.getPageCount() !== 9) throw new Error("PDF must contain exactly 9 pages.");
+        await applyPDFMapping(pdfDoc, data);
+        const output = await pdfDoc.save();
+        const blob = new Blob([output], { type: "application/pdf" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "Onboarding Documents - " + cleanFileName(data.name) + ".pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 1500);
+        document.getElementById("loaderOverlay").classList.remove("visible");
+        showStatus("PDF downloaded successfully. Next: print & sign, or upload to DigiLocker.", "success");
+        fireConfetti();
+    } catch (err) {
+        document.getElementById("loaderOverlay").classList.remove("visible");
+        showStatus("PDF generation failed: " + err.message, "error");
+    }
+}
+
+function cleanFileName(name) {
+    return String(name || "Candidate").replace(/[<>:"/\\|?*\x00-\x1F]/g, "_").replace(/\s+/g, " ").trim().substring(0, 80);
+}
+
+function clearAllInputs() {
+    if (!confirm("This will clear everything you've entered. Continue?")) return;
+    document.querySelectorAll("input, select, textarea").forEach(function (f) {
+        if (f.type === "radio" || f.type === "checkbox") f.checked = false;
+        else f.value = "";
+    });
+    renderNominees(null);
+    maritalStatusChanged();
+    employmentChanged();
+    setDefaultDeclarationDate();
+    hideErrorDrawer();
+    document.querySelectorAll(".field-invalid, .field-valid, .declaration-invalid").forEach(el => el.classList.remove("field-invalid", "field-valid", "declaration-invalid"));
+    try { sessionStorage.removeItem(getDraftKey()); } catch (e) {}
+    showStatus("All fields cleared.", "info");
+    updateProgress();
+}
+
+function setDefaultDeclarationDate() {
+    const el = document.getElementById("declarationDate");
+    if (!el) return;
+    const n = new Date();
+    el.value = n.getFullYear() + "-" + String(n.getMonth() + 1).padStart(2, "0") + "-" + String(n.getDate()).padStart(2, "0");
+}
+
+function fireConfetti() {
+    if (prefersReducedMotion) return;
+    const colors = ["#c00000","#7a0000","#ff2b2b","#16a34a","#fbbf24","#f97316"];
+    for (let i = 0; i < 60; i++) {
+        const p = document.createElement("div");
+        p.className = "confetti-piece";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
+        p.style.animationDuration = (2 + Math.random() * 1.8) + "s";
+        p.style.animationDelay = (Math.random() * 0.4) + "s";
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 4500);
+    }
+}
+
+(function ghostCursor() {
+    if (prefersReducedMotion) return;
+    const canvas = document.getElementById("splashCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let w, h;
+    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener("resize", resize);
+
+    const trail = [];
+    const MAX_TRAIL = 45;
+    let mx = -100, my = -100;
+    let lastMoveTime = 0;
+
+    window.addEventListener("pointermove", function (e) {
+        mx = e.clientX;
+        my = e.clientY;
+        lastMoveTime = performance.now();
+    });
+
+    function tick(now) {
+        ctx.clearRect(0, 0, w, h);
+        const idle = now - lastMoveTime;
+        if (idle < 1000 && mx > 0) trail.push({ x: mx, y: my, born: now });
+        while (trail.length > MAX_TRAIL) trail.shift();
+
+        for (let i = 0; i < trail.length; i++) {
+            const p = trail[i];
+            const age = now - p.born;
+            const life = Math.max(0, 1 - age / 1500);
+            if (life <= 0) continue;
+            const size = 60 * (1 - i / trail.length) * life;
+            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size);
+            grad.addColorStop(0, "rgba(255, 100, 100, " + (0.18 * life) + ")");
+            grad.addColorStop(0.5, "rgba(192, 0, 0, " + (0.08 * life) + ")");
+            grad.addColorStop(1, "rgba(192, 0, 0, 0)");
+            ctx.fillStyle = grad;
+            ctx.fillRect(p.x - size, p.y - size, size * 2, size * 2);
+        }
+
+        for (let i = 0; i < trail.length; i++) {
+            const p = trail[i];
+            const age = now - p.born;
+            const life = Math.max(0, 1 - age / 1500);
+            if (life <= 0) continue;
+            const fade = (i / trail.length);
+            const r = 3 + fade * 4;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, r * life, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(255, " + Math.round(120 + fade * 100) + ", 120, " + (life * 0.7 * (1 - fade * 0.5)) + ")";
+            ctx.fill();
+        }
+
+        while (trail.length && now - trail[0].born > 1500) trail.shift();
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+})();
+
+document.addEventListener("DOMContentLoaded", function () {
+    loadDraft();
+    maritalStatusChanged();
+    employmentChanged();
+    attachValidationListeners();
+    if (!document.getElementById("declarationDate").value) setDefaultDeclarationDate();
+    updateProgress();
+    initSplitAnimations();
+    initHowSteps();
+    initBentoBoxes();
+});
+</script>
+
+</body>
+</html>
