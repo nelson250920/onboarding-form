@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Team Red — Onboarding Documents</title>
+<title>Team Red — Onboarding</title>
 <meta name="theme-color" content="#1a0a0c">
 <link rel="icon" href="https://teamred.uknowva.com/images/logo/screenshot_3.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,7 +46,6 @@ body {
 ::-webkit-scrollbar-track { background: #1a0a0a; }
 ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 10px; border: 2px solid #1a0a0a; }
 
-/* ═══ DARK RED BG (lighter, warmer) ═══ */
 .bg-scene {
     position: fixed;
     inset: 0;
@@ -64,10 +63,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: repeating-linear-gradient(0deg,
-        rgba(255, 100, 100, 0.025) 0px,
-        rgba(255, 100, 100, 0.025) 1px,
-        transparent 1px, transparent 3px);
+    background-image: repeating-linear-gradient(0deg, rgba(255,100,100,0.025) 0px, rgba(255,100,100,0.025) 1px, transparent 1px, transparent 3px);
     mix-blend-mode: overlay;
     opacity: 0.7;
 }
@@ -81,7 +77,7 @@ body {
     mix-blend-mode: overlay;
 }
 
-/* ═══ SPLIT-FLAP ═══ */
+/* SPLIT-FLAP */
 .split-chars { display: inline-flex; flex-wrap: wrap; perspective: 500px; vertical-align: baseline; }
 .split-char { display: inline-block; backface-visibility: hidden; white-space: pre; }
 .split-char[data-space="1"] { width: 0.32em; }
@@ -104,18 +100,20 @@ body {
     to { opacity: 1; transform: translateX(0); }
 }
 
-/* ═══ SHINY TEXT on section-title characters ═══ */
 .section-title .split-char:not([data-space="1"]) {
-    background: linear-gradient(120deg,
-        #7a0000 0%, var(--red) 20%, var(--red-bright) 42%,
-        #ffb8b8 50%, var(--red-bright) 58%, var(--red) 80%, #7a0000 100%);
+    background: linear-gradient(120deg, #7a0000 0%, var(--red) 20%, var(--red-bright) 42%, #ffb8b8 50%, var(--red-bright) 58%, var(--red) 80%, #7a0000 100%);
     background-size: 300% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation:
-        sfFlip 0.72s cubic-bezier(0.34, 1.4, 0.64, 1) backwards,
-        shinySweep 3.2s linear infinite;
+    animation: sfFlip 0.72s cubic-bezier(0.34, 1.4, 0.64, 1) backwards, shinySweep 3.2s linear infinite;
+}
+.section-title .split-word {
+    background: linear-gradient(120deg, #7a0000 0%, var(--red) 20%, var(--red-bright) 42%, #ffb8b8 50%, var(--red-bright) 58%, var(--red) 80%, #7a0000 100%);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 @keyframes shinySweep {
@@ -123,7 +121,6 @@ body {
     to { background-position: -100% 50%; }
 }
 
-/* ═══ GHOST CURSOR ═══ */
 #splashCanvas {
     position: fixed;
     inset: 0;
@@ -134,16 +131,12 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .split-char, .split-word, .split-line {
-        opacity: 1 !important; transform: none !important; animation: none !important;
-    }
-    .section-title .split-char:not([data-space="1"]) {
-        background: none; -webkit-text-fill-color: var(--red);
-    }
+    .split-char, .split-word, .split-line { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .section-title .split-char:not([data-space="1"]),
+    .section-title .split-word { background: none; -webkit-text-fill-color: var(--red); }
     #splashCanvas { display: none; }
 }
 
-/* ═══ NAV (high contrast) ═══ */
 .pill-nav {
     position: sticky;
     top: 16px;
@@ -153,7 +146,6 @@ body {
     padding: 0 15px;
     animation: navIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-
 @keyframes navIn { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: translateY(0); } }
 
 .pill-nav-inner {
@@ -166,463 +158,229 @@ body {
     -webkit-backdrop-filter: blur(22px) saturate(180%);
     border: 1.5px solid rgba(255, 60, 60, 0.5);
     border-radius: 999px;
-    box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.5),
-        0 12px 40px -12px rgba(255, 40, 40, 0.75),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5), 0 12px 40px -12px rgba(255,40,40,0.75), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .nav-logo { display: flex; align-items: center; text-decoration: none; padding-left: 4px; }
-
-.nav-logo img {
-    height: 32px;
-    width: auto;
-    object-fit: contain;
-    border-radius: 8px;
-    background: white;
-    padding: 3px;
-    box-shadow: 0 0 0 1px rgba(255, 60, 60, 0.45);
-}
+.nav-logo img { height: 32px; width: auto; object-fit: contain; border-radius: 8px; background: white; padding: 3px; box-shadow: 0 0 0 1px rgba(255,60,60,0.45); }
 
 .nav-links { display: flex; gap: 2px; margin-left: auto; align-items: center; }
-
 .nav-link {
-    padding: 8px 14px;
-    border-radius: 999px;
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 11.5px;
-    font-weight: 700;
-    transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-    white-space: nowrap;
+    padding: 8px 14px; border-radius: 999px; text-decoration: none; color: rgba(255,255,255,0.78);
+    font-size: 11.5px; font-weight: 700; transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1); white-space: nowrap;
 }
-.nav-link:hover { color: #fff; background: rgba(192, 0, 0, 0.6); transform: translateY(-1px); }
+.nav-link:hover { color: #fff; background: rgba(192,0,0,0.6); transform: translateY(-1px); }
 
 .nav-progress {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 13px;
-    border-radius: 999px;
-    background: rgba(192, 0, 0, 0.35);
-    font-size: 11px;
-    font-weight: 700;
-    color: #ffb0b0;
-    font-family: var(--font-mono);
-    border: 1px solid rgba(255, 60, 60, 0.45);
+    display: flex; align-items: center; gap: 8px; padding: 7px 13px; border-radius: 999px;
+    background: rgba(192,0,0,0.35); font-size: 11px; font-weight: 700; color: #ffb0b0;
+    font-family: var(--font-mono); border: 1px solid rgba(255,60,60,0.45);
 }
 
 .nav-progress-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #ff2b2b;
-    box-shadow: 0 0 10px rgba(255, 43, 43, 1);
-    animation: dotPulse 2s ease-in-out infinite;
+    width: 8px; height: 8px; border-radius: 50%; background: #ff2b2b;
+    box-shadow: 0 0 10px rgba(255,43,43,1); animation: dotPulse 2s ease-in-out infinite;
 }
-
 @keyframes dotPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); opacity: 0.7; } }
 
 .lang-select {
-    padding: 8px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 60, 60, 0.5);
-    font-size: 11px;
-    font-weight: 700;
-    background: rgba(40, 14, 16, 0.75);
-    color: #ffb0b0;
-    cursor: pointer;
-    font-family: var(--font-body);
+    padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(255,60,60,0.5);
+    font-size: 11px; font-weight: 700; background: rgba(40,14,16,0.75); color: #ffb0b0;
+    cursor: pointer; font-family: var(--font-body);
 }
 .lang-select:hover { border-color: var(--red-bright); color: #fff; }
 .lang-select option { background: #1a0a0a; color: #fff; }
 
 @media (max-width: 700px) { .nav-links { display: none; } }
 
-/* ═══ HERO ═══ */
 .hero { position: relative; padding: 60px 20px 48px; text-align: center; }
 
 .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 16px;
-    margin-bottom: 22px;
-    border-radius: 999px;
-    background: rgba(30, 12, 12, 0.75);
-    border: 1px solid rgba(255, 60, 60, 0.45);
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-    color: #ff9090;
-    box-shadow: 0 6px 24px -8px rgba(255, 40, 40, 0.8);
-    animation: badgeFloat 4s ease-in-out infinite;
+    display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; margin-bottom: 22px;
+    border-radius: 999px; background: rgba(30,12,12,0.75); border: 1px solid rgba(255,60,60,0.45);
+    font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.9px;
+    text-transform: uppercase; color: #ff9090;
+    box-shadow: 0 6px 24px -8px rgba(255,40,40,0.8); animation: badgeFloat 4s ease-in-out infinite;
 }
-
 @keyframes badgeFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
 .hero-badge-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: #ff2b2b;
-    box-shadow: 0 0 0 0 rgba(255, 43, 43, 0.7);
-    animation: heroDot 2s ease-in-out infinite;
+    width: 7px; height: 7px; border-radius: 50%; background: #ff2b2b;
+    box-shadow: 0 0 0 0 rgba(255,43,43,0.7); animation: heroDot 2s ease-in-out infinite;
 }
-
 @keyframes heroDot {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 43, 43, 0.7); }
-    50% { box-shadow: 0 0 0 8px rgba(255, 43, 43, 0); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,43,43,0.7); }
+    50% { box-shadow: 0 0 0 8px rgba(255,43,43,0); }
 }
 
 .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(34px, 6.5vw, 60px);
-    font-weight: 800;
-    letter-spacing: -0.8px;
-    line-height: 1.1;
-    margin-bottom: 16px;
-    color: #ffffff;
-    text-shadow: 0 4px 30px rgba(255, 40, 40, 0.7);
+    font-family: var(--font-display); font-size: clamp(26px, 6.2vw, 60px); font-weight: 800;
+    letter-spacing: -0.8px; line-height: 1.1; margin-bottom: 16px; color: #ffffff;
+    text-shadow: 0 4px 30px rgba(255,40,40,0.7);
 }
 
 .hero-title .split-char {
     background: linear-gradient(135deg, #ffffff 0%, #ffd0d0 40%, #ffffff 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    background-clip: text;
+    background-size: 200% 200%; -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation:
-        sfFlip 0.72s cubic-bezier(0.34, 1.4, 0.64, 1) backwards,
-        titleShine 6s ease-in-out 1.2s infinite;
+    animation: sfFlip 0.72s cubic-bezier(0.34, 1.4, 0.64, 1) backwards, titleShine 6s ease-in-out 1.2s infinite;
 }
-
 @keyframes titleShine { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
-.hero-subtitle { font-size: 15px; font-weight: 500; color: rgba(255, 255, 255, 0.78); }
+.hero-subtitle { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.78); }
 
 .hero-wave {
-    display: block;
-    width: 90px;
-    height: 4px;
-    margin: 26px auto 0;
-    border-radius: 4px;
+    display: block; width: 90px; height: 4px; margin: 26px auto 0; border-radius: 4px;
     background: linear-gradient(90deg, transparent, var(--red-bright), transparent);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
 }
 .hero-wave::after {
-    content: "";
-    position: absolute; inset: 0;
+    content: ""; position: absolute; inset: 0;
     background: linear-gradient(90deg, transparent, #fff, transparent);
     animation: waveSlide 2.6s ease-in-out infinite;
 }
 @keyframes waveSlide { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
 
-/* ═══ CARD ═══ */
 .container { max-width: 920px; margin: 0 auto 25px; padding: 0 15px; }
 
 .card-electric {
-    position: relative;
-    padding: 34px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.97);
-    box-shadow:
-        0 1px 2px rgba(20, 10, 10, 0.06),
-        0 30px 100px -30px rgba(255, 40, 40, 0.75);
+    position: relative; padding: 34px; border-radius: 20px; background: rgba(255,255,255,0.97);
+    box-shadow: 0 1px 2px rgba(20,10,10,0.06), 0 30px 100px -30px rgba(255,40,40,0.75);
 }
 
-/* ═══ MAGIC BENTO ═══ */
 .bento-box { position: relative; overflow: hidden; isolation: isolate; }
 .bento-box > *:not(.bento-spotlight):not(.bento-border-glow) { position: relative; z-index: 3; }
 
 .bento-spotlight {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(480px circle at var(--mx, 50%) var(--my, 50%),
-        rgba(255, 60, 60, 0.22) 0%, rgba(192, 0, 0, 0.08) 25%, transparent 50%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    z-index: 1;
+    position: absolute; inset: 0;
+    background: radial-gradient(480px circle at var(--mx, 50%) var(--my, 50%), rgba(255,60,60,0.22) 0%, rgba(192,0,0,0.08) 25%, transparent 50%);
+    opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 1;
 }
 .bento-box:hover .bento-spotlight { opacity: 1; }
 
 .bento-border-glow {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1.5px;
-    background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%),
-        rgba(255, 60, 60, 0.95) 0%, rgba(192, 0, 0, 0.5) 25%, transparent 50%);
+    position: absolute; inset: 0; border-radius: inherit; padding: 1.5px;
+    background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), rgba(255,60,60,0.95) 0%, rgba(192,0,0,0.5) 25%, transparent 50%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    z-index: 2;
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 2;
 }
 .bento-box:hover .bento-border-glow { opacity: 1; }
 
 .bento-star {
-    position: absolute;
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: #ff5c5c;
-    box-shadow: 0 0 8px #ff2b2b, 0 0 16px rgba(255, 60, 60, 0.7);
-    pointer-events: none;
-    z-index: 4;
-    transform: translate(-50%, -50%);
-    animation: bentoStarFly 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #ff5c5c;
+    box-shadow: 0 0 8px #ff2b2b, 0 0 16px rgba(255,60,60,0.7); pointer-events: none; z-index: 4;
+    transform: translate(-50%, -50%); animation: bentoStarFly 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-
 @keyframes bentoStarFly {
     0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
     25% { opacity: 1; transform: translate(-50%, -50%) scale(1.6); }
-    100% {
-        opacity: 0;
-        transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) scale(0.3);
-    }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) scale(0.3); }
 }
 
 .bento-ripple {
-    position: absolute;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 60, 60, 0.5) 0%, transparent 70%);
-    border: 2px solid rgba(255, 60, 60, 0.6);
-    transform: translate(-50%, -50%) scale(0);
-    animation: bentoRippleOut 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    pointer-events: none;
-    z-index: 5;
+    position: absolute; width: 10px; height: 10px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,60,60,0.5) 0%, transparent 70%);
+    border: 2px solid rgba(255,60,60,0.6); transform: translate(-50%, -50%) scale(0);
+    animation: bentoRippleOut 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; pointer-events: none; z-index: 5;
 }
-
 @keyframes bentoRippleOut {
     0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
     100% { transform: translate(-50%, -50%) scale(24); opacity: 0; }
 }
 
-/* ═══ WELCOME (bento) ═══ */
 .welcome {
     background: linear-gradient(135deg, var(--red-tint) 0%, #fff 100%);
-    border: 1px solid var(--red-tint-2);
-    padding: 22px 24px;
-    margin-bottom: 24px;
-    border-radius: 14px;
+    border: 1px solid var(--red-tint-2); padding: 22px 24px; margin-bottom: 24px; border-radius: 14px;
 }
-
 .welcome::before {
-    content: "";
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 5px;
-    background: linear-gradient(180deg, var(--red), var(--red-dark));
-    z-index: 4;
-    border-radius: 14px 0 0 14px;
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+    background: linear-gradient(180deg, var(--red), var(--red-dark)); z-index: 4; border-radius: 14px 0 0 14px;
 }
-
-.welcome-title {
-    color: var(--red);
-    font-family: var(--font-display);
-    margin: 0 0 8px;
-    font-size: 20px;
-    font-weight: 700;
-}
-
+.welcome-title { color: var(--red); font-family: var(--font-display); margin: 0 0 8px; font-size: 20px; font-weight: 700; }
 .welcome-body { color: var(--ink-soft); line-height: 1.65; font-size: 10pt; }
 
-/* ═══ HOW IT WORKS ═══ */
-.how {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1.5px solid var(--line);
-    border-radius: 14px;
-    padding: 22px 24px;
-    margin-bottom: 30px;
-}
-
-.how-title {
-    font-family: var(--font-display);
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 16px;
-}
-
+.how { background: rgba(255,255,255,0.7); border: 1.5px solid var(--line); border-radius: 14px; padding: 22px 24px; margin-bottom: 30px; }
+.how-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 16px; }
 .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 
 .how-step {
-    position: relative;
-    padding: 16px 16px 16px 50px;
-    background: #fff;
-    border: 1px solid var(--red-tint-2);
-    border-radius: 12px;
-    font-size: 9.5pt;
-    line-height: 1.55;
+    position: relative; padding: 16px 16px 16px 50px; background: #fff;
+    border: 1px solid var(--red-tint-2); border-radius: 12px; font-size: 9.5pt; line-height: 1.55;
     color: var(--ink-soft);
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
-    opacity: 0;
-    transform: translateX(-18px);
+    opacity: 0; transform: translateX(-18px);
 }
-
 .how-step.in-view { animation: stepSlideIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 @keyframes stepSlideIn { to { opacity: 1; transform: translateX(0); } }
 .how-step:nth-child(1).in-view { animation-delay: 0.15s; }
 .how-step:nth-child(2).in-view { animation-delay: 0.3s; }
 .how-step:nth-child(3).in-view { animation-delay: 0.45s; }
-
-.how-step:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -16px rgba(122, 0, 0, 0.45); }
-
-.how-step strong {
-    display: block;
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-size: 10.5pt;
-    margin-bottom: 4px;
-}
-
+.how-step:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -16px rgba(122,0,0,0.45); }
+.how-step strong { display: block; color: var(--ink); font-family: var(--font-display); font-size: 10.5pt; margin-bottom: 4px; }
 .how-step .step-desc { display: block; }
-
 .how-step::before {
-    content: attr(data-step);
-    position: absolute;
-    left: 14px;
-    top: 16px;
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--red), var(--red-dark));
-    color: white;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    content: attr(data-step); position: absolute; left: 14px; top: 16px; width: 26px; height: 26px;
+    border-radius: 50%; background: linear-gradient(135deg, var(--red), var(--red-dark)); color: white;
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
     animation: stepPulse 3s ease-in-out infinite;
 }
-
 .how-step:nth-child(2)::before { animation-delay: 0.4s; }
 .how-step:nth-child(3)::before { animation-delay: 0.8s; }
-@keyframes stepPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(192, 0, 0, 0.5); } 50% { box-shadow: 0 0 0 8px rgba(192, 0, 0, 0); } }
-
+@keyframes stepPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(192,0,0,0.5); } 50% { box-shadow: 0 0 0 8px rgba(192,0,0,0); } }
 @media (max-width: 700px) { .how-steps { grid-template-columns: 1fr; } }
 
-/* ═══ SECTION TITLES ═══ */
 .section-title {
-    position: relative;
-    display: block;
-    color: var(--red);
-    font-family: var(--font-display);
-    font-size: 19px;
-    font-weight: 700;
-    letter-spacing: 0.2px;
-    line-height: 1.35;
-    margin: 40px 0 8px;
-    padding: 0 0 12px 24px;
-    border-bottom: 1px solid var(--line);
+    position: relative; display: block; color: var(--red); font-family: var(--font-display);
+    font-size: 19px; font-weight: 700; letter-spacing: 0.2px; line-height: 1.35;
+    margin: 40px 0 8px; padding: 0 0 12px 24px; border-bottom: 1px solid var(--line);
 }
-
 .section-title::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 8px;
-    width: 9px; height: 9px;
-    border-radius: 3px;
-    background: var(--red);
-    box-shadow: 0 0 0 4px var(--red-tint-2);
+    content: ""; position: absolute; left: 0; top: 8px; width: 9px; height: 9px;
+    border-radius: 3px; background: var(--red); box-shadow: 0 0 0 4px var(--red-tint-2);
     animation: titleDotPulse 2.4s ease-in-out infinite;
 }
-
 @keyframes titleDotPulse {
     0%, 100% { box-shadow: 0 0 0 4px var(--red-tint-2); }
-    50% { box-shadow: 0 0 0 8px rgba(252, 228, 228, 0.3); }
+    50% { box-shadow: 0 0 0 8px rgba(252,228,228,0.3); }
 }
-
 .section-title:first-of-type { margin-top: 0; }
+.section-subtitle { color: var(--ink-soft); margin-bottom: 24px; line-height: 1.6; font-size: 10pt; }
 
-.section-subtitle {
-    color: var(--ink-soft);
-    margin-bottom: 24px;
-    line-height: 1.6;
-    font-size: 10pt;
-}
-
-/* ═══ FIELDS ═══ */
-.field {
-    margin-bottom: 18px;
-    position: relative;
-    scroll-margin-top: 110px;
-}
-
+.field { margin-bottom: 18px; position: relative; scroll-margin-top: 110px; }
 .field label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 6px;
-    line-height: 1.4;
-    font-size: 9.6pt;
-    color: var(--ink);
-    transition: color 0.25s ease;
+    display: block; font-weight: 600; margin-bottom: 6px; line-height: 1.4; font-size: 9.6pt;
+    color: var(--ink); transition: color 0.25s ease;
 }
-
 .field:focus-within label { color: var(--red); }
 .required { color: var(--red); font-weight: 700; }
 
 .field input, .field select, .field textarea {
-    width: 100%;
-    padding: 11px 14px;
-    border: 1.5px solid #d8cfcf;
-    border-radius: 10px;
-    background: rgba(255, 253, 253, 0.9);
-    font-family: var(--font-body);
-    font-size: 10pt;
-    color: var(--ink);
+    width: 100%; padding: 11px 14px; border: 1.5px solid #d8cfcf; border-radius: 10px;
+    background: rgba(255,253,253,0.9); font-family: var(--font-body); font-size: 10pt; color: var(--ink);
     transition: border-color 0.2s ease, box-shadow 0.25s ease, background 0.2s ease;
 }
-
 .field input:hover, .field select:hover, .field textarea:hover { border-color: #c7abab; }
 .field textarea { min-height: 75px; resize: vertical; }
-
 .field input:focus, .field select:focus, .field textarea:focus {
-    outline: none;
-    border-color: var(--red);
-    background: white;
-    box-shadow: 0 0 0 4px var(--red-tint-2);
+    outline: none; border-color: var(--red); background: white; box-shadow: 0 0 0 4px var(--red-tint-2);
 }
-
 .field.field-valid::before {
-    content: "✓";
-    position: absolute;
-    right: 12px;
-    bottom: 14px;
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background: var(--green);
-    color: white;
-    font-size: 12px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: tickIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-    z-index: 2;
-    box-shadow: 0 4px 10px -2px rgba(22, 163, 74, 0.5);
+    content: "✓"; position: absolute; right: 12px; bottom: 14px; width: 20px; height: 20px;
+    border-radius: 50%; background: var(--green); color: white; font-size: 12px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    animation: tickIn 0.35s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; z-index: 2;
+    box-shadow: 0 4px 10px -2px rgba(22,163,74,0.5);
 }
-
 @keyframes tickIn {
     from { transform: scale(0) rotate(-90deg); opacity: 0; }
     to { transform: scale(1) rotate(0); opacity: 1; }
 }
-
 .field.field-invalid input, .field.field-invalid select, .field.field-invalid textarea {
-    border-color: var(--red);
-    background: #fdf1f1;
-    animation: invalidShake 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-color: var(--red); background: #fdf1f1; animation: invalidShake 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .field.field-invalid label { color: var(--red); }
-
 @keyframes invalidShake {
     0%, 100% { transform: translateX(0); }
     20% { transform: translateX(-6px); }
@@ -630,270 +388,112 @@ body {
     60% { transform: translateX(-4px); }
     80% { transform: translateX(4px); }
 }
-
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
 .full { grid-column: 1 / -1; }
 
-/* ═══ NOMINEES ═══ */
 .nominee-card {
-    border: 1.5px solid var(--line);
-    border-radius: 14px;
-    padding: 22px;
-    margin-bottom: 18px;
-    background: linear-gradient(180deg, #fcfafa 0%, #faf6f6 100%);
-    position: relative;
+    border: 1.5px solid var(--line); border-radius: 14px; padding: 22px; margin-bottom: 18px;
+    background: linear-gradient(180deg, #fcfafa 0%, #faf6f6 100%); position: relative;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     animation: nomineeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 @keyframes nomineeIn {
     from { opacity: 0; transform: translateY(16px) scale(0.98); }
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
-
-.nominee-card:hover { box-shadow: 0 12px 28px -16px rgba(90, 0, 0, 0.4); transform: translateY(-1px); }
-
+.nominee-card:hover { box-shadow: 0 12px 28px -16px rgba(90,0,0,0.4); transform: translateY(-1px); }
 .nominee-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
-
-.nominee-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--red);
-    font-family: var(--font-display);
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.nominee-title::before {
-    content: "";
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--red), var(--red-dark));
-    flex-shrink: 0;
-}
-
+.nominee-title { display: flex; align-items: center; gap: 10px; color: var(--red); font-family: var(--font-display); font-size: 15px; font-weight: 700; }
+.nominee-title::before { content: ""; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, var(--red), var(--red-dark)); flex-shrink: 0; }
 .remove-nominee {
-    background: white;
-    color: var(--ink-soft);
-    border: 1.5px solid #d8cfcf;
-    padding: 7px 14px;
-    border-radius: 999px;
-    font-size: 12.5px;
-    font-weight: 700;
-    cursor: pointer;
+    background: white; color: var(--ink-soft); border: 1.5px solid #d8cfcf; padding: 7px 14px;
+    border-radius: 999px; font-size: 12.5px; font-weight: 700; cursor: pointer;
 }
-
 .remove-nominee:hover { background: #f8d7da; color: #842029; border-color: #842029; }
-
 .add-nominee {
-    background: white;
-    color: var(--red);
-    border: 1.5px dashed var(--red);
-    padding: 12px 18px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: all 0.25s ease;
-    width: 100%;
-    font-family: var(--font-body);
-    font-size: 10pt;
+    background: white; color: var(--red); border: 1.5px dashed var(--red); padding: 12px 18px;
+    border-radius: 10px; font-weight: 700; cursor: pointer; margin-bottom: 20px; transition: all 0.25s ease;
+    width: 100%; font-family: var(--font-body); font-size: 10pt;
 }
-
-.add-nominee:hover {
-    background: var(--red-tint);
-    border-style: solid;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 20px -10px rgba(122, 0, 0, 0.5);
-}
-
+.add-nominee:hover { background: var(--red-tint); border-style: solid; transform: translateY(-1px); box-shadow: 0 8px 20px -10px rgba(122,0,0,0.5); }
 .nominee-age { background: #f2ecec !important; color: var(--ink-soft); }
 
-/* ═══ DECLARATION ═══ */
 .declaration {
-    border: 1.5px solid var(--line);
-    border-radius: 12px;
-    padding: 16px 17px;
-    margin-bottom: 12px;
-    background: #fcfafa;
-    transition: all 0.25s ease;
-    cursor: pointer;
-    scroll-margin-top: 110px;
+    border: 1.5px solid var(--line); border-radius: 12px; padding: 16px 17px; margin-bottom: 12px;
+    background: #fcfafa; transition: all 0.25s ease; cursor: pointer; scroll-margin-top: 110px;
 }
-
 .declaration:hover { border-color: #c7abab; transform: translateX(2px); }
-
 .declaration:has(input:checked) {
-    border-color: var(--red);
-    background: var(--red-tint);
-    box-shadow: 0 0 0 3px var(--red-tint-2);
-    transform: translateX(4px);
+    border-color: var(--red); background: var(--red-tint); box-shadow: 0 0 0 3px var(--red-tint-2); transform: translateX(4px);
 }
-
-.declaration.declaration-invalid {
-    border-color: var(--red);
-    background: #fdf1f1;
-    animation: invalidShake 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+.declaration.declaration-invalid { border-color: var(--red); background: #fdf1f1; animation: invalidShake 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
 .declaration label { display: flex; align-items: flex-start; gap: 11px; line-height: 1.55; cursor: pointer; }
 .declaration input { margin-top: 3px; flex-shrink: 0; accent-color: var(--red); width: 16px; height: 16px; }
 .declaration-place-date { margin-top: 25px; padding-top: 5px; }
 
-/* ═══ ACTION NOTE (bento) ═══ */
 .action-note {
-    background: linear-gradient(135deg, #fff8e1 0%, #fffbf0 100%);
-    border: 1px solid #f0d98a;
-    border-radius: 14px;
-    padding: 20px 24px;
-    margin-top: 34px;
-    font-size: 9.8pt;
-    line-height: 1.7;
-    color: var(--ink-soft);
+    background: linear-gradient(135deg, #fff8e1 0%, #fffbf0 100%); border: 1px solid #f0d98a;
+    border-radius: 14px; padding: 20px 24px; margin-top: 34px; font-size: 9.8pt; line-height: 1.7; color: var(--ink-soft);
 }
-
-.action-note-title {
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
+.action-note-title { color: var(--ink); font-family: var(--font-display); font-size: 13px; font-weight: 700; margin-bottom: 10px; }
 .action-note ul { margin: 6px 0 0 22px; padding: 0; list-style: none; }
 .action-note li { margin-bottom: 6px; position: relative; padding-left: 4px; }
-.action-note li::before {
-    content: "▸";
-    position: absolute;
-    left: -18px;
-    color: var(--red);
-    font-weight: 800;
-}
+.action-note li::before { content: "▸"; position: absolute; left: -18px; color: var(--red); font-weight: 800; }
 
-/* ═══ BUTTONS ═══ */
-.actions-wrapper {
-    display: flex;
-    gap: 14px;
-    margin-top: 28px;
-    flex-wrap: wrap;
-    align-items: stretch;
-}
-
+.actions-wrapper { display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; align-items: stretch; }
 .secondary-actions { display: flex; gap: 10px; flex-shrink: 0; }
 
 .action-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 24px;
-    border-radius: 14px;
-    border: 1.5px solid rgba(192, 0, 0, 0.18);
-    background: linear-gradient(180deg, #ffffff 0%, #faf6f6 100%);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    overflow: hidden;
+    position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 15px 24px;
+    border-radius: 14px; border: 1.5px solid rgba(192,0,0,0.18);
+    background: linear-gradient(180deg, #ffffff 0%, #faf6f6 100%); color: var(--ink);
+    font-family: var(--font-body); font-size: 13px; font-weight: 700; cursor: pointer; overflow: hidden;
     transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    box-shadow: 0 1px 2px rgba(20, 10, 10, 0.05), 0 6px 18px -10px rgba(122, 0, 0, 0.3);
+    box-shadow: 0 1px 2px rgba(20,10,10,0.05), 0 6px 18px -10px rgba(122,0,0,0.3);
     white-space: nowrap;
 }
-
 .action-btn:hover {
-    transform: translateY(-2px);
-    border-color: rgba(192, 0, 0, 0.4);
-    box-shadow: 0 1px 2px rgba(20, 10, 10, 0.06), 0 14px 30px -12px rgba(122, 0, 0, 0.5);
-    color: var(--red);
+    transform: translateY(-2px); border-color: rgba(192,0,0,0.4);
+    box-shadow: 0 1px 2px rgba(20,10,10,0.06), 0 14px 30px -12px rgba(122,0,0,0.5); color: var(--red);
 }
-
 .action-btn svg { width: 16px; height: 16px; transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 .action-btn:hover svg { transform: scale(1.15) rotate(-8deg); }
 
 .btn-generate {
-    position: relative;
-    flex: 1;
-    min-width: 240px;
-    padding: 18px 32px;
-    border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #c00000 0%, #7a0000 100%);
-    color: white;
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: 0.3px;
-    cursor: pointer;
-    overflow: hidden;
-    isolation: isolate;
-    box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.2) inset,
-        0 -2px 8px rgba(74, 0, 0, 0.5) inset,
-        0 12px 30px -10px rgba(255, 40, 40, 0.8);
+    position: relative; flex: 1; min-width: 240px; padding: 18px 32px; border: none; border-radius: 16px;
+    background: linear-gradient(135deg, #c00000 0%, #7a0000 100%); color: white;
+    font-family: var(--font-body); font-size: 15px; font-weight: 800; letter-spacing: 0.3px;
+    cursor: pointer; overflow: hidden; isolation: isolate;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 -2px 8px rgba(74,0,0,0.5) inset, 0 12px 30px -10px rgba(255,40,40,0.8);
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
     animation: btnBreathe 3.4s ease-in-out infinite;
 }
-
 @keyframes btnBreathe {
     0%, 100% { box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 -2px 8px rgba(74,0,0,0.5) inset, 0 12px 30px -10px rgba(255,40,40,0.8), 0 0 0 0 rgba(255,40,40,0.5); }
     50% { box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 -2px 8px rgba(74,0,0,0.5) inset, 0 18px 42px -10px rgba(255,40,40,1), 0 0 0 10px rgba(255,40,40,0); }
 }
-
-.btn-generate:hover {
-    transform: translateY(-3px) scale(1.01);
-    animation-play-state: paused;
-}
-
+.btn-generate:hover { transform: translateY(-3px) scale(1.01); animation-play-state: paused; }
 .btn-generate .star {
-    position: absolute;
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: white;
-    box-shadow: 0 0 8px white, 0 0 16px rgba(255, 255, 255, 0.9);
-    pointer-events: none;
-    opacity: 0;
+    position: absolute; width: 4px; height: 4px; border-radius: 50%; background: white;
+    box-shadow: 0 0 8px white, 0 0 16px rgba(255,255,255,0.9); pointer-events: none; opacity: 0;
     animation: starOrbit 3.6s ease-in-out infinite;
 }
-
 .btn-generate .star:nth-child(1) { animation-delay: 0s; top: 25%; left: 12%; }
 .btn-generate .star:nth-child(2) { animation-delay: 0.9s; top: 65%; left: 88%; }
 .btn-generate .star:nth-child(3) { animation-delay: 1.8s; top: 15%; left: 80%; }
 .btn-generate .star:nth-child(4) { animation-delay: 2.7s; top: 82%; left: 18%; }
-
 @keyframes starOrbit { 0%, 100% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1.6); } }
-
 .btn-generate::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+    content: ""; position: absolute; inset: 0;
     background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.45) 50%, transparent 70%);
-    transform: translateX(-100%);
-    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateX(-100%); transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 .btn-generate:hover::before { transform: translateX(100%); }
-
-.btn-generate .btn-text {
-    position: relative;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-}
-
+.btn-generate .btn-text { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 12px; }
 .btn-generate svg { width: 18px; height: 18px; transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 .btn-generate:hover svg { transform: translateY(3px); }
 
-/* ═══ STATUS / DRAWER / LOADER / CONFETTI ═══ */
-.status {
-    display: none;
-    margin-top: 18px;
-    padding: 13px 16px;
-    border-radius: 12px;
-    font-weight: 500;
-}
+.status { display: none; margin-top: 18px; padding: 13px 16px; border-radius: 12px; font-weight: 500; }
 .status.success { display: block; background: #e7f6ec; color: #0f5132; border: 1px solid #b6e3c4; }
 .status.error { display: block; background: #fbe9ea; color: #842029; border: 1px solid #f0b8bc; }
 .status.info { display: block; background: #e6f6fb; color: #055160; border: 1px solid #b6e6f2; }
@@ -901,145 +501,58 @@ body {
 .hidden { display: none !important; }
 
 .error-drawer {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(140%);
-    z-index: 9997;
-    width: calc(100% - 32px);
-    max-width: 560px;
-    background: white;
-    border-radius: 18px;
-    box-shadow: 0 2px 6px rgba(20, 10, 10, 0.08), 0 24px 60px -20px rgba(255, 40, 40, 0.7);
-    border: 1.5px solid var(--red-tint-2);
-    overflow: hidden;
-    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: none;
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(140%);
+    z-index: 9997; width: calc(100% - 32px); max-width: 560px; background: white; border-radius: 18px;
+    box-shadow: 0 2px 6px rgba(20,10,10,0.08), 0 24px 60px -20px rgba(255,40,40,0.7);
+    border: 1.5px solid var(--red-tint-2); overflow: hidden;
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;
 }
-
 .error-drawer.visible { transform: translateX(-50%) translateY(0); pointer-events: auto; }
-
 .error-drawer-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 20px;
-    background: linear-gradient(135deg, #fdf1f1 0%, #fff 100%);
-    border-bottom: 1px solid var(--red-tint-2);
+    display: flex; align-items: center; gap: 12px; padding: 16px 20px;
+    background: linear-gradient(135deg, #fdf1f1 0%, #fff 100%); border-bottom: 1px solid var(--red-tint-2);
 }
-
 .error-drawer-icon {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--red), var(--red-dark));
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: 800;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--red), var(--red-dark)); color: white;
+    display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800;
 }
-
 .error-drawer-title { flex: 1; font-family: var(--font-display); font-size: 14px; font-weight: 700; }
 .error-drawer-title small { display: block; font-family: var(--font-body); font-size: 11.5px; font-weight: 500; color: var(--ink-soft); margin-top: 2px; }
-
-.error-drawer-close {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    border: none;
-    background: white;
-    color: var(--ink-soft);
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
+.error-drawer-close { width: 30px; height: 30px; border-radius: 50%; border: none; background: white; color: var(--ink-soft); font-size: 16px; font-weight: 700; cursor: pointer; }
 .error-drawer-body { max-height: 44vh; overflow-y: auto; padding: 8px 0; }
-
 .error-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 20px;
-    cursor: pointer;
-    border: none;
-    background: none;
-    width: 100%;
-    text-align: left;
-    font-family: var(--font-body);
-    font-size: 10pt;
-    color: var(--ink);
-    border-bottom: 1px solid #f5eeee;
+    display: flex; align-items: center; gap: 12px; padding: 12px 20px; cursor: pointer;
+    border: none; background: none; width: 100%; text-align: left;
+    font-family: var(--font-body); font-size: 10pt; color: var(--ink); border-bottom: 1px solid #f5eeee;
 }
-
 .error-item:last-child { border-bottom: none; }
 .error-item:hover { background: var(--red-tint); }
-
 .error-item-num {
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    background: var(--red-tint-2);
-    color: var(--red);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 800;
-    font-family: var(--font-mono);
-    flex-shrink: 0;
+    width: 22px; height: 22px; border-radius: 50%; background: var(--red-tint-2); color: var(--red);
+    display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800;
+    font-family: var(--font-mono); flex-shrink: 0;
 }
-
 .error-item-label { flex: 1; font-weight: 600; }
 .error-item-arrow { color: var(--red); font-size: 16px; opacity: 0.5; }
-
-.error-drawer-footer {
-    padding: 12px 20px;
-    background: #faf6f4;
-    border-top: 1px solid var(--line);
-    display: flex;
-    gap: 10px;
-}
-
+.error-drawer-footer { padding: 12px 20px; background: #faf6f4; border-top: 1px solid var(--line); display: flex; gap: 10px; }
 .error-drawer-btn {
-    flex: 1;
-    padding: 10px 16px;
-    border-radius: 10px;
-    border: 1.5px solid var(--red);
-    background: white;
-    color: var(--red);
-    font-family: var(--font-body);
-    font-size: 11.5px;
-    font-weight: 700;
-    cursor: pointer;
+    flex: 1; padding: 10px 16px; border-radius: 10px; border: 1.5px solid var(--red);
+    background: white; color: var(--red); font-family: var(--font-body); font-size: 11.5px; font-weight: 700; cursor: pointer;
 }
-
 .error-drawer-btn.primary { background: linear-gradient(135deg, var(--red), var(--red-dark)); color: white; border-color: transparent; }
 
 .loader-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: rgba(20, 8, 10, 0.88);
-    backdrop-filter: blur(12px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 26px;
+    position: fixed; inset: 0; z-index: 9999; background: rgba(20,8,10,0.88);
+    backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center;
+    flex-direction: column; gap: 26px;
 }
-
 .loader-overlay.visible { display: flex; }
-
 .lattice { display: grid; grid-template-columns: repeat(3, 14px); gap: 5px; }
-
 .lattice-cell {
-    width: 14px; height: 14px;
-    border-radius: 4px;
-    background: var(--red-bright);
-    opacity: 0.15;
-    animation: latticeWave 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    width: 14px; height: 14px; border-radius: 4px; background: var(--red-bright);
+    opacity: 0.15; animation: latticeWave 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
-
 .lattice-cell:nth-child(1) { animation-delay: 0s; }
 .lattice-cell:nth-child(2) { animation-delay: 0.1s; }
 .lattice-cell:nth-child(3) { animation-delay: 0.2s; }
@@ -1049,50 +562,30 @@ body {
 .lattice-cell:nth-child(7) { animation-delay: 0.6s; }
 .lattice-cell:nth-child(8) { animation-delay: 0.7s; }
 .lattice-cell:nth-child(9) { animation-delay: 0.8s; }
-
 @keyframes latticeWave { 0%, 70%, 100% { opacity: 0.15; transform: scale(1); } 35% { opacity: 1; transform: scale(1.3); } }
-
 .loader-text { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: #fff; }
-.loader-text small { display: block; font-family: var(--font-body); font-weight: 500; font-size: 12px; color: rgba(255, 255, 255, 0.6); margin-top: 4px; }
+.loader-text small { display: block; font-family: var(--font-body); font-weight: 500; font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px; }
 
 .confetti-piece {
-    position: fixed;
-    top: -20px;
-    width: 9px; height: 15px;
-    z-index: 9999;
-    pointer-events: none;
-    animation: confettiFall linear forwards;
-    border-radius: 2px;
+    position: fixed; top: -20px; width: 9px; height: 15px; z-index: 9999;
+    pointer-events: none; animation: confettiFall linear forwards; border-radius: 2px;
 }
-
 @keyframes confettiFall {
     0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
     100% { transform: translateY(105vh) rotate(720deg) scale(0.6); opacity: 0; }
 }
 
-.footer {
-    text-align: center;
-    color: rgba(255, 200, 200, 0.5);
-    font-size: 11px;
-    padding: 20px 0 44px;
-}
-
+.footer { text-align: center; color: rgba(255,200,200,0.5); font-size: 11px; padding: 20px 0 44px; }
 .footer-logo { display: block; height: 34px; width: auto; margin: 0 auto 12px; opacity: 0.95; }
-
 .footer::before {
-    content: "";
-    display: block;
-    width: 46px;
-    height: 3px;
-    margin: 0 auto 16px;
-    border-radius: 3px;
-    background: linear-gradient(90deg, var(--red), var(--red-bright));
+    content: ""; display: block; width: 46px; height: 3px; margin: 0 auto 16px;
+    border-radius: 3px; background: linear-gradient(90deg, var(--red), var(--red-bright));
 }
-
 .privacy-note { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 10.5px; }
 
 @media (max-width: 700px) {
     .hero { padding: 40px 18px 32px; }
+    .hero-title { font-size: clamp(24px, 7.5vw, 40px); }
     .grid { grid-template-columns: 1fr; }
     .full { grid-column: auto; }
     .card-electric { padding: 22px 18px; border-radius: 16px; }
@@ -1100,6 +593,12 @@ body {
     .secondary-actions { width: 100%; }
     .action-btn { flex: 1; justify-content: center; }
     .btn-generate { min-width: 100%; }
+    .nav-progress { padding: 6px 10px; font-size: 10px; }
+    .pill-nav-inner { padding: 6px 10px; }
+    .nav-logo img { height: 28px; }
+    .lang-select { padding: 6px 10px; font-size: 10px; }
+    .error-drawer { bottom: 10px; width: calc(100% - 20px); }
+    .error-drawer-body { max-height: 38vh; }
 }
 </style>
 </head>
@@ -1124,11 +623,11 @@ body {
         </div>
         <select id="languageSelect" class="lang-select" onchange="changeLanguage()">
             <option value="en">EN</option>
-            <option value="te">తెలుగు</option>
-            <option value="kn">ಕನ್ನಡ</option>
-            <option value="ta">தமிழ்</option>
-            <option value="ml">മലയാളം</option>
-            <option value="hi">हिन्दी</option>
+            <option value="te">English + తెలుగు</option>
+            <option value="kn">English + ಕನ್ನಡ</option>
+            <option value="ta">English + தமிழ்</option>
+            <option value="ml">English + മലയാളം</option>
+            <option value="hi">English + हिन्दी</option>
         </select>
     </div>
 </nav>
@@ -1153,9 +652,18 @@ body {
 <div class="how">
     <div class="how-title" data-split="chars" data-delay="40" data-i18n="howTitle">How this works</div>
     <div class="how-steps">
-        <div class="how-step" data-step="1"><strong>Fill the form</strong><span class="step-desc">Enter your personal, KYC and nominee details.</span></div>
-        <div class="how-step" data-step="2"><strong>Generate PDF</strong><span class="step-desc">Download your pre-filled 9-page pack.</span></div>
-        <div class="how-step" data-step="3"><strong>Sign &amp; submit</strong><span class="step-desc">Print &amp; sign, or eSign via DigiLocker, then send it back.</span></div>
+        <div class="how-step" data-step="1">
+            <strong data-i18n="step1Title">Fill the form</strong>
+            <span class="step-desc" data-i18n="step1Desc">Enter your personal, KYC and nominee details.</span>
+        </div>
+        <div class="how-step" data-step="2">
+            <strong data-i18n="step2Title">Generate PDF</strong>
+            <span class="step-desc" data-i18n="step2Desc">Download your pre-filled 9-page pack.</span>
+        </div>
+        <div class="how-step" data-step="3">
+            <strong data-i18n="step3Title">Sign &amp; submit</strong>
+            <span class="step-desc" data-i18n="step3Desc">Print &amp; sign, or eSign via DigiLocker, then send it back.</span>
+        </div>
     </div>
 </div>
 
@@ -1167,28 +675,28 @@ body {
     <div class="field"><label><span data-i18n="fatherName">Father's Name</span> <span class="required">*</span></label><input type="text" id="fatherName" required></div>
     <div class="field"><label><span data-i18n="spouseName">Spouse's Name</span> <span id="spouseRequired" class="required">*</span></label><input type="text" id="spouseName"></div>
     <div class="field"><label><span data-i18n="dob">Date of Birth as per Aadhaar</span> <span class="required">*</span></label><input type="date" id="dob" required></div>
-    <div class="field"><label><span data-i18n="gender">Gender</span> <span class="required">*</span></label><select id="gender" required><option value="">Select</option><option>Male</option><option>Female</option><option>Transgender</option></select></div>
-    <div class="field"><label><span data-i18n="maritalStatus">Marital Status</span> <span class="required">*</span></label><select id="maritalStatus" onchange="maritalStatusChanged()" required><option value="">Select</option><option>Married</option><option>Unmarried</option><option>Widow</option><option>Widower</option><option>Divorcee</option></select></div>
+    <div class="field"><label><span data-i18n="gender">Gender</span> <span class="required">*</span></label><select id="gender" required><option value="" data-i18n="selectOption">Select</option><option>Male</option><option>Female</option><option>Transgender</option></select></div>
+    <div class="field"><label><span data-i18n="maritalStatus">Marital Status</span> <span class="required">*</span></label><select id="maritalStatus" onchange="maritalStatusChanged()" required><option value="" data-i18n="selectOption">Select</option><option>Married</option><option>Unmarried</option><option>Widow</option><option>Widower</option><option>Divorcee</option></select></div>
     <div class="field"><label><span data-i18n="religion">Religion</span> <span class="required">*</span></label><input type="text" id="religion" required></div>
     <div class="field"><label><span data-i18n="email">Email ID</span> <span class="required">*</span></label><input type="email" id="email" required></div>
     <div class="field"><label><span data-i18n="mobile">Mobile Number</span> <span class="required">*</span></label><input type="text" id="mobile" inputmode="numeric" maxlength="10" oninput="digitsOnly(this)" required></div>
     <div class="field"><label><span data-i18n="doj">Date of Joining (DOJ)</span> <span class="required">*</span></label><input type="date" id="doj" required></div>
-    <div class="field"><label><span data-i18n="employmentStatus">Employment Status</span> <span class="required">*</span></label><select id="employmentStatus" onchange="employmentChanged()" required><option value="">Select</option><option>Fresher</option><option>Experienced</option></select></div>
-    <div class="field"><label><span data-i18n="internationalWorker">International Worker</span> <span class="required">*</span></label><select id="internationalWorker" required><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+    <div class="field"><label><span data-i18n="employmentStatus">Employment Status</span> <span class="required">*</span></label><select id="employmentStatus" onchange="employmentChanged()" required><option value="" data-i18n="selectOption">Select</option><option>Fresher</option><option>Experienced</option></select></div>
+    <div class="field"><label><span data-i18n="internationalWorker">International Worker</span> <span class="required">*</span></label><select id="internationalWorker" required><option value="" data-i18n="selectOption">Select</option><option>Yes</option><option>No</option></select></div>
 </div>
 
 <div id="previousEmployment" class="hidden">
-    <h2 class="section-title" data-split="chars" data-delay="35" data-i18n="previousEmployment">Previous Employment Details</h2>
-    <p class="section-subtitle" data-split="words" data-delay="25">These details are required only for experienced employees.</p>
+    <h2 class="section-title" data-split="chars" data-delay="35" data-i18n="previousEmploymentTitle">Previous Employment Details</h2>
+    <p class="section-subtitle" data-split="words" data-delay="25" data-i18n="previousEmploymentSubtitle">These details are required only for experienced employees.</p>
     <div class="grid">
-        <div class="field"><label>Previous Company Name <span class="required">*</span></label><input type="text" id="previousCompany"></div>
-        <div class="field"><label>Previous DOJ <span class="required">*</span></label><input type="date" id="previousDOJ"></div>
-        <div class="field"><label>Previous DOE <span class="required">*</span></label><input type="date" id="previousDOE"></div>
+        <div class="field"><label><span data-i18n="previousCompany">Previous Company Name</span> <span class="required">*</span></label><input type="text" id="previousCompany"></div>
+        <div class="field"><label><span data-i18n="previousDOJ">Previous DOJ</span> <span class="required">*</span></label><input type="date" id="previousDOJ"></div>
+        <div class="field"><label><span data-i18n="previousDOE">Previous DOE</span> <span class="required">*</span></label><input type="date" id="previousDOE"></div>
     </div>
 </div>
 
 <h2 class="section-title" id="kyc" data-split="chars" data-delay="35" data-i18n="kycTitle">KYC / Bank Details</h2>
-<p class="section-subtitle" data-split="words" data-delay="25">Enter your KYC and bank information carefully.</p>
+<p class="section-subtitle" data-split="words" data-delay="25" data-i18n="kycSubtitle">Enter your KYC and bank information carefully.</p>
 <div class="grid">
     <div class="field"><label><span data-i18n="bankAccount">Bank Account Number</span> <span class="required">*</span></label><input type="text" id="bankAccount" inputmode="numeric" oninput="digitsOnly(this)" required></div>
     <div class="field"><label><span data-i18n="ifsc">IFSC Code</span> <span class="required">*</span></label><input type="text" id="ifsc" maxlength="11" required></div>
@@ -1198,41 +706,41 @@ body {
 
 <h2 class="section-title" data-split="chars" data-delay="35" data-i18n="pfTitle">EPF / EPS / UAN Details</h2>
 <div class="grid">
-    <div class="field"><label>Whether earlier a member of EPF Scheme, 1952 <span class="required">*</span></label><select id="epfMember" required><option value="">Select</option><option>Yes</option><option>No</option></select></div>
-    <div class="field"><label>Whether earlier a member of EPS, 1995 <span class="required">*</span></label><select id="epsMember" required><option value="">Select</option><option>Yes</option><option>No</option></select></div>
-    <div class="field"><label>Universal Account Number (UAN) <span class="required">*</span></label><input type="text" id="uan" inputmode="numeric" maxlength="12" oninput="digitsOnly(this)" required></div>
-    <div class="field"><label>Withdrawn Previous EPF Fund <span class="required">*</span></label><select id="withdrawEPF" required><option value="">Select</option><option>Yes</option><option>No</option></select></div>
-    <div class="field"><label>Withdrawn Previous EPS Fund <span class="required">*</span></label><select id="withdrawEPS" required><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+    <div class="field"><label><span data-i18n="epfMember">Whether earlier a member of EPF Scheme, 1952</span> <span class="required">*</span></label><select id="epfMember" required><option value="" data-i18n="selectOption">Select</option><option>Yes</option><option>No</option></select></div>
+    <div class="field"><label><span data-i18n="epsMember">Whether earlier a member of EPS, 1995</span> <span class="required">*</span></label><select id="epsMember" required><option value="" data-i18n="selectOption">Select</option><option>Yes</option><option>No</option></select></div>
+    <div class="field"><label><span data-i18n="uan">Universal Account Number (UAN)</span> <span class="required">*</span></label><input type="text" id="uan" inputmode="numeric" maxlength="12" oninput="digitsOnly(this)" required></div>
+    <div class="field"><label><span data-i18n="withdrawEPF">Withdrawn Previous EPF Fund</span> <span class="required">*</span></label><select id="withdrawEPF" required><option value="" data-i18n="selectOption">Select</option><option>Yes</option><option>No</option></select></div>
+    <div class="field"><label><span data-i18n="withdrawEPS">Withdrawn Previous EPS Fund</span> <span class="required">*</span></label><select id="withdrawEPS" required><option value="" data-i18n="selectOption">Select</option><option>Yes</option><option>No</option></select></div>
 </div>
 
 <h2 class="section-title" data-split="chars" data-delay="35" data-i18n="addressTitle">Permanent Address</h2>
 <div class="grid">
-    <div class="field full"><label>Permanent Address <span class="required">*</span></label><textarea id="permanentAddress" required></textarea></div>
-    <div class="field"><label>City <span class="required">*</span></label><input type="text" id="city" required></div>
-    <div class="field"><label>District <span class="required">*</span></label><input type="text" id="district" required></div>
-    <div class="field"><label>State <span class="required">*</span></label><input type="text" id="state" required></div>
-    <div class="field"><label>Pincode <span class="required">*</span></label><input type="text" id="pincode" inputmode="numeric" maxlength="6" oninput="digitsOnly(this)" required></div>
+    <div class="field full"><label><span data-i18n="permanentAddress">Permanent Address</span> <span class="required">*</span></label><textarea id="permanentAddress" required></textarea></div>
+    <div class="field"><label><span data-i18n="city">City</span> <span class="required">*</span></label><input type="text" id="city" required></div>
+    <div class="field"><label><span data-i18n="district">District</span> <span class="required">*</span></label><input type="text" id="district" required></div>
+    <div class="field"><label><span data-i18n="state">State</span> <span class="required">*</span></label><input type="text" id="state" required></div>
+    <div class="field"><label><span data-i18n="pincode">Pincode</span> <span class="required">*</span></label><input type="text" id="pincode" inputmode="numeric" maxlength="6" oninput="digitsOnly(this)" required></div>
 </div>
 
 <h2 class="section-title" id="nominee" data-split="chars" data-delay="35" data-i18n="nomineeTitle">Nominee Details</h2>
-<p class="section-subtitle" data-split="words" data-delay="25">Maximum 4 nominees. The total share of all nominees must equal 100%.</p>
+<p class="section-subtitle" data-split="words" data-delay="25" data-i18n="nomineeSubtitle">Maximum 4 nominees. The total share of all nominees must equal 100%.</p>
 <div id="nomineeContainer"></div>
-<button type="button" class="add-nominee" id="addNomineeButton" onclick="addNominee()">+ Add Nominee</button>
+<button type="button" class="add-nominee" id="addNomineeButton" onclick="addNominee()" data-i18n="addNominee">+ Add Nominee</button>
 
 <h2 class="section-title" id="declaration" data-split="chars" data-delay="35" data-i18n="declarationTitle">DECLARATION</h2>
-<p class="section-subtitle" data-split="words" data-delay="25">Select only 1 out of 5.</p>
+<p class="section-subtitle" data-split="words" data-delay="25" data-i18n="declarationSubtitle">Select only 1 out of 5.</p>
 
-<div class="declaration" id="decl1"><label><input type="radio" name="declaration" value="1"><span><strong>1.</strong> I hereby certify that the person(s) mentioned is/are a member(s) of my family within the meaning of clause (33) of section 2 of the Code on Social Security, 2020 (36 of 2020).</span></label></div>
-<div class="declaration" id="decl2"><label><input type="radio" name="declaration" value="2"><span><strong>2.</strong> I hereby declare that I have no family within the meaning of clause (33) of section 2 of the said Code.</span></label></div>
-<div class="declaration" id="decl3a"><label><input type="radio" name="declaration" value="3a"><span><strong>3(a).</strong> My father/mother/parents is/are not dependent on me.</span></label></div>
-<div class="declaration" id="decl3b"><label><input type="radio" name="declaration" value="3b"><span><strong>3(b).</strong> My husband's father/mother/parents is/are not dependent on my husband.</span></label></div>
-<div class="declaration" id="decl4"><label><input type="radio" name="declaration" value="4"><span><strong>4.</strong> I have excluded my husband from my family by a notice dated the __________ to the competent authority in terms of clause (33) of section 2 of the said Code.</span></label></div>
-<div class="declaration" id="decl5"><label><input type="radio" name="declaration" value="5"><span><strong>5.</strong> Nomination made herein invalidates my previous nomination.</span></label></div>
+<div class="declaration" id="decl1"><label><input type="radio" name="declaration" value="1"><span><strong>1.</strong> <span data-i18n="decl1">I hereby certify that the person(s) mentioned is/are a member(s) of my family within the meaning of clause (33) of section 2 of the Code on Social Security, 2020 (36 of 2020).</span></span></label></div>
+<div class="declaration" id="decl2"><label><input type="radio" name="declaration" value="2"><span><strong>2.</strong> <span data-i18n="decl2">I hereby declare that I have no family within the meaning of clause (33) of section 2 of the said Code.</span></span></label></div>
+<div class="declaration" id="decl3a"><label><input type="radio" name="declaration" value="3a"><span><strong>3(a).</strong> <span data-i18n="decl3a">My father/mother/parents is/are not dependent on me.</span></span></label></div>
+<div class="declaration" id="decl3b"><label><input type="radio" name="declaration" value="3b"><span><strong>3(b).</strong> <span data-i18n="decl3b">My husband's father/mother/parents is/are not dependent on my husband.</span></span></label></div>
+<div class="declaration" id="decl4"><label><input type="radio" name="declaration" value="4"><span><strong>4.</strong> <span data-i18n="decl4">I have excluded my husband from my family by a notice dated the __________ to the competent authority in terms of clause (33) of section 2 of the said Code.</span></span></label></div>
+<div class="declaration" id="decl5"><label><input type="radio" name="declaration" value="5"><span><strong>5.</strong> <span data-i18n="decl5">Nomination made herein invalidates my previous nomination.</span></span></label></div>
 
 <div class="declaration-place-date">
     <div class="grid">
-        <div class="field"><label>Place <span class="required">*</span></label><input type="text" id="place" required></div>
-        <div class="field"><label>Date <span class="required">*</span></label><input type="date" id="declarationDate" required></div>
+        <div class="field"><label><span data-i18n="place">Place</span> <span class="required">*</span></label><input type="text" id="place" required></div>
+        <div class="field"><label><span data-i18n="declarationDate">Date</span> <span class="required">*</span></label><input type="date" id="declarationDate" required></div>
     </div>
 </div>
 
@@ -1241,9 +749,9 @@ body {
     <div class="bento-border-glow" aria-hidden="true"></div>
     <div class="action-note-title" data-split="chars" data-delay="25" data-i18n="actionNoteTitle">What happens after you click Generate PDF</div>
     <ul data-split="lines" data-delay="120" data-start="100">
-        <li>Your pre-filled 9-page onboarding pack downloads as a PDF.</li>
-        <li>Print it and sign in ink, <em>or</em> upload the PDF to DigiLocker and use their free eSign.</li>
-        <li>Send the signed copy back to Team Red by email or WhatsApp.</li>
+        <li data-i18n="actionNote1">Your pre-filled 9-page onboarding pack downloads as a PDF.</li>
+        <li data-i18n="actionNote2">Print it and sign in ink, or upload the PDF to DigiLocker and use their free eSign.</li>
+        <li data-i18n="actionNote3">Send the signed copy back to Team Red by email or WhatsApp.</li>
     </ul>
 </div>
 
@@ -1251,18 +759,18 @@ body {
     <div class="secondary-actions">
         <button type="button" class="action-btn" onclick="saveDraft()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-            Save
+            <span data-i18n="saveBtn">Save</span>
         </button>
         <button type="button" class="action-btn" onclick="clearAllInputs()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
-            Clear
+            <span data-i18n="clearBtn">Clear</span>
         </button>
     </div>
     <button type="button" class="btn-generate" id="btnGenerate" onclick="generatePDF()">
         <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
         <span class="btn-text">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Generate Final PDF
+            <span data-i18n="generateBtn">Generate Final PDF</span>
         </span>
     </button>
 </div>
@@ -1314,13 +822,15 @@ function getDraftKey() {
     return DRAFT_NAMESPACE + ":" + sid;
 }
 
+/* Detect regional characters — used to pick split mode */
+function hasNonAscii(text) { return /[^\x00-\x7F]/.test(text); }
+
 /* SPLIT FLAP */
 function splitElement(el) {
     const mode = el.dataset.split;
     const delay = parseInt(el.dataset.delay || "40", 10);
     const start = parseInt(el.dataset.start || "0", 10);
 
-    /* ─── LINES MODE: children ARE the content, do NOT wipe them ─── */
     if (mode === "lines") {
         Array.from(el.children).forEach(function (li, i) {
             li.classList.add("split-line");
@@ -1336,36 +846,32 @@ function splitElement(el) {
         return;
     }
 
-    /* ─── CHARS / WORDS MODE: wipe and rebuild from text ─── */
     const text = (el.textContent || "").replace(/\s+/g, " ").trim();
     if (!text) return;
 
     el.setAttribute("aria-label", text);
     el.textContent = "";
 
-    if (mode === "chars") {
+    // If regional text present, always use word-split (chars-split would break complex scripts)
+    const forceWords = hasNonAscii(text);
+
+    if (mode === "chars" && !forceWords) {
         const wrap = document.createElement("span");
         wrap.className = "split-chars";
         for (let i = 0; i < text.length; i++) {
             const ch = text[i];
             const s = document.createElement("span");
             s.className = "split-char";
-            if (ch === " ") {
-                s.setAttribute("data-space", "1");
-                s.innerHTML = "&nbsp;";
-            } else {
-                s.textContent = ch;
-            }
+            if (ch === " ") { s.setAttribute("data-space", "1"); s.innerHTML = "&nbsp;"; }
+            else s.textContent = ch;
             s.style.animationDelay = (start + i * delay) + "ms";
             wrap.appendChild(s);
         }
         el.appendChild(wrap);
         requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-                wrap.classList.add("animate");
-            });
+            requestAnimationFrame(function () { wrap.classList.add("animate"); });
         });
-    } else if (mode === "words") {
+    } else {
         const wrap = document.createElement("span");
         wrap.className = "split-words";
         const words = text.split(" ");
@@ -1379,9 +885,7 @@ function splitElement(el) {
         });
         el.appendChild(wrap);
         requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-                wrap.classList.add("animate");
-            });
+            requestAnimationFrame(function () { wrap.classList.add("animate"); });
         });
     }
 
@@ -1465,819 +969,320 @@ function spawnBentoRipple(box, x, y) {
     setTimeout(() => r.remove(), 1100);
 }
 
-/* TRANSLATIONS */
+/* ═══════════════════════════════════════════════════════════
+   TRANSLATIONS — English / Regional
+═══════════════════════════════════════════════════════════ */
 const translations = {
-    te: { welcomeTitle: "టీమ్ రెడ్కు స్వాగతం", welcomeText: "దయచేసి మీ అన్ని వివరాలను జాగ్రత్తగా నమోదు చేయండి.", howTitle: "ఇది ఎలా పనిచేస్తుంది", personalTitle: "వ్యక్తిగత వివరాలు", actionNoteTitle: "Generate PDF క్లిక్ చేసిన తర్వాత ఏమి జరుగుతుంది", personalSubtitle: "మీ అధికారిక పత్రాల ప్రకారం సమాచారాన్ని అందించండి.", name: "Name as per Aadhaar / ఆధార్ ప్రకారం పేరు", fatherName: "Father's Name / తండ్రి పేరు", spouseName: "Spouse's Name", dob: "Date of Birth", gender: "Gender", maritalStatus: "Marital Status", religion: "Religion", email: "Email ID", mobile: "Mobile Number", doj: "Date of Joining", employmentStatus: "Employment Status", internationalWorker: "International Worker", previousEmployment: "Previous Employment Details", bankAccount: "Bank Account Number", ifsc: "IFSC Code", aadhaar: "Aadhaar Number", pan: "PAN Number", pfTitle: "EPF / EPS / UAN Details", addressTitle: "Permanent Address", nomineeTitle: "Nominee Details", declarationTitle: "DECLARATION", place: "Place", declarationDate: "Date" },
-    kn: { welcomeTitle: "ಟೀಮ್ ರೆಡ್‌ಗೆ ಸ್ವಾಗತ", welcomeText: "ದಯವಿಟ್ಟು ಎಲ್ಲಾ ವಿವರಗಳನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ನಮೂದಿಸಿ.", howTitle: "ಇದು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ", personalTitle: "ವೈಯಕ್ತಿಕ ವಿವರಗಳು", actionNoteTitle: "Generate PDF ಕ್ಲಿಕ್ ಮಾಡಿದ ನಂತರ ಏನಾಗುತ್ತದೆ", personalSubtitle: "ಅಧಿಕೃತ ದಾಖಲೆಗಳ ಪ್ರಕಾರ ಮಾಹಿತಿ ಒದಗಿಸಿ.", name: "Name as per Aadhaar / ಆಧಾರ್ ಪ್ರಕಾರ ಹೆಸರು", fatherName: "Father's Name", spouseName: "Spouse's Name", dob: "Date of Birth", gender: "Gender", maritalStatus: "Marital Status", religion: "Religion", email: "Email ID", mobile: "Mobile Number", doj: "Date of Joining", employmentStatus: "Employment Status", internationalWorker: "International Worker", previousEmployment: "Previous Employment Details", bankAccount: "Bank Account Number", ifsc: "IFSC Code", aadhaar: "Aadhaar Number", pan: "PAN Number", pfTitle: "EPF / EPS / UAN Details", addressTitle: "Permanent Address", nomineeTitle: "Nominee Details", declarationTitle: "DECLARATION", place: "Place", declarationDate: "Date" },
-    ta: { welcomeTitle: "டீம் ரெட்-க்கு வரவேற்கிறோம்", welcomeText: "உங்கள் அனைத்து விவரங்களையும் கவனமாக உள்ளிடவும்.", howTitle: "இது எவ்வாறு செயல்படுகிறது", personalTitle: "தனிப்பட்ட விவரங்கள்", actionNoteTitle: "Generate PDF என்பதைக் கிளிக் செய்த பிறகு என்ன நடக்கும்", personalSubtitle: "ஆவணங்களின்படி தகவல்களை வழங்கவும்.", name: "Name as per Aadhaar / ஆதார் படி பெயர்", fatherName: "Father's Name", spouseName: "Spouse's Name", dob: "Date of Birth", gender: "Gender", maritalStatus: "Marital Status", religion: "Religion", email: "Email ID", mobile: "Mobile Number", doj: "Date of Joining", employmentStatus: "Employment Status", internationalWorker: "International Worker", previousEmployment: "Previous Employment Details", bankAccount: "Bank Account Number", ifsc: "IFSC Code", aadhaar: "Aadhaar Number", pan: "PAN Number", pfTitle: "EPF / EPS / UAN Details", addressTitle: "Permanent Address", nomineeTitle: "Nominee Details", declarationTitle: "DECLARATION", place: "Place", declarationDate: "Date" },
-    ml: { welcomeTitle: "ടീം റെഡിലേക്ക് സ്വാഗതം", welcomeText: "എല്ലാ വിവരങ്ങളും ശ്രദ്ധാപൂർവ്വം നൽകുക.", howTitle: "ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു", personalTitle: "വ്യക്തിഗത വിവരങ്ങൾ", actionNoteTitle: "Generate PDF ക്ലിക്ക് ചെയ്തതിന് ശേഷം എന്ത് സംഭവിക്കും", personalSubtitle: "ഔദ്യോഗിക രേഖകൾ പ്രകാരം വിവരങ്ങൾ നൽകുക.", name: "Name as per Aadhaar / ആധാർ പ്രകാരമുള്ള പേര്", fatherName: "Father's Name", spouseName: "Spouse's Name", dob: "Date of Birth", gender: "Gender", maritalStatus: "Marital Status", religion: "Religion", email: "Email ID", mobile: "Mobile Number", doj: "Date of Joining", employmentStatus: "Employment Status", internationalWorker: "International Worker", previousEmployment: "Previous Employment Details", bankAccount: "Bank Account Number", ifsc: "IFSC Code", aadhaar: "Aadhaar Number", pan: "PAN Number", pfTitle: "EPF / EPS / UAN Details", addressTitle: "Permanent Address", nomineeTitle: "Nominee Details", declarationTitle: "DECLARATION", place: "Place", declarationDate: "Date" },
-    hi: { welcomeTitle: "टीम रेड में आपका स्वागत है", welcomeText: "कृपया सभी जानकारी ध्यानपूर्वक दर्ज करें।", howTitle: "यह कैसे काम करता है", personalTitle: "व्यक्तिगत विवरण", actionNoteTitle: "Generate PDF पर क्लिक करने के बाद क्या होता है", personalSubtitle: "अपने आधिकारिक दस्तावेज़ों के अनुसार जानकारी प्रदान करें।", name: "Name as per Aadhaar / आधार के अनुसार नाम", fatherName: "Father's Name / पिता का नाम", spouseName: "Spouse's Name", dob: "Date of Birth", gender: "Gender", maritalStatus: "Marital Status", religion: "Religion", email: "Email ID", mobile: "Mobile Number", doj: "Date of Joining", employmentStatus: "Employment Status", internationalWorker: "International Worker", previousEmployment: "Previous Employment Details", bankAccount: "Bank Account Number", ifsc: "IFSC Code", aadhaar: "Aadhaar Number", pan: "PAN Number", pfTitle: "EPF / EPS / UAN Details", addressTitle: "Permanent Address", nomineeTitle: "Nominee Details", declarationTitle: "DECLARATION", place: "Place", declarationDate: "Date" }
-};
-
-function changeLanguage() {
-    const lang = document.getElementById("languageSelect").value;
-    if (lang === "en") { try { saveDraftSilent(); } catch (e) {} location.reload(); return; }
-    const dict = translations[lang];
-    if (!dict) return;
-    document.querySelectorAll("[data-i18n]").forEach(function (el) {
-        const k = el.getAttribute("data-i18n");
-        if (!dict[k]) return;
-        el.textContent = dict[k];
-        if (el.dataset.split) { delete el.dataset.splitDone; splitElement(el); }
-    });
-}
-
-/* MARITAL / EMPLOYMENT */
-function maritalStatusChanged() {
-    const s = document.getElementById("maritalStatus").value;
-    const spouse = document.getElementById("spouseName");
-    const req = document.getElementById("spouseRequired");
-    const m = ["Married","Widow","Widower","Divorcee"].includes(s);
-    spouse.required = m;
-    if (m) req.style.display = "inline";
-    else { req.style.display = "none"; spouse.value = ""; }
-    updateNomineeRelations();
-}
-
-function employmentChanged() {
-    const s = document.getElementById("employmentStatus").value;
-    const box = document.getElementById("previousEmployment");
-    const fields = [document.getElementById("previousCompany"), document.getElementById("previousDOJ"), document.getElementById("previousDOE")];
-    if (s === "Experienced") {
-        box.classList.remove("hidden");
-        fields.forEach(f => f.required = true);
-        box.querySelectorAll("[data-split]").forEach(function (el) { if (!el.dataset.splitDone) splitElement(el); });
-    } else {
-        box.classList.add("hidden");
-        fields.forEach(f => { f.required = false; f.value = ""; });
-    }
-    updateProgress();
-}
-
-/* NOMINEES */
-function relationOptions() {
-    const ms = document.getElementById("maritalStatus").value;
-    let o = `<option value="">Select</option><option value="Father">Father</option><option value="Mother">Mother</option>`;
-    if (["Married","Widow","Widower","Divorcee"].includes(ms)) o += `<option value="Spouse">Spouse</option>`;
-    o += `<option value="Guardian">Guardian</option>`;
-    return o;
-}
-
-function updateNomineeRelations() {
-    for (let i = 1; i <= 4; i++) {
-        const rel = document.getElementById("nominee" + i + "_relation");
-        if (!rel) continue;
-        const cur = rel.value;
-        rel.innerHTML = relationOptions();
-        if (Array.from(rel.options).some(o => o.value === cur)) rel.value = cur;
-    }
-}
-
-function requiredAttr(n) { return n === 1 ? "required" : ""; }
-function requiredMark(n) { return n === 1 ? '<span class="required">*</span>' : ""; }
-
-function addNominee() {
-    if (nomineeCount >= 4) { alert("Maximum 4 nominees are allowed."); return; }
-    nomineeCount++;
-    const n = nomineeCount;
-    const div = document.createElement("div");
-    div.className = "nominee-card";
-    div.id = "nominee-" + n;
-    div.innerHTML = `
-        <div class="nominee-header">
-            <div class="nominee-title">Nominee ${n}</div>
-            ${n > 1 ? `<button type="button" class="remove-nominee" onclick="removeNominee(${n})">Remove</button>` : ""}
-        </div>
-        <div class="grid">
-            <div class="field"><label>Name of Nominee ${requiredMark(n)}</label><input type="text" id="nominee${n}_name" ${requiredAttr(n)}></div>
-            <div class="field"><label>Relation ${requiredMark(n)}</label><select id="nominee${n}_relation" ${requiredAttr(n)}>${relationOptions()}</select></div>
-            <div class="field full"><label>Address ${requiredMark(n)}</label><textarea id="nominee${n}_address" ${requiredAttr(n)}></textarea></div>
-            <div class="field"><label>Aadhaar ${requiredMark(n)}</label><input type="text" id="nominee${n}_aadhaar" inputmode="numeric" maxlength="12" oninput="digitsOnly(this)" ${requiredAttr(n)}></div>
-            <div class="field"><label>DOB ${requiredMark(n)}</label><input type="date" id="nominee${n}_dob" onchange="calculateNomineeAge(${n})" ${requiredAttr(n)}></div>
-            <div class="field"><label>Age ${requiredMark(n)}</label><input type="text" class="nominee-age" id="nominee${n}_age" readonly ${requiredAttr(n)}></div>
-            <div class="field"><label>Percentage ${requiredMark(n)}</label><input type="number" id="nominee${n}_percentage" min="1" max="100" ${requiredAttr(n)}></div>
-        </div>`;
-    document.getElementById("nomineeContainer").appendChild(div);
-    document.getElementById("addNomineeButton").style.display = nomineeCount >= 4 ? "none" : "";
-    attachValidationListeners(div);
-    updateProgress();
-}
-
-function removeNominee(n) {
-    if (n === 1) return;
-    if (!confirm("Remove Nominee " + n + "?")) return;
-    renderNominees(getNominees().filter((_, i) => (i + 1) !== n));
-}
-
-function renderNominees(data) {
-    document.getElementById("nomineeContainer").innerHTML = "";
-    nomineeCount = 0;
-    const list = (Array.isArray(data) && data.length) ? data.slice(0, 4) : [{}];
-    list.forEach(function (ni) {
-        addNominee();
-        const n = nomineeCount;
-        setValue("nominee" + n + "_name", ni.name);
-        setValue("nominee" + n + "_address", ni.address);
-        setValue("nominee" + n + "_relation", ni.relation);
-        setValue("nominee" + n + "_aadhaar", ni.aadhaar);
-        setValue("nominee" + n + "_dob", ni.dob);
-        setValue("nominee" + n + "_percentage", ni.percentage);
-        calculateNomineeAge(n);
-    });
-    updateNomineeRelations();
-    updateProgress();
-}
-
-function calculateNomineeAge(n) {
-    const dob = document.getElementById("nominee" + n + "_dob").value;
-    const ageField = document.getElementById("nominee" + n + "_age");
-    if (!dob) { ageField.value = ""; return; }
-    const bd = new Date(dob + "T00:00:00"), today = new Date();
-    if (bd > today) { ageField.value = ""; return; }
-    let age = today.getFullYear() - bd.getFullYear();
-    const m = today.getMonth() - bd.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < bd.getDate())) age--;
-    ageField.value = age >= 0 ? age : "";
-}
-
-function digitsOnly(i) { i.value = i.value.replace(/\D/g, ""); }
-
-function getNominees() {
-    const out = [];
-    for (let i = 1; i <= nomineeCount; i++) {
-        if (!document.getElementById("nominee-" + i)) continue;
-        out.push({
-            name: document.getElementById("nominee" + i + "_name").value.trim(),
-            address: document.getElementById("nominee" + i + "_address").value.trim(),
-            relation: document.getElementById("nominee" + i + "_relation").value,
-            aadhaar: document.getElementById("nominee" + i + "_aadhaar").value,
-            dob: document.getElementById("nominee" + i + "_dob").value,
-            age: document.getElementById("nominee" + i + "_age").value,
-            percentage: document.getElementById("nominee" + i + "_percentage").value
-        });
-    }
-    return out;
-}
-
-function getFormData() {
-    const dec = document.querySelector('input[name="declaration"]:checked');
-    return {
-        name: document.getElementById("name").value.trim(),
-        fatherName: document.getElementById("fatherName").value.trim(),
-        spouseName: document.getElementById("spouseName").value.trim(),
-        dob: document.getElementById("dob").value,
-        gender: document.getElementById("gender").value,
-        maritalStatus: document.getElementById("maritalStatus").value,
-        religion: document.getElementById("religion").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        mobile: document.getElementById("mobile").value.trim(),
-        doj: document.getElementById("doj").value,
-        employmentStatus: document.getElementById("employmentStatus").value,
-        internationalWorker: document.getElementById("internationalWorker").value,
-        previousCompany: document.getElementById("previousCompany").value.trim(),
-        previousDOJ: document.getElementById("previousDOJ").value,
-        previousDOE: document.getElementById("previousDOE").value,
-        bankAccount: document.getElementById("bankAccount").value.trim(),
-        ifsc: document.getElementById("ifsc").value.trim().toUpperCase(),
-        aadhaar: document.getElementById("aadhaar").value,
-        pan: document.getElementById("pan").value.trim().toUpperCase(),
-        epfMember: document.getElementById("epfMember").value,
-        epsMember: document.getElementById("epsMember").value,
-        uan: document.getElementById("uan").value,
-        withdrawEPF: document.getElementById("withdrawEPF").value,
-        withdrawEPS: document.getElementById("withdrawEPS").value,
-        permanentAddress: document.getElementById("permanentAddress").value.trim(),
-        city: document.getElementById("city").value.trim(),
-        district: document.getElementById("district").value.trim(),
-        state: document.getElementById("state").value.trim(),
-        pincode: document.getElementById("pincode").value,
-        nominees: getNominees(),
-        declaration: dec ? dec.value : "",
-        place: document.getElementById("place").value.trim(),
-        declarationDate: document.getElementById("declarationDate").value,
-        savedAt: new Date().toISOString()
-    };
-}
-
-/* VALIDATION */
-function collectErrors(data) {
-    const errors = [];
-    const req = [
-        ["name","Name",data.name],["fatherName","Father's Name",data.fatherName],
-        ["dob","DOB",data.dob],["gender","Gender",data.gender],["maritalStatus","Marital Status",data.maritalStatus],
-        ["religion","Religion",data.religion],["email","Email",data.email],["mobile","Mobile",data.mobile],
-        ["doj","DOJ",data.doj],["employmentStatus","Employment Status",data.employmentStatus],
-        ["internationalWorker","International Worker",data.internationalWorker],
-        ["bankAccount","Bank Account",data.bankAccount],["ifsc","IFSC",data.ifsc],
-        ["aadhaar","Aadhaar",data.aadhaar],["pan","PAN",data.pan],
-        ["epfMember","EPF membership",data.epfMember],["epsMember","EPS membership",data.epsMember],
-        ["uan","UAN",data.uan],["withdrawEPF","Withdrawn EPF",data.withdrawEPF],["withdrawEPS","Withdrawn EPS",data.withdrawEPS],
-        ["permanentAddress","Address",data.permanentAddress],["city","City",data.city],["district","District",data.district],
-        ["state","State",data.state],["pincode","Pincode",data.pincode],
-        ["place","Place",data.place],["declarationDate","Declaration Date",data.declarationDate]
-    ];
-    req.forEach(([id, label, v]) => { if (!v) errors.push({ fieldId: id, label }); });
-
-    const spouseReq = ["Married","Widow","Widower","Divorcee"].includes(data.maritalStatus);
-    if (spouseReq && !data.spouseName) errors.push({ fieldId: "spouseName", label: "Spouse's Name" });
-
-    if (data.mobile && !/^\d{10}$/.test(data.mobile)) errors.push({ fieldId: "mobile", label: "Mobile (10 digits)" });
-    if (data.aadhaar && !/^\d{12}$/.test(data.aadhaar)) errors.push({ fieldId: "aadhaar", label: "Aadhaar (12 digits)" });
-    if (data.uan && !/^\d{12}$/.test(data.uan)) errors.push({ fieldId: "uan", label: "UAN (12 digits)" });
-    if (data.pincode && !/^\d{6}$/.test(data.pincode)) errors.push({ fieldId: "pincode", label: "Pincode (6 digits)" });
-    if (data.pan && !/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(data.pan)) errors.push({ fieldId: "pan", label: "PAN invalid" });
-    if (data.ifsc && !/^[A-Z]{4}0[A-Z0-9]{6}$/.test(data.ifsc)) errors.push({ fieldId: "ifsc", label: "IFSC invalid" });
-
-    if (data.employmentStatus === "Experienced") {
-        if (!data.previousCompany) errors.push({ fieldId: "previousCompany", label: "Previous Company" });
-        if (!data.previousDOJ) errors.push({ fieldId: "previousDOJ", label: "Previous DOJ" });
-        if (!data.previousDOE) errors.push({ fieldId: "previousDOE", label: "Previous DOE" });
-    }
-
-    const clean = data.nominees.filter((n, i) => i === 0 || !(!n.name && !n.address && !n.relation && !n.aadhaar && !n.dob && !n.percentage));
-    if (clean.length === 0) errors.push({ fieldId: "nominee1_name", label: "At least one Nominee" });
-    else {
-        let total = 0;
-        clean.forEach(function (n, i) {
-            const num = i + 1;
-            if (!n.name) errors.push({ fieldId: "nominee"+num+"_name", label: "Nominee "+num+" Name" });
-            if (!n.address) errors.push({ fieldId: "nominee"+num+"_address", label: "Nominee "+num+" Address" });
-            if (!n.relation) errors.push({ fieldId: "nominee"+num+"_relation", label: "Nominee "+num+" Relation" });
-            if (!n.aadhaar) errors.push({ fieldId: "nominee"+num+"_aadhaar", label: "Nominee "+num+" Aadhaar" });
-            else if (!/^\d{12}$/.test(n.aadhaar)) errors.push({ fieldId: "nominee"+num+"_aadhaar", label: "Nominee "+num+" Aadhaar (12)" });
-            if (!n.dob) errors.push({ fieldId: "nominee"+num+"_dob", label: "Nominee "+num+" DOB" });
-            if (!n.percentage) errors.push({ fieldId: "nominee"+num+"_percentage", label: "Nominee "+num+" %" });
-            total += Number(n.percentage) || 0;
-        });
-        if (total !== 100 && clean.every(n => n.percentage)) errors.push({ fieldId: "nominee1_percentage", label: "Shares must total 100%" });
-    }
-
-    if (!data.declaration) errors.push({ fieldId: "decl1", label: "Declaration" });
-    return errors;
-}
-
-function showErrorDrawer(errors) {
-    missingFields = errors;
-    const drawer = document.getElementById("errorDrawer");
-    const body = document.getElementById("errorDrawerBody");
-    document.getElementById("errorCount").textContent = errors.length === 1 ? "1 field needs attention" : errors.length + " fields need attention";
-    body.innerHTML = "";
-    errors.forEach(function (err, i) {
-        const btn = document.createElement("button");
-        btn.className = "error-item";
-        btn.type = "button";
-        btn.innerHTML = `<span class="error-item-num">${i+1}</span><span class="error-item-label">${err.label}</span><span class="error-item-arrow">→</span>`;
-        btn.addEventListener("click", () => scrollToField(err.fieldId));
-        body.appendChild(btn);
-    });
-    drawer.classList.add("visible");
-    errors.forEach(function (err) {
-        const el = document.getElementById(err.fieldId);
-        if (!el) return;
-        const w = el.closest(".field") || el.closest(".declaration");
-        if (w) {
-            w.classList.remove("field-valid");
-            w.classList.add(w.classList.contains("declaration") ? "declaration-invalid" : "field-invalid");
-        }
-    });
-}
-
-function hideErrorDrawer() { document.getElementById("errorDrawer").classList.remove("visible"); }
-
-function scrollToField(id) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const target = el.closest(".field") || el.closest(".declaration") || el;
-    target.scrollIntoView({ behavior: "smooth", block: "center" });
-    setTimeout(() => { if (el.focus) el.focus({ preventScroll: true }); }, 400);
-}
-
-function focusFirstError() {
-    if (missingFields.length) { scrollToField(missingFields[0].fieldId); hideErrorDrawer(); }
-}
-
-function updateFieldState(field) {
-    if (!field || !field.closest) return;
-    const w = field.closest(".field");
-    if (!w) return;
-    if (field.closest(".hidden")) { w.classList.remove("field-valid", "field-invalid"); return; }
-    const v = (field.value || "").trim();
-    if (v) { w.classList.remove("field-invalid"); w.classList.add("field-valid"); }
-    else if (field.required && field.dataset.touched === "true") { w.classList.add("field-invalid"); w.classList.remove("field-valid"); }
-    else { w.classList.remove("field-valid", "field-invalid"); }
-}
-
-function attachValidationListeners(container) {
-    const scope = container || document;
-    scope.querySelectorAll("input, select, textarea").forEach(function (f) {
-        if (f.dataset.tr === "true") return;
-        f.dataset.tr = "true";
-        f.addEventListener("blur", function () { f.dataset.touched = "true"; updateFieldState(f); });
-        f.addEventListener("input", function () { updateFieldState(f); updateProgress(); });
-        f.addEventListener("change", function () { f.dataset.touched = "true"; updateFieldState(f); updateProgress(); });
-    });
-    scope.querySelectorAll('input[name="declaration"]').forEach(function (r) {
-        if (r.dataset.tr === "true") return;
-        r.dataset.tr = "true";
-        r.addEventListener("change", function () {
-            document.querySelectorAll(".declaration").forEach(d => d.classList.remove("declaration-invalid"));
-            updateProgress();
-        });
-    });
-}
-
-function updateProgress() {
-    const req = Array.from(document.querySelectorAll("input[required], select[required], textarea[required]")).filter(f => !f.closest(".hidden"));
-    const filled = req.filter(f => (f.value || "").trim().length > 0).length;
-    document.getElementById("navProgressText").textContent = filled + " / " + req.length;
-}
-
-/* DRAFT */
-function saveDraftSilent() { try { sessionStorage.setItem(getDraftKey(), JSON.stringify(getFormData())); } catch (e) {} }
-
-function saveDraft() {
-    try {
-        sessionStorage.setItem(getDraftKey(), JSON.stringify(getFormData()));
-        showStatus("Draft saved. It will clear automatically when you close this tab.", "success");
-    } catch (e) { showStatus("Could not save draft.", "error"); }
-}
-
-function loadDraft() {
-    let saved = null;
-    try { saved = sessionStorage.getItem(getDraftKey()); } catch (e) {}
-    if (!saved) { renderNominees(null); return; }
-    try {
-        const d = JSON.parse(saved);
-        ["name","fatherName","spouseName","dob","gender","maritalStatus","religion","email","mobile","doj","employmentStatus","internationalWorker","previousCompany","previousDOJ","previousDOE","bankAccount","ifsc","aadhaar","pan","epfMember","epsMember","uan","withdrawEPF","withdrawEPS","permanentAddress","city","district","state","pincode","place","declarationDate"].forEach(k => setValue(k, d[k]));
-        maritalStatusChanged();
-        employmentChanged();
-        renderNominees(d.nominees);
-        if (d.declaration) { const dec = document.querySelector('input[name="declaration"][value="' + d.declaration + '"]'); if (dec) dec.checked = true; }
-        document.querySelectorAll("input, select, textarea").forEach(updateFieldState);
-        updateProgress();
-    } catch (e) { renderNominees(null); }
-}
-
-function setValue(id, v) { const el = document.getElementById(id); if (el) el.value = v || ""; }
-function showStatus(msg, type) { const b = document.getElementById("status"); b.textContent = msg; b.className = "status " + type; }
-
-/* ═══════════════════════════════════════════════════════════
-   PDF MAPPING
-═══════════════════════════════════════════════════════════ */
-const PDF_MAPPING = {
-    1: [
-        { field: "name", type: "text", x: 180.2890625, y: 659.0494689941406, width: 246, height: 30, canvasWidth: 734, canvasHeight: 950 },
-        { field: "declarationDate", type: "text", x: 198.2890625, y: 758.0494689941406, width: 227, height: 24, canvasWidth: 734, canvasHeight: 950 },
-        { field: "place", type: "text", x: 197.2890625, y: 787.0494689941406, width: 232, height: 25, canvasWidth: 734, canvasHeight: 950 },
-    ],
-    2: [
-        { field: "name", type: "text", x: 388.71875, y: 155.71615600585938, width: 303, height: 37, canvasWidth: 715, canvasHeight: 1010 },
-        { field: "fatherName", type: "text", x: 387.71875, y: 196.71615600585938, width: 304, height: 29, canvasWidth: 715, canvasHeight: 1010 },
-        { field: "spouseName", type: "text", x: 388.71875, y: 231.71615600585938, width: 302, height: 27, canvasWidth: 715, canvasHeight: 1010 },
-        { field: "dob", type: "text", x: 389.71875, y: 266.7161560058594, width: 299, height: 21, canvasWidth: 715, canvasHeight: 1010 },
-        { field: "gender", type: "text", x: 394.71875, y: 294.71614837646484, width: 211, height: 19, canvasWidth: 715, canvasHeight: 1010 },
-        { field: "maritalStatus", type: "text", x: 391.71875, y: 318.71614837646484, width: 225, height: 24, canvasWidth: 715, canvasHeight: 1010 },
-        { field: "email", type: "text", x: 389.71875, y: 348.71614837646484, width: 244, height: 19, canvasWidth: 715, canvasHeight: 1010 },
-        { field: "mobile", type: "text", x: 389.71875, y: 367.71614837646484, width: 244, height: 20, canvasWidth: 715, canvasHeight: 1010 },
-        { field: "doj", type: "text", x: 395.71875, y: 392.71614837646484, width: 256, height: 25, canvasWidth: 715, canvasHeight: 1010 },
-        { field: "name", type: "text", x: 585.5208435058594, y: 657.7161254882812, width: 404, height: 23, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "bankAccount", type: "text", x: 585.5208435058594, y: 683.7161254882812, width: 407, height: 22, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "ifsc", type: "text", x: 586.5208435058594, y: 707.7161254882812, width: 406, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "name", type: "text", x: 585.5208435058594, y: 749.7161254882812, width: 420, height: 25, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "aadhaar", type: "text", x: 585.5208435058594, y: 776.7161254882812, width: 424, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "name", type: "text", x: 586.5208435058594, y: 814.7161254882812, width: 429, height: 26, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "pan", type: "text", x: 591.5208435058594, y: 843.7161254882812, width: 408, height: 34, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "epfMember", type: "checkbox", x: 593.5208435058594, y: 893.7161254882812, width: 46, height: 29, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "epsMember", type: "checkbox", x: 592.5208435058594, y: 933.7161254882812, width: 54, height: 32, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "previousDOJ", type: "text", x: 615.5208435058594, y: 1058.7161254882812, width: 107, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "previousCompany", type: "text", x: 97.52084350585938, y: 1061.7161254882812, width: 159, height: 95, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "uan", type: "text", x: 269.5208435058594, y: 1067.7161254882812, width: 147, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "previousDOE", type: "text", x: 733.5208435058594, y: 1071.7161254882812, width: 101, height: 26, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "internationalWorker", type: "checkbox", x: 586.5208435058594, y: 1369.0494384765625, width: 47, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
-    ],
-    3: [
-        { field: "withdrawEPF", type: "checkbox", x: 590.5208435058594, y: 64.71615600585938, width: 68, height: 36, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "withdrawEPS", type: "checkbox", x: 593.5208435058594, y: 117.71615600585938, width: 72, height: 39, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "declarationDate", type: "text", x: 142.52084350585938, y: 417.7161445617676, width: 245, height: 33, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "place", type: "text", x: 143.52084350585938, y: 463.7161445617676, width: 247, height: 30, canvasWidth: 1072, canvasHeight: 1515 },
-    ],
-    4: [
-        { field: "name", type: "text", x: 349.8828125, y: 266.7161560058594, width: 565, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "bankAccount", type: "text", x: 499.8828125, y: 323.7161560058594, width: 213, height: 22, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "dob", type: "text", x: 263.8828125, y: 324.7161560058594, width: 134, height: 19, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "gender", type: "text", x: 314.8828125, y: 351.7161560058594, width: 155, height: 25, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "maritalStatus", type: "text", x: 575.8828125, y: 356.7161560058594, width: 286, height: 19, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "permanentAddress", type: "text", x: 368.8828125, y: 385.71614837646484, width: 637, height: 49, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee1_relation", type: "text", x: 387.8828125, y: 654.7161407470703, width: 113, height: 28, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee1_name", type: "text", x: 144.8828125, y: 656.7161254882812, width: 135, height: 29, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee1_percentage", type: "text", x: 595.8828125, y: 656.7161445617676, width: 151, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee1_dob", type: "text", x: 504.8828125, y: 657.7161254882812, width: 80, height: 22, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee1_address", type: "text", x: 279.8828125, y: 657.7161407470703, width: 101, height: 74, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee2_relation", type: "text", x: 387.8828125, y: 724.7161254882812, width: 112, height: 28, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee2_dob", type: "text", x: 507.8828125, y: 728.0494689941406, width: 77, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee2_name", type: "text", x: 146.8828125, y: 728.7161254882812, width: 128, height: 24, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee2_percentage", type: "text", x: 594.8828125, y: 728.7161254882812, width: 147, height: 24, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee2_address", type: "text", x: 283.8828125, y: 735.7161407470703, width: 97, height: 93, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee3_relation", type: "text", x: 386.8828125, y: 753.0494689941406, width: 115, height: 27, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee3_name", type: "text", x: 149.8828125, y: 756.7161254882812, width: 125, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee3_dob", type: "text", x: 508.8828125, y: 756.7161407470703, width: 82, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee3_percentage", type: "text", x: 594.8828125, y: 757.7161254882812, width: 150, height: 21, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee4_name", type: "text", x: 145.8828125, y: 798.7161254882812, width: 129, height: 32, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee4_percentage", type: "text", x: 594.8828125, y: 798.7161254882812, width: 152, height: 33, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee4_dob", type: "text", x: 504.8828125, y: 801.7161254882812, width: 81, height: 28, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee4_relation", type: "text", x: 390.8828125, y: 802.7161254882812, width: 113, height: 27, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee1_name", type: "text", x: 213.8828125, y: 1184.7161254882812, width: 305, height: 24, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee1_age", type: "text", x: 522.8828125, y: 1185.0494384765625, width: 87, height: 23, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee1_relation", type: "text", x: 624.8828125, y: 1185.7161254882812, width: 292, height: 23, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee2_relation", type: "text", x: 625.8828125, y: 1208.0494384765625, width: 290, height: 21, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee3_relation", type: "text", x: 627.8828125, y: 1229.0494384765625, width: 289, height: 26, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee4_relation", type: "text", x: 626.8828125, y: 1258.0494384765625, width: 291, height: 25, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee2_name", type: "text", x: 237.08074951171875, y: 1342.7161254882812, width: 338, height: 29, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee2_age", type: "text", x: 580.0807495117188, y: 1344.3828125, width: 96, height: 24, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee3_age", type: "text", x: 583.0807495117188, y: 1369.3828125, width: 97, height: 22, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee3_name", type: "text", x: 237.08074951171875, y: 1372.3828125, width: 334, height: 22, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee4_age", type: "text", x: 582.0807495117188, y: 1394.3828125, width: 98, height: 28, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee4_name", type: "text", x: 236.08074951171875, y: 1396.3828125, width: 338, height: 26, canvasWidth: 1223, canvasHeight: 1583 },
-    ],
-    5: [
-        { field: "nominee1_name", type: "text", x: 152.8828125, y: 321.7161445617676, width: 337, height: 33, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee1_dob", type: "text", x: 500.8828125, y: 323.7161445617676, width: 161, height: 34, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee1_relation", type: "text", x: 667.8828125, y: 323.7161445617676, width: 249, height: 34, canvasWidth: 1101, canvasHeight: 1425 },
-        { field: "nominee2_name", type: "text", x: 171.08074951171875, y: 422.7161445617676, width: 371, height: 35, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee2_dob", type: "text", x: 556.0807495117188, y: 424.7161445617676, width: 176, height: 39, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee2_relation", type: "text", x: 744.0807495117188, y: 426.7161445617676, width: 277, height: 36, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee3_name", type: "text", x: 169.08074951171875, y: 488.7161445617676, width: 371, height: 34, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee3_dob", type: "text", x: 556.0807495117188, y: 492.7161445617676, width: 180, height: 31, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee3_relation", type: "text", x: 749.0807495117188, y: 493.7161445617676, width: 270, height: 34, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee4_name", type: "text", x: 170.08074951171875, y: 557.7161445617676, width: 376, height: 30, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee4_relation", type: "text", x: 749.0807495117188, y: 559.7161445617676, width: 277, height: 34, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "nominee4_dob", type: "text", x: 556.0807495117188, y: 560.7161445617676, width: 179, height: 32, canvasWidth: 1223, canvasHeight: 1583 },
-        { field: "declarationDate", type: "text", x: 205.08074951171875, y: 728.7161254882812, width: 210, height: 30, canvasWidth: 1223, canvasHeight: 1583 },
-    ],
-    6: [
-        { field: "name", type: "text", x: 631.3385620117188, y: 307.71614837646484, width: 282, height: 34, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "fatherName", type: "text", x: 632.3385620117188, y: 350.71614837646484, width: 286, height: 32, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "dob", type: "text", x: 630.3385620117188, y: 387.71614837646484, width: 193, height: 31, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "uan", type: "text", x: 631.3385620117188, y: 429.71614837646484, width: 194, height: 33, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "gender", type: "text", x: 629.3385620117188, y: 467.7161445617676, width: 196, height: 34, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "religion", type: "text", x: 627.3385620117188, y: 507.7161445617676, width: 195, height: 33, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "maritalStatus", type: "text", x: 628.3385620117188, y: 549.7161445617676, width: 197, height: 28, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "doj", type: "text", x: 626.3385620117188, y: 666.7161407470703, width: 198, height: 32, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "permanentAddress", type: "text", x: 627.3385620117188, y: 755.7161254882812, width: 196, height: 133, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "district", type: "text", x: 625.3385620117188, y: 892.7161254882812, width: 201, height: 25, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "state", type: "text", x: 626.3385620117188, y: 921.7161254882812, width: 202, height: 21, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "pincode", type: "text", x: 625.3385620117188, y: 946.7161254882812, width: 205, height: 21, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "email", type: "text", x: 628.3385620117188, y: 972.7161254882812, width: 200, height: 23, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "mobile", type: "text", x: 626.3385620117188, y: 996.7161254882812, width: 204, height: 26, canvasWidth: 952, canvasHeight: 1347 },
-    ],
-    7: [
-        { field: "name", type: "text", x: 279.33856201171875, y: 217.71615600585938, width: 295, height: 25, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "doj", type: "text", x: 734.3385620117188, y: 272.7161560058594, width: 86, height: 22, canvasWidth: 952, canvasHeight: 1347 },
-    ],
-    8: [
-        { field: "nominee1_name", type: "text", x: 116.33856201171875, y: 247.71615600585938, width: 198, height: 24, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee1_relation", type: "text", x: 320.33856201171875, y: 247.71615600585938, width: 133, height: 22, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee1_age", type: "text", x: 456.33856201171875, y: 247.71615600585938, width: 97, height: 25, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee1_aadhaar", type: "text", x: 556.3385620117188, y: 247.71615600585938, width: 139, height: 23, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee1_percentage", type: "text", x: 716.3385620117188, y: 249.71615600585938, width: 174, height: 22, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee2_name", type: "text", x: 115.33856201171875, y: 271.7161560058594, width: 199, height: 22, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee2_aadhaar", type: "text", x: 556.3385620117188, y: 271.7161560058594, width: 141, height: 21, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee2_relation", type: "text", x: 320.33856201171875, y: 272.7161560058594, width: 135, height: 25, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee2_age", type: "text", x: 455.33856201171875, y: 272.7161560058594, width: 98, height: 25, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee2_percentage", type: "text", x: 715.3385620117188, y: 272.7161560058594, width: 178, height: 23, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee3_aadhaar", type: "text", x: 559.3385620117188, y: 294.7161560058594, width: 141, height: 23, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee3_name", type: "text", x: 112.33856201171875, y: 295.7161560058594, width: 203, height: 22, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee3_relation", type: "text", x: 317.33856201171875, y: 295.7161560058594, width: 138, height: 23, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee3_percentage", type: "text", x: 716.3385620117188, y: 296.7161560058594, width: 180, height: 22, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee3_age", type: "text", x: 456.33856201171875, y: 297.7161560058594, width: 98, height: 21, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee4_aadhaar", type: "text", x: 560.3385620117188, y: 315.7161560058594, width: 144, height: 25, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee4_percentage", type: "text", x: 716.3385620117188, y: 316.7161560058594, width: 184, height: 23, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee4_age", type: "text", x: 458.33856201171875, y: 317.7161560058594, width: 99, height: 25, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee4_name", type: "text", x: 111.33856201171875, y: 318.7161560058594, width: 205, height: 25, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "nominee4_relation", type: "text", x: 319.33856201171875, y: 319.7161560058594, width: 138, height: 24, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "declaration", value: "1",  type: "checkbox", x: 31.33856201171875, y: 404.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "declaration", value: "2",  type: "checkbox", x: 31.33856201171875, y: 428.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "declaration", value: "3a", type: "checkbox", x: 31.33856201171875, y: 452.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "declaration", value: "3b", type: "checkbox", x: 31.33856201171875, y: 476.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "declaration", value: "4",  type: "checkbox", x: 31.33856201171875, y: 500.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "declaration", value: "5",  type: "checkbox", x: 31.33856201171875, y: 524.71614837646484, width: 47, height: 32, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "place", type: "text", x: 104.33856201171875, y: 884.7161254882812, width: 166, height: 31, canvasWidth: 952, canvasHeight: 1347 },
-        { field: "declarationDate", type: "text", x: 105.33856201171875, y: 919.7161254882812, width: 165, height: 28, canvasWidth: 952, canvasHeight: 1347 },
-    ],
-    9: [
-        { field: "declarationDate", type: "text", x: 143.33856201171875, y: 289.7161560058594, width: 206, height: 32, canvasWidth: 952, canvasHeight: 1347 },
-    ],
-};
-
-/* ═══════════════════════════════════════════════════════════
-   PDF HELPERS
-═══════════════════════════════════════════════════════════ */
-
-function formatDateForPDF(value) {
-    if (!value) return "";
-    const p = value.split("-");
-    return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : value;
-}
-
-function resolvePDFValue(field, data) {
-    const values = {
-        name: data.name, fatherName: data.fatherName, spouseName: data.spouseName,
-        dob: formatDateForPDF(data.dob), gender: data.gender,
-        maritalStatus: data.maritalStatus, religion: data.religion,
-        email: data.email, mobile: data.mobile, doj: formatDateForPDF(data.doj),
-        employmentStatus: data.employmentStatus, internationalWorker: data.internationalWorker,
-        previousCompany: data.previousCompany,
-        previousDOJ: formatDateForPDF(data.previousDOJ),
-        previousDOE: formatDateForPDF(data.previousDOE),
-        bankAccount: data.bankAccount, ifsc: data.ifsc,
-        aadhaar: data.aadhaar, pan: data.pan,
-        epfMember: data.epfMember, epsMember: data.epsMember, uan: data.uan,
-        withdrawEPF: data.withdrawEPF, withdrawEPS: data.withdrawEPS,
-        permanentAddress: data.permanentAddress, city: data.city,
-        district: data.district, state: data.state, pincode: data.pincode,
-        place: data.place, declaration: data.declaration,
-        declarationDate: formatDateForPDF(data.declarationDate)
-    };
-
-    const nomineeMatch = field.match(/^nominee([1-4])_(name|address|relation|aadhaar|dob|age|percentage)$/);
-    if (nomineeMatch) {
-        const nominee = data.nominees[Number(nomineeMatch[1]) - 1];
-        if (!nominee) return "";
-        if (nomineeMatch[2] === "dob") return formatDateForPDF(nominee.dob);
-        return nominee[nomineeMatch[2]] || "";
-    }
-
-    return values[field] || "";
-}
-
-function isCheckboxChecked(mapping, rawValue) {
-    if (mapping.field === "declaration") {
-        if (mapping.value) return String(rawValue) === String(mapping.value);
-        return Boolean(rawValue);
-    }
-    return String(rawValue).trim().toLowerCase() === "yes";
-}
-
-const YES_NO_WORD_FIELDS = new Set([
-    "internationalWorker", "epfMember", "epsMember", "withdrawEPF", "withdrawEPS"
-]);
-
-function wrapTextToWidth(text, font, fontSize, maxWidth) {
-    const words = String(text).split(/\s+/).filter(Boolean);
-    const lines = [];
-    let current = "";
-    for (const word of words) {
-        const candidate = current ? current + " " + word : word;
-        if (font.widthOfTextAtSize(candidate, fontSize) <= maxWidth || !current) {
-            current = candidate;
-        } else {
-            lines.push(current);
-            current = word;
-        }
-    }
-    if (current) lines.push(current);
-    return lines.length ? lines : [""];
-}
-
-function drawTextInBox(page, font, text, box, baseSize) {
-    const MIN_FONT_SIZE = 6;
-    const BOTTOM_PADDING = 2;
-    let fontSize = baseSize || 9;
-    let lineHeight = fontSize * 1.15;
-    let lines = wrapTextToWidth(String(text), font, fontSize, box.width);
-
-    while (box.height > 0 && lines.length * lineHeight > box.height && fontSize > MIN_FONT_SIZE) {
-        fontSize -= 0.5;
-        lineHeight = fontSize * 1.15;
-        lines = wrapTextToWidth(String(text), font, fontSize, box.width);
-    }
-
-    const lastBaselineY = box.bottomY + BOTTOM_PADDING;
-    let cursorY = lastBaselineY + (lines.length - 1) * lineHeight;
-    for (const line of lines) {
-        if (cursorY > box.topY + lineHeight) { cursorY -= lineHeight; continue; }
-        page.drawText(line, {
-            x: box.x, y: cursorY, size: fontSize, font: font,
-            color: PDFLib.rgb(0, 0, 0)
-        });
-        cursorY -= lineHeight;
-    }
-}
-
-function drawCheckmark(page, box) {
-    const size = Math.max(6, Math.min(box.width, box.height) * 0.8);
-    const cx = box.x + (box.width - size) / 2;
-    const cy = box.bottomY + (box.height - size) / 2;
-    const p0 = { x: cx + size * 0.05, y: cy + size * 0.45 };
-    const p1 = { x: cx + size * 0.40, y: cy + size * 0.08 };
-    const p2 = { x: cx + size * 0.95, y: cy + size * 0.85 };
-    const thickness = Math.max(1.3, size * 0.14);
-    page.drawLine({ start: p0, end: p1, thickness: thickness, color: PDFLib.rgb(0, 0, 0) });
-    page.drawLine({ start: p1, end: p2, thickness: thickness, color: PDFLib.rgb(0, 0, 0) });
-}
-
-async function applyPDFMapping(pdfDoc, data) {
-    const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
-    const pages = pdfDoc.getPages();
-
-    for (let pageNumber = 1; pageNumber <= 9; pageNumber++) {
-        const mappings = PDF_MAPPING[pageNumber] || [];
-        if (!mappings.length) continue;
-
-        const page = pages[pageNumber - 1];
-        const pageWidth = page.getWidth();
-        const pageHeight = page.getHeight();
-
-        for (const mapping of mappings) {
-            const scaleX = pageWidth / mapping.canvasWidth;
-            const scaleY = pageHeight / mapping.canvasHeight;
-            const boxX = mapping.x * scaleX;
-            const boxWidth = mapping.width * scaleX;
-            const boxHeight = mapping.height * scaleY;
-            const boxTopY = pageHeight - (mapping.y * scaleY);
-            const boxBottomY = pageHeight - ((mapping.y + mapping.height) * scaleY);
-
-            const box = { x: boxX, topY: boxTopY, bottomY: boxBottomY, width: boxWidth, height: boxHeight };
-            const rawValue = resolvePDFValue(mapping.field, data);
-
-            if (mapping.type === "checkbox") {
-                if (YES_NO_WORD_FIELDS.has(mapping.field)) {
-                    if (!rawValue) continue;
-                    drawTextInBox(page, font, rawValue, box, mapping.size);
-                    continue;
-                }
-                if (!isCheckboxChecked(mapping, rawValue)) continue;
-                drawCheckmark(page, box);
-                continue;
-            }
-
-            if (!rawValue) continue;
-            drawTextInBox(page, font, rawValue, box, mapping.size);
-        }
-    }
-}
-/* GENERATE PDF */
-async function generatePDF() {
-    const data = getFormData();
-    const errors = collectErrors(data);
-    if (errors.length > 0) { showErrorDrawer(errors); setTimeout(() => scrollToField(errors[0].fieldId), 250); return; }
-    hideErrorDrawer();
-    saveDraftSilent();
-    document.getElementById("loaderOverlay").classList.add("visible");
-    try {
-        let response;
-        try { response = await fetch(encodeURI(PDF_FILE_NAME), { cache: "no-store" }); }
-        catch (e) { throw new Error("Could not load the PDF template."); }
-        if (!response.ok) throw new Error("PDF template not found.");
-        const buffer = await response.arrayBuffer();
-        const pdfDoc = await PDFLib.PDFDocument.load(buffer);
-        if (pdfDoc.getPageCount() !== 9) throw new Error("PDF must contain exactly 9 pages.");
-        await applyPDFMapping(pdfDoc, data);
-        const output = await pdfDoc.save();
-        const blob = new Blob([output], { type: "application/pdf" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "Onboarding Documents - " + cleanFileName(data.name) + ".pdf";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        setTimeout(() => URL.revokeObjectURL(url), 1500);
-        document.getElementById("loaderOverlay").classList.remove("visible");
-        showStatus("PDF downloaded successfully. Next: print & sign, or upload to DigiLocker.", "success");
-        fireConfetti();
-    } catch (err) {
-        document.getElementById("loaderOverlay").classList.remove("visible");
-        showStatus("PDF generation failed: " + err.message, "error");
-    }
-}
-
-function cleanFileName(name) {
-    return String(name || "Candidate").replace(/[<>:"/\\|?*\x00-\x1F]/g, "_").replace(/\s+/g, " ").trim().substring(0, 80);
-}
-
-/* CLEAR */
-function clearAllInputs() {
-    if (!confirm("This will clear everything you've entered. Continue?")) return;
-    document.querySelectorAll("input, select, textarea").forEach(function (f) {
-        if (f.type === "radio" || f.type === "checkbox") f.checked = false;
-        else f.value = "";
-    });
-    renderNominees(null);
-    maritalStatusChanged();
-    employmentChanged();
-    setDefaultDeclarationDate();
-    hideErrorDrawer();
-    document.querySelectorAll(".field-invalid, .field-valid, .declaration-invalid").forEach(el => el.classList.remove("field-invalid", "field-valid", "declaration-invalid"));
-    try { sessionStorage.removeItem(getDraftKey()); } catch (e) {}
-    showStatus("All fields cleared.", "info");
-    updateProgress();
-}
-
-function setDefaultDeclarationDate() {
-    const el = document.getElementById("declarationDate");
-    if (!el) return;
-    const n = new Date();
-    el.value = n.getFullYear() + "-" + String(n.getMonth() + 1).padStart(2, "0") + "-" + String(n.getDate()).padStart(2, "0");
-}
-
-/* CONFETTI */
-function fireConfetti() {
-    if (prefersReducedMotion) return;
-    const colors = ["#c00000","#7a0000","#ff2b2b","#16a34a","#fbbf24","#f97316"];
-    for (let i = 0; i < 60; i++) {
-        const p = document.createElement("div");
-        p.className = "confetti-piece";
-        p.style.left = Math.random() * 100 + "vw";
-        p.style.background = colors[Math.floor(Math.random() * colors.length)];
-        p.style.animationDuration = (2 + Math.random() * 1.8) + "s";
-        p.style.animationDelay = (Math.random() * 0.4) + "s";
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 4500);
-    }
-}
-
-/* GHOST CURSOR */
-(function ghostCursor() {
-    if (prefersReducedMotion) return;
-    const canvas = document.getElementById("splashCanvas");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    let w, h;
-    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-    resize();
-    window.addEventListener("resize", resize);
-
-    const trail = [];
-    const MAX_TRAIL = 45;
-    let mx = -100, my = -100;
-    let lastMoveTime = 0;
-
-    window.addEventListener("pointermove", function (e) {
-        mx = e.clientX;
-        my = e.clientY;
-        lastMoveTime = performance.now();
-    });
-
-    function tick(now) {
-        ctx.clearRect(0, 0, w, h);
-
-        const idle = now - lastMoveTime;
-        if (idle < 1000 && mx > 0) {
-            trail.push({ x: mx, y: my, born: now });
-        }
-        while (trail.length > MAX_TRAIL) trail.shift();
-
-        // Outer bloom
-        for (let i = 0; i < trail.length; i++) {
-            const p = trail[i];
-            const age = now - p.born;
-            const life = Math.max(0, 1 - age / 1500);
-            if (life <= 0) continue;
-            const size = 60 * (1 - i / trail.length) * life;
-            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size);
-            grad.addColorStop(0, "rgba(255, 100, 100, " + (0.18 * life) + ")");
-            grad.addColorStop(0.5, "rgba(192, 0, 0, " + (0.08 * life) + ")");
-            grad.addColorStop(1, "rgba(192, 0, 0, 0)");
-            ctx.fillStyle = grad;
-            ctx.fillRect(p.x - size, p.y - size, size * 2, size * 2);
-        }
-
-        // Bright core
-        for (let i = 0; i < trail.length; i++) {
-            const p = trail[i];
-            const age = now - p.born;
-            const life = Math.max(0, 1 - age / 1500);
-            if (life <= 0) continue;
-            const fade = (i / trail.length);
-            const r = 3 + fade * 4;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, r * life, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(255, " + Math.round(120 + fade * 100) + ", 120, " + (life * 0.7 * (1 - fade * 0.5)) + ")";
-            ctx.fill();
-        }
-
-        // Remove dead particles
-        while (trail.length && now - trail[0].born > 1500) trail.shift();
-
-        requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-})();
-
-/* INIT */
-document.addEventListener("DOMContentLoaded", function () {
-    loadDraft();
-    maritalStatusChanged();
-    employmentChanged();
-    attachValidationListeners();
-    if (!document.getElementById("declarationDate").value) setDefaultDeclarationDate();
-    updateProgress();
-    initSplitAnimations();
-    initHowSteps();
-    initBentoBoxes();
-});
-</script>
-
-</body>
-</html>
+    te: {
+        welcomeTitle: "Welcome to Team Red / టీమ్ రెడ్కు స్వాగతం",
+        welcomeText: "Please enter all your details carefully. / దయచేసి మీ అన్ని వివరాలను జాగ్రత్తగా నమోదు చేయండి.",
+        howTitle: "How this works / ఇది ఎలా పనిచేస్తుంది",
+        step1Title: "Fill the form / ఫారం నింపండి",
+        step1Desc: "Enter your personal, KYC and nominee details. / మీ వ్యక్తిగత, KYC మరియు నామినీ వివరాలను నమోదు చేయండి.",
+        step2Title: "Generate PDF / PDF సృష్టించండి",
+        step2Desc: "Download your pre-filled 9-page pack. / మీ ముందుగా నింపిన 9-పేజీ ప్యాక్ను డౌన్లోడ్ చేయండి.",
+        step3Title: "Sign & submit / సంతకం చేసి సమర్పించండి",
+        step3Desc: "Print & sign, or eSign via DigiLocker, then send it back. / ప్రింట్ చేసి సంతకం చేయండి, లేదా DigiLocker ద్వారా eSign చేసి పంపండి.",
+        personalTitle: "Personal Details / వ్యక్తిగత వివరాలు",
+        personalSubtitle: "Please provide your personal and employment information as per your official documents. / మీ అధికారిక పత్రాల ప్రకారం సమాచారాన్ని అందించండి.",
+        name: "Name as per Aadhaar / ఆధార్ ప్రకారం పేరు",
+        fatherName: "Father's Name / తండ్రి పేరు",
+        spouseName: "Spouse's Name / జీవిత భాగస్వామి పేరు",
+        dob: "Date of Birth as per Aadhaar / ఆధార్ ప్రకారం పుట్టిన తేదీ",
+        gender: "Gender / లింగం",
+        maritalStatus: "Marital Status / వైవాహిక స్థితి",
+        religion: "Religion / మతం",
+        email: "Email ID / ఇమెయిల్ ఐడి",
+        mobile: "Mobile Number / మొబైల్ నంబర్",
+        doj: "Date of Joining (DOJ) / చేరిన తేదీ (DOJ)",
+        employmentStatus: "Employment Status / ఉద్యోగ స్థితి",
+        internationalWorker: "International Worker / అంతర్జాతీయ కార్మికుడు",
+        previousEmploymentTitle: "Previous Employment Details / మునుపటి ఉద్యోగ వివరాలు",
+        previousEmploymentSubtitle: "These details are required only for experienced employees. / అనుభవం ఉన్న ఉద్యోగులకు మాత్రమే.",
+        previousCompany: "Previous Company Name / మునుపటి కంపెనీ పేరు",
+        previousDOJ: "Previous DOJ / మునుపటి చేరిన తేదీ",
+        previousDOE: "Previous DOE / మునుపటి నిష్క్రమణ తేదీ",
+        kycTitle: "KYC / Bank Details / KYC / బ్యాంక్ వివరాలు",
+        kycSubtitle: "Enter your KYC and bank information carefully. / మీ KYC మరియు బ్యాంక్ వివరాలను జాగ్రత్తగా నమోదు చేయండి.",
+        bankAccount: "Bank Account Number / బ్యాంక్ ఖాతా సంఖ్య",
+        ifsc: "IFSC Code / IFSC కోడ్",
+        aadhaar: "Aadhaar Number / ఆధార్ సంఖ్య",
+        pan: "PAN Number / PAN సంఖ్య",
+        pfTitle: "EPF / EPS / UAN Details / EPF / EPS / UAN వివరాలు",
+        epfMember: "Whether earlier a member of EPF Scheme, 1952 / గతంలో EPF పథకం, 1952 సభ్యులా",
+        epsMember: "Whether earlier a member of EPS, 1995 / గతంలో EPS, 1995 సభ్యులా",
+        uan: "Universal Account Number (UAN) / UAN నంబర్",
+        withdrawEPF: "Withdrawn Previous EPF Fund / మీ గత EPF నిధిని ఉపసంహరించుకున్నారా",
+        withdrawEPS: "Withdrawn Previous EPS Fund / మీ గత EPS నిధిని ఉపసంహరించుకున్నారా",
+        addressTitle: "Permanent Address / శాశ్వత చిరునామా",
+        permanentAddress: "Permanent Address / శాశ్వత చిరునామా",
+        city: "City / నగరం",
+        district: "District / జిల్లా",
+        state: "State / రాష్ట్రం",
+        pincode: "Pincode / పిన్ కోడ్",
+        nomineeTitle: "Nominee Details / నామినీ వివరాలు",
+        nomineeSubtitle: "Maximum 4 nominees. Total share must equal 100%. / గరిష్టంగా 4 నామినీలు. మొత్తం వాటా 100% ఉండాలి.",
+        addNominee: "+ Add Nominee / + నామినీని జోడించండి",
+        declarationTitle: "DECLARATION / ప్రకటన",
+        declarationSubtitle: "Select only 1 out of 5. / 5లో 1 మాత్రమే ఎంచుకోండి.",
+        decl1: "I hereby certify that the person(s) mentioned is/are a member(s) of my family within the meaning of clause (33) of section 2 of the Code on Social Security, 2020. / సోషల్ సెక్యూరిటీ కోడ్, 2020 సెక్షన్ 2 క్లాజ్ (33) అర్థంలో పేర్కొన్న వ్యక్తి(లు) నా కుటుంబ సభ్యులు.",
+        decl2: "I hereby declare that I have no family within the meaning of clause (33) of section 2 of the said Code. / పేర్కొన్న కోడ్ సెక్షన్ 2 క్లాజ్ (33) అర్థంలో నాకు కుటుంబం లేదు.",
+        decl3a: "My father/mother/parents is/are not dependent on me. / నా తండ్రి/తల్లి/తల్లిదండ్రులు నాపై ఆధారపడి లేరు.",
+        decl3b: "My husband's father/mother/parents is/are not dependent on my husband. / నా భర్త తండ్రి/తల్లి/తల్లిదండ్రులు నా భర్తపై ఆధారపడి లేరు.",
+        decl4: "I have excluded my husband from my family by a notice dated the __________ to the competent authority. / పేర్కొన్న కోడ్ నిబంధనల ప్రకారం సమర్థ అధికారికి నోటీసు ద్వారా నా భర్తను కుటుంబం నుండి మినహాయించాను.",
+        decl5: "Nomination made herein invalidates my previous nomination. / ఇక్కడ చేసిన నామినేషన్ నా మునుపటి నామినేషన్ను రద్దు చేస్తుంది.",
+        place: "Place / స్థలం",
+        declarationDate: "Date / తేదీ",
+        actionNoteTitle: "What happens after you click Generate PDF / Generate PDF క్లిక్ చేసిన తర్వాత",
+        actionNote1: "Your pre-filled 9-page onboarding pack downloads as a PDF. / మీ 9-పేజీ ప్యాక్ PDFగా డౌన్లోడ్ అవుతుంది.",
+        actionNote2: "Print it and sign in ink, or upload to DigiLocker to eSign. / ప్రింట్ చేసి సంతకం చేయండి, లేదా DigiLockerలో eSign చేయండి.",
+        actionNote3: "Send the signed copy back to Team Red by email or WhatsApp. / సంతకం చేసిన కాపీని ఇమెయిల్ లేదా WhatsApp ద్వారా పంపండి.",
+        saveBtn: "Save / సేవ్",
+        clearBtn: "Clear / క్లియర్",
+        generateBtn: "Generate Final PDF / PDF సృష్టించండి",
+        selectOption: "Select / ఎంచుకోండి"
+    },
+    kn: {
+        welcomeTitle: "Welcome to Team Red / ಟೀಮ್ ರೆಡ್ಗೆ ಸ್ವಾಗತ",
+        welcomeText: "Please enter all your details carefully. / ದಯವಿಟ್ಟು ಎಲ್ಲಾ ವಿವರಗಳನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ನಮೂದಿಸಿ.",
+        howTitle: "How this works / ಇದು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ",
+        step1Title: "Fill the form / ಫಾರ್ಮ್ ಭರ್ತಿ ಮಾಡಿ",
+        step1Desc: "Enter your personal, KYC and nominee details. / ನಿಮ್ಮ ವೈಯಕ್ತಿಕ, KYC ಮತ್ತು ನಾಮಿನಿ ವಿವರಗಳನ್ನು ನಮೂದಿಸಿ.",
+        step2Title: "Generate PDF / PDF ರಚಿಸಿ",
+        step2Desc: "Download your pre-filled 9-page pack. / ನಿಮ್ಮ 9-ಪುಟಗಳ ಪ್ಯಾಕ್ ಡೌನ್ಲೋಡ್ ಮಾಡಿ.",
+        step3Title: "Sign & submit / ಸಹಿ ಮಾಡಿ ಸಲ್ಲಿಸಿ",
+        step3Desc: "Print & sign, or eSign via DigiLocker, then send it back. / ಪ್ರಿಂಟ್ ಮಾಡಿ ಸಹಿ ಮಾಡಿ, ಅಥವಾ DigiLocker ಮೂಲಕ eSign ಮಾಡಿ.",
+        personalTitle: "Personal Details / ವೈಯಕ್ತಿಕ ವಿವರಗಳು",
+        personalSubtitle: "Please provide your personal and employment information as per your official documents. / ಅಧಿಕೃತ ದಾಖಲೆಗಳ ಪ್ರಕಾರ ಮಾಹಿತಿ ಒದಗಿಸಿ.",
+        name: "Name as per Aadhaar / ಆಧಾರ್ ಪ್ರಕಾರ ಹೆಸರು",
+        fatherName: "Father's Name / ತಂದೆಯ ಹೆಸರು",
+        spouseName: "Spouse's Name / ಸಂಗಾತಿಯ ಹೆಸರು",
+        dob: "Date of Birth as per Aadhaar / ಆಧಾರ್ ಪ್ರಕಾರ ಜನ್ಮ ದಿನಾಂಕ",
+        gender: "Gender / ಲಿಂಗ",
+        maritalStatus: "Marital Status / ವೈವಾಹಿಕ ಸ್ಥಿತಿ",
+        religion: "Religion / ಧರ್ಮ",
+        email: "Email ID / ಇಮೇಲ್ ಐಡಿ",
+        mobile: "Mobile Number / ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
+        doj: "Date of Joining (DOJ) / ಸೇರ್ಪಡೆ ದಿನಾಂಕ",
+        employmentStatus: "Employment Status / ಉದ್ಯೋಗ ಸ್ಥಿತಿ",
+        internationalWorker: "International Worker / ಅಂತರರಾಷ್ಟ್ರೀಯ ಕಾರ್ಮಿಕ",
+        previousEmploymentTitle: "Previous Employment Details / ಹಿಂದಿನ ಉದ್ಯೋಗ ವಿವರಗಳು",
+        previousEmploymentSubtitle: "These details are required only for experienced employees. / ಅನುಭವಿ ಉದ್ಯೋಗಿಗಳಿಗೆ ಮಾತ್ರ.",
+        previousCompany: "Previous Company Name / ಹಿಂದಿನ ಕಂಪನಿಯ ಹೆಸರು",
+        previousDOJ: "Previous DOJ / ಹಿಂದಿನ ಸೇರ್ಪಡೆ ದಿನಾಂಕ",
+        previousDOE: "Previous DOE / ಹಿಂದಿನ ನಿರ್ಗಮನ ದಿನಾಂಕ",
+        kycTitle: "KYC / Bank Details / KYC / ಬ್ಯಾಂಕ್ ವಿವರಗಳು",
+        kycSubtitle: "Enter your KYC and bank information carefully. / ನಿಮ್ಮ KYC ಮತ್ತು ಬ್ಯಾಂಕ್ ವಿವರಗಳನ್ನು ನಮೂದಿಸಿ.",
+        bankAccount: "Bank Account Number / ಬ್ಯಾಂಕ್ ಖಾತೆ ಸಂಖ್ಯೆ",
+        ifsc: "IFSC Code / IFSC ಕೋಡ್",
+        aadhaar: "Aadhaar Number / ಆಧಾರ್ ಸಂಖ್ಯೆ",
+        pan: "PAN Number / PAN ಸಂಖ್ಯೆ",
+        pfTitle: "EPF / EPS / UAN Details / EPF / EPS / UAN ವಿವರಗಳು",
+        epfMember: "Whether earlier a member of EPF Scheme, 1952 / EPF ಯೋಜನೆ 1952ರ ಸದಸ್ಯರಾಗಿದ್ದೀರಾ",
+        epsMember: "Whether earlier a member of EPS, 1995 / EPS 1995ರ ಸದಸ್ಯರಾಗಿದ್ದೀರಾ",
+        uan: "Universal Account Number (UAN) / UAN ಸಂಖ್ಯೆ",
+        withdrawEPF: "Withdrawn Previous EPF Fund / ಹಿಂದಿನ EPF ನಿಧಿ ಹಿಂಪಡೆದಿದ್ದೀರಾ",
+        withdrawEPS: "Withdrawn Previous EPS Fund / ಹಿಂದಿನ EPS ನಿಧಿ ಹಿಂಪಡೆದಿದ್ದೀರಾ",
+        addressTitle: "Permanent Address / ಶಾಶ್ವತ ವಿಳಾಸ",
+        permanentAddress: "Permanent Address / ಶಾಶ್ವತ ವಿಳಾಸ",
+        city: "City / ನಗರ",
+        district: "District / ಜಿಲ್ಲೆ",
+        state: "State / ರಾಜ್ಯ",
+        pincode: "Pincode / ಪಿನ್ ಕೋಡ್",
+        nomineeTitle: "Nominee Details / ನಾಮಿನಿ ವಿವರಗಳು",
+        nomineeSubtitle: "Maximum 4 nominees. Total share must equal 100%. / ಗರಿಷ್ಠ 4 ನಾಮಿನಿಗಳು. ಒಟ್ಟು 100%.",
+        addNominee: "+ Add Nominee / + ನಾಮಿನಿ ಸೇರಿಸಿ",
+        declarationTitle: "DECLARATION / ಘೋಷಣೆ",
+        declarationSubtitle: "Select only 1 out of 5. / 5ರಲ್ಲಿ 1 ಆಯ್ಕೆಮಾಡಿ.",
+        decl1: "I hereby certify that the person(s) mentioned is/are a member(s) of my family within the meaning of clause (33) of section 2 of the Code on Social Security, 2020. / ಸೋಷಲ್ ಸೆಕ್ಯೂರಿಟಿ ಕೋಡ್, 2020 ರ ಸೆಕ್ಷನ್ 2 ಕ್ಲಾಜ್ (33) ಅರ್ಥದಲ್ಲಿ ನಮೂದಿಸಿದ ವ್ಯಕ್ತಿ(ಗಳು) ನನ್ನ ಕುಟುಂಬ ಸದಸ್ಯರು.",
+        decl2: "I hereby declare that I have no family within the meaning of clause (33) of section 2 of the said Code. / ಹೇಳಿದ ಕೋಡ್ನ ಸೆಕ್ಷನ್ 2 ಕ್ಲಾಜ್ (33) ಅರ್ಥದಲ್ಲಿ ನನಗೆ ಕುಟುಂಬವಿಲ್ಲ.",
+        decl3a: "My father/mother/parents is/are not dependent on me. / ನನ್ನ ತಂದೆ/ತಾಯಿ/ಪೋಷಕರು ನನ್ನ ಮೇಲೆ ಅವಲಂಬಿತರಲ್ಲ.",
+        decl3b: "My husband's father/mother/parents is/are not dependent on my husband. / ನನ್ನ ಗಂಡನ ತಂದೆ/ತಾಯಿ/ಪೋಷಕರು ನನ್ನ ಗಂಡನ ಮೇಲೆ ಅವಲಂಬಿತರಲ್ಲ.",
+        decl4: "I have excluded my husband from my family by a notice dated the __________ to the competent authority. / ಸಮರ್ಥ ಅಧಿಕಾರಿಗೆ ನೋಟಿಸ್ ಮೂಲಕ ನನ್ನ ಗಂಡನನ್ನು ಕುಟುಂಬದಿಂದ ಹೊರಗಿಟ್ಟಿದ್ದೇನೆ.",
+        decl5: "Nomination made herein invalidates my previous nomination. / ಇಲ್ಲಿ ಮಾಡಿದ ನಾಮಿನೇಷನ್ ಹಿಂದಿನ ನಾಮಿನೇಷನ್ ಅನ್ನು ರದ್ದುಗೊಳಿಸುತ್ತದೆ.",
+        place: "Place / ಸ್ಥಳ",
+        declarationDate: "Date / ದಿನಾಂಕ",
+        actionNoteTitle: "What happens after you click Generate PDF / Generate PDF ಕ್ಲಿಕ್ ಮಾಡಿದ ನಂತರ",
+        actionNote1: "Your pre-filled 9-page onboarding pack downloads as a PDF. / ನಿಮ್ಮ 9-ಪುಟಗಳ ಪ್ಯಾಕ್ PDF ಆಗಿ ಡೌನ್ಲೋಡ್ ಆಗುತ್ತದೆ.",
+        actionNote2: "Print it and sign in ink, or upload to DigiLocker to eSign. / ಪ್ರಿಂಟ್ ಮಾಡಿ ಸಹಿ ಮಾಡಿ ಅಥವಾ DigiLocker ನಲ್ಲಿ eSign ಮಾಡಿ.",
+        actionNote3: "Send the signed copy back to Team Red by email or WhatsApp. / ಸಹಿ ಮಾಡಿದ ಪ್ರತಿಯನ್ನು ಇಮೇಲ್ ಅಥವಾ WhatsApp ಮೂಲಕ ಕಳುಹಿಸಿ.",
+        saveBtn: "Save / ಉಳಿಸಿ",
+        clearBtn: "Clear / ತೆರವು",
+        generateBtn: "Generate Final PDF / PDF ರಚಿಸಿ",
+        selectOption: "Select / ಆಯ್ಕೆಮಾಡಿ"
+    },
+    ta: {
+        welcomeTitle: "Welcome to Team Red / டீம் ரெட்-க்கு வரவேற்கிறோம்",
+        welcomeText: "Please enter all your details carefully. / உங்கள் அனைத்து விவரங்களையும் கவனமாக உள்ளிடவும்.",
+        howTitle: "How this works / இது எவ்வாறு செயல்படுகிறது",
+        step1Title: "Fill the form / படிவத்தை நிரப்பவும்",
+        step1Desc: "Enter your personal, KYC and nominee details. / உங்கள் தனிப்பட்ட, KYC மற்றும் நாமினி விவரங்களை உள்ளிடவும்.",
+        step2Title: "Generate PDF / PDF உருவாக்கவும்",
+        step2Desc: "Download your pre-filled 9-page pack. / உங்கள் 9 பக்க பேக்கை பதிவிறக்கவும்.",
+        step3Title: "Sign & submit / கையெழுத்திட்டு சமர்ப்பிக்கவும்",
+        step3Desc: "Print & sign, or eSign via DigiLocker, then send it back. / அச்சிட்டு கையெழுத்திடவும் அல்லது DigiLocker மூலம் eSign செய்யவும்.",
+        personalTitle: "Personal Details / தனிப்பட்ட விவரங்கள்",
+        personalSubtitle: "Please provide your personal and employment information as per your official documents. / ஆவணங்களின்படி தகவல்களை வழங்கவும்.",
+        name: "Name as per Aadhaar / ஆதார் படி பெயர்",
+        fatherName: "Father's Name / தந்தையின் பெயர்",
+        spouseName: "Spouse's Name / வாழ்க்கைத் துணையின் பெயர்",
+        dob: "Date of Birth as per Aadhaar / ஆதார் படி பிறந்த தேதி",
+        gender: "Gender / பாலினம்",
+        maritalStatus: "Marital Status / திருமண நிலை",
+        religion: "Religion / மதம்",
+        email: "Email ID / மின்னஞ்சல் ஐடி",
+        mobile: "Mobile Number / மொபைல் எண்",
+        doj: "Date of Joining (DOJ) / பணியில் சேர்ந்த தேதி",
+        employmentStatus: "Employment Status / வேலை நிலை",
+        internationalWorker: "International Worker / சர்வதேச தொழிலாளர்",
+        previousEmploymentTitle: "Previous Employment Details / முந்தைய வேலை விவரங்கள்",
+        previousEmploymentSubtitle: "These details are required only for experienced employees. / அனுபவமுள்ளவர்களுக்கு மட்டும்.",
+        previousCompany: "Previous Company Name / முந்தைய நிறுவனத்தின் பெயர்",
+        previousDOJ: "Previous DOJ / முந்தைய சேர்ந்த தேதி",
+        previousDOE: "Previous DOE / முந்தைய வெளியேறிய தேதி",
+        kycTitle: "KYC / Bank Details / KYC / வங்கி விவரங்கள்",
+        kycSubtitle: "Enter your KYC and bank information carefully. / உங்கள் KYC மற்றும் வங்கி விவரங்களை உள்ளிடவும்.",
+        bankAccount: "Bank Account Number / வங்கி கணக்கு எண்",
+        ifsc: "IFSC Code / IFSC குறியீடு",
+        aadhaar: "Aadhaar Number / ஆதார் எண்",
+        pan: "PAN Number / PAN எண்",
+        pfTitle: "EPF / EPS / UAN Details / EPF / EPS / UAN விவரங்கள்",
+        epfMember: "Whether earlier a member of EPF Scheme, 1952 / EPF திட்டம் 1952 உறுப்பினரா",
+        epsMember: "Whether earlier a member of EPS, 1995 / EPS 1995 உறுப்பினரா",
+        uan: "Universal Account Number (UAN) / UAN எண்",
+        withdrawEPF: "Withdrawn Previous EPF Fund / முந்தைய EPF நிதியை திரும்பப் பெற்றீர்களா",
+        withdrawEPS: "Withdrawn Previous EPS Fund / முந்தைய EPS நிதியை திரும்பப் பெற்றீர்களா",
+        addressTitle: "Permanent Address / நிரந்தர முகவரி",
+        permanentAddress: "Permanent Address / நிரந்தர முகவரி",
+        city: "City / நகரம்",
+        district: "District / மாவட்டம்",
+        state: "State / மாநிலம்",
+        pincode: "Pincode / அஞ்சல் குறியீடு",
+        nomineeTitle: "Nominee Details / நாமினி விவரங்கள்",
+        nomineeSubtitle: "Maximum 4 nominees. Total share must equal 100%. / அதிகபட்சம் 4 நாமினிகள். மொத்தம் 100%.",
+        addNominee: "+ Add Nominee / + நாமினி சேர்க்கவும்",
+        declarationTitle: "DECLARATION / அறிவிப்பு",
+        declarationSubtitle: "Select only 1 out of 5. / 5ல் 1 தேர்வு செய்யவும்.",
+        decl1: "I hereby certify that the person(s) mentioned is/are a member(s) of my family within the meaning of clause (33) of section 2 of the Code on Social Security, 2020. / சமூக பாதுகாப்பு கோட், 2020 பிரிவு 2 பிரிவு (33) பொருளில் குறிப்பிட்ட நபர்(கள்) எனது குடும்ப உறுப்பினர்.",
+        decl2: "I hereby declare that I have no family within the meaning of clause (33) of section 2 of the said Code. / குறிப்பிட்ட கோட்டின் பிரிவு 2 பிரிவு (33) பொருளில் எனக்கு குடும்பம் இல்லை.",
+        decl3a: "My father/mother/parents is/are not dependent on me. / என் தந்தை/தாய்/பெற்றோர் என்னை சார்ந்திருக்கவில்லை.",
+        decl3b: "My husband's father/mother/parents is/are not dependent on my husband. / என் கணவரின் தந்தை/தாய்/பெற்றோர் என் கணவரை சார்ந்திருக்கவில்லை.",
+        decl4: "I have excluded my husband from my family by a notice dated the __________ to the competent authority. / தகுதியான அதிகாரிக்கு அறிவிப்பு மூலம் என் கணவரை குடும்பத்திலிருந்து விலக்கியுள்ளேன்.",
+        decl5: "Nomination made herein invalidates my previous nomination. / இங்கு செய்யப்பட்ட நாமினேஷன் முந்தைய நாமினேஷனை ரத்து செய்கிறது.",
+        place: "Place / இடம்",
+        declarationDate: "Date / தேதி",
+        actionNoteTitle: "What happens after you click Generate PDF / Generate PDF கிளிக் செய்த பின்",
+        actionNote1: "Your pre-filled 9-page onboarding pack downloads as a PDF. / உங்கள் 9 பேஜ் பேக் PDF ஆக பதிவிறக்கம் ஆகும்.",
+        actionNote2: "Print it and sign in ink, or upload to DigiLocker to eSign. / அச்சிட்டு கையெழுத்திடவும் அல்லது DigiLocker இல் eSign செய்யவும்.",
+        actionNote3: "Send the signed copy back to Team Red by email or WhatsApp. / கையெழுத்திட்ட நகலை மின்னஞ்சல் அல்லது WhatsApp மூலம் அனுப்பவும்.",
+        saveBtn: "Save / சேமி",
+        clearBtn: "Clear / அழி",
+        generateBtn: "Generate Final PDF / PDF உருவாக்கு",
+        selectOption: "Select / தேர்வு"
+    },
+    ml: {
+        welcomeTitle: "Welcome to Team Red / ടീം റെഡിലേക്ക് സ്വാഗതം",
+        welcomeText: "Please enter all your details carefully. / എല്ലാ വിവരങ്ങളും ശ്രദ്ധാപൂർവ്വം നൽകുക.",
+        howTitle: "How this works / ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു",
+        step1Title: "Fill the form / ഫോം പൂരിപ്പിക്കുക",
+        step1Desc: "Enter your personal, KYC and nominee details. / വ്യക്തിഗത, KYC, നോമിനി വിവരങ്ങൾ നൽകുക.",
+        step2Title: "Generate PDF / PDF സൃഷ്ടിക്കുക",
+        step2Desc: "Download your pre-filled 9-page pack. / 9 പേജ് പായ്ക്ക് ഡൗൺലോഡ് ചെയ്യുക.",
+        step3Title: "Sign & submit / ഒപ്പിട്ട് സമർപ്പിക്കുക",
+        step3Desc: "Print & sign, or eSign via DigiLocker, then send it back. / പ്രിന്റ് ചെയ്ത് ഒപ്പിടുക, അല്ലെങ്കിൽ DigiLocker വഴി eSign ചെയ്യുക.",
+        personalTitle: "Personal Details / വ്യക്തിഗത വിവരങ്ങൾ",
+        personalSubtitle: "Please provide your personal and employment information as per your official documents. / ഔദ്യോഗിക രേഖകൾ പ്രകാരം വിവരങ്ങൾ നൽകുക.",
+        name: "Name as per Aadhaar / ആധാർ പ്രകാരമുള്ള പേര്",
+        fatherName: "Father's Name / പിതാവിന്റെ പേര്",
+        spouseName: "Spouse's Name / പങ്കാളിയുടെ പേര്",
+        dob: "Date of Birth as per Aadhaar / ആധാർ പ്രകാരം ജനന തീയതി",
+        gender: "Gender / ലിംഗം",
+        maritalStatus: "Marital Status / വൈവാഹിക നില",
+        religion: "Religion / മതം",
+        email: "Email ID / ഇമെയിൽ ഐഡി",
+        mobile: "Mobile Number / മൊബൈൽ നമ്പർ",
+        doj: "Date of Joining (DOJ) / ജോലിയിൽ ചേർന്ന തീയതി",
+        employmentStatus: "Employment Status / തൊഴിൽ നില",
+        internationalWorker: "International Worker / അന്താരാഷ്ട്ര തൊഴിലാളി",
+        previousEmploymentTitle: "Previous Employment Details / മുൻ തൊഴിൽ വിവരങ്ങൾ",
+        previousEmploymentSubtitle: "These details are required only for experienced employees. / പരിചയസമ്പന്നർക്ക് മാത്രം.",
+        previousCompany: "Previous Company Name / മുൻ കമ്പനിയുടെ പേര്",
+        previousDOJ: "Previous DOJ / മുൻ ചേർന്ന തീയതി",
+        previousDOE: "Previous DOE / മുൻ ജോലി അവസാനിച്ച തീയതി",
+        kycTitle: "KYC / Bank Details / KYC / ബാങ്ക് വിവരങ്ങൾ",
+        kycSubtitle: "Enter your KYC and bank information carefully. / KYC, ബാങ്ക് വിവരങ്ങൾ നൽകുക.",
+        bankAccount: "Bank Account Number / ബാങ്ക് അക്കൗണ്ട് നമ്പർ",
+        ifsc: "IFSC Code / IFSC കോഡ്",
+        aadhaar: "Aadhaar Number / ആധാർ നമ്പർ",
+        pan: "PAN Number / PAN നമ്പർ",
+        pfTitle: "EPF / EPS / UAN Details / EPF / EPS / UAN വിവരങ്ങൾ",
+        epfMember: "Whether earlier a member of EPF Scheme, 1952 / EPF സ്കീം 1952 അംഗമായിരുന്നോ",
+        epsMember: "Whether earlier a member of EPS, 1995 / EPS 1995 അംഗമായിരുന്നോ",
+        uan: "Universal Account Number (UAN) / UAN നമ്പർ",
+        withdrawEPF: "Withdrawn Previous EPF Fund / മുൻ EPF ഫണ്ട് പിൻവലിച്ചിട്ടുണ്ടോ",
+        withdrawEPS: "Withdrawn Previous EPS Fund / മുൻ EPS ഫണ്ട് പിൻവലിച്ചിട്ടുണ്ടോ",
+        addressTitle: "Permanent Address / സ്ഥിര വിലാസം",
+        permanentAddress: "Permanent Address / സ്ഥിര വിലാസം",
+        city: "City / നഗരം",
+        district: "District / ജില്ല",
+        state: "State / സംസ്ഥാനം",
+        pincode: "Pincode / പിൻകോഡ്",
+        nomineeTitle: "Nominee Details / നോമിനി വിവരങ്ങൾ",
+        nomineeSubtitle: "Maximum 4 nominees. Total share must equal 100%. / പരമാവധി 4 നോമിനികൾ. ആകെ 100%.",
+        addNominee: "+ Add Nominee / + നോമിനി ചേർക്കുക",
+        declarationTitle: "DECLARATION / പ്രഖ്യാപനം",
+        declarationSubtitle: "Select only 1 out of 5. / 5ൽ 1 തിരഞ്ഞെടുക്കുക.",
+        decl1: "I hereby certify that the person(s) mentioned is/are a member(s) of my family within the meaning of clause (33) of section 2 of the Code on Social Security, 2020. / സോഷ്യൽ സെക്യൂരിറ്റി കോഡ്, 2020 സെക്ഷൻ 2 ക്ലോസ് (33) അർത്ഥത്തിൽ പരാമർശിച്ച വ്യക്തി(കൾ) എന്റെ കുടുംബാംഗമാണ്.",
+        decl2: "I hereby declare that I have no family within the meaning of clause (33) of section 2 of the said Code. / പറഞ്ഞ കോഡിന്റെ സെക്ഷൻ 2 ക്ലോസ് (33) അർത്ഥത്തിൽ എനിക്ക് കുടുംബമില്ല.",
+        decl3a: "My father/mother/parents is/are not dependent on me. / എന്റെ പിതാവ്/മാതാവ്/മാതാപിതാക്കൾ എന്നെ ആശ്രയിക്കുന്നില്ല.",
+        decl3b: "My husband's father/mother/parents is/are not dependent on my husband. / എന്റെ ഭർത്താവിന്റെ പിതാവ്/മാതാവ്/മാതാപിതാക്കൾ എന്റെ ഭർത്താവിനെ ആശ്രയിക്കുന്നില്ല.",
+        decl4: "I have excluded my husband from my family by a notice dated the __________ to the competent authority. / ഉചിതമായ അധികാരിക്ക് നോട്ടീസ് നൽകി എന്റെ ഭർത്താവിനെ കുടുംബത്തിൽ നിന്ന് ഒഴിവാക്കിയിരിക്കുന്നു.",
+        decl5: "Nomination made herein invalidates my previous nomination. / ഇവിടെ ചെയ്ത നാമനിർദ്ദേശം മുൻ നാമനിർദ്ദേശത്തെ അസാധുവാക്കുന്നു.",
+        place: "Place / സ്ഥലം",
+        declarationDate: "Date / തീയതി",
+        actionNoteTitle: "What happens after you click Generate PDF / Generate PDF ക്ലിക്ക് ചെയ്തതിന് ശേഷം",
+        actionNote1: "Your pre-filled 9-page onboarding pack downloads as a PDF. / നിങ്ങളുടെ 9 പേജ് പാക്ക് PDF ആയി ഡൗൺലോഡ് ആകും.",
+        actionNote2: "Print it and sign in ink, or upload to DigiLocker to eSign. / പ്രിന്റ് ചെയ്ത് ഒപ്പിടുക, അല്ലെങ്കിൽ DigiLocker-ൽ eSign ചെയ്യുക.",
+        actionNote3: "Send the signed copy back to Team Red by email or WhatsApp. / ഒപ്പിട്ട പകർപ്പ് ഇമെയിൽ അല്ലെങ്കിൽ WhatsApp വഴി അയയ്ക്കുക.",
+        saveBtn: "Save / സേവ്",
+        clearBtn: "Clear / മായ്ക്കുക",
+        generateBtn: "Generate Final PDF / PDF സൃഷ്ടിക്കുക",
+        selectOption: "Select / തിരഞ്ഞെടുക്കുക"
+    },
+    hi: {
+        welcomeTitle: "Welcome to Team Red / टीम रेड में आपका स्वागत है",
+        welcomeText: "Please enter all your details carefully. / कृपया सभी जानकारी ध्यानपूर्वक दर्ज करें।",
+        howTitle: "How this works / यह कैसे काम करता है",
+        step1Title: "Fill the form / फ़ॉर्म भरें",
+        step1Desc: "Enter your personal, KYC and nominee details. / अपनी व्यक्तिगत, KYC और नामांकित जानकारी दर्ज करें।",
+        step2Title: "Generate PDF / PDF बनाएं",
+        step2Desc: "Download your pre-filled 9-page pack. / अपना 9-पृष्ठ पैक डाउनलोड करें।",
+        step3Title: "Sign & submit / हस्ताक्षर करें और जमा करें",
+        step3Desc: "Print & sign, or eSign via DigiLocker, then send it back. / प्रिंट कर हस्ताक्षर करें या DigiLocker से eSign करें।",
+        personalTitle: "Personal Details / व्यक्तिगत विवरण",
+        personalSubtitle: "Please provide your personal and employment information as per your official documents. / अपने आधिकारिक दस्तावेज़ों के अनुसार जानकारी दें।",
+        name: "Name as per Aadhaar / आधार के अनुसार नाम",
+        fatherName: "Father's Name / पिता का नाम",
+        spouseName: "Spouse's Name / जीवनसाथी का नाम",
+        dob: "Date of Birth as per Aadhaar / आधार के अनुसार जन्म तिथि",
+        gender: "Gender / लिंग",
+        maritalStatus: "Marital Status / वैवाहिक स्थिति",
+        religion: "Religion / धर्म",
+        email: "Email ID / ईमेल आईडी",
+        mobile: "Mobile Number / मोबाइल नंबर",
+        doj: "Date of Joining (DOJ) / ज्वाइनिंग की तारीख",
+        employmentStatus: "Employment Status / रोजगार स्थिति",
+        internationalWorker: "International Worker / अंतरराष्ट्रीय कर्मचारी",
+        previousEmploymentTitle: "Previous Employment Details / पिछली नौकरी का विवरण",
+        previousEmploymentSubtitle: "These details are required only for experienced employees. / केवल अनुभवी कर्मचारियों के लिए।",
+        previousCompany: "Previous Company Name / पिछली कंपनी का नाम",
+        previousDOJ: "Previous DOJ / पिछली ज्वाइनिंग तारीख",
+        previousDOE: "Previous DOE / पिछली छोड़ने की तारीख",
+        kycTitle: "KYC / Bank Details / KYC / बैंक विवरण",
+        kycSubtitle: "Enter your KYC and bank information carefully. / अपनी KYC और बैंक जानकारी ध्यानपूर्वक दर्ज करें।",
+        bankAccount: "Bank Account Number / बैंक खाता संख्या",
+        ifsc: "IFSC Code / IFSC कोड",
+        aadhaar: "Aadhaar Number / आधार संख्या",
+        pan: "PAN Number / PAN संख्या",
+        pfTitle: "EPF / EPS / UAN Details / EPF / EPS / UAN विवरण",
+        epfMember: "Whether earlier a member of EPF Scheme, 1952 / EPF योजना 1952 के सद
