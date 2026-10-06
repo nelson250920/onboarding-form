@@ -1707,17 +1707,21 @@ const PDF_MAPPING = {
         { field: "aadhaar", type: "text", x: 585.5208435058594, y: 776.7161254882812, width: 424, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "name", type: "text", x: 586.5208435058594, y: 814.7161254882812, width: 429, height: 26, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "pan", type: "text", x: 591.5208435058594, y: 843.7161254882812, width: 408, height: 34, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "epfMember", type: "checkbox", x: 593.5208435058594, y: 893.7161254882812, width: 46, height: 29, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "epsMember", type: "checkbox", x: 592.5208435058594, y: 933.7161254882812, width: 54, height: 32, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "previousDOJ", type: "text", x: 615.5208435058594, y: 1058.7161254882812, width: 107, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
+       { field: "epfMember", value: "Yes", type: "checkbox", x: 850, y: 895, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
+{ field: "epfMember", value: "No",  type: "checkbox", x: 920, y: 895, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
+{ field: "epsMember", value: "Yes", type: "checkbox", x: 850, y: 935, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
+{ field: "epsMember", value: "No",  type: "checkbox", x: 920, y: 935, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
+{ field: "internationalWorker", value: "Yes", type: "checkbox", x: 850, y: 1370, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
+{ field: "internationalWorker", value: "No",  type: "checkbox", x: 920, y: 1370, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },        { field: "previousDOJ", type: "text", x: 615.5208435058594, y: 1058.7161254882812, width: 107, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "previousCompany", type: "text", x: 97.52084350585938, y: 1061.7161254882812, width: 159, height: 95, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "uan", type: "text", x: 269.5208435058594, y: 1067.7161254882812, width: 147, height: 24, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "previousDOE", type: "text", x: 733.5208435058594, y: 1071.7161254882812, width: 101, height: 26, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "internationalWorker", type: "checkbox", x: 586.5208435058594, y: 1369.0494384765625, width: 47, height: 27, canvasWidth: 1072, canvasHeight: 1515 },
     ],
     3: [
-        { field: "withdrawEPF", type: "checkbox", x: 590.5208435058594, y: 64.71615600585938, width: 68, height: 36, canvasWidth: 1072, canvasHeight: 1515 },
-        { field: "withdrawEPS", type: "checkbox", x: 593.5208435058594, y: 117.71615600585938, width: 72, height: 39, canvasWidth: 1072, canvasHeight: 1515 },
+       { field: "withdrawEPF", value: "Yes", type: "checkbox", x: 850, y: 66, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
+{ field: "withdrawEPF", value: "No",  type: "checkbox", x: 920, y: 66, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
+{ field: "withdrawEPS", value: "Yes", type: "checkbox", x: 850, y: 119, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
+{ field: "withdrawEPS", value: "No",  type: "checkbox", x: 920, y: 119, width: 18, height: 20, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "declarationDate", type: "text", x: 142.52084350585938, y: 417.7161445617676, width: 245, height: 33, canvasWidth: 1072, canvasHeight: 1515 },
         { field: "place", type: "text", x: 143.52084350585938, y: 463.7161445617676, width: 247, height: 30, canvasWidth: 1072, canvasHeight: 1515 },
     ],
@@ -1874,8 +1878,7 @@ function isCheckboxChecked(mapping, rawValue) {
     return String(rawValue).trim().toLowerCase() === "yes";
 }
 
-const YES_NO_WORD_FIELDS = new Set(["internationalWorker", "epfMember", "epsMember", "withdrawEPF", "withdrawEPS"]);
-
+const YES_NO_WORD_FIELDS = new Set(); // No fields use word-drawing anymore
 function wrapTextToWidth(text, font, fontSize, maxWidth) {
     const words = String(text).split(/\s+/).filter(Boolean);
     const lines = [];
